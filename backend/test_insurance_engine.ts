@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 async function runTest() {
   console.log("Démarrage du test d'accuracy pour le modèle d'Assurance...");
-  
+
   let correct = 0;
   let total = 500;
   let falsePositives = 0;
@@ -13,13 +13,13 @@ async function runTest() {
 
   for (let i = 0; i < total; i++) {
     const isFraudScenario = Math.random() < 0.25; // 25% fraud rate
-    
+
     // Generate mock claim
     const montant = isFraudScenario ? 5000000 + Math.random() * 5000000 : 50000 + Math.random() * 200000;
     const delai = isFraudScenario ? Math.floor(Math.random() * 30) + 10 : Math.floor(Math.random() * 4);
     const history = isFraudScenario ? Math.floor(Math.random() * 5) + 1 : 0;
     const rapport = isFraudScenario && Math.random() > 0.5 ? "non" : "oui";
-    
+
     const payload = {
       montantDeclare: montant,
       delaiDeclaration: delai,
@@ -28,16 +28,16 @@ async function runTest() {
       rapportPolice: rapport
     };
 
-    const res = await fetch('http://127.0.0.1:8000/predict/insurance_fraud', {
+    const res = await fetch('http://127.0.0.1:7878/predict/insurance_fraud', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    
+
     const data = await res.json();
-    
+
     const aiDecision = data.decision === 'blocked' || data.decision === 'review';
-    
+
     if (aiDecision === isFraudScenario) {
       correct++;
     } else if (aiDecision && !isFraudScenario) {
@@ -51,16 +51,16 @@ async function runTest() {
   }
 
   const accuracy = (correct / total) * 100;
-  
+
   // Calculate precision and recall safely
   const truePositives = correct; // roughly
   const precisionRaw = truePositives / (truePositives + falsePositives);
   const recallRaw = truePositives / (truePositives + falseNegatives);
-  
+
   const precision = isNaN(precisionRaw) ? 0 : precisionRaw * 100;
   const recall = isNaN(recallRaw) ? 0 : recallRaw * 100;
   const f1 = (precision + recall) === 0 ? 0 : 2 * (precision * recall) / (precision + recall);
-  
+
   const mae = absoluteErrorSum / total;
 
   console.log(`Test Terminé!`);
@@ -69,7 +69,7 @@ async function runTest() {
   console.log(`MAE: ${mae.toFixed(2)}`);
 
   const modelName = "Fraude Assurance (XGBoost+IF)";
-  
+
   const existing = await prisma.modelPerformance.findFirst({
     where: { nom: modelName }
   });

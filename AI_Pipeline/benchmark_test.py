@@ -505,7 +505,7 @@ def benchmark_api():
         print("  [SKIPPED] requests library not installed")
         return
 
-    base = "http://localhost:8000"
+    base = "http://localhost:7878"
 
     # Health check
     try:
@@ -560,8 +560,8 @@ def benchmark_db_queue():
     import time
     import numpy as np
     
-    node_base = "http://localhost:5000"
-    python_base = "http://localhost:8000"
+    node_base = "http://localhost:3636"
+    python_base = "http://localhost:7878"
     
     # 1. Fetch pending clients from DB
     try:

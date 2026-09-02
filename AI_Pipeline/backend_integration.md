@@ -1,6 +1,6 @@
 # Integrating the AI Microservice with Your Main Backend
 
-This guide explains how to connect your new **Algorisk AI Backend** (running on FastAPI at `http://localhost:8000`) with your main application backend (e.g., Node.js, Spring Boot, or Django) that serves your React frontend.
+This guide explains how to connect your new **Algorisk AI Backend** (running on FastAPI at `http://localhost:7878`) with your main application backend (e.g., Node.js, Spring Boot, or Django) that serves your React frontend.
 
 ## 🏗️ Architecture (Microservices Pattern)
 
@@ -10,7 +10,7 @@ You now have a **Microservices Architecture**. Instead of putting heavy Machine 
 graph LR
     A["React Frontend"] -->|1. Submit Loan / Txn| B["Main Backend<br/>(Node.js / Java / etc)"]
     B -->|2. Save to Database| C[("PostgreSQL / MySQL")]
-    B -->|3. POST /predict/full| D["AI Backend<br/>(FastAPI :8000)"]
+    B -->|3. POST /predict/full| D["AI Backend<br/>(FastAPI :7878)"]
     D -->|4. Return Risk & Fraud Score| B
     B -->|5. Return Final Result| A
 ```
@@ -25,7 +25,7 @@ Create a new file in your main backend called `aiService.js`:
 // aiService.js
 const axios = require('axios');
 
-const AI_API_URL = process.env.AI_API_URL || 'http://localhost:8000';
+const AI_API_URL = process.env.AI_API_URL || 'http://localhost:7878';
 
 /**
  * Sends a transaction to the AI Fraud Engine.

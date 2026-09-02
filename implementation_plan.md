@@ -37,7 +37,7 @@ API routes to serve the data (e.g., `GET /api/banking/connectors`).
 ### 2. Update Frontend (Vite/React)
 
 #### [MODIFY] `ALGORISKAI/vite.config.ts`
-Add a proxy configuration so `/api` requests are forwarded to the local backend server (e.g., `http://localhost:5000`).
+Add a proxy configuration so `/api` requests are forwarded to the local backend server (e.g., `http://localhost:3636`).
 
 #### [MODIFY] `ALGORISKAI/src/data/*.ts`
 Refactor the frontend to fetch data from the backend instead of using the static objects. We will implement React `useEffect` hooks or a data fetching library (like React Query, if desired) to load this data dynamically.

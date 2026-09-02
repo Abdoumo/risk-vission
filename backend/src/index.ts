@@ -14,8 +14,8 @@ import fs from 'fs';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const dir = path.join(__dirname, '../../AI_Pipeline/DATASETS');
-    if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir, { recursive: true });
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
     }
     cb(null, dir);
   },
@@ -28,8 +28,8 @@ const upload = multer({ storage: storage });
 const fraudStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     const dir = path.join(__dirname, '../../AI_Pipeline/DATASETS');
-    if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir, { recursive: true });
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
     }
     cb(null, dir);
   },
@@ -53,13 +53,13 @@ app.post('/api/fraude/upload', uploadFraud.single('csvFile'), async (req, res) =
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
   }
-  
+
   try {
     const pythonScript = path.join(__dirname, '../../AI_Pipeline/fraud_upload_engine.py');
     const pyVenvPath = path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe');
     const cwdPath = path.join(__dirname, '../../AI_Pipeline');
     execSync(`"${pyVenvPath}" "${pythonScript}"`, { cwd: cwdPath, stdio: 'inherit' });
-    
+
     const resultPath = path.join(__dirname, '../../AI_Pipeline/fraud_results.json');
     if (fs.existsSync(resultPath)) {
       const parsedData = JSON.parse(fs.readFileSync(resultPath, 'utf8'));
@@ -68,7 +68,7 @@ app.post('/api/fraude/upload', uploadFraud.single('csvFile'), async (req, res) =
         await (prisma.fraudHistoryItem as any).create({ data: item });
       }
     }
-    
+
     res.status(200).send('File uploaded and fraud models retrained.');
   } catch (err) {
     console.error(err);
@@ -132,7 +132,7 @@ app.get('/api/banking/connectors', async (req, res) => {
 app.post('/api/banking/connectors', async (req, res) => {
   try {
     const { name, endpoint, apiKey, secretKey } = req.body;
-    
+
     // Create new API connector
     const newConnector = await prisma.bankConnector.create({
       data: {
@@ -208,11 +208,11 @@ app.get('/api/banking/metrics', (req, res) => {
     const h = Math.floor(i / 6);
     const m = (i % 6) * 10;
     data.push({
-      time: `${String(8 + h).padStart(2,'0')}:${String(m).padStart(2,'0')}`,
-      sib:         Math.round(20  + Math.sin(i/8) * 15  + Math.random() * 10),
-      ged:         Math.round(8   + Math.sin(i/5) * 4   + Math.random() * 5),
-      corebanking: Math.round(60  + Math.sin(i/6) * 25  + Math.random() * 15),
-      swift:       Math.round(6   + Math.sin(i/10) * 3  + Math.random() * 3),
+      time: `${String(8 + h).padStart(2, '0')}:${String(m).padStart(2, '0')}`,
+      sib: Math.round(20 + Math.sin(i / 8) * 15 + Math.random() * 10),
+      ged: Math.round(8 + Math.sin(i / 5) * 4 + Math.random() * 5),
+      corebanking: Math.round(60 + Math.sin(i / 6) * 25 + Math.random() * 15),
+      swift: Math.round(6 + Math.sin(i / 10) * 3 + Math.random() * 3),
     });
   }
   res.json(data);
@@ -237,12 +237,12 @@ app.get('/api/fraud-stats', async (req, res) => {
     const total = await prisma.fraudHistoryItem.count();
     const blocked = await prisma.fraudHistoryItem.count({ where: { decision: 'blocked' } });
     const review = await prisma.fraudHistoryItem.count({ where: { decision: 'review' } });
-    
+
     // For Analyses / heure, we can mock it based on total or just return total as a string,
     // but since the user wants real data, let's just show total analyses instead, or calculate it.
     // We'll show the actual total count of analyses done.
     const detectionRate = total > 0 ? ((blocked / total) * 100).toFixed(1) + '%' : '0%';
-    
+
     res.json({
       totalAnalyses: total,
       blocked: blocked,
@@ -260,7 +260,7 @@ app.get('/api/system/financial-stats', async (req, res) => {
     // Calculate total loss from fraud items and VarData
     const fraudItems = await prisma.fraudHistoryItem.findMany();
     let totalLoss = 0;
-    
+
     for (const item of fraudItems) {
       if (item.decision === 'blocked' || item.decision === 'review') {
         const montantStr = item.montant.replace(/[^0-9.-]+/g, "");
@@ -270,7 +270,7 @@ app.get('/api/system/financial-stats', async (req, res) => {
         }
       }
     }
-    
+
     const varData = await prisma.varData.findMany();
     for (const vd of varData) {
       if (vd.perte && !isNaN(vd.perte)) {
@@ -302,7 +302,7 @@ app.get('/api/system/financial-overview', async (req, res) => {
     const fraudItems = await prisma.fraudHistoryItem.findMany();
     let totalAmountEvaluated = 0;
     let totalExpectedLoss = 0;
-    
+
     // Grouping loss per user
     const userLossMap: Record<string, { entite: string; totalMontant: number; expectedLoss: number; transactions: number; status: string }> = {};
 
@@ -336,11 +336,11 @@ app.get('/api/system/financial-overview', async (req, res) => {
           status: item.decision
         };
       }
-      
+
       userLossMap[entite].totalMontant += montant;
       userLossMap[entite].expectedLoss += expectedLoss;
       userLossMap[entite].transactions += 1;
-      
+
       // Keep the most severe status (blocked > review > others)
       if (item.decision === 'blocked') {
         userLossMap[entite].status = 'blocked';
@@ -684,21 +684,21 @@ app.post('/api/risques/upload', upload.single('csvFile'), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
     }
-    
+
     // Run the Python script
     const pyScriptPath = path.join(__dirname, '../../AI_Pipeline/var_engine.py');
     const pyVenvPath = path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe');
     const cwdPath = path.join(__dirname, '../../AI_Pipeline');
-    
+
     execSync(`"${pyVenvPath}" "${pyScriptPath}"`, { cwd: cwdPath });
-    
+
     // Read the results
     const varResultPath = path.join(__dirname, '../../AI_Pipeline/var_results.json');
     if (fs.existsSync(varResultPath)) {
       const varJson = JSON.parse(fs.readFileSync(varResultPath, 'utf8'));
       const risquesPortefeuille = varJson.portfolio || [];
       const varData = varJson.var_data || [];
-      
+
       // Update Prisma
       await prisma.risqueActif.deleteMany();
       if (risquesPortefeuille.length > 0) {
@@ -706,7 +706,7 @@ app.post('/api/risques/upload', upload.single('csvFile'), async (req, res) => {
           await prisma.risqueActif.create({ data: r });
         }
       }
-      
+
       await prisma.varData.deleteMany();
       if (varData.length > 0) {
         for (const vd of varData) {
@@ -874,7 +874,7 @@ app.patch('/api/modeles/:nom', async (req, res) => {
   try {
     const nom = decodeURIComponent(req.params.nom);
     const data = req.body;
-    
+
     // In our DB, we don't have a unique constraint on 'nom' inherently unless we enforce it or we findFirst
     // Wait, in schema.prisma, nom is unique? Wait let me check.
     // If we assume it's unique or we update all with this nom:
@@ -897,7 +897,7 @@ app.patch('/api/modeles/:nom', async (req, res) => {
 
 app.post('/api/predict/fraud/banking', async (req, res) => {
   try {
-    const pythonRes = await fetch('http://127.0.0.1:8000/predict/fraud', {
+    const pythonRes = await fetch('http://127.0.0.1:7878/predict/fraud', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(req.body)
@@ -911,7 +911,7 @@ app.post('/api/predict/fraud/banking', async (req, res) => {
 
 app.post('/api/predict/fraud/insurance', async (req, res) => {
   try {
-    const pythonRes = await fetch('http://127.0.0.1:8000/predict/insurance_fraud', {
+    const pythonRes = await fetch('http://127.0.0.1:7878/predict/insurance_fraud', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(req.body)
@@ -937,15 +937,15 @@ app.post('/api/modeles/train/:nom', async (req, res) => {
 
     // Call the Python FastAPI training endpoint
     addSystemLog('INFO', `[Scheduler] Triggering retraining on ${pythonEndpoint}...`);
-    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:8000';
+    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:7878';
     const response = await fetch(`${aiApiUrl}/train/${pythonEndpoint}`, { method: 'POST' });
     if (!response.ok) {
-        throw new Error('Python API training failed: ' + response.statusText);
+      throw new Error('Python API training failed: ' + response.statusText);
     }
-    
+
     const result = await response.json();
     const metrics = result.metrics;
-    
+
     let newPrec = 0, newRec = 0, newF1 = 0, newRmse = 0, newMae = 0;
     if (metrics) {
       newPrec = Math.round(metrics.accuracy * 100);
@@ -955,25 +955,25 @@ app.post('/api/modeles/train/:nom', async (req, res) => {
       newMae = metrics.mae || 0;
     }
 
-      const now = new Date().toLocaleString('fr-DZ');
-      
-      if (newPrec > 0) {
-        const updated = await prisma.modelPerformance.updateMany({
-          where: { nom },
-          data: {
-            precision: newPrec,
-            rappel: newRec,
-            f1Score: newF1,
-            rmse: newRmse ? parseFloat(newRmse.toFixed(4)) : 0,
-            mae: newMae ? parseFloat(newMae.toFixed(4)) : 0,
-            dernierEntrainement: now
-          }
-        });
-        const finalModel = await prisma.modelPerformance.findFirst({ where: { nom } });
-        res.json(finalModel);
-      } else {
-        res.status(500).json({ error: 'Benchmark not found' });
-      }
+    const now = new Date().toLocaleString('fr-DZ');
+
+    if (newPrec > 0) {
+      const updated = await prisma.modelPerformance.updateMany({
+        where: { nom },
+        data: {
+          precision: newPrec,
+          rappel: newRec,
+          f1Score: newF1,
+          rmse: newRmse ? parseFloat(newRmse.toFixed(4)) : 0,
+          mae: newMae ? parseFloat(newMae.toFixed(4)) : 0,
+          dernierEntrainement: now
+        }
+      });
+      const finalModel = await prisma.modelPerformance.findFirst({ where: { nom } });
+      res.json(finalModel);
+    } else {
+      res.status(500).json({ error: 'Benchmark not found' });
+    }
 
 
   } catch (error) {
@@ -985,23 +985,23 @@ app.post('/api/islamic/simulate', async (req, res) => {
   try {
     const payload = req.body;
     addSystemLog('INFO', `[IslamicEngine] Request simulation for contract type: ${payload.contract_type}`);
-    
+
     // We try port 5000 first, if Python FastAPI runs there, or fallback to 8000.
     // Based on previous code, python might be on 5000 or 8000. Let's try 5000 as configured in app.py.
     // If it fails, the error will be logged.
     // Actually, since Node is on 5000, Python must be on another port or it's standard 8000. 
     // We'll use 8000 which is what /train uses.
-    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:8000';
+    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:7878';
     const response = await fetch(`${aiApiUrl}/predict/islamic`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    
+
     if (!response.ok) {
       throw new Error(`Python API failed: ${response.statusText}`);
     }
-    
+
     const result = await response.json();
     res.json(result);
   } catch (error) {
@@ -1026,13 +1026,13 @@ app.delete('/api/system/reset-data', async (req, res) => {
   try {
     await prisma.fraudHistoryItem.deleteMany();
     await prisma.clientProfile.deleteMany();
-    
+
     // Also wipe risk module data
     await prisma.risqueActif.deleteMany();
     await prisma.riskKpi.deleteMany();
     await prisma.stressTest.deleteMany();
     await prisma.varData.deleteMany();
-    
+
     res.json({ success: true, message: 'Database reset successfully' });
   } catch (error) {
     console.error('Failed to reset database:', error);
@@ -1078,10 +1078,10 @@ app.get('/api/anomalies', async (req, res) => {
       // the montant is usually a string like "50,000 DZD", parse it to number
       const numMatch = item.montant.replace(/,/g, '').match(/\d+/);
       const valeur = numMatch ? parseInt(numMatch[0]) : 0;
-      
+
       // We know item.score is 0-100
       const normalizedScore = item.score / 100.0;
-      
+
       return {
         date: item.date,
         valeur: valeur,
@@ -1118,7 +1118,7 @@ app.get('/api/alertes', async (req, res) => {
       let alertType = 'info';
       if (item.score >= 80) alertType = 'critique';
       else if (item.score >= 50) alertType = 'avertissement';
-      
+
       return {
         id: item.id.toString(),
         type: alertType,
@@ -1156,19 +1156,19 @@ function getCpuLoad() {
   for (let i = 0; i < currentCpuInfo.length; i++) {
     const coreNow = currentCpuInfo[i].times;
     const coreLast = lastCpuInfo[i].times;
-    
+
     const idleNow = coreNow.idle;
     const idleLast = coreLast.idle;
-    
+
     const totalNow = coreNow.user + coreNow.nice + coreNow.sys + coreNow.idle + coreNow.irq;
     const totalLast = coreLast.user + coreLast.nice + coreLast.sys + coreLast.idle + coreLast.irq;
-    
+
     idleDifference += idleNow - idleLast;
     totalDifference += totalNow - totalLast;
   }
-  
+
   lastCpuInfo = currentCpuInfo;
-  
+
   if (totalDifference === 0) return 0;
   const used = totalDifference - idleDifference;
   return Math.round((used / totalDifference) * 100);
@@ -1202,16 +1202,16 @@ app.get('/api/predictions/real', async (req, res) => {
       if (actifs.length === 0) {
         return res.json({ results: [] });
       }
-      
+
       baseValue = actifs.reduce((acc, a) => acc + (a.poids * 10000), 0) || 1000000; // use portfolio weight as proxy
 
-      
+
       if (model === 'monte_carlo') {
         volatility = 0.015; // 1.5%
         drift = 0.0005;
         confidenceSpread = 0.04;
       } else if (model === 'parametric') {
-        volatility = 0.012; 
+        volatility = 0.012;
         drift = 0.0002;
         confidenceSpread = 0.03;
       } else if (model === 'historical') {
@@ -1228,7 +1228,7 @@ app.get('/api/predictions/real', async (req, res) => {
     if (model === 'islamic_default') confidenceLevel = 90;
 
     // Call Python AI API
-    const pyRes = await fetch('http://127.0.0.1:8000/predict/timeseries', {
+    const pyRes = await fetch('http://127.0.0.1:7878/predict/timeseries', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1246,11 +1246,11 @@ app.get('/api/predictions/real', async (req, res) => {
 
     const pyData = await pyRes.json();
     const results = pyData.results;
-    
+
     // Format dates and prepare final data array
     const data = [];
     const baseDate = new Date();
-    
+
     // Add 10 days of historical 'reel' data
     // Use a deterministic seed so the history doesn't jump around on every click
     let lastReel = baseValue * 0.95; // start slightly lower
@@ -1258,12 +1258,12 @@ app.get('/api/predictions/real', async (req, res) => {
       const d = new Date(baseDate);
       d.setDate(d.getDate() + i);
       const dateStr = d.toLocaleDateString('fr-DZ', { day: '2-digit', month: 'short' });
-      
+
       // Deterministic pseudo-random change based on index
       const pseudoRandom = Math.sin(i * 12.345) * 0.5 + 0.5; // 0 to 1
       const change = lastReel * (pseudoRandom * volatility * 2 - volatility + drift);
       lastReel = lastReel + change;
-      
+
       data.push({
         date: dateStr,
         reel: isPercentage ? parseFloat(lastReel.toFixed(2)) : Math.round(lastReel),
@@ -1281,7 +1281,7 @@ app.get('/api/predictions/real', async (req, res) => {
 
       // Connect the lines seamlessly: the first prediction point should also have 'reel' as the last known value,
       // or we just let Recharts connect them. Recharts connects them if they are in the same array.
-      
+
       data.push({
         date: dateStr,
         reel: i === 0 ? (isPercentage ? parseFloat(lastReel.toFixed(2)) : Math.round(lastReel)) : null,
@@ -1317,9 +1317,9 @@ app.get('/api/system/metrics', async (req, res) => {
   const freeRam = os.freemem();
   const usedRam = totalRam - freeRam;
   const ramPercent = Math.round((usedRam / totalRam) * 100);
-  
+
   const cpuPercent = getCpuLoad();
-  
+
   let gpuPercent = 0;
   try {
     const gpuRaw = execSync('nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits').toString();
@@ -1338,11 +1338,11 @@ app.get('/api/system/metrics', async (req, res) => {
   } catch (e) {
     networkSpeed = 0;
   }
-  
-  const avgLatency = requestLatencies.length > 0 
-    ? Math.round(requestLatencies.reduce((a, b) => a + b, 0) / requestLatencies.length) 
+
+  const avgLatency = requestLatencies.length > 0
+    ? Math.round(requestLatencies.reduce((a, b) => a + b, 0) / requestLatencies.length)
     : 0;
-  
+
   res.json({
     cpu: cpuPercent,
     gpu: gpuPercent,
@@ -1369,7 +1369,7 @@ app.delete('/api/system/reset-data', async (req, res) => {
     await prisma.fraudHistoryItem.deleteMany();
     await prisma.decisionHistoryItem.deleteMany();
     await prisma.xaiDecision.deleteMany(); // will cascade down
-    
+
     res.json({ success: true, message: 'Data cleared successfully' });
   } catch (error) {
     console.error('Error clearing data:', error);
