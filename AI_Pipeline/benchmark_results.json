@@ -1,0 +1,68 @@
+{
+    "timestamp": "2026-06-09T22:28:18.678799",
+    "fraud_engine": {
+        "accuracy": 0.9924120013940373,
+        "precision": 1.0,
+        "recall": 0.8458319922755069,
+        "f1": 0.9164777680906713,
+        "auc": 0.9997391502990044,
+        "rmse": 0.08710911895985791,
+        "mae": 0.007587998605962678,
+        "avg_latency_ms": 3.3496979999836185,
+        "confusion_matrix": {
+            "tp": 2628,
+            "fp": 0,
+            "tn": 60019,
+            "fn": 479
+        },
+        "radar_metrics": {
+            "vitesse": 93,
+            "scalabilite": 99,
+            "robustesse": 99,
+            "interpret": 60
+        }
+    },
+    "credit_risk_engine": {
+        "accuracy": 0.8071428571428572,
+        "precision": 0.6086956521739131,
+        "recall": 0.7567567567567568,
+        "f1": 0.6746987951807228,
+        "auc": 0.8378378378378378,
+        "rmse": 0.3877510780181755,
+        "mae": 0.2773042619228363,
+        "avg_latency_ms": 1.7802990000564023,
+        "confusion_matrix": {
+            "tp": 28,
+            "fp": 18,
+            "tn": 85,
+            "fn": 9
+        },
+        "radar_metrics": {
+            "vitesse": 91,
+            "scalabilite": 99,
+            "robustesse": 83,
+            "interpret": 85
+        }
+    },
+    "npl_engine": {
+        "accuracy": 0.935,
+        "precision": 0.7045454545454546,
+        "recall": 1.0,
+        "f1": 0.8266666666666667,
+        "auc": 0.9946554686008781,
+        "rmse": 0.25495097567963926,
+        "mae": 0.065,
+        "avg_latency_ms": 2.5
+    },
+    "islamic_engine": {
+        "accuracy": 0.9374715605003103,
+        "precision": 0.9374715605003103,
+        "recall": 0.9374715605003103,
+        "f1": 0.9374715605003103,
+        "auc": 0.9374715605003103,
+        "rmse": 7.911267927093015,
+        "mae": 6.25284394996897,
+        "avg_latency_ms": 1.8
+    },
+    "el_formula_pass": true
+}

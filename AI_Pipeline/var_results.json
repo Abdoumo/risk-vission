@@ -1,0 +1,385 @@
+{
+  "portfolio": [
+    {
+      "ticker": "ALLIANCE",
+      "nom": "Alliance Assurances",
+      "secteur": "Assurances",
+      "poids": 15.0,
+      "var95": -2.23,
+      "mcVar95": -2.39,
+      "es95": -2.76,
+      "beta": 0.68,
+      "sharpe": -0.01,
+      "risque": "moyen"
+    },
+    {
+      "ticker": "BIOPHARM",
+      "nom": "Biopharm",
+      "secteur": "Pharmaceutique",
+      "poids": 18.0,
+      "var95": -2.98,
+      "mcVar95": -3.21,
+      "es95": -3.82,
+      "beta": 1.1,
+      "sharpe": 0.57,
+      "risque": "moyen"
+    },
+    {
+      "ticker": "CAAR",
+      "nom": "CAAR",
+      "secteur": "Assurances",
+      "poids": 12.0,
+      "var95": -2.03,
+      "mcVar95": -2.06,
+      "es95": -2.48,
+      "beta": 0.36,
+      "sharpe": -1.21,
+      "risque": "moyen"
+    },
+    {
+      "ticker": "SAIDAL",
+      "nom": "Groupe Saïdal",
+      "secteur": "Pharmaceutique",
+      "poids": 14.000000000000002,
+      "var95": -3.48,
+      "mcVar95": -3.48,
+      "es95": -4.26,
+      "beta": 1.38,
+      "sharpe": 2.63,
+      "risque": "moyen"
+    },
+    {
+      "ticker": "EGH",
+      "nom": "El Aurassi",
+      "secteur": "Hôtellerie",
+      "poids": 10.0,
+      "var95": -4.7,
+      "mcVar95": -4.87,
+      "es95": -5.98,
+      "beta": 2.65,
+      "sharpe": 1.31,
+      "risque": "élevé"
+    },
+    {
+      "ticker": "NCA",
+      "nom": "NCA Rouiba",
+      "secteur": "Agroalimentaire",
+      "poids": 13.0,
+      "var95": -2.57,
+      "mcVar95": -2.71,
+      "es95": -3.35,
+      "beta": 0.64,
+      "sharpe": 1.9,
+      "risque": "moyen"
+    },
+    {
+      "ticker": "ROUIBA",
+      "nom": "AOM Invest",
+      "secteur": "Holding",
+      "poids": 10.0,
+      "var95": -3.5,
+      "mcVar95": -3.48,
+      "es95": -4.7,
+      "beta": 1.01,
+      "sharpe": 1.23,
+      "risque": "moyen"
+    },
+    {
+      "ticker": "DAHLI",
+      "nom": "Dahli",
+      "secteur": "Holding",
+      "poids": 8.0,
+      "var95": -1.66,
+      "mcVar95": -1.62,
+      "es95": -2.01,
+      "beta": 0.19,
+      "sharpe": -0.56,
+      "risque": "faible"
+    }
+  ],
+  "var_data": [
+    {
+      "jour": "J-40",
+      "perte": -0.3,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-39",
+      "perte": 0.02,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-38",
+      "perte": -0.01,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-37",
+      "perte": 0.71,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-36",
+      "perte": -0.08,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-35",
+      "perte": -0.36,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-34",
+      "perte": -0.83,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-33",
+      "perte": -1.49,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-32",
+      "perte": 0.4,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-31",
+      "perte": -0.23,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-30",
+      "perte": 0.69,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-29",
+      "perte": -0.93,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-28",
+      "perte": 0.07,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-27",
+      "perte": 1.21,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-26",
+      "perte": 0.54,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-25",
+      "perte": 0.54,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-24",
+      "perte": 0.09,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-23",
+      "perte": -0.67,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-22",
+      "perte": 0.04,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-21",
+      "perte": 1.95,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-20",
+      "perte": -0.73,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-19",
+      "perte": -0.52,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-18",
+      "perte": 0.97,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-17",
+      "perte": -0.58,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-16",
+      "perte": 0.1,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-15",
+      "perte": 0.09,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-14",
+      "perte": -0.98,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-13",
+      "perte": 0.69,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-12",
+      "perte": 0.53,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-11",
+      "perte": -1.17,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-10",
+      "perte": 0.53,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-9",
+      "perte": 0.99,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-8",
+      "perte": -0.83,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-7",
+      "perte": 0.29,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-6",
+      "perte": 0.25,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-5",
+      "perte": -0.95,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-4",
+      "perte": 1.68,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-3",
+      "perte": 1.65,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-2",
+      "perte": -0.98,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    },
+    {
+      "jour": "J-1",
+      "perte": 0.6,
+      "var95": -0.98,
+      "mcVar95": -1.02,
+      "es95": -1.23
+    }
+  ],
+  "global_var95": -0.98,
+  "global_mc_var95": -1.02,
+  "global_es95": -1.23
+}

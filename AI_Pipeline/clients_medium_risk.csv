@@ -1,0 +1,51 @@
+client_name,age,employ,income,debtinc,creddebt,othdebt,default,kashf_ratib,sijil_tijari,ouqoud,damanat,wathaiq_zoboun,card_brand,card_type,credit_limit,has_chip,card_on_dark_web,MaritalStatus,EducationLevel,EmploymentStatus,HomeOwnershipStatus,BankruptcyHistory
+طارق بلعيد,35,13,42,47.6,1.537536,13.246464,1,false,false,true,true,true,Visa,Debit,$35649,YES,No,Married,High School,Employed,Mortgage,1
+ليلى شريف,40,15,138,34.1,2.444256,8.871744,1,true,false,true,true,true,Visa,Debit,$2181,YES,No,Widowed,Associate,Employed,Rent,0
+SPA ElDjazaïr Tech,28,1,16,44.7,1.147776,3.556224,1,true,true,true,true,true,Visa,Credit,$14400,YES,No,Single,Master,Employed,Mortgage,1
+حسيبة خيذر,30,12,40,37.0,2.4976,3.1024,1,false,false,true,true,true,Visa,Debit,$19746,YES,No,Single,Associate,Employed,Mortgage,1
+SNC Tlemcen Immo,20,0,17,32.3,0.087584,0.694416,1,false,true,true,false,true,Discover,Credit,$11200,YES,No,Single,Associate,Employed,Mortgage,0
+ليلى شريف,41,14,44,31.7,0.706112,0.789888,0,false,false,true,true,true,Mastercard,Debit,$2143,YES,No,Married,Master,Unemployed,Mortgage,1
+يوسف قادري,50,25,94,35.3,3.467472,6.496528,1,false,false,true,true,true,Visa,Credit,$12100,YES,No,Widowed,Associate,Employed,Other,0
+حسيبة خيذر,29,1,29,51.2,4.660184,7.635816,1,true,false,true,false,true,Mastercard,Debit,$12607,YES,No,Married,Master,Self-Employed,Rent,1
+زينب عماري,24,0,16,37.3,0.049056,2.286944,0,false,false,true,true,true,Visa,Debit,$19483,YES,No,Divorced,Master,Employed,Mortgage,1
+ليلى شريف,41,15,120,32.9,5.31744,1.64256,0,true,false,true,true,true,Mastercard,Debit,$39114,YES,No,Married,High School,Employed,Mortgage,0
+SNC Tlemcen Immo,53,5,78,47.3,13.871832,13.116168,1,false,true,true,true,true,Visa,Credit,$11000,YES,No,Divorced,Bachelor,Self-Employed,Rent,0
+SNC Tlemcen Immo,38,4,56,31.6,0.883456,0.908544,0,false,true,true,true,true,Visa,Credit,$36900,YES,No,Married,Bachelor,Employed,Rent,0
+عمر حشاني,47,29,169,32.2,0.698984,6.737016,0,false,false,true,true,true,Mastercard,Credit,$7200,YES,No,Married,Master,Employed,Mortgage,0
+ليلى شريف,36,11,49,31.3,0.545272,0.728728,1,false,false,true,true,true,Visa,Debit (Prepaid),$91,YES,No,Married,High School,Employed,Rent,0
+زينب عماري,35,16,37,47.2,8.425936,4.302064,0,true,false,true,true,true,Visa,Debit,$23137,YES,No,Divorced,Associate,Unemployed,Other,1
+عمر حشاني,40,8,57,35.6,1.7556,4.6284,0,true,false,true,true,true,Mastercard,Credit,$4000,YES,No,Married,High School,Employed,Mortgage,0
+SNC Tlemcen Immo,45,2,29,35.4,0.886356,2.245644,1,false,true,true,true,true,Visa,Debit,$3942,YES,No,Single,High School,Employed,Mortgage,1
+كريم بوزيدي,44,7,78,40.5,6.3063,10.0737,1,true,false,true,false,true,Visa,Debit,$13569,YES,No,Single,Bachelor,Employed,Mortgage,1
+SPA ElDjazaïr Tech,40,9,33,47.0,9.7614,1.4586,1,true,true,true,true,true,Mastercard,Debit,$22248,YES,No,Divorced,Bachelor,Self-Employed,Own,1
+عبد الله منصور,48,0,19,40.8,1.699056,2.404944,1,true,false,true,true,true,Mastercard,Credit,$10900,YES,No,Married,Associate,Employed,Mortgage,0
+زينب عماري,47,3,21,45.4,0.135828,6.332172,0,false,false,true,true,true,Mastercard,Debit,$16747,YES,No,Married,Master,Employed,Mortgage,0
+فاطمة الزهراء,37,10,123,47.3,6.043236,36.514764,0,true,false,true,true,true,Mastercard,Credit,$10600,YES,No,Single,Bachelor,Unemployed,Rent,1
+عمر حشاني,26,4,28,39.5,0.4522,4.8678,1,true,false,true,false,true,Mastercard,Debit,$20816,YES,No,Married,Associate,Employed,Rent,0
+SPA ElDjazaïr Tech,37,13,24,38.9,1.204704,3.067296,0,false,true,true,true,true,Visa,Debit,$19081,YES,No,Married,Bachelor,Employed,Rent,1
+عمر حشاني,41,19,96,37.8,4.507776,10.468224,1,true,false,true,true,true,Amex,Credit,$18400,YES,No,Married,Associate,Employed,Other,0
+نور الدين عمار,41,16,135,34.4,2.5542,9.3258,0,true,false,true,true,true,Visa,Credit,$8000,YES,No,Single,Associate,Employed,Rent,1
+عبد الله منصور,32,11,57,53.8,10.879932,16.252068,1,false,false,true,false,true,Visa,Credit,$9800,YES,No,Married,Bachelor,Employed,Own,0
+سارة حميدي,26,5,18,45.5,1.14948,4.43052,0,true,false,true,true,true,Discover,Credit,$7000,YES,No,Married,Bachelor,Employed,Mortgage,0
+نور الدين عمار,43,4,26,37.1,1.502644,2.189356,0,true,false,true,false,true,Visa,Credit,$13900,YES,No,Divorced,Bachelor,Employed,Mortgage,0
+عبد الله منصور,41,13,93,44.7,19.084716,8.257284,1,true,false,true,true,true,Visa,Debit,$13368,YES,No,Single,Master,Unemployed,Mortgage,1
+زينب عماري,30,8,27,50.3,7.487046,3.474954,1,true,false,true,true,true,Mastercard,Debit,$24191,YES,No,Married,Associate,Employed,Rent,1
+حسيبة خيذر,33,11,35,45.9,1.01283,10.11717,1,false,false,true,true,true,Visa,Debit,$20858,YES,No,Single,Bachelor,Employed,Mortgage,1
+زينب عماري,37,5,29,54.6,2.810796,11.457204,0,false,false,true,true,true,Mastercard,Debit,$23999,YES,No,Divorced,Associate,Employed,Mortgage,1
+فاطمة الزهراء,38,21,65,46.8,5.06688,16.77312,1,true,false,true,false,true,Mastercard,Credit,$8400,YES,No,Widowed,Bachelor,Employed,Mortgage,1
+يوسف قادري,47,9,52,50.1,5.079672,15.824328,0,false,false,true,true,true,Visa,Debit,$22701,YES,No,Married,Associate,Self-Employed,Own,1
+زينب عماري,29,1,17,32.5,0.2635,0.5865,0,true,false,true,true,true,Visa,Credit,$1500,YES,No,Married,Bachelor,Employed,Other,1
+طارق بلعيد,35,10,28,31.3,0.219856,0.508144,1,true,false,true,false,true,Mastercard,Debit,$28877,YES,No,Married,Bachelor,Employed,Mortgage,0
+زينب عماري,35,17,42,33.0,0.18648,2.33352,0,false,false,true,true,true,Mastercard,Debit,$37192,YES,No,Married,Associate,Employed,Own,0
+حسيبة خيذر,43,16,89,30.4,0.318976,0.393024,1,false,false,true,false,true,Mastercard,Debit,$14699,YES,No,Single,Associate,Employed,Own,1
+SPA ElDjazaïr Tech,37,19,38,43.5,5.1813,5.0787,1,false,true,true,true,true,Visa,Debit,$21692,YES,No,Married,High School,Employed,Mortgage,1
+سارة حميدي,38,3,25,33.7,0.62345,1.22655,0,false,false,true,true,true,Visa,Credit,$25300,YES,No,Divorced,Bachelor,Self-Employed,Other,0
+SNC Tlemcen Immo,30,8,56,36.4,0.666624,6.501376,0,true,true,true,false,true,Mastercard,Debit,$51951,YES,No,Single,Bachelor,Employed,Mortgage,1
+حسيبة خيذر,32,13,25,37.5,1.1925,2.5575,0,false,false,true,true,true,Amex,Credit,$24400,YES,No,Single,High School,Employed,Own,0
+SARL ConstantinePro,29,6,25,34.2,1.1697,0.9303,1,false,true,true,true,true,Visa,Debit,$42541,YES,No,Married,Associate,Self-Employed,Mortgage,1
+محمد بن سالم,38,0,23,38.1,1.795932,1.930068,1,true,false,true,false,true,Visa,Debit,$318,YES,No,Married,Associate,Employed,Rent,0
+SARL ConstantinePro,21,0,26,37.7,3.059056,0.944944,1,true,true,true,true,true,Visa,Credit,$14600,YES,No,Widowed,High School,Employed,Mortgage,1
+سارة حميدي,29,13,27,32.3,0.137862,1.104138,0,false,false,true,false,true,Visa,Credit,$13200,YES,No,Married,High School,Employed,Mortgage,1
+طارق بلعيد,42,21,121,33.1,2.730728,4.771272,0,false,false,true,true,true,Mastercard,Debit,$7834,YES,No,Divorced,Bachelor,Employed,Mortgage,1
+علي بوعلام,33,16,46,38.1,4.799088,2.652912,0,true,false,true,true,true,Visa,Debit,$20827,YES,No,Single,Bachelor,Employed,Mortgage,1
+أحمد طاهر,31,11,28,34.8,0.690816,1.997184,0,true,false,true,false,true,Mastercard,Debit,$3106,YES,No,Single,High School,Employed,Rent,0

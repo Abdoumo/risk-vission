@@ -1,0 +1,66 @@
+{
+    "XGBoost": {
+        "Precision": 94,
+        "Rappel": 58,
+        "Vitesse": 98,
+        "Robustesse": 74,
+        "Scalabilit\u00e9": 88,
+        "Interpr\u00e9tabilit\u00e9": 85,
+        "F1_history": {
+            "Jan": 54.054054054054056,
+            "F\u00e9v": 71.42857142857143,
+            "Mar": 86.20689655172413,
+            "Avr": 77.27272727272727,
+            "Mai": 59.25925925925925,
+            "Jun": 64.86486486486487
+        }
+    },
+    "RandomForest": {
+        "Precision": 95,
+        "Rappel": 57,
+        "Vitesse": 92,
+        "Robustesse": 80,
+        "Scalabilit\u00e9": 82,
+        "Interpr\u00e9tabilit\u00e9": 85,
+        "F1_history": {
+            "Jan": 54.054054054054056,
+            "F\u00e9v": 68.29268292682927,
+            "Mar": 86.20689655172413,
+            "Avr": 74.4186046511628,
+            "Mai": 59.25925925925925,
+            "Jun": 64.86486486486487
+        }
+    },
+    "Transformer": {
+        "Precision": 95,
+        "Rappel": 55,
+        "Vitesse": 30,
+        "Robustesse": 81,
+        "Scalabilit\u00e9": 27,
+        "Interpr\u00e9tabilit\u00e9": 20,
+        "F1_history": {
+            "Jan": 55.55555555555556,
+            "F\u00e9v": 71.42857142857143,
+            "Mar": 84.21052631578947,
+            "Avr": 71.42857142857143,
+            "Mai": 59.25925925925925,
+            "Jun": 61.111111111111114
+        }
+    },
+    "LSTM": {
+        "Precision": 96,
+        "Rappel": 54,
+        "Vitesse": 45,
+        "Robustesse": 86,
+        "Scalabilit\u00e9": 40,
+        "Interpr\u00e9tabilit\u00e9": 20,
+        "F1_history": {
+            "Jan": 51.42857142857142,
+            "F\u00e9v": 76.19047619047619,
+            "Mar": 82.14285714285714,
+            "Avr": 76.19047619047619,
+            "Mai": 59.25925925925925,
+            "Jun": 61.111111111111114
+        }
+    }
+}

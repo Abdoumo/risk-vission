@@ -1,0 +1,333 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BankConnector {
+  id             String      @id @default(uuid())
+  name           String
+  system         String
+  type           String
+  bank           String
+  status         String
+  latency        Int
+  uptime         Float
+  requestsPerMin Int
+  lastSync       String
+  endpoint       String
+  authMethod     String
+  dataVolume     String
+  errorRate      Float
+  version        String
+  environment    String
+  apiKey         String?
+  secretKey      String?
+  flows          FlowStat[]
+}
+
+model FlowStat {
+  id            String         @id @default(uuid())
+  label         String
+  count         Int
+  status        String
+  lastRun       String
+  connectorId   String
+  connector     BankConnector  @relation(fields: [connectorId], references: [id])
+}
+
+model ApiLog {
+  id         String   @id @default(uuid())
+  timestamp  String
+  method     String
+  endpoint   String
+  connector  String
+  statusCode Int
+  latency    Int
+  payload    String
+  level      String
+  message    String
+  requestId  String
+}
+
+model DataFlow {
+  id             String @id @default(uuid())
+  source         String
+  destination    String
+  type           String
+  volume         Int
+  frequency      String
+  lastExec       String
+  status         String
+  transformation String
+}
+
+model ModelPerformance {
+  id                  String @id @default(uuid())
+  nom                 String
+  precision           Float
+  rappel              Float
+  f1Score             Float
+  mae                 Float
+  rmse                Float
+  status              String
+  dernierEntrainement String
+}
+
+model Alerte {
+  id           String  @id @default(uuid())
+  type         String
+  message_fr   String
+  message_ar   String
+  message_en   String
+  modele       String
+  timestamp_fr String
+  timestamp_ar String
+  timestamp_en String
+  vue          Boolean
+}
+
+model KPI {
+  id        String  @id @default(uuid())
+  labelKey  String
+  valeur    String
+  variation Float
+  unite     String?
+  tendance  String
+}
+
+model DonneeDistribution {
+  id      String @id @default(uuid())
+  tranche String
+  count   Int
+}
+
+model PipelineStep {
+  id         String @id @default(uuid())
+  nom_fr     String
+  nom_ar     String
+  nom_en     String
+  status     String
+  duree      String
+  details_fr String
+  details_ar String
+  details_en String
+}
+
+model RisqueActif {
+  id      String @id @default(uuid())
+  ticker  String
+  nom     String
+  secteur String
+  poids   Float
+  var95   Float
+  mcVar95 Float?
+  es95    Float?
+  beta    Float
+  sharpe  Float
+  risque  String
+}
+
+model FraudHistoryItem {
+  id       String @id
+  date     String
+  type     String
+  sousType String
+  entite   String
+  score    Float
+  decision String
+  montant  String
+  analyste String
+  details  Json?
+}
+
+model GlobalFeatureImportance {
+  id         String @id @default(uuid())
+  feature    String
+  feature_ar String
+  importance Float
+  trend      String
+  category   String
+}
+
+model ModelFairness {
+  id                String @id @default(uuid())
+  group             String
+  group_ar          String
+  accuracy          Float
+  falsePositiveRate Float
+  falseNegativeRate Float
+  count             Int
+}
+
+model DecisionHistoryItem {
+  id        String  @id
+  date      String
+  entity    String
+  type      String
+  score     Float
+  decision  String
+  riskLevel String
+  model     String
+  validated Boolean
+  analyst   String
+}
+
+model ComparaisonModele {
+  id           String @id @default(uuid())
+  sujet        String
+  LSTM         Float
+  XGBoost      Float
+  RandomForest Float
+  Transformer  Float
+}
+
+model MatriceConfusion {
+  id          String @id @default(uuid())
+  vraiPositif Int
+  fauxPositif Int
+  fauxNegatif Int
+  vraiNegatif Int
+}
+
+model PredictionModel {
+  id       String @id @default(uuid())
+  value    String @unique
+  label    String
+  accuracy Float
+  color    String
+}
+
+model PredictionTarget {
+  id    String @id @default(uuid())
+  value String @unique
+  label String
+}
+
+model XaiDecision {
+  id                    String @id
+  type                  String
+  label_fr              String
+  label_ar              String
+  label_en              String
+  entity                String
+  decision_fr           String
+  decision_ar           String
+  decision_en           String
+  score                 Float
+  confidence            Float
+  riskLevel             String
+  timestamp             String
+  model                 String
+  naturalExplanation_fr String
+  naturalExplanation_ar String
+  naturalExplanation_en String
+  
+  shapFeatures    ShapFeature[]
+  counterFactuals CounterFactual[]
+}
+
+model ShapFeature {
+  id            String @id @default(uuid())
+  xaiDecisionId String
+  feature       String
+  feature_ar    String
+  feature_en    String
+  shapValue     Float
+  baselineValue Float
+  actualValue   String
+  contribution  String
+  importance    Int
+  category      String
+
+  xaiDecision   XaiDecision @relation(fields: [xaiDecisionId], references: [id], onDelete: Cascade)
+}
+
+model CounterFactual {
+  id            String @id @default(uuid())
+  xaiDecisionId String
+  action_fr     String
+  action_ar     String
+  action_en     String
+  impact        Int
+  feasibility   String
+
+  xaiDecision   XaiDecision @relation(fields: [xaiDecisionId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id        String      @id @default(uuid())
+  email     String      @unique
+  password  String
+  name      String?
+  phone     String?
+  role      String      @default("USER")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  logs      ActionLog[]
+}
+
+model ActionLog {
+  id        String   @id @default(uuid())
+  userId    String
+  action    String
+  resource  String
+  details   String?
+  timestamp DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ClientProfile {
+  id          String   @id @default(uuid())
+  client_name String
+  status      String   @default("PENDING")
+  data        Json
+  createdAt   DateTime @default(now())
+}
+
+model RiskKpi {
+  id      String @id @default(uuid())
+  label   String
+  value   String
+  icon    String
+  color   String
+  border  String
+  bg      String
+}
+
+model StressTest {
+  id       String @id @default(uuid())
+  scenario String
+  impact   Float
+  prob     Float
+  color    String
+}
+
+model VarData {
+  id      String @id @default(uuid())
+  jour    String
+  perte   Float
+  var95   Float
+  mcVar95 Float?
+  es95    Float?
+}
+
+model PerformanceTemporelle {
+  id          String @id @default(uuid())
+  date        String
+  lstm        Float
+  xgboost     Float
+  rf          Float
+  transformer Float
+}
+
+

@@ -1,0 +1,52 @@
+Here is a comprehensive breakdown of exactly what is inside your AI_Pipeline folder, how the AI functions, and how you actually run the code.
+
+🧠 How the AI Works (The Core Concept)
+The AI system is built to process tabular financial data (like stock prices, OHLCV data, or loan attributes) and predict future outcomes—specifically, whether a price will go UP or DOWN, or whether a borrower is a high or low risk.
+
+It uses two primary mathematical approaches:
+
+Tree-Based Machine Learning (XGBoost / Random Forest): Fast, highly accurate models perfect for raw tabular data and feature correlations.
+Deep Learning (PyTorch - LSTM / MLP / Transformers): Neural networks designed to analyze sequences over time (e.g., looking at the past 60 days of market momentum to predict day 61).
+📂 File Breakdown & Purpose
+1. The Core Execution Files
+solution.ipynb (The Main Engine)
+What it does: This is the primary Jupyter Notebook where the entire pipeline is glued together. It loads the CSV/Parquet data, cleans it, trains the models, and evaluates their accuracy.
+How it runs: You run this file cell-by-cell using Jupyter. As we discovered earlier, it currently contains Kaggle dataset paths (/kaggle/input/...) that need to be updated to point to your local DATASETS folder.
+DATASETS/
+What it does: Contains all your raw data (ZIP files, CSV files like Loan new datset.csv and bank.csv). This is the fuel for the AI.
+.venv/
+What it does: The isolated Python Virtual Environment containing all the installed libraries (torch, xgboost, pandas).
+2. Data Preparation & Feature Engineering
+df_squeezer.py
+What it does: A memory optimization script. When dealing with millions of rows of financial data, RAM fills up quickly. This script automatically downsizes data types (e.g., converting a massive float64 to float16 if the numbers are small) to drastically reduce memory usage without losing information.
+Préparation.py
+What it does: Contains the make_sequences() function. It takes raw historical data and chops it into sliding windows of 60 days so the LSTM neural network can learn chronological patterns.
+3. The AI Models (The "Brains")
+These files are modular snippets defining the mathematical architecture of the AI. They are imported or copied into the main notebook to be trained:
+
+LSTM.py
+How it works: Defines a PyTorch Long Short-Term Memory neural network. It includes an Attention Mechanism (self.attn), allowing the AI to "focus" mathematically on the most volatile or important days within a 60-day window, ignoring the quiet days.
+Transformer NLP.py
+How it works: Defines a Transformer architecture. Originally built for text (NLP), Transformers use self-attention and are incredibly powerful at finding hidden relationships in time-series financial data.
+XGBoost.py & Random Forest.py
+How they work: Classic ensemble learning algorithms. They build hundreds of "Decision Trees" to classify risk. XGBoost is tuned to learn slowly (learning_rate=0.05) with heavy regularization to prevent it from memorizing the data (overfitting).
+XGBoost + Random Forest.py
+How it works: A hybrid file. It contains a build_features function that uses Technical Analysis (ta library) to calculate financial indicators (RSI, MACD, Bollinger Bands) from raw OHLCV prices before feeding them into XGBoost and Random Forest classifiers.
+MLP.py
+How it works: Defines a Multi-Layer Perceptron. A standard, fully connected "vanilla" neural network used for basic tabular data mapping.
+4. The Training Logic
+TRAINING.py
+What it does: Contains the PyTorch training loop for the deep learning models.
+How it works: It loops over the data for 100 epochs, uses BCELoss (Binary Cross Entropy) to calculate how "wrong" the AI's predictions are, and uses the Adam optimizer with a CosineAnnealingLR scheduler to mathematically tweak the AI's weights until it gets the answers right.
+🚀 How to actually run it all:
+Because we set up your environment earlier, the actual execution is straightforward:
+
+Open your VS Code Terminal inside the ALGORISK/AlgoRiskAI folder.
+Activate your virtual environment:
+bash
+.\AI_Pipeline\.venv\Scripts\activate
+Start the Jupyter interface in your browser:
+bash
+jupyter notebook AI_Pipeline/solution.ipynb
+Important Fix: In the first few code cells of the notebook, change the /kaggle/input/... paths to point to a file inside your DATASETS folder (like "AI_Pipeline/DATASETS/Loan new datset.csv").
+Press Shift + Enter on each cell to load the data, build the features, and watch the AI train!

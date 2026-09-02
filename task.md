@@ -1,0 +1,30 @@
+# Task List: Create Backend and Connect to PostgreSQL
+
+- [/] Initialize Backend Project
+  - [ ] Create `backend` folder
+  - [ ] Initialize `package.json` with dependencies
+  - [ ] Initialize TypeScript config
+- [ ] Setup Prisma & PostgreSQL
+  - [ ] Initialize Prisma with PostgreSQL provider
+- [x] Initialize Backend Project
+  - [x] Create `backend` folder
+  - [x] Initialize `package.json` with dependencies
+  - [x] Initialize TypeScript config
+- [x] Setup Prisma & PostgreSQL
+  - [x] Initialize Prisma with PostgreSQL provider
+  - [x] Define Prisma Schema (BankConnectors, ApiLogs, DataFlows)
+  - [x] Apply database migrations (`npx prisma db push` or `migrate dev`)
+  - [x] Seed the database with the initial hardcoded data
+- [x] Create Express API
+  - [x] Create Express server entry point (`src/index.ts`)
+  - [x] Create API routes for BankConnectors, ApiLogs, DataFlows
+- [x] Implement `/api/predictions/real` endpoint in Node.js backend.
+    - [x] Read data from Prisma (`RisqueActif`, `FraudHistoryItem`)
+    - [x] Calculate predictions for 4 models (monte_carlo, parametric, historical, islamic_default) over the given horizon
+    - [x] Return JSON in `{ results, stats }` format matching the frontend's needs.
+- [ ] Update Frontend
+  - [ ] Add proxy to `vite.config.ts`
+  - [ ] Refactor frontend to use `fetch` instead of static data imports
+- [ ] Verification
+  - [ ] Ensure backend runs
+  - [ ] Ensure frontend successfully fetches data from backend
