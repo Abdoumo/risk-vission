@@ -897,7 +897,7 @@ app.patch('/api/modeles/:nom', async (req, res) => {
 
 app.post('/api/predict/fraud/banking', async (req, res) => {
   try {
-    const pythonRes = await fetch('http://127.0.0.1:7878/predict/fraud', {
+    const pythonRes = await fetch('http://127.0.0.1:7676/predict/fraud', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(req.body)
@@ -911,7 +911,7 @@ app.post('/api/predict/fraud/banking', async (req, res) => {
 
 app.post('/api/predict/fraud/insurance', async (req, res) => {
   try {
-    const pythonRes = await fetch('http://127.0.0.1:7878/predict/insurance_fraud', {
+    const pythonRes = await fetch('http://127.0.0.1:7676/predict/insurance_fraud', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(req.body)
@@ -937,7 +937,7 @@ app.post('/api/modeles/train/:nom', async (req, res) => {
 
     // Call the Python FastAPI training endpoint
     addSystemLog('INFO', `[Scheduler] Triggering retraining on ${pythonEndpoint}...`);
-    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:7878';
+    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:7676';
     const response = await fetch(`${aiApiUrl}/train/${pythonEndpoint}`, { method: 'POST' });
     if (!response.ok) {
       throw new Error('Python API training failed: ' + response.statusText);
@@ -991,7 +991,7 @@ app.post('/api/islamic/simulate', async (req, res) => {
     // If it fails, the error will be logged.
     // Actually, since Node is on 5000, Python must be on another port or it's standard 8000. 
     // We'll use 8000 which is what /train uses.
-    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:7878';
+    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:7676';
     const response = await fetch(`${aiApiUrl}/predict/islamic`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1228,7 +1228,7 @@ app.get('/api/predictions/real', async (req, res) => {
     if (model === 'islamic_default') confidenceLevel = 90;
 
     // Call Python AI API
-    const pyRes = await fetch('http://127.0.0.1:7878/predict/timeseries', {
+    const pyRes = await fetch('http://127.0.0.1:7676/predict/timeseries', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1377,7 +1377,7 @@ app.delete('/api/system/reset-data', async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3636;
 app.listen(port as number, '0.0.0.0', () => {
   console.log(`Serveur démarré sur le port ${port}`);
 });
