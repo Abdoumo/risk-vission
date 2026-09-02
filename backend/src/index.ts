@@ -937,7 +937,8 @@ app.post('/api/modeles/train/:nom', async (req, res) => {
 
     // Call the Python FastAPI training endpoint
     addSystemLog('INFO', `[Scheduler] Triggering retraining on ${pythonEndpoint}...`);
-    const response = await fetch(`http://localhost:8000/train/${pythonEndpoint}`, { method: 'POST' });
+    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:8000';
+    const response = await fetch(`${aiApiUrl}/train/${pythonEndpoint}`, { method: 'POST' });
     if (!response.ok) {
         throw new Error('Python API training failed: ' + response.statusText);
     }
@@ -990,7 +991,8 @@ app.post('/api/islamic/simulate', async (req, res) => {
     // If it fails, the error will be logged.
     // Actually, since Node is on 5000, Python must be on another port or it's standard 8000. 
     // We'll use 8000 which is what /train uses.
-    const response = await fetch('http://localhost:8000/predict/islamic', {
+    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:8000';
+    const response = await fetch(`${aiApiUrl}/predict/islamic`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)

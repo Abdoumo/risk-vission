@@ -201,15 +201,15 @@ export default function XaiView() {
   const [lastGenerated, setLastGenerated] = useState<string | null>(null);
 
   const fetchXaiData = () => {
-    fetch('http://localhost:5000/api/xai/decisions').then(r => r.json()).then(data => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/xai/decisions`).then(r => r.json()).then(data => {
       setXaiDecisions(data);
       if (data.length > 0 && !selectedDecisionId) {
         setSelectedDecisionId(data[0].id);
       }
     }).catch(() => {});
-    fetch('http://localhost:5000/api/xai/feature-importance').then(r => r.json()).then(setGlobalFeatureImportance).catch(() => {});
-    fetch('http://localhost:5000/api/xai/model-fairness').then(r => r.json()).then(setModelFairness).catch(() => {});
-    fetch('http://localhost:5000/api/xai/decision-history').then(r => r.json()).then(setDecisionHistory).catch(() => {});
+    fetch(`${import.meta.env.VITE_API_URL}/api/xai/feature-importance`).then(r => r.json()).then(setGlobalFeatureImportance).catch(() => {});
+    fetch(`${import.meta.env.VITE_API_URL}/api/xai/model-fairness`).then(r => r.json()).then(setModelFairness).catch(() => {});
+    fetch(`${import.meta.env.VITE_API_URL}/api/xai/decision-history`).then(r => r.json()).then(setDecisionHistory).catch(() => {});
   };
 
   useEffect(() => {
@@ -219,7 +219,7 @@ export default function XaiView() {
   const handleGenerate = async () => {
     setGenerating(true);
     try {
-      const resp = await fetch('http://localhost:5000/api/xai/generate', { method: 'POST' });
+      const resp = await fetch(`${import.meta.env.VITE_API_URL}/api/xai/generate`, { method: 'POST' });
       const result = await resp.json();
       if (result.status === 'ok' || result.decisions > 0) {
         setLastGenerated(new Date().toLocaleTimeString());

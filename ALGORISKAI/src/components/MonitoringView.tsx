@@ -32,7 +32,7 @@ export default function MonitoringView() {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/system/metrics');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/system/metrics`);
         if (res.ok) {
           const data = await res.json();
           setMetrics(prev => [
@@ -56,7 +56,7 @@ export default function MonitoringView() {
           });
         }
         
-        const logsRes = await fetch('http://localhost:5000/api/system/logs');
+        const logsRes = await fetch(`${import.meta.env.VITE_API_URL}/api/system/logs`);
         if (logsRes.ok) {
            const logsData = await logsRes.json();
            setLogs(logsData);

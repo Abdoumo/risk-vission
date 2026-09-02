@@ -32,7 +32,7 @@ export default function SettingsView() {
   useEffect(() => {
     const fetchFinancialOverview = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/system/financial-overview', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/system/financial-overview`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('algorisk_token')}`
           }
@@ -57,7 +57,7 @@ export default function SettingsView() {
     
     setIsResetting(true);
     try {
-      const response = await fetch('http://localhost:5000/api/system/reset-data', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/system/reset-data`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('algorisk_token')}`

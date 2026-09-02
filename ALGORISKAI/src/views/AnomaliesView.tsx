@@ -15,7 +15,7 @@ export default function AnomaliesView() {
   const [selectedDetails, setSelectedDetails] = useState<any>(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/anomalies')
+    fetch(`${import.meta.env.VITE_API_URL}/api/anomalies`)
       .then(r => r.json())
       .then(data => {
         setAnomalies(data);
@@ -37,7 +37,7 @@ export default function AnomaliesView() {
       const detectedCount = dataList.filter(a => a.score >= 0.5).length;
       const fProb = detectedCount / dataList.length;
 
-      const response = await fetch('http://localhost:8000/calculate/fraud_var', {
+      const response = await fetch(`${import.meta.env.VITE_AI_API_URL}/calculate/fraud_var`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

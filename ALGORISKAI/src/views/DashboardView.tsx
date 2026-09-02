@@ -33,7 +33,7 @@ export default function DashboardView() {
 
   useEffect(() => {
     // Fetch real metrics from the Python backend
-    fetch('http://localhost:8000/models/status')
+    fetch(`${import.meta.env.VITE_AI_API_URL}/models/status`)
       .then(r => r.json())
       .then(data => {
         if (!data.error && data.fraud_engine && data.credit_risk_engine) {

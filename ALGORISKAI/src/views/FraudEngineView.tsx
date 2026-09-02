@@ -609,7 +609,7 @@ export default function FraudEngineView() {
   const [globalStats, setGlobalStats] = useState({ totalAnalyses: 0, blocked: 0, review: 0, detectionRate: '0%' });
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/fraud-stats')
+    fetch(`${import.meta.env.VITE_API_URL}/api/fraud-stats`)
       .then(r => r.json())
       .then(setGlobalStats)
       .catch(err => console.error("Error fetching global stats", err));
@@ -617,7 +617,7 @@ export default function FraudEngineView() {
 
   useEffect(() => {
     if (activeTab === 'historique') {
-      fetch('http://localhost:5000/api/fraud-history')
+      fetch(`${import.meta.env.VITE_API_URL}/api/fraud-history`)
         .then(r => r.json())
         .then(setFraudHistory)
         .catch(err => console.error("Error fetching history", err));
