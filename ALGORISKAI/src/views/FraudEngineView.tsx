@@ -288,7 +288,7 @@ function BankingPanel({ lang, isRTL }: { lang: string; isRTL: boolean }) {
               {t('Signaux détectés (XAI)', 'الإشارات المكتشفة (XAI)', 'Detected signals (XAI)')}
             </p>
             <div>
-              {result.signals.map((sig, i) => (
+              {result.signals && result.signals.map((sig, i) => (
                 <SignalRow key={i} sig={sig} lang={lang} isRTL={isRTL} />
               ))}
             </div>
@@ -565,7 +565,7 @@ function SinistresPanel({ lang, isRTL }: { lang: string; isRTL: boolean }) {
             <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">
               {t2('Facteurs de risque détectés (XAI)', 'عوامل الخطر المكتشفة', 'Detected risk factors (XAI)')}
             </p>
-            {result.signals.map((sig, i) => <SignalRow key={i} sig={sig} lang={lang} isRTL={isRTL} />)}
+            {result.signals && result.signals.map((sig, i) => <SignalRow key={i} sig={sig} lang={lang} isRTL={isRTL} />)}
           </div>
         )}
 
