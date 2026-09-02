@@ -134,8 +134,8 @@ function BankingPanel({ lang, isRTL }: { lang: string; isRTL: boolean }) {
   }, [inp]);
 
   const applyScenario = (sc: typeof SCENARIOS_BANKING[0]) => setInp({ ...sc.input } as TransactionInput);
-  const dc = result ? decisionCfg[result.decision] : null;
-  const ringColor = result ? dc!.ring : '#334155';
+  const dc = result && result.decision ? decisionCfg[result.decision as keyof typeof decisionCfg] : null;
+  const ringColor = dc?.ring ?? '#334155';
 
   const t = (fr: string, ar: string, en: string) => lang === 'ar' ? ar : lang === 'en' ? en : fr;
 
@@ -359,7 +359,7 @@ function SinistresPanel({ lang, isRTL }: { lang: string; isRTL: boolean }) {
   }, [inp]);
 
   const applyScenario = (sc: typeof SCENARIOS_SINISTRES[0]) => setInp({ ...sc.input });
-  const dc = result ? decisionCfg[result.decision] : null;
+  const dc = result && result.decision ? decisionCfg[result.decision as keyof typeof decisionCfg] : null;
 
   const typeIcons: Record<SinistreType, any> = {
     vol: ShieldOff, incendie: Flame, accident: Car, degat_eaux: Droplets, corporel: User,
