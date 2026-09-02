@@ -13,7 +13,7 @@ window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
 
   const response = await originalFetch(input, newInit);
 
-  if (response.status === 401) {
+  if (response.status === 401 || response.status === 403) {
     // Dispatch a custom event to notify the app to logout
     window.dispatchEvent(new Event('auth-unauthorized'));
   }
