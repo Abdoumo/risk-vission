@@ -1188,7 +1188,7 @@ app.get('/api/predictions/real', async (req, res) => {
     if (model === 'islamic_default') {
       const items = await prisma.fraudHistoryItem.findMany();
       if (items.length === 0) {
-        return res.status(400).json({ error: 'EMPTY_DB', message: 'Aucune donnée disponible. Veuillez importer un dataset.' });
+        return res.json({ results: [] });
       }
       const detectedCount = items.filter(i => i.score >= 50).length;
       baseValue = (detectedCount / items.length) * 100; // base default %
@@ -1200,7 +1200,7 @@ app.get('/api/predictions/real', async (req, res) => {
       // VaR models
       const actifs = await prisma.risqueActif.findMany();
       if (actifs.length === 0) {
-        return res.status(400).json({ error: 'EMPTY_DB', message: 'Aucune donnée de portefeuille disponible. Veuillez importer un dataset CSV.' });
+        return res.json({ results: [] });
       }
       
       baseValue = actifs.reduce((acc, a) => acc + (a.poids * 10000), 0) || 1000000; // use portfolio weight as proxy
