@@ -1378,6 +1378,6 @@ app.delete('/api/system/reset-data', async (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
+app.listen(port as number, '0.0.0.0', () => {
   console.log(`Serveur démarré sur le port ${port}`);
 });
