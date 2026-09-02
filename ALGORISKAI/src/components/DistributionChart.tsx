@@ -6,12 +6,12 @@ interface DistributionChartProps {
   data: DonneeDistribution[];
 }
 
-const colors = ['#0891b2', '#06b6d4', '#22d3ee', '#67e8f9', '#0284c7', '#0ea5e9', '#38bdf8', '#7dd3fc'];
+const colors = ['#047857', '#059669', '#10b981', '#34d399', '#14b8a6', '#ef4444', '#f59e0b', '#6ee7b7'];
 
 export default function DistributionChart({ data }: DistributionChartProps) {
   const { t, isRTL } = useLang();
   return (
-    <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 transition-all duration-300 hover:border-cyan-500/20 hover:shadow-[0_0_30px_rgba(34,211,238,0.05)]">
+    <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 transition-all duration-300 hover:border-emerald-500/20 hover:shadow-[0_0_30px_rgba(16,185,129,0.05)]">
       <div className={`mb-5 ${isRTL ? 'text-right' : ''}`}>
         <h3 className="text-lg font-bold text-white tracking-tight">{t('chart_distribution_title')}</h3>
         <p className="text-[13px] font-medium text-slate-400 mt-1">{t('chart_distribution_sub')}</p>

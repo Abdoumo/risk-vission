@@ -18,7 +18,7 @@ export default function AlertesList({ alertes }: AlertesListProps) {
   const iconMap = {
     critique:     { Icon: AlertCircle,  color: 'text-rose-400',    bg: 'bg-rose-500/10',    border: 'border-rose-500/20' },
     avertissement:{ Icon: AlertTriangle, color: 'text-amber-400',  bg: 'bg-amber-500/10',  border: 'border-amber-500/20' },
-    info:         { Icon: Info,          color: 'text-cyan-400',  bg: 'bg-cyan-500/10',  border: 'border-cyan-500/20' },
+    info:         { Icon: Info,          color: 'text-emerald-400',  bg: 'bg-emerald-500/10',  border: 'border-emerald-500/20' },
   };
 
   const getMessage = (alerte: Alerte) => {
@@ -36,7 +36,7 @@ export default function AlertesList({ alertes }: AlertesListProps) {
   const nonVues = localAlertes.filter((a) => !a.vue).length;
 
   return (
-    <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 h-full transition-all duration-300 hover:border-cyan-500/20 hover:shadow-[0_0_30px_rgba(34,211,238,0.05)]">
+    <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 h-full transition-all duration-300 hover:border-emerald-500/20 hover:shadow-[0_0_30px_rgba(16,185,129,0.05)]">
       <div className={`mb-5 flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
         <div className={isRTL ? 'text-right' : ''}>
           <h3 className="text-lg font-bold text-white tracking-tight">{t('alerts_title')}</h3>
@@ -46,7 +46,7 @@ export default function AlertesList({ alertes }: AlertesListProps) {
         </div>
         <button 
           onClick={() => setLocalAlertes(prev => prev.map(a => ({ ...a, vue: true })))}
-          className="text-[13px] font-semibold text-cyan-400 hover:text-cyan-300 transition-colors whitespace-nowrap"
+          className="text-[13px] font-semibold text-emerald-400 hover:text-emerald-300 transition-colors whitespace-nowrap"
         >
           {t('alerts_markall')}
         </button>

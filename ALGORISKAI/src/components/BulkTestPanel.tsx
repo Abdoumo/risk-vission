@@ -237,10 +237,10 @@ export default function BulkTestPanel() {
       className="space-y-6 relative"
     >
       {/* Background glow effects */}
-      <div className="absolute top-[30%] left-[20%] w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute top-[30%] left-[20%] w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
 
-      <motion.div variants={itemVariants} className="rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-md p-8 flex flex-col items-center justify-center border-dashed hover:border-cyan-500/30 hover:bg-slate-900/60 transition-all cursor-pointer group">
-        <UploadCloud className="h-12 w-12 text-cyan-500/50 mb-4 group-hover:text-cyan-400 group-hover:scale-110 transition-all duration-500" />
+      <motion.div variants={itemVariants} className="rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-md p-8 flex flex-col items-center justify-center border-dashed hover:border-emerald-500/30 hover:bg-slate-900/60 transition-all cursor-pointer group">
+        <UploadCloud className="h-12 w-12 text-emerald-500/50 mb-4 group-hover:text-emerald-400 group-hover:scale-110 transition-all duration-500" />
         <h3 className="text-lg font-semibold text-white mb-1">
           {t('Importer Profils Complets (Sauvegarde & Analyse Automatique)', 'استيراد الملفات (حفظ وتحليل تلقائي)', 'Import Profiles (Auto-Save & Analyze)')}
         </h3>
@@ -252,7 +252,7 @@ export default function BulkTestPanel() {
           accept=".csv"
           onChange={handleFileUpload}
           disabled={processing}
-          className="block w-full text-sm text-slate-400 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-cyan-500/10 file:text-cyan-400 hover:file:bg-cyan-500/20 max-w-xs cursor-pointer disabled:opacity-50 transition-colors"
+          className="block w-full text-sm text-slate-400 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-emerald-500/10 file:text-emerald-400 hover:file:bg-emerald-500/20 max-w-xs cursor-pointer disabled:opacity-50 transition-colors"
         />
       </motion.div>
 
@@ -270,7 +270,7 @@ export default function BulkTestPanel() {
           <button 
             onClick={startProcessing}
             disabled={processing}
-            className={`flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-cyan-400 px-5 py-2.5 text-sm font-bold text-white shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all hover:from-cyan-500 hover:to-cyan-300 disabled:opacity-50 disabled:cursor-not-allowed ${isRTL ? 'flex-row-reverse' : ''}`}
+            className={`flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-cyan-400 px-5 py-2.5 text-sm font-bold text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all hover:from-emerald-500 hover:to-cyan-300 disabled:opacity-50 disabled:cursor-not-allowed ${isRTL ? 'flex-row-reverse' : ''}`}
           >
             {processing ? <Loader2 className="h-4.5 w-4.5 animate-spin" /> : <Play className="h-4.5 w-4.5" />}
             {processing ? t('Analyse en cours...', 'جاري التحليل...', 'Analysis in progress...') : t('Lancer l\'analyse', 'بدء التحليل', 'Start Analysis')}

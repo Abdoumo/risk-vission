@@ -111,15 +111,15 @@ export default function PredictionsView() {
       className="space-y-6 relative"
     >
       {/* Background glow effects */}
-      <div className="absolute top-20 right-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
-      <div className="absolute bottom-20 left-20 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute top-20 right-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-20 left-20 w-[500px] h-[500px] bg-green-600/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
 
       {/* ── Config Panel ─────────────────────────────────────────────── */}
       <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6">
         <div className={`flex items-center justify-between mb-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
           <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.15)]">
-              <Target className="h-5 w-5 text-cyan-400" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+              <Target className="h-5 w-5 text-emerald-400" />
             </div>
             <div className={isRTL ? 'text-right' : ''}>
               <h3 className="text-xl font-bold text-white tracking-tight">{t('pred_config')}</h3>
@@ -131,7 +131,7 @@ export default function PredictionsView() {
           <button
             onClick={handleRunAI}
             disabled={runStatus === 'running'}
-            className="group flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-cyan-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-105 hover:shadow-cyan-500/40 disabled:opacity-50 disabled:hover:scale-100"
+            className="group flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-emerald-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 hover:shadow-emerald-500/40 disabled:opacity-50 disabled:hover:scale-100"
           >
             {runStatus === 'running' ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -151,7 +151,7 @@ export default function PredictionsView() {
                 value={selectedModel}
                 onChange={e => setSelectedModel(e.target.value)}
                 disabled={runStatus === 'running'}
-                className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-2.5 text-sm font-medium text-white outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-2.5 text-sm font-medium text-white outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 {modelOptions.map(m => (
                   <option key={m.value} value={m.value}>{m.label}</option>
@@ -163,7 +163,7 @@ export default function PredictionsView() {
           {/* Horizon */}
           <div className={`lg:col-span-2 ${isRTL ? 'text-right' : ''}`}>
             <label className="mb-2 block text-[13px] font-semibold text-slate-300">
-              {t('pred_horizon')} <span className="text-cyan-400 font-bold">— {horizon} jours</span>
+              {t('pred_horizon')} <span className="text-emerald-400 font-bold">— {horizon} jours</span>
             </label>
             <div className="space-y-3 mt-4 px-2">
               <input
@@ -180,7 +180,7 @@ export default function PredictionsView() {
                     key={val} 
                     onClick={() => setHorizon(val.toString())}
                     disabled={runStatus === 'running'}
-                    className={`hover:text-cyan-400 transition-colors ${horizon === val.toString() ? 'text-cyan-400 scale-110' : ''}`}
+                    className={`hover:text-emerald-400 transition-colors ${horizon === val.toString() ? 'text-emerald-400 scale-110' : ''}`}
                   >
                     {val}j
                   </button>
@@ -194,7 +194,7 @@ export default function PredictionsView() {
       {/* ── Progress Panel ─────────────────── */}
       {runStatus === 'running' && (
         <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-10 flex flex-col items-center justify-center text-center">
-          <Loader2 className="h-10 w-10 text-cyan-400 animate-spin mb-4" />
+          <Loader2 className="h-10 w-10 text-emerald-400 animate-spin mb-4" />
           <h4 className="text-white font-bold text-lg">Inférence IA en cours...</h4>
           <p className="text-slate-400 text-sm mt-2 max-w-md">
             Le modèle analyse la volatilité du portefeuille et génère les trajectoires stochastiques.
@@ -218,9 +218,9 @@ export default function PredictionsView() {
               value: stats.isPercentage ? `${stats.avg}%` : Number(stats.avg).toLocaleString('fr-DZ'),
               sub: stats.isPercentage ? 'Taux moyen projeté' : 'DZD projetés',
               icon: BarChart3,
-              color: 'text-cyan-400',
-              border: 'border-cyan-500/20',
-              bg: 'from-cyan-500/10',
+              color: 'text-emerald-400',
+              border: 'border-emerald-500/20',
+              bg: 'from-emerald-500/10',
             },
             {
               label: t('pred_trend'),
@@ -236,9 +236,9 @@ export default function PredictionsView() {
               value: `${stats.horizon} j`,
               sub: 'Horizon temporel',
               icon: Calendar,
-              color: 'text-blue-400',
-              border: 'border-blue-500/20',
-              bg: 'from-blue-500/10',
+              color: 'text-green-400',
+              border: 'border-green-500/20',
+              bg: 'from-green-500/10',
             },
             {
               label: t('pred_confidence'),
@@ -269,7 +269,7 @@ export default function PredictionsView() {
 
       {/* ── Chart ────────────────────────────────────────────────────── */}
       {runStatus === 'done' && (
-        <motion.div variants={itemVariants} className={`transition-all duration-500 ring-1 ring-cyan-500/20 rounded-2xl shadow-[0_0_30px_rgba(34,211,238,0.05)]`}>
+        <motion.div variants={itemVariants} className={`transition-all duration-500 ring-1 ring-emerald-500/20 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.05)]`}>
           <PredictionChart data={resultData} />
         </motion.div>
       )}
@@ -284,9 +284,9 @@ export default function PredictionsView() {
                 {currentModel.label} <span className="mx-1.5 text-slate-600">•</span> Horizon {horizon}j
               </p>
             </div>
-            <div className="flex items-center gap-2 rounded-xl bg-cyan-500/10 border border-cyan-500/20 px-3 py-1.5 shadow-[0_0_10px_rgba(34,211,238,0.1)]">
-              <CheckCircle2 className="h-4 w-4 text-cyan-400" />
-              <span className="text-[12px] font-bold text-cyan-400 tracking-wide">
+            <div className="flex items-center gap-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <span className="text-[12px] font-bold text-emerald-400 tracking-wide">
                 Généré par IA
               </span>
             </div>
@@ -313,9 +313,9 @@ export default function PredictionsView() {
                   const formatVal = (v: number | null) => v === null ? '—' : (isPct ? `${v}%` : v.toLocaleString('fr-DZ'));
                   
                   return (
-                    <tr key={i} className="hover:bg-cyan-500/5 transition-colors group">
+                    <tr key={i} className="hover:bg-emerald-500/5 transition-colors group">
                       <td className="px-4 py-3.5 text-[13px] font-medium text-slate-300">{d.date}</td>
-                      <td className="px-4 py-3.5 text-[14px] font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors">
+                      <td className="px-4 py-3.5 text-[14px] font-bold text-emerald-400 group-hover:text-emerald-300 transition-colors">
                         {formatVal(d.predit)}
                       </td>
                       <td className="px-4 py-3.5 text-[13px] font-medium text-slate-400">
@@ -331,11 +331,11 @@ export default function PredictionsView() {
                         <div className={`flex items-center gap-2.5 ${isRTL ? 'flex-row-reverse' : ''}`}>
                           <div className="h-1.5 w-16 overflow-hidden rounded-full bg-slate-800">
                             <div
-                              className="h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]"
+                              className="h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 shadow-[0_0_10px_rgba(16,185,129,0.5)]"
                               style={{ width: `${conf}%` }}
                             />
                           </div>
-                          <span className="text-[12px] font-bold text-cyan-400">
+                          <span className="text-[12px] font-bold text-emerald-400">
                             {conf.toFixed(1)}%
                           </span>
                         </div>

@@ -79,7 +79,7 @@ export default function SettingsView() {
   const Toggle = ({ val, onToggle }: { val: boolean; onToggle: () => void }) => (
     <button
       onClick={onToggle}
-      className={`relative h-6 w-11 rounded-full transition-colors ${val ? 'bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]' : 'bg-slate-800 border border-white/10'}`}
+      className={`relative h-6 w-11 rounded-full transition-colors ${val ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'bg-slate-800 border border-white/10'}`}
     >
       <div className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${val ? 'translate-x-5' : 'translate-x-0.5'}`} />
     </button>
@@ -103,12 +103,12 @@ export default function SettingsView() {
       className="space-y-6 relative"
     >
       {/* Background glow effects */}
-      <div className="absolute top-0 right-[20%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute top-0 right-[20%] w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
 
       {/* Model params */}
       <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)]">
         <div className={`flex items-center gap-3 mb-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
-          <Sliders className="h-5 w-5 text-cyan-400" />
+          <Sliders className="h-5 w-5 text-emerald-400" />
           <h3 className="text-base font-bold text-white">{t('settings_models')}</h3>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -119,7 +119,7 @@ export default function SettingsView() {
               <input type="range" min="0.5" max="1" step="0.01" value={settings.anomalyThreshold}
                 onChange={(e) => setSettings({ ...settings, anomalyThreshold: parseFloat(e.target.value) })}
                 className="flex-1 h-2 rounded-full bg-slate-800 accent-cyan-500" />
-              <span className="text-sm font-bold text-cyan-400 w-12">{settings.anomalyThreshold}</span>
+              <span className="text-sm font-bold text-emerald-400 w-12">{settings.anomalyThreshold}</span>
             </div>
           </div>
           {/* Batch size */}
@@ -127,7 +127,7 @@ export default function SettingsView() {
             <label className="block text-sm font-medium text-slate-300 mb-2">{t('settings_batch')}</label>
             <select value={settings.batchSize}
               onChange={(e) => setSettings({ ...settings, batchSize: parseInt(e.target.value) })}
-              className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-2.5 text-sm text-slate-300 outline-none focus:border-cyan-500/50 focus:bg-slate-900/80 transition-colors">
+              className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-2.5 text-sm text-slate-300 outline-none focus:border-emerald-500/50 focus:bg-slate-900/80 transition-colors">
               {[32, 64, 128, 256, 512, 1024].map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
           </div>
@@ -136,7 +136,7 @@ export default function SettingsView() {
             <label className="block text-sm font-medium text-slate-300 mb-2">{t('settings_retrain_freq')}</label>
             <select value={settings.retrainFreq}
               onChange={(e) => setSettings({ ...settings, retrainFreq: e.target.value })}
-              className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-2.5 text-sm text-slate-300 outline-none focus:border-cyan-500/50 focus:bg-slate-900/80 transition-colors">
+              className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-2.5 text-sm text-slate-300 outline-none focus:border-emerald-500/50 focus:bg-slate-900/80 transition-colors">
               <option value="6h">6h</option>
               <option value="12h">12h</option>
               <option value="24h">24h</option>
@@ -151,7 +151,7 @@ export default function SettingsView() {
               <input type="range" min="80" max="99" step="1" value={settings.confidenceInterval}
                 onChange={(e) => setSettings({ ...settings, confidenceInterval: parseInt(e.target.value) })}
                 className="flex-1 h-2 rounded-full bg-slate-800 accent-cyan-500" />
-              <span className="text-sm font-bold text-cyan-400 w-12">{settings.confidenceInterval}%</span>
+              <span className="text-sm font-bold text-emerald-400 w-12">{settings.confidenceInterval}%</span>
             </div>
           </div>
           {/* GPU */}
@@ -161,7 +161,7 @@ export default function SettingsView() {
               <input type="range" min="10" max="100" step="5" value={settings.gpuAllocation}
                 onChange={(e) => setSettings({ ...settings, gpuAllocation: parseInt(e.target.value) })}
                 className="flex-1 h-2 rounded-full bg-slate-800 accent-cyan-500" />
-              <span className="text-sm font-bold text-cyan-400 w-12">{settings.gpuAllocation}%</span>
+              <span className="text-sm font-bold text-emerald-400 w-12">{settings.gpuAllocation}%</span>
             </div>
           </div>
           {/* Max models */}
@@ -169,7 +169,7 @@ export default function SettingsView() {
             <label className="block text-sm font-medium text-slate-300 mb-2">{t('settings_max_models')}</label>
             <input type="number" value={settings.maxModels}
               onChange={(e) => setSettings({ ...settings, maxModels: parseInt(e.target.value) })}
-              className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-2.5 text-sm text-slate-300 outline-none focus:border-cyan-500/50 focus:bg-slate-900/80 transition-colors" />
+              className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-2.5 text-sm text-slate-300 outline-none focus:border-emerald-500/50 focus:bg-slate-900/80 transition-colors" />
           </div>
         </div>
       </motion.div>
@@ -178,7 +178,7 @@ export default function SettingsView() {
         {/* Automation */}
         <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)]">
           <div className={`flex items-center gap-3 mb-5 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <Shield className="h-5 w-5 text-cyan-400" />
+            <Shield className="h-5 w-5 text-emerald-400" />
             <h3 className="text-base font-bold text-white">{t('settings_automation')}</h3>
           </div>
           <div className="space-y-4">
@@ -200,7 +200,7 @@ export default function SettingsView() {
         {/* Notifications */}
         <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 shadow-[0_0_20px_rgba(0,0,0,0.2)]">
           <div className={`flex items-center gap-3 mb-5 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <Bell className="h-5 w-5 text-cyan-400" />
+            <Bell className="h-5 w-5 text-emerald-400" />
             <h3 className="text-base font-bold text-white">{t('settings_notifs')}</h3>
           </div>
           <div className="space-y-4">
@@ -249,7 +249,7 @@ export default function SettingsView() {
               <TrendingDown className="w-4 h-4 text-red-400" />
               <span className="text-sm font-medium">{isRTL ? 'إجمالي خسائر العملاء' : 'Total Clients Loss'}</span>
               <a href="#user-loss-breakdown" title={isRTL ? 'رؤية التفاصيل بالأسفل' : 'See breakdown below'}>
-                <Info className="w-4 h-4 text-slate-500 hover:text-cyan-400 cursor-pointer transition-colors" />
+                <Info className="w-4 h-4 text-slate-500 hover:text-emerald-400 cursor-pointer transition-colors" />
               </a>
             </div>
             <input 
@@ -335,7 +335,7 @@ export default function SettingsView() {
           onClick={() => {
             window.location.reload();
           }}
-          className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-cyan-400 px-5 py-2.5 text-sm font-bold text-white shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all hover:from-cyan-500 hover:to-cyan-300">
+          className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-cyan-400 px-5 py-2.5 text-sm font-bold text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all hover:from-emerald-500 hover:to-cyan-300">
           <Save className="h-4.5 w-4.5" />
           {t('settings_save')}
         </button>

@@ -17,11 +17,11 @@ export default function MonitoringView() {
   const { t, isRTL } = useLang();
 
   const [metrics, setMetrics] = useState<MetricGauge[]>([
-    { labelKey: 'cpu',        value: 0,   max: 100,  unit: '%',    icon: Cpu,       gradient: 'from-cyan-500 to-cyan-300' },
+    { labelKey: 'cpu',        value: 0,   max: 100,  unit: '%',    icon: Cpu,       gradient: 'from-emerald-500 to-cyan-300' },
     { labelKey: 'gpu',        value: 0,   max: 100,  unit: '%',    icon: Zap,       gradient: 'from-emerald-500 to-emerald-300' },
     { labelKey: 'memory',     value: 0,   max: 32,   unit: 'GB',   icon: HardDrive, gradient: 'from-cyan-600 to-cyan-400' },
     { labelKey: 'network',    value: 0,  max: 1000, unit: 'Mb/s', icon: Wifi,      gradient: 'from-emerald-600 to-emerald-400' },
-    { labelKey: 'latency',    value: 0,   max: 200,  unit: 'ms',   icon: Clock,     gradient: 'from-cyan-500 to-emerald-400' },
+    { labelKey: 'latency',    value: 0,   max: 200,  unit: 'ms',   icon: Clock,     gradient: 'from-emerald-500 to-emerald-400' },
     { labelKey: 'throughput', value: 0, max: 2000, unit: 'r/s',  icon: Activity,  gradient: 'from-emerald-500 to-cyan-400' },
   ]);
 
@@ -87,7 +87,7 @@ export default function MonitoringView() {
       className="space-y-6 relative"
     >
       {/* Background glow effects */}
-      <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
       <div className="absolute bottom-[20%] left-[10%] w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
 
       <motion.div variants={itemVariants} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -96,10 +96,10 @@ export default function MonitoringView() {
           const pct = (metric.value / metric.max) * 100;
           const isCritical = pct > 90;
           const isWarning = pct > 75;
-          const color = isCritical ? 'text-rose-400' : isWarning ? 'text-amber-400' : 'text-cyan-400';
+          const color = isCritical ? 'text-rose-400' : isWarning ? 'text-amber-400' : 'text-emerald-400';
 
           return (
-            <div key={i} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 transition-all hover:border-cyan-500/30 hover:bg-slate-900/60 shadow-[0_0_20px_rgba(0,0,0,0.2)]">
+            <div key={i} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 transition-all hover:border-emerald-500/30 hover:bg-slate-900/60 shadow-[0_0_20px_rgba(0,0,0,0.2)]">
               <div className={`flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
                 <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <Icon className={`h-4 w-4 ${color}`} />

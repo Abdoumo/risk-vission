@@ -52,19 +52,19 @@ function DetailModal({
   nom, state, onClose, isRTL,
 }: { nom: string; state: ModelState; onClose: () => void; isRTL: boolean }) {
   const metrics = [
-    { label: 'Précision', value: `${state.precision}%`, icon: BarChart3, color: 'text-cyan-400', bg: 'bg-cyan-500/10' },
+    { label: 'Précision', value: `${state.precision}%`, icon: BarChart3, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
     { label: 'Score F1',  value: `${state.f1Score}%`,  icon: Activity,   color: 'text-indigo-400', bg: 'bg-indigo-500/10' },
     { label: 'MAE',       value: state.mae.toString(), icon: TrendingDown,color: 'text-rose-400', bg: 'bg-rose-500/10' },
     { label: 'RMSE',      value: state.rmse.toString(),icon: TrendingUp,  color: 'text-amber-400', bg: 'bg-amber-500/10' },
   ];
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
-      <div className={`w-full max-w-lg rounded-2xl border border-white/10 bg-slate-900/80 shadow-[0_0_50px_rgba(34,211,238,0.1)] backdrop-blur-xl overflow-hidden ${isRTL ? 'text-right' : ''}`}>
+      <div className={`w-full max-w-lg rounded-2xl border border-white/10 bg-slate-900/80 shadow-[0_0_50px_rgba(16,185,129,0.1)] backdrop-blur-xl overflow-hidden ${isRTL ? 'text-right' : ''}`}>
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/5 p-6">
           <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.15)]">
-              <Brain className="h-5 w-5 text-cyan-400" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+              <Brain className="h-5 w-5 text-emerald-400" />
             </div>
             <div className={isRTL ? 'text-right' : ''}>
               <h3 className="text-lg font-bold text-white tracking-tight">{nom}</h3>
@@ -374,7 +374,7 @@ export default function ModelesTable({ modeles: initialModeles }: ModelesTablePr
   // ── STATUS CONFIG ─────────────────────────────────────────────────────────
   const statusConfig: Record<ModelStatus, { bg: string; text: string; dot: string }> = {
     actif:          { bg: 'bg-emerald-500/10',  text: 'text-emerald-400',  dot: 'bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]' },
-    'entraînement': { bg: 'bg-cyan-500/10',     text: 'text-cyan-400',     dot: 'bg-cyan-500 animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.5)]' },
+    'entraînement': { bg: 'bg-emerald-500/10',     text: 'text-emerald-400',     dot: 'bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]' },
     inactif:        { bg: 'bg-slate-500/10',    text: 'text-slate-400',    dot: 'bg-slate-500' },
   };
 
@@ -386,20 +386,20 @@ export default function ModelesTable({ modeles: initialModeles }: ModelesTablePr
 
   const SortIcon = ({ field }: { field: typeof sortField }) => (
     <span className="ml-1 inline-flex flex-col">
-      {sortField === field && sortDir === 'asc'  && <ChevronUp   className="h-2.5 w-2.5 text-cyan-400" />}
-      {sortField === field && sortDir === 'desc' && <ChevronDown  className="h-2.5 w-2.5 text-cyan-400" />}
+      {sortField === field && sortDir === 'asc'  && <ChevronUp   className="h-2.5 w-2.5 text-emerald-400" />}
+      {sortField === field && sortDir === 'desc' && <ChevronDown  className="h-2.5 w-2.5 text-emerald-400" />}
       {sortField !== field && <ChevronDown className="h-2.5 w-2.5 text-slate-600" />}
     </span>
   );
 
   return (
     <>
-      <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 transition-all duration-300 hover:border-cyan-500/20 hover:shadow-[0_0_30px_rgba(34,211,238,0.05)]">
+      <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 transition-all duration-300 hover:border-emerald-500/20 hover:shadow-[0_0_30px_rgba(16,185,129,0.05)]">
         {/* ── Header ─────────────────────────────────────────────────── */}
         <div className={`mb-5 flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
           <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.15)]">
-              <Brain className="h-5 w-5 text-cyan-400" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+              <Brain className="h-5 w-5 text-emerald-400" />
             </div>
             <div className={isRTL ? 'text-right' : ''}>
               <h3 className="text-lg font-bold text-white tracking-tight">{t('models_title')}</h3>
@@ -454,24 +454,24 @@ export default function ModelesTable({ modeles: initialModeles }: ModelesTablePr
                 return (
                   <tr
                     key={m.nom}
-                    className={`border-b border-white/5 transition-colors hover:bg-cyan-500/5 group ${isTr ? 'bg-cyan-500/5' : ''}`}
+                    className={`border-b border-white/5 transition-colors hover:bg-emerald-500/5 group ${isTr ? 'bg-emerald-500/5' : ''}`}
                   >
                     {/* Name */}
                     <td className={`px-4 py-3.5 ${isRTL ? 'text-right' : ''}`}>
                       <div>
-                        <span className="text-[14px] font-bold text-slate-200 group-hover:text-cyan-300 transition-colors">{m.nom}</span>
+                        <span className="text-[14px] font-bold text-slate-200 group-hover:text-emerald-300 transition-colors">{m.nom}</span>
                         {/* Training progress bar */}
                         {isTr && (
                           <div className="mt-2">
                             <div className="flex items-center justify-between mb-1">
-                              <span className="text-[11px] text-cyan-400 font-mono font-bold">
+                              <span className="text-[11px] text-emerald-400 font-mono font-bold">
                                 Epoch {st.epoch}/{st.totalEpochs}
                               </span>
-                              <span className="text-[11px] text-cyan-400 font-mono font-bold">{st.trainProgress}%</span>
+                              <span className="text-[11px] text-emerald-400 font-mono font-bold">{st.trainProgress}%</span>
                             </div>
                             <div className="h-1.5 overflow-hidden rounded-full bg-slate-800">
                               <div
-                                className="h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)] transition-all duration-300"
+                                className="h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 shadow-[0_0_10px_rgba(16,185,129,0.5)] transition-all duration-300"
                                 style={{ width: `${st.trainProgress}%` }}
                               />
                             </div>
@@ -504,11 +504,11 @@ export default function ModelesTable({ modeles: initialModeles }: ModelesTablePr
                       <div className={`flex items-center gap-2.5 ${isRTL ? 'flex-row-reverse' : ''}`}>
                         <div className="h-1.5 w-16 overflow-hidden rounded-full bg-slate-800">
                           <div
-                            className="h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.5)] transition-all duration-500"
+                            className="h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 shadow-[0_0_8px_rgba(16,185,129,0.5)] transition-all duration-500"
                             style={{ width: `${st.precision}%` }}
                           />
                         </div>
-                        <span className="text-[13px] font-black text-cyan-400 w-10">{st.precision}%</span>
+                        <span className="text-[13px] font-black text-emerald-400 w-10">{st.precision}%</span>
                       </div>
                     </td>
 
@@ -552,10 +552,10 @@ export default function ModelesTable({ modeles: initialModeles }: ModelesTablePr
                           onClick={() => handleRetrain(m.nom)}
                           disabled={isTr}
                           title={isRTL ? 'إعادة التدريب' : 'Ré-entraîner'}
-                          className="rounded-lg p-2 text-slate-400 transition-all hover:bg-cyan-500/10 hover:text-cyan-400 active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
+                          className="rounded-lg p-2 text-slate-400 transition-all hover:bg-emerald-500/10 hover:text-emerald-400 active:scale-90 disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                           {isTr
-                            ? <Loader2  className="h-4 w-4 animate-spin text-cyan-400" />
+                            ? <Loader2  className="h-4 w-4 animate-spin text-emerald-400" />
                             : <RotateCcw className="h-4 w-4" />
                           }
                         </button>

@@ -27,7 +27,7 @@ export default function RisquesView() {
 
 
   const risqueColors = {
-    faible: { bg: 'bg-cyan-500/10', text: 'text-cyan-400', border: 'border-cyan-500/20' },
+    faible: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
     moyen:  { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/20' },
     élevé:  { bg: 'bg-rose-500/10',   text: 'text-rose-400',   border: 'border-rose-500/20' },
   };
@@ -56,7 +56,7 @@ export default function RisquesView() {
       className="space-y-6 relative"
     >
       {/* Background glow effects */}
-      <div className="absolute top-40 right-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute top-40 right-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
       <div className="absolute bottom-20 left-20 w-[500px] h-[500px] bg-rose-600/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
 
       {risquesPortefeuille.length === 0 ? (
@@ -110,7 +110,7 @@ export default function RisquesView() {
                   <ReferenceLine y={-3.2} stroke="#f43f5e" strokeDasharray="4 4" label={{ value: 'VaR 95%', fill: '#f43f5e', fontSize: 11, fontWeight: 'bold' }} />
                   <Bar dataKey="perte" name="P&L %" radius={[4, 4, 0, 0]}>
                     {varData.map((entry, idx) => (
-                      <Cell key={idx} fill={entry.perte < -3.2 ? '#f43f5e' : '#06b6d4'} fillOpacity={0.8} />
+                      <Cell key={idx} fill={entry.perte < -3.2 ? '#f43f5e' : '#047857'} fillOpacity={0.8} />
                     ))}
                   </Bar>
                 </BarChart>
@@ -127,11 +127,11 @@ export default function RisquesView() {
                 {stressTests.map((s, i) => (
                   <div key={i} className={`flex items-center justify-between p-3 rounded-xl border border-white/5 bg-slate-900/50 hover:bg-slate-800/50 transition-colors ${isRTL ? 'flex-row-reverse' : ''}`}>
                     <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                      <div className="h-3 w-3 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.2)]" style={{ backgroundColor: s.color.replace('#22c55e', '#06b6d4').replace('#ef4444', '#f43f5e') }} />
+                      <div className="h-3 w-3 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.2)]" style={{ backgroundColor: s.color.replace('#22c55e', '#047857').replace('#ef4444', '#f43f5e') }} />
                       <span className="text-[13px] font-bold text-slate-300">{s.scenario}</span>
                     </div>
                     <div className={`flex items-center gap-5 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                      <span className={`text-[14px] font-black ${s.impact < 0 ? 'text-rose-400' : 'text-cyan-400'}`}>
+                      <span className={`text-[14px] font-black ${s.impact < 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
                         {s.impact > 0 ? '+' : ''}{s.impact}%
                       </span>
                       <div className="w-24">
@@ -139,7 +139,7 @@ export default function RisquesView() {
                           <span className="text-[11px] font-bold text-slate-500">{s.prob}%</span>
                         </div>
                         <div className="h-1.5 overflow-hidden rounded-full bg-slate-800">
-                          <div className="h-full rounded-full" style={{ width: `${s.prob}%`, backgroundColor: s.color.replace('#22c55e', '#06b6d4').replace('#ef4444', '#f43f5e'), opacity: 0.8 }} />
+                          <div className="h-full rounded-full" style={{ width: `${s.prob}%`, backgroundColor: s.color.replace('#22c55e', '#047857').replace('#ef4444', '#f43f5e'), opacity: 0.8 }} />
                         </div>
                       </div>
                     </div>
@@ -159,9 +159,9 @@ export default function RisquesView() {
                 </p>
               </div>
               <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                <div className="text-center bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-2.5 px-4 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-                  <p className="text-2xl font-black text-cyan-400">{risquesPortefeuille.reduce((a,b)=>a+b.poids,0)}%</p>
-                  <p className="text-[11px] font-bold text-cyan-500/70 uppercase tracking-wider">Allocation totale</p>
+                <div className="text-center bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-2.5 px-4 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
+                  <p className="text-2xl font-black text-emerald-400">{risquesPortefeuille.reduce((a,b)=>a+b.poids,0)}%</p>
+                  <p className="text-[11px] font-bold text-emerald-500/70 uppercase tracking-wider">Allocation totale</p>
                 </div>
               </div>
             </div>
@@ -178,9 +178,9 @@ export default function RisquesView() {
                   {risquesPortefeuille.map((a, i) => {
                     const rc = risqueColors[a.risque];
                     return (
-                      <tr key={i} className="hover:bg-cyan-500/5 transition-colors group">
+                      <tr key={i} className="hover:bg-emerald-500/5 transition-colors group">
                         <td className="px-4 py-3.5">
-                          <span className="font-mono text-[14px] font-bold text-cyan-400">{a.ticker}</span>
+                          <span className="font-mono text-[14px] font-bold text-emerald-400">{a.ticker}</span>
                         </td>
                         <td className="px-4 py-3.5 text-[13px] font-medium text-slate-200">{a.nom}</td>
                         <td className="px-4 py-3.5 text-[13px] font-medium text-slate-400">{a.secteur}</td>

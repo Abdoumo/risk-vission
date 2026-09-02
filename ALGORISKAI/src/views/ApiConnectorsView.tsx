@@ -15,11 +15,11 @@ const statusConfig = {
   connected:    { label_fr: 'Connecté',     label_ar: 'متصل',       label_en: 'Connected',    icon: CheckCircle2, color: 'text-green-400',  bg: 'bg-green-500/10',  border: 'border-green-500/30',  dot: 'bg-green-400 animate-pulse' },
   degraded:     { label_fr: 'Dégradé',      label_ar: 'متدهور',     label_en: 'Degraded',     icon: AlertTriangle,color: 'text-amber-400',  bg: 'bg-amber-500/10',  border: 'border-amber-500/30',  dot: 'bg-amber-400' },
   disconnected: { label_fr: 'Déconnecté',   label_ar: 'منقطع',      label_en: 'Disconnected', icon: WifiOff,      color: 'text-red-400',    bg: 'bg-red-500/10',    border: 'border-red-500/30',    dot: 'bg-red-400' },
-  syncing:      { label_fr: 'Synchro...',   label_ar: 'مزامنة...',  label_en: 'Syncing...',   icon: Loader2,      color: 'text-cyan-400',   bg: 'bg-cyan-500/10',   border: 'border-cyan-500/30',   dot: 'bg-cyan-400 animate-pulse' },
+  syncing:      { label_fr: 'Synchro...',   label_ar: 'مزامنة...',  label_en: 'Syncing...',   icon: Loader2,      color: 'text-emerald-400',   bg: 'bg-emerald-500/10',   border: 'border-emerald-500/30',   dot: 'bg-emerald-400 animate-pulse' },
 };
 
 const typeColors: Record<string, string> = {
-  SIB:         'bg-blue-500/10 text-blue-400 border-blue-500/20',
+  SIB:         'bg-green-500/10 text-green-400 border-green-500/20',
   GED:         'bg-violet-500/10 text-violet-400 border-violet-500/20',
   CoreBanking: 'bg-green-500/10 text-green-400 border-green-500/20',
   SWIFT:       'bg-amber-500/10 text-amber-400 border-amber-500/20',
@@ -267,15 +267,15 @@ export default function ApiConnectorsView() {
       animate="visible"
       className="space-y-6 relative"
     >
-      <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-green-600/5 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
 
       <motion.div variants={itemVariants} className="grid grid-cols-2 gap-4 md:grid-cols-5">
         {[
           { label: lang === 'ar' ? 'متصل' : lang === 'en' ? 'Connected' : 'Connectés',           value: connected,    color: 'text-emerald-400', bg: 'from-emerald-500/10' },
           { label: lang === 'ar' ? 'متدهور' : lang === 'en' ? 'Degraded' : 'Dégradés',            value: degraded,     color: 'text-amber-400', bg: 'from-amber-500/10' },
           { label: lang === 'ar' ? 'منقطع' : lang === 'en' ? 'Disconnected' : 'Déconnectés',     value: disconnected, color: 'text-rose-400',   bg: 'from-rose-500/10' },
-          { label: lang === 'ar' ? 'مزامنة' : lang === 'en' ? 'Syncing' : 'En synchro',          value: syncing,      color: 'text-cyan-400',  bg: 'from-cyan-500/10' },
+          { label: lang === 'ar' ? 'مزامنة' : lang === 'en' ? 'Syncing' : 'En synchro',          value: syncing,      color: 'text-emerald-400',  bg: 'from-emerald-500/10' },
           { label: lang === 'ar' ? 'طلب/دقيقة' : lang === 'en' ? 'req/min' : 'req/min total',    value: totalReq.toLocaleString(), color: 'text-white', bg: 'from-slate-500/10' },
         ].map((s, i) => (
           <div key={i} className={`rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md bg-gradient-to-br ${s.bg} to-transparent p-5 shadow-[0_0_20px_rgba(0,0,0,0.2)]`}>
@@ -295,7 +295,7 @@ export default function ApiConnectorsView() {
                 key={tab.id}
                 onClick={() => setActiveSection(tab.id as any)}
                 className={`flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-[13px] font-bold transition-all ${isRTL ? 'flex-row-reverse' : ''} ${
-                  active ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.1)]' : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
+                  active ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]' : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
                 <Icon className="h-4.5 w-4.5" />
@@ -306,7 +306,7 @@ export default function ApiConnectorsView() {
         </div>
         <button
           onClick={() => setShowNewModal(true)}
-          className={`flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 px-4 py-2.5 text-[13px] font-bold text-white shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_25px_rgba(34,211,238,0.5)] active:scale-[0.98] transition-all ${isRTL ? 'flex-row-reverse' : ''}`}
+          className={`flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-green-700 px-4 py-2.5 text-[13px] font-bold text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] active:scale-[0.98] transition-all ${isRTL ? 'flex-row-reverse' : ''}`}
         >
           <Plus className="h-4 w-4 fill-white/20" />
           {lang === 'ar' ? 'اتصال جديد' : lang === 'en' ? 'New Connection' : 'Nouvelle Connexion'}
@@ -452,7 +452,7 @@ export default function ApiConnectorsView() {
                 <span className={`shrink-0 w-14 font-bold ${log.level === 'ERROR' ? 'text-red-400' : log.level === 'WARN' ? 'text-amber-400' : log.level === 'DEBUG' ? 'text-slate-500' : 'text-green-400'}`}>
                   {log.level}
                 </span>
-                <span className={`shrink-0 w-12 font-bold ${log.method === 'POST' ? 'text-blue-400' : log.method === 'GET' ? 'text-green-400' : log.method === 'PUT' ? 'text-amber-400' : 'text-red-400'}`}>
+                <span className={`shrink-0 w-12 font-bold ${log.method === 'POST' ? 'text-green-400' : log.method === 'GET' ? 'text-green-400' : log.method === 'PUT' ? 'text-amber-400' : 'text-red-400'}`}>
                   {log.method}
                 </span>
                 <span className={`shrink-0 w-10 font-bold ${log.statusCode >= 200 && log.statusCode < 300 ? 'text-green-400' : log.statusCode >= 400 ? 'text-red-400' : 'text-amber-400'}`}>
@@ -479,14 +479,14 @@ export default function ApiConnectorsView() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className={`rounded-xl border border-white/5 bg-slate-800/30 p-6 flex flex-col items-center justify-center text-center hover:bg-slate-800/50 transition-colors`}>
-              <div className="h-12 w-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-4">
-                <FileText className="h-6 w-6 text-cyan-400" />
+              <div className="h-12 w-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4">
+                <FileText className="h-6 w-6 text-emerald-400" />
               </div>
               <h4 className="text-sm font-bold text-white mb-2">Portefeuille de Risques (SGBV)</h4>
               <p className="text-[12px] text-slate-400 mb-6 max-w-[250px]">
                 Uploadez votre CSV contenant les actifs pour évaluer le VaR et les risques de marché.
               </p>
-              <label className="flex cursor-pointer items-center gap-2 rounded-xl bg-cyan-500/10 px-5 py-2.5 text-[13px] font-bold text-cyan-400 transition-all hover:bg-cyan-500/20 border border-cyan-500/20 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] active:scale-[0.98]">
+              <label className="flex cursor-pointer items-center gap-2 rounded-xl bg-emerald-500/10 px-5 py-2.5 text-[13px] font-bold text-emerald-400 transition-all hover:bg-emerald-500/20 border border-emerald-500/20 hover:shadow-[0_0_15px_rgba(16,185,129,0.2)] active:scale-[0.98]">
                 {isUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <UploadCloud className="h-4 w-4" />}
                 <span>{isUploading ? 'Chargement...' : 'Importer CSV'}</span>
                 <input type="file" accept=".csv" className="hidden" onChange={handleFileUpload} disabled={isUploading} />
@@ -518,12 +518,12 @@ export default function ApiConnectorsView() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className={`w-full max-w-md rounded-2xl border border-white/10 bg-slate-900/90 p-6 shadow-[0_0_50px_rgba(34,211,238,0.1)] backdrop-blur-xl ${isRTL ? 'text-right' : ''}`}
+              className={`w-full max-w-md rounded-2xl border border-white/10 bg-slate-900/90 p-6 shadow-[0_0_50px_rgba(16,185,129,0.1)] backdrop-blur-xl ${isRTL ? 'text-right' : ''}`}
             >
               <div className={`flex items-center justify-between mb-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
                 <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.15)]">
-                    <Wifi className="h-5 w-5 text-cyan-400" />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+                    <Wifi className="h-5 w-5 text-emerald-400" />
                   </div>
                   <h3 className="text-lg font-bold text-white tracking-tight">Nouvelle Connexion</h3>
                 </div>
@@ -546,18 +546,18 @@ export default function ApiConnectorsView() {
               }} className="space-y-4">
                 <div>
                   <label className="block text-[13px] font-semibold text-slate-300 mb-2">Nom de l'API / Partenaire</label>
-                  <input required name="name" type="text" placeholder="Ex: Stripe, SWIFT Gateway..." className="w-full rounded-xl border border-white/5 bg-slate-950 px-4 py-2.5 text-sm text-white outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50" />
+                  <input required name="name" type="text" placeholder="Ex: Stripe, SWIFT Gateway..." className="w-full rounded-xl border border-white/5 bg-slate-950 px-4 py-2.5 text-sm text-white outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50" />
                 </div>
                 <div>
                   <label className="block text-[13px] font-semibold text-slate-300 mb-2">URL Endpoint</label>
-                  <input required name="endpoint" type="url" placeholder="https://api.example.com/v1" className="w-full rounded-xl border border-white/5 bg-slate-950 px-4 py-2.5 text-sm text-white font-mono outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50" />
+                  <input required name="endpoint" type="url" placeholder="https://api.example.com/v1" className="w-full rounded-xl border border-white/5 bg-slate-950 px-4 py-2.5 text-sm text-white font-mono outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50" />
                 </div>
                 <div>
                   <label className="block text-[13px] font-semibold text-slate-300 mb-2">API Key / Client ID</label>
-                  <input required name="apiKey" type="text" placeholder="sk_live_..." className="w-full rounded-xl border border-white/5 bg-slate-950 px-4 py-2.5 text-sm text-white font-mono outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50" />
+                  <input required name="apiKey" type="text" placeholder="sk_live_..." className="w-full rounded-xl border border-white/5 bg-slate-950 px-4 py-2.5 text-sm text-white font-mono outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50" />
                 </div>
                 <div>
-                  <button type="submit" className="mt-2 w-full rounded-xl bg-cyan-500 px-4 py-3 text-sm font-bold text-white shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:bg-cyan-400 transition-colors">
+                  <button type="submit" className="mt-2 w-full rounded-xl bg-emerald-500 px-4 py-3 text-sm font-bold text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:bg-emerald-400 transition-colors">
                     Connecter l'API
                   </button>
                 </div>

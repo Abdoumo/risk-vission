@@ -17,7 +17,7 @@ export default function AnomaliesChart({ data }: AnomaliesChartProps) {
         </div>
         <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
           <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <div className="h-3 w-3 rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.5)]" />
+            <div className="h-3 w-3 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(6,182,212,0.5)]" />
             <span className="text-[12px] font-bold text-slate-300">Normal</span>
           </div>
           <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
@@ -30,8 +30,8 @@ export default function AnomaliesChart({ data }: AnomaliesChartProps) {
         <ComposedChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 5 }}>
           <defs>
             <linearGradient id="anomGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#06b6d4" stopOpacity={0} />
+              <stop offset="5%" stopColor="#047857" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#047857" stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" opacity={0.5} />
@@ -41,7 +41,7 @@ export default function AnomaliesChart({ data }: AnomaliesChartProps) {
             contentStyle={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', fontSize: '13px', color: '#f8fafc', backdropFilter: 'blur(8px)', boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
             formatter={(value: any) => [Number(value).toFixed(2), '']}
           />
-          <Area type="monotone" dataKey="valeur" stroke="#06b6d4" fill="url(#anomGrad)" strokeWidth={2} dot={false} name="Valeur" />
+          <Area type="monotone" dataKey="valeur" stroke="#047857" fill="url(#anomGrad)" strokeWidth={2} dot={false} name="Valeur" />
           <Bar dataKey="score" barSize={6} name="Score" radius={[4, 4, 0, 0]} opacity={0.8}>
             {data.map((entry, idx) => (
               <Cell key={idx} fill={entry.anomalie ? '#f43f5e' : '#1e293b'} />

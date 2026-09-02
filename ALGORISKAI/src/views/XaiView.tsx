@@ -280,7 +280,7 @@ export default function XaiView() {
     >
       {/* Background glow effects */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-green-600/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
 
       {/* ── Header banner ─────────────────────────────────────────────── */}
       <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6">
@@ -321,9 +321,9 @@ export default function XaiView() {
               <ShieldCheck className="h-3.5 w-3.5 text-green-400" />
               <span className="text-xs font-medium text-green-400">BCBS 239</span>
             </div>
-            <div className={`flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
-              <span className="text-xs font-medium text-blue-400">CRD V</span>
+            <div className={`flex items-center gap-1.5 rounded-full bg-green-500/10 border border-green-500/20 px-3 py-1.5 ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <ShieldCheck className="h-3.5 w-3.5 text-green-400" />
+              <span className="text-xs font-medium text-green-400">CRD V</span>
             </div>
           </div>
         </div>
@@ -466,7 +466,7 @@ export default function XaiView() {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-[13px] font-bold transition-all min-w-fit ${isRTL ? 'flex-row-reverse' : ''} ${
-                    isActive ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.1)]' : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
+                    isActive ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]' : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
                   }`}
                 >
                   <Icon className="h-3.5 w-3.5 shrink-0" />

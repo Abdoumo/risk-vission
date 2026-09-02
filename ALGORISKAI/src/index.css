@@ -1,16 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════
+   🇩🇿 AlgoRiskAI — Algerian Color Palette
+   ═══════════════════════════════════════════ */
+:root {
+  --alg-green: #10b981;
+  --alg-green-deep: #047857;
+  --alg-green-glow: rgba(16, 185, 129, 0.25);
+  --alg-red: #ef4444;
+  --alg-red-deep: #dc2626;
+  --alg-red-glow: rgba(239, 68, 68, 0.2);
+  --alg-white: #f0f0f0;
+  --alg-silver: #94a3b8;
+  --alg-black: #020617;
+  --alg-surface: #0f172a;
+}
+
 /* Arabic font support */
 .font-arabic {
   font-family: 'Cairo', 'Segoe UI', sans-serif;
 }
 
-/* Custom scrollbar — green theme */
+/* Custom scrollbar — Algerian green theme */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: #0a0f0a; }
-::-webkit-scrollbar-thumb { background: #14532d; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #166534; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: var(--alg-green-deep); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--alg-green); }
 
 /* Range input */
 input[type="range"] {
@@ -26,21 +42,23 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 16px; height: 16px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--alg-green);
   cursor: pointer;
-  border: 2px solid #0a0f0a;
+  border: 2px solid #0a0a0a;
+  box-shadow: 0 0 8px var(--alg-green-glow);
 }
 input[type="range"]::-moz-range-thumb {
   width: 16px; height: 16px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--alg-green);
   cursor: pointer;
-  border: 2px solid #0a0f0a;
+  border: 2px solid #0a0a0a;
+  box-shadow: 0 0 8px var(--alg-green-glow);
 }
 
 /* Select */
 select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2322c55e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2310b981' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   padding-right: 32px;
@@ -56,4 +74,42 @@ select {
   background-position: left 12px center;
   padding-right: 12px;
   padding-left: 32px;
+}
+
+/* ═══════════════════════════════════════════
+   Animated Background Orbs
+   ═══════════════════════════════════════════ */
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+.orb-green {
+  animation: float-orb 12s ease-in-out infinite;
+}
+
+.orb-red {
+  animation: float-orb 15s ease-in-out infinite reverse;
+}
+
+/* ═══════════════════════════════════════════
+   Algerian Flag Accent Strip
+   ═══════════════════════════════════════════ */
+.flag-strip {
+  height: 3px;
+  background: linear-gradient(90deg, #10b981 33%, #ffffff 33% 66%, #ef4444 66%);
+  border-radius: 2px 2px 0 0;
+}
+
+/* ═══════════════════════════════════════════
+   Glowing card border animation
+   ═══════════════════════════════════════════ */
+@keyframes border-glow {
+  0%, 100% { border-color: rgba(16, 185, 129, 0.15); }
+  50% { border-color: rgba(16, 185, 129, 0.35); }
+}
+
+.glow-card:hover {
+  animation: border-glow 2s ease-in-out infinite;
 }

@@ -659,23 +659,23 @@ export default function FraudEngineView() {
       className="space-y-6 relative"
     >
       {/* Background glow effects */}
-      <div className="absolute top-40 right-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
+      <div className="absolute top-40 right-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] -z-10 mix-blend-screen pointer-events-none" />
       <div className="absolute bottom-20 left-20 w-[500px] h-[500px] bg-rose-600/10 rounded-full blur-[150px] -z-10 mix-blend-screen pointer-events-none" />
 
       {/* ── Header banner ───────────────────────────────── */}
-      <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-8 relative overflow-hidden shadow-[0_0_50px_rgba(34,211,238,0.05)]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(34,211,238,0.15)_0%,_transparent_60%)] pointer-events-none" />
+      <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-8 relative overflow-hidden shadow-[0_0_50px_rgba(16,185,129,0.05)]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(16,185,129,0.15)_0%,_transparent_60%)] pointer-events-none" />
         <div className={`relative flex items-start justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
           <div className={isRTL ? 'text-right' : ''}>
             <div className={`flex items-center gap-2 mb-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <div className="flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1.5 shadow-[0_0_10px_rgba(34,211,238,0.2)]">
-                <Radio className="h-3 w-3 text-cyan-400 animate-pulse" />
-                <span className="text-[11px] font-bold text-cyan-400">LIVE · INFÉRENCE EN TEMPS RÉEL</span>
+              <div className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                <Radio className="h-3 w-3 text-emerald-400 animate-pulse" />
+                <span className="text-[11px] font-bold text-emerald-400">LIVE · INFÉRENCE EN TEMPS RÉEL</span>
               </div>
             </div>
             <h1 className="text-3xl font-black text-white tracking-tight">
               {t('Moteur ', 'محرك ', 'Engine ')}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">{t('Anti-Fraude IA','مكافحة الاحتيال بالذكاء الاصطناعي','Anti-Fraud AI')}</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-600 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]">{t('Anti-Fraude IA','مكافحة الاحتيال بالذكاء الاصطناعي','Anti-Fraud AI')}</span>
             </h1>
             <p className="mt-2 text-[15px] text-slate-300 max-w-lg leading-relaxed">
               {t(
@@ -687,7 +687,7 @@ export default function FraudEngineView() {
           </div>
           <div className="hidden md:flex flex-col items-end gap-1.5 shrink-0">
             <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Powered by</span>
-            <span className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">RiskVisionAI</span>
+            <span className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400">RiskVisionAI</span>
             <span className="text-[11px] font-medium text-slate-400">XGBoost · LSTM · Autoencodeur</span>
           </div>
         </div>
@@ -725,7 +725,7 @@ export default function FraudEngineView() {
           return (
             <button key={tab.id} onClick={() => setActiveTab(tab.id as any)}
               className={`flex flex-1 items-center justify-center gap-2.5 rounded-xl py-3 text-sm font-bold transition-all ${isRTL ? 'flex-row-reverse' : ''} ${
-                active ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.1)]' : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                active ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]' : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
               }`}>
               <Icon className="h-4 w-4" />
               <span className="hidden sm:inline">{lang === 'ar' ? tab.label_ar : lang === 'en' ? tab.label_en : tab.label_fr}</span>
@@ -746,9 +746,9 @@ export default function FraudEngineView() {
         <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6">
           <div className={`mb-5 flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
             <h3 className="text-lg font-bold text-white tracking-tight">{t('Historique des analyses','سجل التحليلات','Analysis history')}</h3>
-            <div className={`flex items-center gap-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 px-3 py-1.5 shadow-[0_0_10px_rgba(34,211,238,0.15)] ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <Radio className="h-3 w-3 text-cyan-400 animate-pulse" />
-              <span className="text-[11px] font-bold text-cyan-400">Live</span>
+            <div className={`flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 shadow-[0_0_10px_rgba(16,185,129,0.15)] ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <Radio className="h-3 w-3 text-emerald-400 animate-pulse" />
+              <span className="text-[11px] font-bold text-emerald-400">Live</span>
             </div>
           </div>
           <div className="overflow-x-auto rounded-xl border border-white/5 bg-slate-900/50">
@@ -764,12 +764,12 @@ export default function FraudEngineView() {
                 {fraudHistory.map((item, i) => {
                   const dc2 = decisionCfg[item.decision as keyof typeof decisionCfg] || decisionCfg['review'];
                   return (
-                    <tr key={i} className="hover:bg-cyan-500/5 transition-colors group">
-                      <td className="px-4 py-3.5 font-mono text-[13px] font-bold text-cyan-400">{item.id}</td>
+                    <tr key={i} className="hover:bg-emerald-500/5 transition-colors group">
+                      <td className="px-4 py-3.5 font-mono text-[13px] font-bold text-emerald-400">{item.id}</td>
                       <td className="px-4 py-3.5 text-[13px] font-medium text-slate-300 whitespace-nowrap">{item.date}</td>
                       <td className="px-4 py-3.5">
                         <span className={`rounded-full border px-2.5 py-1 text-[10px] font-bold ${
-                          item.type === 'banking' ? 'border-cyan-500/20 bg-cyan-500/10 text-cyan-400' : 'border-indigo-500/20 bg-indigo-500/10 text-indigo-400'
+                          item.type === 'banking' ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-400' : 'border-indigo-500/20 bg-indigo-500/10 text-indigo-400'
                         }`}>{item.type === 'banking' ? (lang === 'ar' ? 'بنكي' : 'Bancaire') : (lang === 'ar' ? 'تأمين' : 'Assurance')}</span>
                         <p className="text-[11px] font-medium text-slate-400 mt-1.5">{item.sousType}</p>
                       </td>
@@ -795,7 +795,7 @@ export default function FraudEngineView() {
                             const parsedDetails = typeof item.details === 'string' ? JSON.parse(item.details) : item.details;
                             setSelectedDetails({ ...item, details: parsedDetails });
                           }} 
-                          className="px-3 py-1.5 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-xl hover:bg-cyan-500/20 hover:shadow-[0_0_10px_rgba(34,211,238,0.1)] transition font-bold text-[11px]"
+                          className="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl hover:bg-emerald-500/20 hover:shadow-[0_0_10px_rgba(16,185,129,0.1)] transition font-bold text-[11px]"
                         >
                           Détails
                         </button>
@@ -810,7 +810,7 @@ export default function FraudEngineView() {
       )}
       {selectedDetails && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
-          <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-2xl overflow-hidden shadow-[0_0_50px_rgba(34,211,238,0.1)] flex flex-col">
+          <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-2xl overflow-hidden shadow-[0_0_50px_rgba(16,185,129,0.1)] flex flex-col">
             <div className="p-5 border-b border-white/5 flex items-center justify-between">
               <h3 className="text-lg font-bold text-white tracking-tight">Profil Client : {selectedDetails.entite}</h3>
               <button onClick={() => setSelectedDetails(null)} className="rounded-xl p-2 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">✕</button>
@@ -820,7 +820,7 @@ export default function FraudEngineView() {
                  <>
                    <div className="grid grid-cols-2 gap-4 text-sm">
                    <div className="bg-slate-900/50 p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                     <h4 className="font-bold text-cyan-400 mb-3 uppercase text-[11px] tracking-wider">Informations Financières</h4>
+                     <h4 className="font-bold text-emerald-400 mb-3 uppercase text-[11px] tracking-wider">Informations Financières</h4>
                      <div className="space-y-1.5">
                        <p><span className="text-slate-400">Revenus:</span> <span className="font-medium text-slate-200">{selectedDetails.details.income} K DZD</span></p>
                        <p><span className="text-slate-400">Dette:</span> <span className="font-medium text-slate-200">{(parseFloat(selectedDetails.details.creddebt || '0') + parseFloat(selectedDetails.details.othdebt || '0')).toFixed(2)} K DZD</span></p>
@@ -865,7 +865,7 @@ export default function FraudEngineView() {
                  {selectedDetails.details.ml_results && (
                    <div className="mt-5 bg-slate-900/60 p-5 rounded-xl border border-white/10">
                      <h4 className="font-bold text-white mb-4 flex items-center gap-2">
-                       <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.5)]"></span>
+                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
                        Analyse IA (Python Engine)
                      </h4>
                      <div className="grid grid-cols-2 gap-4 text-sm">

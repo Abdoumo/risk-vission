@@ -103,10 +103,10 @@ export default function DashboardView() {
       animate="visible"
       variants={containerVariants}
     >
-      {/* Background Orbs */}
+      {/* Background Orbs — Algerian palette */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-10 left-1/4 w-[400px] h-[400px] bg-cyan-500/5 blur-[100px] rounded-full mix-blend-screen" />
-        <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full mix-blend-screen" />
+        <div className="absolute top-10 left-1/4 w-[400px] h-[400px] bg-emerald-500/5 blur-[100px] rounded-full mix-blend-screen orb-green" />
+        <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-red-500/3 blur-[120px] rounded-full mix-blend-screen orb-red" />
       </div>
 
       <div className="relative z-10 space-y-6">

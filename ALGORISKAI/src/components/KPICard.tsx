@@ -9,21 +9,21 @@ interface KPICardProps {
 }
 
 const colors = [
-  'from-cyan-500/10 to-blue-500/5 border-cyan-500/20 hover:shadow-cyan-500/20',
-  'from-blue-500/10 to-indigo-500/5 border-blue-500/20 hover:shadow-blue-500/20',
+  'from-emerald-500/10 to-green-600/5 border-emerald-500/20 hover:shadow-emerald-500/20',
+  'from-teal-500/10 to-emerald-500/5 border-teal-500/20 hover:shadow-teal-500/20',
+  'from-red-500/10 to-rose-500/5 border-red-500/20 hover:shadow-red-500/20',
+  'from-amber-500/10 to-orange-500/5 border-amber-500/20 hover:shadow-amber-500/20',
   'from-emerald-500/10 to-teal-500/5 border-emerald-500/20 hover:shadow-emerald-500/20',
-  'from-purple-500/10 to-fuchsia-500/5 border-purple-500/20 hover:shadow-purple-500/20',
-  'from-sky-500/10 to-cyan-500/5 border-sky-500/20 hover:shadow-sky-500/20',
-  'from-indigo-500/10 to-blue-500/5 border-indigo-500/20 hover:shadow-indigo-500/20',
+  'from-rose-500/10 to-red-500/5 border-rose-500/20 hover:shadow-rose-500/20',
 ];
 
 const valueColors = [
-  'text-cyan-400',
-  'text-blue-400',
   'text-emerald-400',
-  'text-purple-400',
-  'text-sky-400',
-  'text-indigo-400',
+  'text-teal-400',
+  'text-red-400',
+  'text-amber-400',
+  'text-emerald-400',
+  'text-rose-400',
 ];
 
 export default function KPICard({ kpi, index }: KPICardProps) {

@@ -34,11 +34,11 @@ export default function CyberDashboardView() {
   const { t, isRTL } = useLang();
 
   return (
-    <div className="relative min-h-screen bg-[#020617] text-slate-200 overflow-hidden font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="relative min-h-screen bg-[#020617] text-slate-200 overflow-hidden font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
       {/* Background Effects */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-cyan-500/10 blur-[120px] rounded-full mix-blend-screen" />
-        <div className="absolute top-1/4 -right-64 w-[600px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full mix-blend-screen" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-emerald-500/10 blur-[120px] rounded-full mix-blend-screen" />
+        <div className="absolute top-1/4 -right-64 w-[600px] h-[600px] bg-green-600/10 blur-[120px] rounded-full mix-blend-screen" />
         <div className="absolute -bottom-64 -left-64 w-[600px] h-[600px] bg-emerald-500/10 blur-[120px] rounded-full mix-blend-screen" />
         {/* Subtle grid pattern overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
@@ -55,9 +55,9 @@ export default function CyberDashboardView() {
             <span className="hidden sm:inline-block border-l border-white/10 pl-4">Latency: 12ms</span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="hover:text-cyan-400 transition-colors cursor-pointer">EN</span>
-            <span className="hover:text-cyan-400 transition-colors cursor-pointer">FR</span>
-            <span className="hover:text-cyan-400 transition-colors cursor-pointer">AR</span>
+            <span className="hover:text-emerald-400 transition-colors cursor-pointer">EN</span>
+            <span className="hover:text-emerald-400 transition-colors cursor-pointer">FR</span>
+            <span className="hover:text-emerald-400 transition-colors cursor-pointer">AR</span>
           </div>
         </div>
 
@@ -71,13 +71,13 @@ export default function CyberDashboardView() {
           >
             {/* Left Content */}
             <div className={`flex-1 text-center lg:text-left ${isRTL ? 'lg:text-right' : ''}`}>
-              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-cyan-500/20 backdrop-blur-md mb-6">
-                <Zap className="w-4 h-4 text-cyan-400" />
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-emerald-500/20 backdrop-blur-md mb-6">
+                <Zap className="w-4 h-4 text-emerald-400" />
                 <span className="text-[13px] font-medium tracking-wide text-cyan-50">v2.4 Neural Core Active</span>
               </motion.div>
 
               <motion.h1 variants={itemVariants} className="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
-                Predictive <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">Intelligence</span> <br className="hidden lg:block" />
+                Predictive <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-green-600">Intelligence</span> <br className="hidden lg:block" />
                 for Modern Finance
               </motion.h1>
 
@@ -88,7 +88,7 @@ export default function CyberDashboardView() {
               <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
                 <button 
                   onClick={() => onNavigate && onNavigate('predictions')}
-                  className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-green-700 text-white font-semibold shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
                 >
                   Initialize Dashboard
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -110,19 +110,19 @@ export default function CyberDashboardView() {
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-[10%] rounded-full border border-cyan-500/20"
+                className="absolute inset-[10%] rounded-full border border-emerald-500/20"
               />
               {/* Core Nodes */}
               <div className="relative w-full h-full flex items-center justify-center">
-                <motion.div variants={glowingOrbVariants} animate="animate" className="absolute w-32 h-32 rounded-full bg-cyan-400/20 blur-xl" />
+                <motion.div variants={glowingOrbVariants} animate="animate" className="absolute w-32 h-32 rounded-full bg-emerald-400/20 blur-xl" />
                 <div className="relative z-10 w-24 h-24 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 shadow-2xl flex items-center justify-center backdrop-blur-xl">
-                  <Activity className="w-10 h-10 text-cyan-400" />
+                  <Activity className="w-10 h-10 text-emerald-400" />
                 </div>
 
                 {/* Floating Elements */}
                 {[
                   { icon: ShieldCheck, color: "text-emerald-400", pos: "top-1/4 -left-4", delay: 0 },
-                  { icon: Lock, color: "text-blue-400", pos: "bottom-1/4 -right-4", delay: 1 },
+                  { icon: Lock, color: "text-green-400", pos: "bottom-1/4 -right-4", delay: 1 },
                   { icon: Globe, color: "text-purple-400", pos: "-top-8 right-1/4", delay: 2 },
                 ].map((item, i) => (
                   <motion.div
@@ -149,9 +149,9 @@ export default function CyberDashboardView() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {[
-              { title: "Real-time Fraud Detection", desc: "Sub-millisecond latency analyzing millions of transactions with our optimized AI models.", icon: Activity, color: "from-cyan-500 to-blue-500" },
-              { title: "Predictive Credit Risk", desc: "Dynamic risk scoring utilizing alternative data streams and behavioral analytics.", icon: BarChart3, color: "from-blue-500 to-indigo-500" },
-              { title: "Enterprise Security", desc: "Bank-grade encryption with Zero-Trust architecture built directly into the core.", icon: ShieldCheck, color: "from-emerald-500 to-cyan-500" },
+              { title: "Real-time Fraud Detection", desc: "Sub-millisecond latency analyzing millions of transactions with our optimized AI models.", icon: Activity, color: "from-emerald-500 to-green-600" },
+              { title: "Predictive Credit Risk", desc: "Dynamic risk scoring utilizing alternative data streams and behavioral analytics.", icon: BarChart3, color: "from-green-500 to-indigo-500" },
+              { title: "Enterprise Security", desc: "Bank-grade encryption with Zero-Trust architecture built directly into the core.", icon: ShieldCheck, color: "from-emerald-500 to-emerald-500" },
             ].map((feature, i) => (
               <motion.div
                 key={i}

@@ -59,7 +59,7 @@ function AppInner() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-emerald-500/30 selection:text-emerald-200">
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}

@@ -65,8 +65,8 @@ export default function AnomaliesView() {
   const stats = [
     { labelKey: 'anomalies_detected',    value: detected.length.toString(),      icon: AlertTriangle, color: 'text-rose-400',   border: 'border-rose-500/20',   bg: 'from-rose-500/10' },
     { labelKey: 'anomalies_avg_score',   value: (detected.reduce((a,b)=>a+b.score,0)/Math.max(detected.length,1)).toFixed(2), icon: Eye,     color: 'text-amber-400', border: 'border-amber-500/20', bg: 'from-amber-500/10' },
-    { labelKey: 'anomalies_normal_rate', value: `${(((anomalies.length-detected.length)/Math.max(anomalies.length, 1))*100).toFixed(1)}%`, icon: Shield,  color: 'text-cyan-400', border: 'border-cyan-500/20', bg: 'from-cyan-500/10' },
-    { labelKey: 'anomalies_observations',value: anomalies.length.toString(),     icon: Filter,        color: 'text-blue-400',  border: 'border-blue-500/20',  bg: 'from-blue-500/10' },
+    { labelKey: 'anomalies_normal_rate', value: `${(((anomalies.length-detected.length)/Math.max(anomalies.length, 1))*100).toFixed(1)}%`, icon: Shield,  color: 'text-emerald-400', border: 'border-emerald-500/20', bg: 'from-emerald-500/10' },
+    { labelKey: 'anomalies_observations',value: anomalies.length.toString(),     icon: Filter,        color: 'text-green-400',  border: 'border-green-500/20',  bg: 'from-green-500/10' },
   ];
 
   const handleExportCsv = () => {
@@ -161,7 +161,7 @@ export default function AnomaliesView() {
         <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 lg:col-span-1 flex flex-col justify-center">
           <div className={`mb-4 flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
              <h3 className="text-lg font-bold text-white tracking-tight">Monte Carlo VaR</h3>
-             <button onClick={() => calculateVar(anomalies)} disabled={isCalculatingVar} className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 border border-cyan-500/20 transition-all">
+             <button onClick={() => calculateVar(anomalies)} disabled={isCalculatingVar} className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition-all">
                 {isCalculatingVar ? <Loader2 className="h-4 w-4 animate-spin" /> : <Filter className="h-4 w-4" />}
              </button>
           </div>
@@ -207,7 +207,7 @@ export default function AnomaliesView() {
               </ResponsiveContainer>
             ) : (
               <div className="h-full w-full flex items-center justify-center text-slate-500">
-                {isCalculatingVar ? <Loader2 className="h-8 w-8 animate-spin text-cyan-400" /> : 'Aucune donnée'}
+                {isCalculatingVar ? <Loader2 className="h-8 w-8 animate-spin text-emerald-400" /> : 'Aucune donnée'}
               </div>
             )}
           </div>
@@ -239,7 +239,7 @@ export default function AnomaliesView() {
             </thead>
             <tbody className="divide-y divide-white/5">
               {anomalies.map((a, i) => (
-                <tr key={i} className="hover:bg-cyan-500/5 transition-colors group">
+                <tr key={i} className="hover:bg-emerald-500/5 transition-colors group">
                   <td className="px-4 py-3.5 text-[13px] font-medium text-slate-300">{a.date}</td>
                   <td className="px-4 py-3.5 text-[13px] font-medium text-slate-300">{a.entite || '-'}</td>
                   <td className="px-4 py-3.5 text-[14px] font-bold text-slate-200">{a.valeur}</td>
@@ -267,7 +267,7 @@ export default function AnomaliesView() {
                   <td className="px-4 py-3.5">
                     <button 
                       onClick={() => setSelectedDetails(a)} 
-                      className="px-3 py-1.5 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-xl hover:bg-cyan-500/20 hover:shadow-[0_0_10px_rgba(34,211,238,0.1)] transition font-bold text-[11px]"
+                      className="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl hover:bg-emerald-500/20 hover:shadow-[0_0_10px_rgba(16,185,129,0.1)] transition font-bold text-[11px]"
                     >
                       Détails
                     </button>
@@ -284,7 +284,7 @@ export default function AnomaliesView() {
 
       {selectedDetails && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
-          <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-2xl overflow-hidden shadow-[0_0_50px_rgba(34,211,238,0.1)] flex flex-col">
+          <div className="bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-2xl overflow-hidden shadow-[0_0_50px_rgba(16,185,129,0.1)] flex flex-col">
             <div className="p-5 border-b border-white/5 flex items-center justify-between">
               <h3 className="text-lg font-bold text-white tracking-tight">Détails de l'anomalie : {selectedDetails.entite || 'Inconnue'}</h3>
               <button onClick={() => setSelectedDetails(null)} className="rounded-xl p-2 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">✕</button>
