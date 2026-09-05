@@ -56,7 +56,9 @@ app.post('/api/fraude/upload', uploadFraud.single('csvFile'), async (req, res) =
 
   try {
     const pythonScript = path.join(__dirname, '../../AI_Pipeline/fraud_upload_engine.py');
-    const pyVenvPath = path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe');
+    const pyVenvPath = os.platform() === 'win32' 
+      ? path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe')
+      : path.join(__dirname, '../../AI_Pipeline/.venv/bin/python');
     const cwdPath = path.join(__dirname, '../../AI_Pipeline');
     execSync(`"${pyVenvPath}" "${pythonScript}"`, { cwd: cwdPath, stdio: 'inherit' });
 
@@ -687,7 +689,9 @@ app.post('/api/risques/upload', upload.single('csvFile'), async (req, res) => {
 
     // Run the Python script
     const pyScriptPath = path.join(__dirname, '../../AI_Pipeline/var_engine.py');
-    const pyVenvPath = path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe');
+    const pyVenvPath = os.platform() === 'win32' 
+      ? path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe')
+      : path.join(__dirname, '../../AI_Pipeline/.venv/bin/python');
     const cwdPath = path.join(__dirname, '../../AI_Pipeline');
 
     execSync(`"${pyVenvPath}" "${pyScriptPath}"`, { cwd: cwdPath });
