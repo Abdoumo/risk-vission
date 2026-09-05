@@ -5,8 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run dev:node\" \"npm run dev:python\"",
+    "dev:linux": "concurrently \"npm run dev:node\" \"npm run dev:python:linux\"",
     "dev:node": "nodemon src/index.ts",
-    "dev:python": "cd ../AI_Pipeline && .\\.venv\\Scripts\\python.exe app.py"
+    "dev:python": "cd ../AI_Pipeline && .\\.venv\\Scripts\\python.exe app.py",
+    "dev:python:linux": "cd ../AI_Pipeline && ./.venv/bin/python app.py"
   },
   "keywords": [],
   "author": "",
