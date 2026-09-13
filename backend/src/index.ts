@@ -1427,6 +1427,10 @@ try {
   console.log("Synchronisation de la base de données Prisma...");
   execSync('npx prisma db push', { stdio: 'inherit' });
   console.log("Base de données synchronisée avec succès.");
+  
+  console.log("Peuplement des Profils Clients (CreditRisk)...");
+  execSync('npx ts-node prisma/seed_credit_clients.ts', { stdio: 'inherit' });
+  console.log("Profils Clients générés avec succès.");
 } catch (error) {
   console.error("Erreur lors de la synchronisation Prisma:", error);
 }
