@@ -540,9 +540,20 @@ app.post('/api/xai/generate', async (req, res) => {
     const path = require('path');
     const scriptPath = path.join(__dirname, '..', '..', 'AI_Pipeline', 'xai_engine.py');
 
-    const py = spawn('python', [scriptPath], {
+    const pyVenvPath = os.platform() === 'win32' 
+      ? path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe')
+      : path.join(__dirname, '../../AI_Pipeline/.venv/bin/python');
+
+    const py = spawn(pyVenvPath, [scriptPath], {
       cwd: path.join(__dirname, '..', '..', 'AI_Pipeline'),
       env: { ...process.env }
+    });
+
+    py.on('error', (err: any) => {
+      console.error('[XAI] Failed to start python process:', err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: 'Failed to start XAI engine', details: err.message });
+      }
     });
 
     let stdout = '';
