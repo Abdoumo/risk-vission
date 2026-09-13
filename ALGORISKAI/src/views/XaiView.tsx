@@ -192,6 +192,7 @@ export default function XaiView() {
   const { lang, isRTL } = useLang();
   const [selectedDecisionId, setSelectedDecisionId] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'shap' | 'counterfactual' | 'global' | 'fairness' | 'history'>('shap');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [xaiDecisions, setXaiDecisions] = useState<XaiDecision[]>([]);
   const [globalFeatureImportance, setGlobalFeatureImportance] = useState<GlobalFeatureImportance[]>([]);
@@ -216,10 +217,20 @@ export default function XaiView() {
     fetchXaiData();
   }, []);
 
-  const handleGenerate = async () => {
+  const handlePageChange = (newPage: number) => {
+    if (newPage < 1) return;
+    setCurrentPage(newPage);
+    handleGenerate(newPage);
+  };
+
+  const handleGenerate = async (pageToFetch = currentPage) => {
     setGenerating(true);
     try {
-      const resp = await fetch(`/api/xai/generate`, { method: 'POST' });
+      const resp = await fetch(`/api/xai/generate`, { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ page: pageToFetch })
+      });
       const result = await resp.json();
       if (result.status === 'ok' || result.decisions > 0) {
         setLastGenerated(new Date().toLocaleTimeString());
@@ -300,7 +311,7 @@ export default function XaiView() {
           </div>
           <div className={`flex items-center gap-2 shrink-0 flex-wrap ${isRTL ? 'mr-auto' : 'ml-auto'}`}>
             <button
-              onClick={handleGenerate}
+              onClick={() => handleGenerate(currentPage)}
               disabled={generating}
               className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition-all ${
                 generating
@@ -344,7 +355,7 @@ export default function XaiView() {
             )}
           </p>
           <button
-            onClick={handleGenerate}
+            onClick={() => handleGenerate(currentPage)}
             className="flex items-center gap-2 mx-auto rounded-xl bg-gradient-to-r from-green-600 to-emerald-500 px-6 py-3 text-sm font-bold text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:from-green-500 hover:to-emerald-400 transition-all"
           >
             <Zap className="h-5 w-5" />
@@ -401,6 +412,26 @@ export default function XaiView() {
               isRTL={isRTL}
             />
           ))}
+          </div>
+
+          <div className={`flex items-center justify-between pt-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <button 
+               onClick={() => handlePageChange(currentPage - 1)}
+               disabled={currentPage === 1 || generating}
+               className="px-3 py-1.5 rounded-lg bg-slate-800 border border-white/10 text-xs font-medium text-slate-300 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {t('Précédent', 'السابق', 'Previous')}
+            </button>
+            <span className="text-xs font-medium text-emerald-400 border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 rounded-full">
+              {t(`Page ${currentPage}`, `الصفحة ${currentPage}`, `Page ${currentPage}`)}
+            </span>
+            <button 
+               onClick={() => handlePageChange(currentPage + 1)}
+               disabled={generating || xaiDecisions.length < 15}
+               className="px-3 py-1.5 rounded-lg bg-slate-800 border border-white/10 text-xs font-medium text-slate-300 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {t('Suivant', 'التالي', 'Next')}
+            </button>
           </div>
 
           {/* Model info */}

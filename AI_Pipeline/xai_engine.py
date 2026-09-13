@@ -494,7 +494,7 @@ def generate_explanation(record: dict, score: float, record_type: str, shap_feat
 
 # ── Main analysis pipeline ──────────────────────────────────────────
 
-def run_xai_analysis():
+def run_xai_analysis(limit=15, offset=0):
     """Read real data from PostgreSQL, compute XAI explanations, write results back."""
     conn = get_connection()
     cur = conn.cursor()
@@ -587,14 +587,14 @@ def run_xai_analysis():
     conn.commit()
 
     # ── 2. Read fraud history ───────────────────────────────────────
-    print("[XAI] Reading FraudHistoryItem records...")
-    cur.execute('SELECT id, date, type, "sousType", entite, score, decision, montant, analyste, details FROM "FraudHistoryItem" ORDER BY id DESC LIMIT 50')
+    print(f"[XAI] Reading FraudHistoryItem records... (limit={limit}, offset={offset})")
+    cur.execute(f'SELECT id, date, type, "sousType", entite, score, decision, montant, analyste, details FROM "FraudHistoryItem" ORDER BY id DESC LIMIT {limit} OFFSET {offset}')
     fraud_rows = cur.fetchall()
     print(f"[XAI] Found {len(fraud_rows)} fraud records")
 
     # ── 3. Read risk portfolio ──────────────────────────────────────
-    print("[XAI] Reading RisqueActif records...")
-    cur.execute('SELECT id, ticker, nom, secteur, poids, var95, "mcVar95", es95, beta, sharpe, risque FROM "RisqueActif" LIMIT 20')
+    print(f"[XAI] Reading RisqueActif records...")
+    cur.execute(f'SELECT id, ticker, nom, secteur, poids, var95, "mcVar95", es95, beta, sharpe, risque FROM "RisqueActif" LIMIT {limit} OFFSET {offset}')
     risk_rows = cur.fetchall()
     print(f"[XAI] Found {len(risk_rows)} risk portfolio records")
 
@@ -611,7 +611,7 @@ def run_xai_analysis():
     all_shap_features_for_importance = []
 
     # ── 4. Process fraud records ────────────────────────────────────
-    for i, row in enumerate(fraud_rows[:15]):  # top 15
+    for i, row in enumerate(fraud_rows):
         fid, date, ftype, sous_type, entite, score, decision_str, montant, analyste, details = row
 
         # Parse details JSON for feature values
@@ -853,5 +853,11 @@ def run_xai_analysis():
 
 # ── CLI entry point ─────────────────────────────────────────────────
 if __name__ == "__main__":
-    result = run_xai_analysis()
+    import argparse
+    parser = argparse.ArgumentParser(description='XAI Engine')
+    parser.add_argument('--limit', type=int, default=15, help='Number of records to process')
+    parser.add_argument('--offset', type=int, default=0, help='Offset for records')
+    args = parser.parse_args()
+
+    result = run_xai_analysis(limit=args.limit, offset=args.offset)
     print(json.dumps(result, indent=2))

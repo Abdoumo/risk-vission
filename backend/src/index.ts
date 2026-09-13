@@ -597,6 +597,10 @@ app.get('/api/xai/decision-history', async (req, res) => {
 
 app.post('/api/xai/generate', async (req, res) => {
   try {
+    const page = req.body.page || 1;
+    const limit = 15;
+    const offset = (page - 1) * limit;
+
     const { spawn } = require('child_process');
     const path = require('path');
     const scriptPath = path.join(__dirname, '..', '..', 'AI_Pipeline', 'xai_engine.py');
@@ -605,7 +609,7 @@ app.post('/api/xai/generate', async (req, res) => {
       ? path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe')
       : path.join(__dirname, '../../AI_Pipeline/.venv/bin/python');
 
-    const py = spawn(pyVenvPath, [scriptPath], {
+    const py = spawn(pyVenvPath, [scriptPath, '--limit', limit.toString(), '--offset', offset.toString()], {
       cwd: path.join(__dirname, '..', '..', 'AI_Pipeline'),
       env: { ...process.env }
     });
