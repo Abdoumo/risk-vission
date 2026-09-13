@@ -736,7 +736,7 @@ def run_xai_analysis():
         cur.execute('''
             INSERT INTO "ModelFairness" (id, "group", group_ar, accuracy, "falsePositiveRate", "falseNegativeRate", count)
             VALUES (%s,%s,%s,%s,%s,%s,%s)
-        ''', (str(uuid.uuid4()), labels["group"], labels["group_ar"], round(accuracy, 1), round(fp_rate, 1), round(fn_rate, 1), count))
+        ''', (str(uuid.uuid4()), labels["group"], labels["group_ar"], float(round(accuracy, 1)), float(round(fp_rate, 1)), float(round(fn_rate, 1)), count))
     conn.commit()
 
     # ── 9. Write DecisionHistoryItem ────────────────────────────────

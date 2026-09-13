@@ -43,13 +43,21 @@ def main():
                     decision_val = 'approved'
                     
                 credit_limit_raw = str(row.get('credit_limit', '$0'))
+                if credit_limit_raw == 'nan' or credit_limit_raw.strip() == '':
+                    credit_limit_raw = '$0'
+                    
                 montant_val = credit_limit_raw.replace('$', '') + '00 DZD'
                 analyste_val = 'Système XAI'
                 
+                try:
+                    credit_limit_val = float(credit_limit_raw.replace('$', ''))
+                except ValueError:
+                    credit_limit_val = 0.0
+
                 ml_results = {
                     "credit_risk": {
                         "pd_percentage": str(round(score_val * 0.8, 1)),
-                        "expected_loss": float(credit_limit_raw.replace('$', '')) * (score_val/100) * 100
+                        "expected_loss": credit_limit_val * (score_val/100) * 100
                     },
                     "fraud_analysis": {
                         "overall_fraud_score": round(score_val, 1)
