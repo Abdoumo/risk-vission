@@ -90,7 +90,7 @@ export default function BulkTestPanel() {
 
       try {
         // 1. Save directly to DB first
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/clients/bulk`, {
+        const res = await fetch(`/api/clients/bulk`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ clients: parsedClients })
@@ -188,7 +188,7 @@ export default function BulkTestPanel() {
       setCurrentIndex(idx + 1);
 
       // 2. Save full JSON payload to Postgres (including ML results)
-      await fetch(`${import.meta.env.VITE_API_URL}/api/fraud-history`, {
+      await fetch(`/api/fraud-history`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
