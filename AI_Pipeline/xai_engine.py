@@ -485,6 +485,81 @@ def run_xai_analysis():
     print("[XAI] Starting real data analysis...")
 
     # ── 1. Clear old XAI data ───────────────────────────────────────
+    print("[XAI] Ensuring XAI tables exist...")
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS "XaiDecision" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        "type" TEXT NOT NULL,
+        "entite" TEXT NOT NULL,
+        "score" DOUBLE PRECISION NOT NULL,
+        "decision" TEXT NOT NULL,
+        "confidence" DOUBLE PRECISION NOT NULL,
+        "explanation" TEXT NOT NULL,
+        "explanation_ar" TEXT NOT NULL,
+        "explanation_en" TEXT NOT NULL
+    )
+    ''')
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS "CounterFactual" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "xaiDecisionId" TEXT NOT NULL,
+        "action_fr" TEXT NOT NULL,
+        "action_ar" TEXT NOT NULL,
+        "action_en" TEXT NOT NULL,
+        "impact" INTEGER NOT NULL,
+        "feasibility" TEXT NOT NULL
+    )
+    ''')
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS "ShapFeature" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "xaiDecisionId" TEXT NOT NULL,
+        "feature" TEXT NOT NULL,
+        "feature_ar" TEXT NOT NULL,
+        "feature_en" TEXT NOT NULL,
+        "shapValue" DOUBLE PRECISION NOT NULL,
+        "baselineValue" DOUBLE PRECISION NOT NULL,
+        "actualValue" TEXT NOT NULL,
+        "contribution" TEXT NOT NULL,
+        "importance" INTEGER NOT NULL,
+        "category" TEXT NOT NULL
+    )
+    ''')
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS "GlobalFeatureImportance" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "feature" TEXT NOT NULL,
+        "feature_ar" TEXT NOT NULL,
+        "feature_en" TEXT NOT NULL,
+        "importance" DOUBLE PRECISION NOT NULL,
+        "category" TEXT NOT NULL
+    )
+    ''')
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS "ModelFairness" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "metric" TEXT NOT NULL,
+        "metric_ar" TEXT NOT NULL,
+        "metric_en" TEXT NOT NULL,
+        "value" DOUBLE PRECISION NOT NULL,
+        "status" TEXT NOT NULL
+    )
+    ''')
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS "DecisionHistoryItem" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        "entity" TEXT NOT NULL,
+        "type" TEXT NOT NULL,
+        "originalScore" DOUBLE PRECISION NOT NULL,
+        "adjustedScore" DOUBLE PRECISION NOT NULL,
+        "finalDecision" TEXT NOT NULL,
+        "impact" TEXT NOT NULL
+    )
+    ''')
+    conn.commit()
+
     print("[XAI] Clearing old XAI data...")
     cur.execute('DELETE FROM "CounterFactual"')
     cur.execute('DELETE FROM "ShapFeature"')
