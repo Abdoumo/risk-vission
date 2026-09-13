@@ -1,0 +1,1001 @@
+Client_ID,Type_Client,Nom,Prenom,Wilaya,Ville,Agence,Secteur_Activite,Type_Compte,Solde_Compte_DZD,Revenu_Mensuel_DZD,Type_Credit,Montant_Credit_DZD,Duree_Credit_Mois,Echeance_Mensuelle_DZD,Impayes_DZD,Jours_Retard,Classe_Creance,Provision_DZD,Date_Credit,Statut_Client
+CL-00001,Particulier,Ferhat,Mohamed,Oran,Oran,Agence Oran Centre,Agroalimentaire,Compte courant,1002765,1455248,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-05-24,Prospect
+CL-00002,Grande entreprise,Meziane,Mohamed,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte professionnel,2419098,529330,Credit exploitation,6759658,36,202804.55,0.0,0,Saine,0.0,2025-11-16,Actif
+CL-00003,Professionnel,Saidi,Ahmed,Batna,Batna,Agence Batna Centre,Services,Compte epargne,2529978,1322267,Credit exploitation,29407911,120,261673.66,0.0,0,Saine,0.0,2021-09-12,Prospect
+CL-00004,Particulier,Bensalem,Sofiane,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte professionnel,483062,945735,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-01-18,Prospect
+CL-00005,PME,Meziane,Samir,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte epargne,2147355,1157811,Credit exploitation,3498388,48,79000.61,316002.44,120,Creance douteuse,158001.22,2024-10-27,Actif
+CL-00006,PME,Dahmani,Farid,Boumerdes,Boumerdes,Agence Boumerdes Centre,Imprimerie,Compte cheque,874801,303930,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-12-22,Prospect
+CL-00007,Grande entreprise,Haddad,Farid,Alger,Alger,Agence Alger Centre,Distribution,Compte courant,217098,966521,Credit equipement,5469497,72,87765.35,526592.1,180,Creance douteuse,263296.05,2025-06-21,Inactif
+CL-00008,PME,Dahmani,Amine,Constantine,Constantine,Agence Constantine Centre,BTP,Compte epargne,811893,1120421,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-01-28,Inactif
+CL-00009,Professionnel,Rahmani,Nabil,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte cheque,3246557,804136,Credit exploitation,25626737,48,586265.13,4690121.04,240,Creance compromise,3752096.83,2025-02-16,Inactif
+CL-00010,PME,Mebarki,Bilal,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte professionnel,2552155,1283333,Credit investissement,24883371,36,782741.46,782741.46,35,Creance classee,156548.29,2022-04-30,Actif
+CL-00011,Grande entreprise,Mebarki,Nassim,Setif,Setif,Agence Setif Centre,Informatique,Compte professionnel,736527,1711876,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-06-14,Actif
+CL-00012,Particulier,Khelifi,Bilal,Alger,Alger,Agence Alger Centre,Commerce,Compte cheque,1470519,1368428,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-07-23,Prospect
+CL-00013,Particulier,Brahimi,Mohamed,Alger,Alger,Agence Alger Centre,Informatique,Compte professionnel,1384788,61732,Credit exploitation,10215949,120,93048.4,0.0,0,Saine,0.0,2026-04-07,Actif
+CL-00014,Grande entreprise,Guediri,Yacine,Skikda,Skikda,Agence Skikda Centre,Transport,Compte cheque,117392,431035,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-06-24,Inactif
+CL-00015,Grande entreprise,Touati,Samir,Boumerdes,Boumerdes,Agence Boumerdes Centre,Distribution,Compte courant,2721497,1679576,Credit investissement,21195107,48,490883.69,0.0,0,Saine,0.0,2024-01-03,Actif
+CL-00016,PME,Amrani,Bilal,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte courant,2717394,1130429,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-05-20,Prospect
+CL-00017,PME,Rahmani,Walid,Bejaia,Bejaia,Agence Bejaia Centre,Agriculture,Compte courant,1228229,506492,Credit investissement,28054591,60,539051.34,0.0,0,Saine,0.0,2024-09-30,Actif
+CL-00018,Particulier,Haddad,Walid,Setif,Setif,Agence Setif Centre,Transport,Compte cheque,3129321,1356884,Credit immobilier,25122172,60,476032.68,0.0,0,Saine,0.0,2024-03-26,Prospect
+CL-00019,Grande entreprise,Cherif,Mourad,Bejaia,Bejaia,Agence Bejaia Centre,Commerce,Compte courant,2076742,1668663,Credit immobilier,544254,84,6919.22,0.0,0,Saine,0.0,2025-07-20,Inactif
+CL-00020,PME,Amrani,Ahmed,Ouargla,Ouargla,Agence Ouargla Centre,Imprimerie,Compte courant,611788,793101,Credit investissement,27859147,36,873866.3,1747732.6,60,Creance classee,349546.52,2022-02-22,Actif
+CL-00021,Particulier,Bensalem,Nabil,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte professionnel,752470,788898,Credit investissement,7573970,36,240811.24,0.0,0,Saine,0.0,2026-08-03,Actif
+CL-00022,Grande entreprise,Rahmani,Lyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte cheque,764299,286600,Credit exploitation,3305402,60,58662.12,0.0,0,Saine,0.0,2021-02-20,Actif
+CL-00023,PME,Cherif,Sofiane,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte courant,3167448,1415225,Credit immobilier,28673861,24,1281015.31,0.0,0,Saine,0.0,2026-04-30,Actif
+CL-00024,PME,Boudiaf,Lyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte courant,1969136,1727713,Credit equipement,12318529,120,108155.56,0.0,0,Saine,0.0,2024-11-27,Inactif
+CL-00025,PME,Dahmani,Anis,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agriculture,Compte professionnel,3184703,451640,Credit exploitation,3941087,24,175210.67,0.0,0,Saine,0.0,2025-07-06,Actif
+CL-00026,Particulier,Bensalem,Karim,Oran,Oran,Agence Oran Centre,Agroalimentaire,Compte courant,882022,774650,Credit exploitation,3730291,72,60993.81,0.0,0,Saine,0.0,2026-06-11,Actif
+CL-00027,PME,Guediri,Sofiane,Setif,Setif,Agence Setif Centre,Imprimerie,Compte epargne,381128,1461303,Credit investissement,6421623,84,81882.03,491292.18,180,Creance douteuse,245646.09,2024-04-11,Inactif
+CL-00028,PME,Meziane,Rayan,Setif,Setif,Agence Setif Centre,BTP,Compte courant,1744505,149288,Credit immobilier,23988864,120,223818.12,1790544.96,240,Creance compromise,1432435.97,2025-05-01,Inactif
+CL-00029,Professionnel,Benali,Samir,Blida,Blida,Agence Blida Centre,BTP,Compte professionnel,2268298,465927,Credit exploitation,10850400,72,169897.61,0.0,0,Saine,0.0,2024-08-31,Actif
+CL-00030,Grande entreprise,Touati,Yacine,Annaba,Annaba,Agence Annaba Centre,BTP,Compte epargne,510816,441788,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-03-11,Actif
+CL-00031,Particulier,Haddad,Walid,Alger,Alger,Agence Alger Centre,Informatique,Compte epargne,1899938,1327693,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-05-16,Actif
+CL-00032,Grande entreprise,Haddad,Samir,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte epargne,1508353,1031179,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-12-13,Prospect
+CL-00033,Particulier,Dahmani,Rayan,Blida,Blida,Agence Blida Centre,Commerce,Compte courant,2698973,764010,Credit equipement,20321394,12,1953549.9,0.0,0,Saine,0.0,2023-08-12,Actif
+CL-00034,PME,Guediri,Youcef,Setif,Setif,Agence Setif Centre,BTP,Compte courant,86603,1474363,Credit personnel,25156253,60,486014.67,0.0,0,Saine,0.0,2021-04-21,Inactif
+CL-00035,Grande entreprise,Dahmani,Ahmed,Batna,Batna,Agence Batna Centre,Imprimerie,Compte cheque,2131401,884666,Credit exploitation,2693580,120,24891.77,0.0,0,Saine,0.0,2022-12-14,Actif
+CL-00036,Grande entreprise,Cherif,Nabil,Bejaia,Bejaia,Agence Bejaia Centre,Services,Compte courant,972019,309717,Credit personnel,4860597,24,238781.57,0.0,0,Saine,0.0,2023-06-07,Prospect
+CL-00037,Grande entreprise,Guediri,Karim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte courant,2427379,1586201,Credit personnel,25921658,36,797556.45,0.0,0,Saine,0.0,2024-06-01,Inactif
+CL-00038,Grande entreprise,Hamdi,Sofiane,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte professionnel,1479311,235160,Credit exploitation,9417707,120,92352.67,0.0,0,Saine,0.0,2022-03-20,Actif
+CL-00039,Particulier,Hamdi,Bilal,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte courant,476467,316075,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-05-22,Actif
+CL-00040,Grande entreprise,Bensalem,Ilyes,Oran,Oran,Agence Oran Centre,Commerce,Compte cheque,777958,1563261,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-01-27,Actif
+CL-00041,Grande entreprise,Boudiaf,Hichem,Setif,Setif,Agence Setif Centre,Informatique,Compte cheque,3115954,527102,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-12-20,Actif
+CL-00042,Grande entreprise,Rahmani,Youcef,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte cheque,370007,1114355,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-05-19,Prospect
+CL-00043,Grande entreprise,Meziane,Farid,Constantine,Constantine,Agence Constantine Centre,Transport,Compte epargne,2157123,640554,Credit investissement,7657309,60,147763.46,0.0,0,Saine,0.0,2025-05-13,Actif
+CL-00044,Professionnel,Brahimi,Nabil,Oran,Oran,Agence Oran Centre,Services,Compte courant,1966382,319632,Credit immobilier,7617486,36,243578.41,0.0,0,Saine,0.0,2026-03-23,Actif
+CL-00045,Professionnel,Bensalem,Karim,Annaba,Annaba,Agence Annaba Centre,Commerce,Compte professionnel,3145941,488725,Credit immobilier,6681676,60,127099.34,0.0,0,Saine,0.0,2024-02-07,Inactif
+CL-00046,Grande entreprise,Benali,Bilal,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte professionnel,2377606,52215,Credit personnel,4174870,84,52856.4,105712.8,75,Creance classee,21142.56,2022-10-05,Actif
+CL-00047,Professionnel,Cherif,Ilyes,Constantine,Constantine,Agence Constantine Centre,Transport,Compte epargne,2714767,360842,Credit immobilier,1398101,48,31962.02,0.0,0,Saine,0.0,2024-10-06,Actif
+CL-00048,Professionnel,Mansouri,Sofiane,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte epargne,2768382,521560,Credit personnel,12015443,12,1057520.36,0.0,0,Saine,0.0,2022-05-28,Actif
+CL-00049,Professionnel,Guediri,Nassim,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte professionnel,1997118,1032537,Credit exploitation,28180830,48,645835.9,0.0,0,Saine,0.0,2023-01-06,Actif
+CL-00050,Professionnel,Haddad,Lyes,Batna,Batna,Agence Batna Centre,Informatique,Compte epargne,1764221,576407,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-11-11,Inactif
+CL-00051,Grande entreprise,Cherif,Lyes,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte epargne,1003313,347623,Credit exploitation,5498529,24,259650.52,0.0,0,Saine,0.0,2022-11-14,Actif
+CL-00052,Particulier,Rahmani,Rayan,Boumerdes,Boumerdes,Agence Boumerdes Centre,Distribution,Compte cheque,1206621,931681,Credit immobilier,7266106,36,215631.62,0.0,0,Saine,0.0,2022-12-13,Actif
+CL-00053,PME,Dahmani,Bilal,Boumerdes,Boumerdes,Agence Boumerdes Centre,Commerce,Compte professionnel,261830,356283,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-09-30,Inactif
+CL-00054,Professionnel,Mansouri,Walid,Boumerdes,Boumerdes,Agence Boumerdes Centre,Imprimerie,Compte cheque,729479,1685749,Credit exploitation,5336076,60,99494.57,0.0,0,Saine,0.0,2022-11-14,Actif
+CL-00055,Particulier,Boudiaf,Ahmed,Alger,Alger,Agence Alger Centre,BTP,Compte courant,1898791,152892,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-05-13,Actif
+CL-00056,Particulier,Khelifi,Anis,Batna,Batna,Agence Batna Centre,Agroalimentaire,Compte courant,725131,109708,Credit personnel,1701619,12,149164.6,0.0,0,Saine,0.0,2021-04-26,Inactif
+CL-00057,Professionnel,Rahmani,Samir,Ouargla,Ouargla,Agence Ouargla Centre,Agriculture,Compte cheque,970155,855952,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-05-31,Prospect
+CL-00058,PME,Slimani,Anis,Skikda,Skikda,Agence Skikda Centre,Transport,Compte courant,568456,1463898,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-04-08,Actif
+CL-00059,Grande entreprise,Benali,Walid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte cheque,3195655,1378182,Credit exploitation,5068622,72,80616.96,322467.84,120,Creance douteuse,161233.92,2026-07-03,Actif
+CL-00060,Particulier,Touati,Hichem,Setif,Setif,Agence Setif Centre,Agriculture,Compte professionnel,734576,1244042,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-01-12,Actif
+CL-00061,Particulier,Ferhat,Anis,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte professionnel,228918,731875,Credit exploitation,7813489,84,107752.63,0.0,0,Saine,0.0,2025-11-24,Actif
+CL-00062,Grande entreprise,Brahimi,Lyes,Constantine,Constantine,Agence Constantine Centre,Distribution,Compte cheque,2882928,118607,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-25,Actif
+CL-00063,Particulier,Guediri,Nabil,Boumerdes,Boumerdes,Agence Boumerdes Centre,Imprimerie,Compte cheque,2494762,1460362,Credit exploitation,9662388,72,155052.62,0.0,0,Saine,0.0,2021-10-01,Actif
+CL-00064,PME,Touati,Karim,Blida,Blida,Agence Blida Centre,Services,Compte professionnel,2181223,322502,Credit exploitation,18038256,48,392665.11,0.0,0,Saine,0.0,2024-07-10,Actif
+CL-00065,Professionnel,Khelifi,Ahmed,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte epargne,689636,1670287,Credit personnel,6592011,48,160117.77,0.0,0,Saine,0.0,2025-02-05,Actif
+CL-00066,Particulier,Rahmani,Bilal,Alger,Alger,Agence Alger Centre,BTP,Compte professionnel,1768989,371542,Credit immobilier,18784797,120,169176.59,1015059.54,180,Creance douteuse,507529.77,2024-03-16,Inactif
+CL-00067,PME,Rahmani,Amine,Blida,Blida,Agence Blida Centre,Informatique,Compte cheque,3292288,209108,Credit personnel,26855473,36,830799.64,0.0,0,Saine,0.0,2025-02-18,Actif
+CL-00068,Professionnel,Touati,Ahmed,Alger,Alger,Agence Alger Centre,Commerce,Compte professionnel,1489446,1189464,Credit investissement,9675594,60,183057.24,0.0,0,Saine,0.0,2026-07-13,Actif
+CL-00069,Professionnel,Rahmani,Samir,Batna,Batna,Agence Batna Centre,Distribution,Compte courant,1757146,836593,Credit investissement,22767892,72,350513.73,0.0,0,Saine,0.0,2026-05-07,Inactif
+CL-00070,Particulier,Slimani,Adel,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte cheque,2242035,397967,Credit exploitation,18510586,36,550465.69,0.0,0,Saine,0.0,2024-08-28,Actif
+CL-00071,Particulier,Brahimi,Anis,Ouargla,Ouargla,Agence Ouargla Centre,Services,Compte courant,1514451,478843,Credit personnel,8692962,60,166227.46,0.0,0,Saine,0.0,2025-02-04,Prospect
+CL-00072,PME,Haddad,Yacine,Oran,Oran,Agence Oran Centre,Distribution,Compte cheque,2897079,1650587,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-12-14,Inactif
+CL-00073,Professionnel,Khelifi,Youcef,Batna,Batna,Agence Batna Centre,Imprimerie,Compte cheque,3485060,1527369,Credit investissement,27421729,48,622492.59,0.0,0,Saine,0.0,2023-02-25,Actif
+CL-00074,Grande entreprise,Cherif,Bilal,Batna,Batna,Agence Batna Centre,Imprimerie,Compte professionnel,2422246,156232,Credit immobilier,24433321,72,360436.38,0.0,0,Saine,0.0,2022-03-26,Inactif
+CL-00075,Particulier,Haddad,Farid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte cheque,3119397,744679,Credit investissement,3097641,120,29391.03,0.0,0,Saine,0.0,2025-05-19,Actif
+CL-00076,Professionnel,Belkacem,Anis,Blida,Blida,Agence Blida Centre,Commerce,Compte professionnel,846304,1255945,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-11-12,Actif
+CL-00077,Professionnel,Mebarki,Samir,Blida,Blida,Agence Blida Centre,Agriculture,Compte courant,566089,195750,Credit exploitation,15468075,84,209967.79,0.0,0,Saine,0.0,2023-11-20,Actif
+CL-00078,PME,Ferhat,Youcef,Ouargla,Ouargla,Agence Ouargla Centre,BTP,Compte cheque,857664,1536036,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-04-13,Actif
+CL-00079,Grande entreprise,Brahimi,Adel,Annaba,Annaba,Agence Annaba Centre,Distribution,Compte epargne,2904319,1015138,Credit personnel,6266418,48,143829.12,0.0,0,Saine,0.0,2024-02-06,Actif
+CL-00080,Particulier,Belkacem,Nabil,Oran,Oran,Agence Oran Centre,Informatique,Compte cheque,1885511,1369261,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-03-20,Inactif
+CL-00081,Particulier,Hamdi,Bilal,Batna,Batna,Agence Batna Centre,Commerce,Compte epargne,2295510,1087510,Credit investissement,17961042,72,290682.44,0.0,0,Saine,0.0,2021-10-10,Actif
+CL-00082,PME,Touati,Anis,Alger,Alger,Agence Alger Centre,Commerce,Compte courant,1897487,901183,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-04-19,Actif
+CL-00083,Particulier,Bensalem,Bilal,Annaba,Annaba,Agence Annaba Centre,Distribution,Compte courant,2774170,760207,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-06-12,Actif
+CL-00084,PME,Slimani,Mohamed,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte cheque,1412803,622848,Credit exploitation,21924119,12,1982938.17,0.0,0,Saine,0.0,2025-02-04,Actif
+CL-00085,Professionnel,Slimani,Lyes,Blida,Blida,Agence Blida Centre,Imprimerie,Compte courant,1158602,799957,Credit exploitation,19175781,60,367722.41,0.0,0,Saine,0.0,2022-01-27,Inactif
+CL-00086,Professionnel,Benali,Nabil,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte professionnel,564606,308332,Credit equipement,15669499,24,766995.22,0.0,0,Saine,0.0,2026-06-20,Actif
+CL-00087,PME,Belkacem,Nabil,Blida,Blida,Agence Blida Centre,Imprimerie,Compte epargne,1809689,39391,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-01-26,Actif
+CL-00088,PME,Ferhat,Ilyes,Blida,Blida,Agence Blida Centre,Agriculture,Compte cheque,2735153,1678930,Credit equipement,16336515,72,252464.76,0.0,0,Saine,0.0,2022-06-30,Inactif
+CL-00089,Particulier,Haddad,Karim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Distribution,Compte epargne,813392,811321,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-11-24,Actif
+CL-00090,Grande entreprise,Mebarki,Nassim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Imprimerie,Compte cheque,1342589,1613641,Credit immobilier,23450185,24,1074665.52,2149331.04,60,Creance classee,429866.21,2024-04-28,Inactif
+CL-00091,Particulier,Mansouri,Karim,Batna,Batna,Agence Batna Centre,Services,Compte epargne,2095606,146654,Credit personnel,7025610,24,309731.58,619463.16,60,Creance classee,123892.63,2026-01-21,Inactif
+CL-00092,Particulier,Meziane,Farid,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte courant,3050549,203508,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-09-22,Actif
+CL-00093,Professionnel,Benali,Mohamed,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte professionnel,1979951,94751,Credit investissement,20979549,24,917749.13,0.0,0,Saine,0.0,2022-08-12,Prospect
+CL-00094,Particulier,Belkacem,Anis,Batna,Batna,Agence Batna Centre,Commerce,Compte courant,1630234,555344,Credit personnel,11947547,12,1146219.05,0.0,0,Saine,0.0,2022-02-03,Prospect
+CL-00095,PME,Slimani,Adel,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte cheque,1135716,1433856,Credit investissement,8198414,12,766375.81,766375.81,35,Creance classee,153275.16,2021-11-16,Inactif
+CL-00096,Particulier,Haddad,Nassim,Batna,Batna,Agence Batna Centre,Services,Compte epargne,2630028,1600797,Credit personnel,23882678,24,1046103.27,0.0,0,Saine,0.0,2021-08-24,Inactif
+CL-00097,Particulier,Amrani,Amine,Bejaia,Bejaia,Agence Bejaia Centre,Agroalimentaire,Compte professionnel,497262,501506,Credit immobilier,13161667,48,307374.3,0.0,0,Saine,0.0,2023-03-17,Prospect
+CL-00098,Particulier,Khelifi,Nassim,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte professionnel,2392899,77890,Credit investissement,29524654,48,707243.54,1414487.08,60,Creance classee,282897.42,2023-10-17,Actif
+CL-00099,Particulier,Khelifi,Anis,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte cheque,2670476,1710579,Credit personnel,29402122,24,1361620.19,0.0,0,Saine,0.0,2023-05-13,Prospect
+CL-00100,Professionnel,Belkacem,Adel,Batna,Batna,Agence Batna Centre,Commerce,Compte epargne,3289062,741821,Credit exploitation,16455092,84,217532.53,0.0,0,Saine,0.0,2026-03-26,Actif
+CL-00101,Grande entreprise,Khelifi,Bilal,Constantine,Constantine,Agence Constantine Centre,Services,Compte epargne,2670966,604585,Credit personnel,25428127,84,356021.15,0.0,0,Saine,0.0,2025-07-18,Actif
+CL-00102,Professionnel,Touati,Youcef,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte courant,2730168,226850,Credit personnel,8455727,12,804527.1,4827162.6,180,Creance douteuse,2413581.3,2026-09-06,Actif
+CL-00103,Professionnel,Boudiaf,Hichem,Batna,Batna,Agence Batna Centre,Industrie,Compte epargne,2516317,1039390,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-25,Prospect
+CL-00104,Grande entreprise,Rahmani,Mourad,Setif,Setif,Agence Setif Centre,Distribution,Compte epargne,1200780,1718101,Credit personnel,26567747,60,462013.01,1386039.03,90,Creance classee,277207.81,2022-05-12,Prospect
+CL-00105,PME,Guediri,Ilyes,Constantine,Constantine,Agence Constantine Centre,Services,Compte professionnel,3335162,1332977,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-06-23,Actif
+CL-00106,Particulier,Amrani,Nabil,Constantine,Constantine,Agence Constantine Centre,Informatique,Compte courant,3184265,1204361,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-10-20,Prospect
+CL-00107,Professionnel,Khelifi,Karim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte courant,2271944,520405,Credit exploitation,11865121,84,163983.26,0.0,0,Saine,0.0,2021-03-20,Actif
+CL-00108,Professionnel,Boudiaf,Amine,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte courant,2000347,189777,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-06-09,Actif
+CL-00109,Professionnel,Meziane,Nabil,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte cheque,1589956,480639,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-02-13,Actif
+CL-00110,Particulier,Rahmani,Nassim,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte cheque,285122,349949,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-07-29,Prospect
+CL-00111,PME,Saidi,Nassim,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte professionnel,2649766,66438,Credit investissement,15175835,24,672693.8,672693.8,35,Creance classee,134538.76,2023-03-24,Actif
+CL-00112,Grande entreprise,Boudiaf,Anis,Ouargla,Ouargla,Agence Ouargla Centre,Distribution,Compte cheque,3083709,1156888,Credit immobilier,9890077,84,135381.65,0.0,0,Saine,0.0,2025-06-05,Actif
+CL-00113,Particulier,Rahmani,Nassim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte courant,695491,455787,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-06-08,Actif
+CL-00114,PME,Brahimi,Anis,Oran,Oran,Agence Oran Centre,Agriculture,Compte cheque,1829465,1228755,Credit exploitation,24806698,36,796761.82,1593523.64,75,Creance classee,318704.73,2023-02-28,Actif
+CL-00115,Particulier,Touati,Adel,Alger,Alger,Agence Alger Centre,Informatique,Compte epargne,1253338,388003,Credit exploitation,29899445,72,486287.62,0.0,0,Saine,0.0,2024-03-25,Inactif
+CL-00116,Professionnel,Amrani,Nassim,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte courant,1206841,349820,Credit exploitation,2041858,72,30760.8,0.0,0,Saine,0.0,2024-12-12,Inactif
+CL-00117,Grande entreprise,Cherif,Amine,Batna,Batna,Agence Batna Centre,Informatique,Compte professionnel,2041428,170504,Credit equipement,23776723,12,2121211.42,0.0,0,Saine,0.0,2025-02-07,Actif
+CL-00118,PME,Cherif,Sofiane,Ouargla,Ouargla,Agence Ouargla Centre,Transport,Compte cheque,3075764,801132,Credit exploitation,24982418,60,479746.03,0.0,0,Saine,0.0,2021-09-26,Prospect
+CL-00119,Grande entreprise,Rahmani,Mourad,Constantine,Constantine,Agence Constantine Centre,Informatique,Compte epargne,1001087,1186923,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-01-02,Inactif
+CL-00120,PME,Amrani,Mohamed,Oran,Oran,Agence Oran Centre,Commerce,Compte courant,3135838,283361,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-04-12,Prospect
+CL-00121,Particulier,Slimani,Walid,Bejaia,Bejaia,Agence Bejaia Centre,Transport,Compte courant,842420,1256223,Credit investissement,8305393,120,72416.15,0.0,0,Saine,0.0,2022-03-28,Actif
+CL-00122,PME,Cherif,Nabil,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte cheque,1005803,191383,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-01-23,Prospect
+CL-00123,Particulier,Khelifi,Mohamed,Annaba,Annaba,Agence Annaba Centre,Distribution,Compte epargne,2390260,997806,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-03-05,Prospect
+CL-00124,PME,Boudiaf,Adel,Ouargla,Ouargla,Agence Ouargla Centre,Distribution,Compte professionnel,299901,1414163,Credit equipement,12659056,48,291865.76,0.0,0,Saine,0.0,2022-10-11,Actif
+CL-00125,Professionnel,Benali,Adel,Constantine,Constantine,Agence Constantine Centre,Services,Compte cheque,312326,1736255,Credit personnel,5421379,72,88481.79,353927.16,120,Creance douteuse,176963.58,2026-01-05,Actif
+CL-00126,Professionnel,Ferhat,Farid,Constantine,Constantine,Agence Constantine Centre,BTP,Compte courant,2639974,301114,Credit investissement,17175550,60,330926.11,0.0,0,Saine,0.0,2024-07-24,Actif
+CL-00127,Professionnel,Mansouri,Youcef,Skikda,Skikda,Agence Skikda Centre,BTP,Compte courant,2576231,410818,Credit exploitation,10707140,24,490944.73,0.0,0,Saine,0.0,2026-06-11,Inactif
+CL-00128,PME,Hamdi,Adel,Batna,Batna,Agence Batna Centre,Informatique,Compte cheque,73287,1117517,Credit immobilier,15957737,48,362969.17,0.0,0,Saine,0.0,2024-12-09,Actif
+CL-00129,PME,Boudiaf,Nabil,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte courant,3109725,1703394,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-06-02,Actif
+CL-00130,Professionnel,Slimani,Walid,Blida,Blida,Agence Blida Centre,Imprimerie,Compte epargne,3373798,1249876,Credit personnel,27116987,60,470519.36,0.0,0,Saine,0.0,2026-07-04,Prospect
+CL-00131,PME,Slimani,Anis,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte professionnel,2601446,81400,Credit exploitation,14321078,36,424017.68,0.0,0,Saine,0.0,2023-12-05,Actif
+CL-00132,PME,Slimani,Nabil,Skikda,Skikda,Agence Skikda Centre,Transport,Compte epargne,1406172,1248707,Credit personnel,16730289,84,219241.61,0.0,0,Saine,0.0,2026-07-29,Actif
+CL-00133,Particulier,Saidi,Walid,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte courant,1702299,1667827,Credit investissement,6008517,72,92110.29,0.0,0,Saine,0.0,2022-08-12,Prospect
+CL-00134,PME,Ferhat,Rayan,Alger,Alger,Agence Alger Centre,Informatique,Compte courant,3396692,1581478,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-03-17,Actif
+CL-00135,Professionnel,Khelifi,Yacine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Transport,Compte cheque,496364,346997,Credit immobilier,26660299,72,400579.2,0.0,0,Saine,0.0,2021-06-18,Actif
+CL-00136,Professionnel,Khelifi,Mourad,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte cheque,2250166,567715,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-05-11,Actif
+CL-00137,Grande entreprise,Benali,Ilyes,Ouargla,Ouargla,Agence Ouargla Centre,Imprimerie,Compte courant,1970304,526212,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-09-23,Actif
+CL-00138,Particulier,Touati,Amine,Batna,Batna,Agence Batna Centre,BTP,Compte courant,2283963,1557373,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-11-16,Actif
+CL-00139,Professionnel,Belkacem,Mohamed,Annaba,Annaba,Agence Annaba Centre,Commerce,Compte courant,2720147,229530,Credit personnel,21055491,36,628664.44,0.0,0,Saine,0.0,2026-07-07,Actif
+CL-00140,Particulier,Boudiaf,Mourad,Constantine,Constantine,Agence Constantine Centre,Informatique,Compte professionnel,2695753,286955,Credit personnel,15428215,84,200236.26,1201417.56,180,Creance douteuse,600708.78,2025-02-26,Inactif
+CL-00141,Professionnel,Rahmani,Yacine,Batna,Batna,Agence Batna Centre,Commerce,Compte cheque,2572350,1026049,Credit exploitation,7799273,120,72439.77,0.0,0,Saine,0.0,2023-07-08,Prospect
+CL-00142,Grande entreprise,Boudiaf,Samir,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte epargne,895557,272860,Credit immobilier,796350,60,14900.62,29801.24,60,Creance classee,5960.25,2022-06-27,Actif
+CL-00143,Particulier,Brahimi,Ahmed,Bejaia,Bejaia,Agence Bejaia Centre,Distribution,Compte cheque,1121517,1514314,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-04-02,Actif
+CL-00144,Grande entreprise,Haddad,Lyes,Oran,Oran,Agence Oran Centre,Transport,Compte courant,528983,685830,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-09-28,Inactif
+CL-00145,Particulier,Benali,Adel,Oran,Oran,Agence Oran Centre,Industrie,Compte professionnel,1904684,297011,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-01-19,Actif
+CL-00146,Grande entreprise,Khelifi,Yacine,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte epargne,898190,928138,Credit personnel,9920178,24,439668.32,0.0,0,Saine,0.0,2023-01-14,Actif
+CL-00147,Professionnel,Mebarki,Karim,Blida,Blida,Agence Blida Centre,Agriculture,Compte cheque,1767757,1508370,Credit exploitation,2045605,84,28300.82,0.0,0,Saine,0.0,2024-08-17,Inactif
+CL-00148,Professionnel,Saidi,Amine,Ouargla,Ouargla,Agence Ouargla Centre,Agriculture,Compte courant,2032156,553322,Credit personnel,26089206,36,833278.1,0.0,0,Saine,0.0,2025-03-29,Inactif
+CL-00149,Particulier,Saidi,Mohamed,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Informatique,Compte cheque,505831,846304,Credit exploitation,14671795,120,143676.49,0.0,0,Saine,0.0,2022-08-23,Prospect
+CL-00150,Grande entreprise,Amrani,Amine,Alger,Alger,Agence Alger Centre,Transport,Compte courant,3366216,1540880,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-02-04,Inactif
+CL-00151,Professionnel,Touati,Nabil,Oran,Oran,Agence Oran Centre,Transport,Compte cheque,3406517,703234,Credit exploitation,6062204,120,53934.52,0.0,0,Saine,0.0,2026-07-21,Actif
+CL-00152,Particulier,Cherif,Anis,Setif,Setif,Agence Setif Centre,Informatique,Compte cheque,2582604,1533616,Credit investissement,2372558,120,23190.67,0.0,0,Saine,0.0,2024-09-12,Actif
+CL-00153,Grande entreprise,Haddad,Samir,Bejaia,Bejaia,Agence Bejaia Centre,Agriculture,Compte courant,363002,626875,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-08-31,Actif
+CL-00154,Grande entreprise,Belkacem,Samir,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Commerce,Compte courant,1505488,409068,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-07-19,Actif
+CL-00155,PME,Hamdi,Youcef,Bejaia,Bejaia,Agence Bejaia Centre,Services,Compte courant,176917,1354194,Credit exploitation,26957101,60,479152.61,0.0,0,Saine,0.0,2022-10-05,Inactif
+CL-00156,PME,Brahimi,Youcef,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte epargne,776211,1577902,Credit immobilier,24644882,12,2402386.82,0.0,0,Saine,0.0,2021-06-04,Prospect
+CL-00157,PME,Mansouri,Samir,Blida,Blida,Agence Blida Centre,Agriculture,Compte epargne,2563593,578527,Credit equipement,15184208,120,140409.03,0.0,0,Saine,0.0,2026-08-07,Actif
+CL-00158,Grande entreprise,Mansouri,Ahmed,Batna,Batna,Agence Batna Centre,Distribution,Compte courant,2205977,1193482,Credit personnel,27045611,48,651139.72,0.0,0,Saine,0.0,2024-09-19,Inactif
+CL-00159,Particulier,Meziane,Nassim,Setif,Setif,Agence Setif Centre,Informatique,Compte cheque,2835837,1391523,Credit equipement,3965855,60,71150.73,142301.46,75,Creance classee,28460.29,2022-11-06,Actif
+CL-00160,Grande entreprise,Dahmani,Farid,Setif,Setif,Agence Setif Centre,Transport,Compte cheque,1282625,850472,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-01-09,Prospect
+CL-00161,Professionnel,Cherif,Ahmed,Setif,Setif,Agence Setif Centre,Informatique,Compte epargne,819666,554384,Credit exploitation,7196440,72,117901.67,0.0,0,Saine,0.0,2022-08-16,Actif
+CL-00162,PME,Cherif,Adel,Skikda,Skikda,Agence Skikda Centre,Services,Compte epargne,2418177,1318392,Credit investissement,5654047,48,132527.65,0.0,0,Saine,0.0,2024-07-16,Actif
+CL-00163,Grande entreprise,Mebarki,Yacine,Boumerdes,Boumerdes,Agence Boumerdes Centre,Transport,Compte professionnel,1279747,1336532,Credit investissement,8118459,120,79402.7,0.0,0,Saine,0.0,2022-02-24,Prospect
+CL-00164,Grande entreprise,Dahmani,Hichem,Oran,Oran,Agence Oran Centre,Transport,Compte courant,1093098,850755,Credit immobilier,26406554,48,632212.46,0.0,0,Saine,0.0,2023-09-28,Prospect
+CL-00165,Professionnel,Slimani,Adel,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte professionnel,1584126,450134,Credit investissement,23967917,36,716470.14,0.0,0,Saine,0.0,2026-08-18,Actif
+CL-00166,Particulier,Mansouri,Walid,Skikda,Skikda,Agence Skikda Centre,Transport,Compte professionnel,74916,1260203,Credit personnel,3117544,120,28910.12,0.0,0,Saine,0.0,2025-02-25,Prospect
+CL-00167,PME,Khelifi,Anis,Batna,Batna,Agence Batna Centre,Transport,Compte cheque,8556,1792082,Credit personnel,29991541,12,2789856.94,0.0,0,Saine,0.0,2026-04-23,Prospect
+CL-00168,Particulier,Meziane,Anis,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte cheque,2754544,1634059,Credit investissement,24920040,12,2318299.92,0.0,0,Saine,0.0,2023-11-17,Inactif
+CL-00169,PME,Slimani,Lyes,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte epargne,3301936,1216125,Credit equipement,24824890,36,787188.24,0.0,0,Saine,0.0,2023-09-20,Actif
+CL-00170,PME,Meziane,Samir,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte cheque,312586,735514,Credit exploitation,10350819,60,197769.02,395538.04,60,Creance classee,79107.61,2023-07-15,Actif
+CL-00171,Grande entreprise,Ferhat,Farid,Constantine,Constantine,Agence Constantine Centre,Services,Compte professionnel,1658457,651510,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-04-02,Actif
+CL-00172,Particulier,Boudiaf,Farid,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte cheque,1273952,770783,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-08-08,Actif
+CL-00173,Grande entreprise,Hamdi,Mohamed,Constantine,Constantine,Agence Constantine Centre,Imprimerie,Compte courant,2754832,849699,Credit investissement,23052982,120,210297.75,0.0,0,Saine,0.0,2025-12-04,Prospect
+CL-00174,PME,Dahmani,Hichem,Skikda,Skikda,Agence Skikda Centre,Agroalimentaire,Compte professionnel,1866289,1375672,Credit immobilier,28705853,120,272644.7,1090578.8,120,Creance douteuse,545289.4,2022-02-02,Actif
+CL-00175,PME,Saidi,Rayan,Skikda,Skikda,Agence Skikda Centre,Transport,Compte epargne,371668,1366371,Credit personnel,29549628,48,677339.67,1354679.34,75,Creance classee,270935.87,2023-08-09,Prospect
+CL-00176,Professionnel,Cherif,Rayan,Blida,Blida,Agence Blida Centre,BTP,Compte epargne,2174871,937980,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-06-28,Inactif
+CL-00177,Grande entreprise,Boudiaf,Hichem,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte cheque,2256353,75173,Credit exploitation,5145061,12,504503.01,0.0,0,Saine,0.0,2023-06-27,Actif
+CL-00178,Grande entreprise,Cherif,Ilyes,Batna,Batna,Agence Batna Centre,Commerce,Compte epargne,924532,673801,Credit immobilier,952573,48,22349.32,0.0,0,Saine,0.0,2024-08-18,Inactif
+CL-00179,PME,Benali,Mohamed,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte professionnel,1965116,982467,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-10-16,Inactif
+CL-00180,Grande entreprise,Slimani,Anis,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte professionnel,99303,1055799,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-12-18,Actif
+CL-00181,Grande entreprise,Mansouri,Farid,Alger,Alger,Agence Alger Centre,Industrie,Compte cheque,1898772,1530976,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-05-29,Prospect
+CL-00182,Grande entreprise,Touati,Rayan,Constantine,Constantine,Agence Constantine Centre,BTP,Compte cheque,2739279,1270436,Credit investissement,15720441,12,1389513.91,0.0,0,Saine,0.0,2025-04-22,Inactif
+CL-00183,PME,Guediri,Bilal,Setif,Setif,Agence Setif Centre,Informatique,Compte courant,1494731,1636265,Credit investissement,21760201,36,646473.77,5171790.16,240,Creance compromise,4137432.13,2023-05-12,Inactif
+CL-00184,Particulier,Meziane,Karim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agriculture,Compte epargne,1778507,1443676,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-02-26,Actif
+CL-00185,PME,Brahimi,Karim,Oran,Oran,Agence Oran Centre,BTP,Compte courant,1314193,221004,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-09-03,Inactif
+CL-00186,Particulier,Khelifi,Sofiane,Setif,Setif,Agence Setif Centre,Agriculture,Compte cheque,987860,63218,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-22,Actif
+CL-00187,Professionnel,Boudiaf,Lyes,Batna,Batna,Agence Batna Centre,Imprimerie,Compte professionnel,3302743,745487,Credit personnel,13762523,72,200638.62,601915.86,90,Creance classee,120383.17,2023-06-17,Actif
+CL-00188,PME,Dahmani,Mohamed,Oran,Oran,Agence Oran Centre,Distribution,Compte cheque,3474774,1159447,Credit exploitation,9383353,72,144587.56,0.0,0,Saine,0.0,2026-05-20,Actif
+CL-00189,Grande entreprise,Meziane,Nassim,Blida,Blida,Agence Blida Centre,Informatique,Compte courant,2316253,1377166,Credit equipement,19621054,12,1872320.66,0.0,0,Saine,0.0,2021-09-01,Actif
+CL-00190,Particulier,Belkacem,Hichem,Batna,Batna,Agence Batna Centre,Services,Compte epargne,1963569,223422,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-02-28,Prospect
+CL-00191,Professionnel,Meziane,Youcef,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte epargne,1191403,971405,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-06-13,Prospect
+CL-00192,PME,Cherif,Nassim,Ouargla,Ouargla,Agence Ouargla Centre,BTP,Compte cheque,2008246,1265904,Credit exploitation,6631740,60,123310.83,123310.83,35,Creance classee,24662.17,2023-12-05,Prospect
+CL-00193,Professionnel,Saidi,Karim,Skikda,Skikda,Agence Skikda Centre,Agroalimentaire,Compte professionnel,329543,226615,Credit immobilier,9027460,60,163022.07,0.0,0,Saine,0.0,2022-05-12,Prospect
+CL-00194,Particulier,Amrani,Amine,Bejaia,Bejaia,Agence Bejaia Centre,Services,Compte courant,450457,1296585,Credit immobilier,24239002,48,541899.13,0.0,0,Saine,0.0,2023-05-04,Prospect
+CL-00195,Particulier,Saidi,Ahmed,Annaba,Annaba,Agence Annaba Centre,Distribution,Compte cheque,2760711,282832,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-03-15,Actif
+CL-00196,Professionnel,Guediri,Rayan,Skikda,Skikda,Agence Skikda Centre,Services,Compte cheque,334259,373654,Credit investissement,26406855,72,423174.25,0.0,0,Saine,0.0,2024-01-15,Prospect
+CL-00197,Particulier,Ferhat,Karim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte professionnel,2533548,1798869,Credit immobilier,19690666,120,173582.58,0.0,0,Saine,0.0,2024-09-27,Prospect
+CL-00198,Particulier,Mansouri,Mohamed,Skikda,Skikda,Agence Skikda Centre,BTP,Compte epargne,1783529,214364,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-03-15,Inactif
+CL-00199,Professionnel,Cherif,Samir,Skikda,Skikda,Agence Skikda Centre,Transport,Compte professionnel,3436288,1179187,Credit personnel,7505567,72,122298.72,0.0,0,Saine,0.0,2021-06-09,Prospect
+CL-00200,PME,Benali,Bilal,Alger,Alger,Agence Alger Centre,Industrie,Compte cheque,774337,1126986,Credit equipement,29752154,120,260851.14,0.0,0,Saine,0.0,2024-04-05,Prospect
+CL-00201,PME,Hamdi,Karim,Constantine,Constantine,Agence Constantine Centre,Services,Compte professionnel,1770858,1777511,Credit personnel,12090884,60,223963.49,1343780.94,180,Creance douteuse,671890.47,2022-04-22,Actif
+CL-00202,Grande entreprise,Touati,Lyes,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte courant,100236,1139475,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-02-11,Inactif
+CL-00203,Grande entreprise,Mansouri,Ilyes,Setif,Setif,Agence Setif Centre,Agriculture,Compte professionnel,687859,310292,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-08-05,Prospect
+CL-00204,Particulier,Slimani,Ilyes,Bejaia,Bejaia,Agence Bejaia Centre,Imprimerie,Compte professionnel,421574,1629382,Credit exploitation,5588633,12,489129.51,0.0,0,Saine,0.0,2022-08-26,Actif
+CL-00205,Grande entreprise,Dahmani,Sofiane,Blida,Blida,Agence Blida Centre,BTP,Compte cheque,928579,164667,Credit personnel,7529009,60,137676.32,0.0,0,Saine,0.0,2021-03-29,Actif
+CL-00206,Grande entreprise,Saidi,Rayan,Blida,Blida,Agence Blida Centre,BTP,Compte professionnel,1415134,434775,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-10-03,Actif
+CL-00207,Professionnel,Mebarki,Walid,Annaba,Annaba,Agence Annaba Centre,Commerce,Compte epargne,815925,1463171,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-08-10,Actif
+CL-00208,Grande entreprise,Bensalem,Farid,Batna,Batna,Agence Batna Centre,Industrie,Compte cheque,2185028,539029,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-01-22,Actif
+CL-00209,PME,Amrani,Rayan,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte courant,1079175,936152,Credit equipement,2379148,72,35449.3,0.0,0,Saine,0.0,2023-06-04,Actif
+CL-00210,Grande entreprise,Bensalem,Youcef,Skikda,Skikda,Agence Skikda Centre,Industrie,Compte epargne,1353317,894866,Credit investissement,11863662,36,346841.06,693682.12,75,Creance classee,138736.42,2025-01-26,Actif
+CL-00211,Grande entreprise,Hamdi,Samir,Constantine,Constantine,Agence Constantine Centre,Transport,Compte epargne,1580998,1058883,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-07-22,Actif
+CL-00212,PME,Saidi,Walid,Annaba,Annaba,Agence Annaba Centre,BTP,Compte professionnel,2253386,1493665,Credit exploitation,7148813,24,343613.56,0.0,0,Saine,0.0,2021-04-05,Prospect
+CL-00213,Professionnel,Haddad,Youcef,Bejaia,Bejaia,Agence Bejaia Centre,Informatique,Compte courant,2259746,97485,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-08-12,Inactif
+CL-00214,Professionnel,Dahmani,Youcef,Constantine,Constantine,Agence Constantine Centre,Transport,Compte cheque,1033609,163035,Credit immobilier,21005097,120,190328.7,0.0,0,Saine,0.0,2023-05-12,Actif
+CL-00215,Grande entreprise,Slimani,Mourad,Blida,Blida,Agence Blida Centre,Imprimerie,Compte professionnel,1434225,986086,Credit immobilier,20520884,12,2014542.56,0.0,0,Saine,0.0,2024-02-02,Actif
+CL-00216,Grande entreprise,Haddad,Bilal,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte epargne,1195589,1232636,Credit exploitation,17088961,12,1555164.75,0.0,0,Saine,0.0,2023-12-30,Actif
+CL-00217,Grande entreprise,Meziane,Mohamed,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte professionnel,2113728,655002,Credit immobilier,20551153,84,258541.61,0.0,0,Saine,0.0,2026-04-05,Actif
+CL-00218,Grande entreprise,Haddad,Yacine,Oran,Oran,Agence Oran Centre,Agroalimentaire,Compte professionnel,2979268,1233393,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-03-02,Prospect
+CL-00219,PME,Ferhat,Ilyes,Setif,Setif,Agence Setif Centre,Imprimerie,Compte epargne,578645,1799090,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-06-15,Actif
+CL-00220,PME,Mansouri,Karim,Batna,Batna,Agence Batna Centre,Transport,Compte cheque,2573952,1181308,Credit investissement,23439436,60,406808.84,0.0,0,Saine,0.0,2026-02-06,Actif
+CL-00221,Particulier,Meziane,Walid,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte epargne,57873,1061992,Credit personnel,5515778,12,538069.1,0.0,0,Saine,0.0,2022-05-02,Actif
+CL-00222,Professionnel,Brahimi,Adel,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte courant,2295167,1666791,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-05-16,Actif
+CL-00223,Particulier,Amrani,Yacine,Oran,Oran,Agence Oran Centre,Transport,Compte cheque,1477052,246320,Credit immobilier,5175470,48,120163.35,0.0,0,Saine,0.0,2026-04-28,Actif
+CL-00224,PME,Amrani,Lyes,Boumerdes,Boumerdes,Agence Boumerdes Centre,Transport,Compte cheque,211599,1490456,Credit immobilier,23519405,72,345585.97,0.0,0,Saine,0.0,2025-09-26,Actif
+CL-00225,Particulier,Khelifi,Amine,Boumerdes,Boumerdes,Agence Boumerdes Centre,Industrie,Compte epargne,3029695,983896,Credit exploitation,28512644,60,510429.76,0.0,0,Saine,0.0,2025-02-25,Inactif
+CL-00226,Grande entreprise,Meziane,Youcef,Oran,Oran,Agence Oran Centre,Commerce,Compte courant,2541934,1558145,Credit personnel,6434913,24,302136.82,0.0,0,Saine,0.0,2024-09-04,Actif
+CL-00227,Particulier,Meziane,Nassim,Bejaia,Bejaia,Agence Bejaia Centre,BTP,Compte epargne,2840239,385383,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-01-25,Actif
+CL-00228,Professionnel,Saidi,Rayan,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte courant,887231,1206369,Credit personnel,7077484,24,336350.82,0.0,0,Saine,0.0,2021-03-12,Actif
+CL-00229,Professionnel,Rahmani,Anis,Alger,Alger,Agence Alger Centre,Agroalimentaire,Compte professionnel,3274724,500014,Credit personnel,21542436,72,315617.48,0.0,0,Saine,0.0,2022-11-26,Actif
+CL-00230,Professionnel,Bensalem,Amine,Skikda,Skikda,Agence Skikda Centre,Agriculture,Compte professionnel,2511334,600241,Credit exploitation,22558456,84,279334.84,0.0,0,Saine,0.0,2021-07-06,Actif
+CL-00231,PME,Touati,Karim,Alger,Alger,Agence Alger Centre,Agroalimentaire,Compte courant,437078,919401,Credit immobilier,10731481,48,253587.01,0.0,0,Saine,0.0,2021-05-16,Inactif
+CL-00232,Grande entreprise,Amrani,Ahmed,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte courant,1671839,617202,Credit investissement,12118284,36,373202.89,0.0,0,Saine,0.0,2021-07-25,Actif
+CL-00233,Professionnel,Brahimi,Ilyes,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte courant,1633104,1134166,Credit personnel,6306475,24,284886.96,0.0,0,Saine,0.0,2026-08-15,Prospect
+CL-00234,Grande entreprise,Amrani,Karim,Annaba,Annaba,Agence Annaba Centre,BTP,Compte epargne,2071263,1097270,Credit equipement,24535222,36,784988.41,784988.41,45,Creance classee,156997.68,2026-08-07,Prospect
+CL-00235,Grande entreprise,Meziane,Hichem,Constantine,Constantine,Agence Constantine Centre,Transport,Compte epargne,2562881,951559,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-07-01,Actif
+CL-00236,Professionnel,Saidi,Karim,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte courant,1458288,290225,Credit exploitation,10508103,48,250525.16,0.0,0,Saine,0.0,2026-07-16,Actif
+CL-00237,Professionnel,Mansouri,Nassim,Batna,Batna,Agence Batna Centre,Imprimerie,Compte courant,948188,1423257,Credit exploitation,24423933,48,571260.92,0.0,0,Saine,0.0,2024-03-22,Actif
+CL-00238,Grande entreprise,Haddad,Yacine,Setif,Setif,Agence Setif Centre,Distribution,Compte epargne,1872755,242828,Credit personnel,8675637,36,261090.95,0.0,0,Saine,0.0,2023-07-04,Actif
+CL-00239,Professionnel,Guediri,Sofiane,Blida,Blida,Agence Blida Centre,Informatique,Compte professionnel,3120288,914141,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-04-27,Actif
+CL-00240,Particulier,Saidi,Ilyes,Constantine,Constantine,Agence Constantine Centre,Services,Compte cheque,1446027,1338554,Credit exploitation,24361192,48,537767.9,0.0,0,Saine,0.0,2026-07-11,Actif
+CL-00241,PME,Mebarki,Youcef,Blida,Blida,Agence Blida Centre,Distribution,Compte professionnel,2152634,39120,Credit exploitation,13875057,72,212824.48,0.0,0,Saine,0.0,2022-06-29,Actif
+CL-00242,Particulier,Meziane,Mourad,Oran,Oran,Agence Oran Centre,BTP,Compte courant,2745475,725562,Credit equipement,18781294,12,1659821.07,0.0,0,Saine,0.0,2022-11-09,Actif
+CL-00243,Particulier,Guediri,Ilyes,Boumerdes,Boumerdes,Agence Boumerdes Centre,Industrie,Compte epargne,3178925,1206271,Credit personnel,1686438,84,21261.21,0.0,0,Saine,0.0,2023-11-12,Actif
+CL-00244,Professionnel,Slimani,Nassim,Oran,Oran,Agence Oran Centre,Informatique,Compte courant,3390897,420074,Credit personnel,9899972,36,312210.06,2497680.48,240,Creance compromise,1998144.38,2023-06-24,Actif
+CL-00245,Professionnel,Khelifi,Adel,Oran,Oran,Agence Oran Centre,Informatique,Compte epargne,921254,147098,Credit investissement,2363985,60,41766.88,0.0,0,Saine,0.0,2022-10-29,Actif
+CL-00246,Particulier,Mebarki,Anis,Alger,Alger,Agence Alger Centre,Informatique,Compte epargne,189321,519627,Credit exploitation,2621055,12,232899.07,0.0,0,Saine,0.0,2021-04-12,Prospect
+CL-00247,Professionnel,Touati,Mourad,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte professionnel,2222206,826514,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-12-02,Inactif
+CL-00248,Grande entreprise,Brahimi,Bilal,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte professionnel,2524809,1474937,Credit personnel,11042443,60,204829.1,409658.2,60,Creance classee,81931.64,2025-04-13,Actif
+CL-00249,Grande entreprise,Hamdi,Karim,Ouargla,Ouargla,Agence Ouargla Centre,BTP,Compte courant,1909284,1324407,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-03-07,Prospect
+CL-00250,Grande entreprise,Boudiaf,Nassim,Alger,Alger,Agence Alger Centre,Distribution,Compte professionnel,3187939,320375,Credit investissement,17026758,24,764634.0,0.0,0,Saine,0.0,2024-03-11,Actif
+CL-00251,Particulier,Rahmani,Ahmed,Blida,Blida,Agence Blida Centre,Commerce,Compte cheque,124650,457513,Credit personnel,23362099,60,411240.87,0.0,0,Saine,0.0,2023-04-15,Actif
+CL-00252,Grande entreprise,Touati,Lyes,Oran,Oran,Agence Oran Centre,Industrie,Compte cheque,2699597,1280718,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-11-08,Actif
+CL-00253,Professionnel,Saidi,Sofiane,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte courant,1378289,1609968,Credit equipement,24216979,120,230928.9,0.0,0,Saine,0.0,2025-02-26,Actif
+CL-00254,Particulier,Belkacem,Hichem,Oran,Oran,Agence Oran Centre,BTP,Compte cheque,138908,451744,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-04-23,Actif
+CL-00255,Particulier,Haddad,Farid,Batna,Batna,Agence Batna Centre,Transport,Compte professionnel,926721,1130707,Credit personnel,6898533,120,65646.39,0.0,0,Saine,0.0,2024-01-26,Actif
+CL-00256,Particulier,Saidi,Rayan,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte courant,150050,1420271,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-10-10,Actif
+CL-00257,Grande entreprise,Mebarki,Mourad,Batna,Batna,Agence Batna Centre,Services,Compte epargne,16235,424594,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-05-18,Inactif
+CL-00258,Particulier,Saidi,Mohamed,Boumerdes,Boumerdes,Agence Boumerdes Centre,Distribution,Compte epargne,2619688,706697,Credit personnel,17247349,60,313024.51,0.0,0,Saine,0.0,2022-09-10,Actif
+CL-00259,Professionnel,Haddad,Nassim,Batna,Batna,Agence Batna Centre,Distribution,Compte epargne,1462589,1727920,Credit investissement,15318270,12,1433100.11,2866200.22,60,Creance classee,573240.04,2026-09-01,Actif
+CL-00260,Grande entreprise,Saidi,Mourad,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte professionnel,1982822,199116,Credit immobilier,28911784,120,276670.3,0.0,0,Saine,0.0,2021-06-30,Actif
+CL-00261,Professionnel,Brahimi,Bilal,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte courant,1155892,1732644,Credit exploitation,3772857,60,65833.9,65833.9,35,Creance classee,13166.78,2025-11-30,Actif
+CL-00262,PME,Dahmani,Mourad,Constantine,Constantine,Agence Constantine Centre,BTP,Compte professionnel,2426088,1631546,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-04-13,Prospect
+CL-00263,Grande entreprise,Cherif,Nassim,Skikda,Skikda,Agence Skikda Centre,Services,Compte courant,1184957,1274484,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-08-25,Actif
+CL-00264,Particulier,Belkacem,Rayan,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte cheque,462924,634206,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-12-08,Actif
+CL-00265,PME,Slimani,Nabil,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte cheque,279717,199664,Credit investissement,29165334,84,380750.95,0.0,0,Saine,0.0,2021-02-21,Actif
+CL-00266,Grande entreprise,Belkacem,Samir,Alger,Alger,Agence Alger Centre,Agroalimentaire,Compte professionnel,1085409,1216746,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-12-13,Inactif
+CL-00267,Professionnel,Ferhat,Hichem,Setif,Setif,Agence Setif Centre,Transport,Compte epargne,2801616,1444878,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-10-29,Inactif
+CL-00268,Professionnel,Benali,Walid,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte cheque,963252,55550,Credit exploitation,19342419,84,248055.4,0.0,0,Saine,0.0,2024-05-04,Actif
+CL-00269,PME,Guediri,Nabil,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte cheque,1189760,1517456,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-22,Actif
+CL-00270,Grande entreprise,Haddad,Nabil,Setif,Setif,Agence Setif Centre,Industrie,Compte courant,2845480,1003180,Credit exploitation,1456950,24,65699.37,394196.22,180,Creance douteuse,197098.11,2021-10-29,Actif
+CL-00271,Particulier,Cherif,Amine,Skikda,Skikda,Agence Skikda Centre,Agriculture,Compte cheque,2657385,1281366,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-10-23,Actif
+CL-00272,Particulier,Bensalem,Youcef,Blida,Blida,Agence Blida Centre,Commerce,Compte professionnel,3355756,1010040,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-06-19,Prospect
+CL-00273,Particulier,Hamdi,Karim,Bejaia,Bejaia,Agence Bejaia Centre,BTP,Compte epargne,189683,794404,Credit exploitation,23291995,72,346115.79,0.0,0,Saine,0.0,2023-02-02,Actif
+CL-00274,Grande entreprise,Haddad,Karim,Annaba,Annaba,Agence Annaba Centre,Commerce,Compte cheque,2872661,255800,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-02-11,Actif
+CL-00275,Professionnel,Touati,Adel,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte epargne,1203495,242149,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-01-01,Inactif
+CL-00276,Particulier,Belkacem,Bilal,Alger,Alger,Agence Alger Centre,Distribution,Compte epargne,1140451,1015065,Credit personnel,23361566,72,342313.16,1369252.64,120,Creance douteuse,684626.32,2024-03-13,Actif
+CL-00277,Professionnel,Meziane,Lyes,Setif,Setif,Agence Setif Centre,Transport,Compte cheque,2983338,1114411,Credit exploitation,7678888,120,74228.4,0.0,0,Saine,0.0,2023-04-28,Actif
+CL-00278,Professionnel,Bensalem,Rayan,Blida,Blida,Agence Blida Centre,BTP,Compte epargne,3349563,794726,Credit personnel,7880444,24,363995.14,0.0,0,Saine,0.0,2025-07-20,Actif
+CL-00279,Professionnel,Meziane,Rayan,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte epargne,724971,1036728,Credit exploitation,7895467,36,244540.48,0.0,0,Saine,0.0,2023-02-03,Inactif
+CL-00280,PME,Haddad,Nassim,Setif,Setif,Agence Setif Centre,BTP,Compte cheque,815913,784351,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-06-18,Actif
+CL-00281,Particulier,Khelifi,Nassim,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte cheque,638457,1211363,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-08-02,Inactif
+CL-00282,PME,Hamdi,Adel,Annaba,Annaba,Agence Annaba Centre,Services,Compte professionnel,2807831,1317050,Credit personnel,25747059,36,836368.89,0.0,0,Saine,0.0,2023-01-11,Actif
+CL-00283,PME,Dahmani,Hichem,Batna,Batna,Agence Batna Centre,Industrie,Compte cheque,606505,88068,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-10,Prospect
+CL-00284,Particulier,Amrani,Sofiane,Skikda,Skikda,Agence Skikda Centre,Transport,Compte epargne,1946256,418078,Credit immobilier,10978097,72,166700.15,0.0,0,Saine,0.0,2025-11-06,Actif
+CL-00285,Grande entreprise,Mebarki,Rayan,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte cheque,1220696,466316,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-10-07,Actif
+CL-00286,Grande entreprise,Khelifi,Hichem,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte cheque,2438565,1101001,Credit exploitation,23678023,60,425542.02,0.0,0,Saine,0.0,2022-07-27,Prospect
+CL-00287,Professionnel,Dahmani,Farid,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte professionnel,84425,245986,Credit equipement,23284180,12,2033211.11,0.0,0,Saine,0.0,2024-11-10,Actif
+CL-00288,Grande entreprise,Saidi,Lyes,Ouargla,Ouargla,Agence Ouargla Centre,Commerce,Compte courant,1284519,1379735,Credit immobilier,18783664,60,344339.47,0.0,0,Saine,0.0,2024-02-04,Actif
+CL-00289,PME,Touati,Walid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte professionnel,1418998,1435054,Credit immobilier,27817805,72,452023.99,0.0,0,Saine,0.0,2026-03-26,Inactif
+CL-00290,Particulier,Khelifi,Sofiane,Ouargla,Ouargla,Agence Ouargla Centre,BTP,Compte professionnel,3465089,940718,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-10-16,Prospect
+CL-00291,Professionnel,Belkacem,Anis,Bejaia,Bejaia,Agence Bejaia Centre,Imprimerie,Compte courant,210171,1171483,Credit exploitation,23492061,24,1057631.53,3172894.59,90,Creance classee,634578.92,2024-05-02,Actif
+CL-00292,Grande entreprise,Bensalem,Mourad,Batna,Batna,Agence Batna Centre,BTP,Compte professionnel,1092441,1094539,Credit exploitation,16259464,84,208928.49,0.0,0,Saine,0.0,2022-06-09,Prospect
+CL-00293,Professionnel,Khelifi,Karim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Informatique,Compte cheque,1090322,1207073,Credit equipement,23209447,84,291401.61,0.0,0,Saine,0.0,2026-04-14,Actif
+CL-00294,Grande entreprise,Touati,Ahmed,Blida,Blida,Agence Blida Centre,Imprimerie,Compte professionnel,1370250,94801,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-04-17,Prospect
+CL-00295,Grande entreprise,Ferhat,Yacine,Batna,Batna,Agence Batna Centre,Agriculture,Compte professionnel,1941231,1772782,Credit investissement,10869444,60,208383.62,0.0,0,Saine,0.0,2026-03-19,Actif
+CL-00296,Professionnel,Hamdi,Rayan,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte courant,249513,105955,Credit exploitation,26374669,24,1273213.29,7639279.74,180,Creance douteuse,3819639.87,2021-03-12,Actif
+CL-00297,Grande entreprise,Meziane,Adel,Blida,Blida,Agence Blida Centre,Transport,Compte professionnel,2599981,350631,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-03-17,Actif
+CL-00298,Professionnel,Benali,Mourad,Skikda,Skikda,Agence Skikda Centre,Distribution,Compte cheque,163638,427801,Credit equipement,19500235,72,294529.19,0.0,0,Saine,0.0,2021-09-19,Actif
+CL-00299,PME,Belkacem,Samir,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Informatique,Compte professionnel,1314518,1175725,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-06-26,Actif
+CL-00300,PME,Meziane,Youcef,Setif,Setif,Agence Setif Centre,Services,Compte cheque,3142116,562309,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-05-25,Inactif
+CL-00301,PME,Brahimi,Adel,Oran,Oran,Agence Oran Centre,Commerce,Compte epargne,348181,213490,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-05-19,Inactif
+CL-00302,PME,Rahmani,Samir,Boumerdes,Boumerdes,Agence Boumerdes Centre,Commerce,Compte courant,3296654,260860,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-11-27,Actif
+CL-00303,Particulier,Dahmani,Bilal,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte professionnel,97070,1138931,Credit investissement,9722978,12,914052.97,0.0,0,Saine,0.0,2022-08-20,Actif
+CL-00304,PME,Cherif,Rayan,Skikda,Skikda,Agence Skikda Centre,Agroalimentaire,Compte courant,2591067,808937,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-07-31,Inactif
+CL-00305,Grande entreprise,Slimani,Mourad,Annaba,Annaba,Agence Annaba Centre,Services,Compte courant,1699361,931310,Credit exploitation,18548343,60,364662.68,1093988.04,90,Creance classee,218797.61,2025-09-11,Prospect
+CL-00306,Grande entreprise,Saidi,Nassim,Oran,Oran,Agence Oran Centre,Industrie,Compte epargne,3106729,737279,Credit investissement,27327863,12,2509871.21,0.0,0,Saine,0.0,2025-03-21,Inactif
+CL-00307,PME,Meziane,Adel,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte cheque,2424783,458522,Credit exploitation,1950579,24,91293.95,0.0,0,Saine,0.0,2025-01-30,Actif
+CL-00308,Grande entreprise,Belkacem,Nassim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte courant,1681097,1165574,Credit investissement,24004658,48,546833.57,0.0,0,Saine,0.0,2025-08-22,Prospect
+CL-00309,Grande entreprise,Amrani,Rayan,Blida,Blida,Agence Blida Centre,Informatique,Compte epargne,1899097,1457145,Credit equipement,17143458,84,239159.36,0.0,0,Saine,0.0,2026-07-13,Actif
+CL-00310,Particulier,Rahmani,Ilyes,Blida,Blida,Agence Blida Centre,BTP,Compte cheque,1645586,601435,Credit equipement,12402934,36,400937.22,801874.44,60,Creance classee,160374.89,2023-06-12,Actif
+CL-00311,Professionnel,Slimani,Lyes,Batna,Batna,Agence Batna Centre,Transport,Compte epargne,1396754,172025,Credit exploitation,12402680,24,577535.4,0.0,0,Saine,0.0,2023-08-29,Actif
+CL-00312,Professionnel,Touati,Sofiane,Blida,Blida,Agence Blida Centre,Informatique,Compte cheque,2139757,1084506,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-08-27,Actif
+CL-00313,Particulier,Belkacem,Nabil,Batna,Batna,Agence Batna Centre,Services,Compte courant,1404283,603470,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-01-25,Actif
+CL-00314,Particulier,Hamdi,Mohamed,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte professionnel,2426870,115032,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-03-22,Actif
+CL-00315,Particulier,Haddad,Ahmed,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte cheque,2220420,1151735,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-08-27,Inactif
+CL-00316,Professionnel,Slimani,Bilal,Oran,Oran,Agence Oran Centre,Agroalimentaire,Compte cheque,2659409,302568,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-06-10,Actif
+CL-00317,Grande entreprise,Boudiaf,Mourad,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte courant,3410992,855070,Credit exploitation,13232413,24,590069.15,0.0,0,Saine,0.0,2021-02-25,Inactif
+CL-00318,Professionnel,Haddad,Amine,Bejaia,Bejaia,Agence Bejaia Centre,Services,Compte cheque,2262955,1602513,Credit personnel,5083968,48,117952.43,0.0,0,Saine,0.0,2022-01-10,Actif
+CL-00319,Grande entreprise,Bensalem,Nassim,Alger,Alger,Agence Alger Centre,Agriculture,Compte cheque,2776786,829499,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-28,Prospect
+CL-00320,Grande entreprise,Khelifi,Samir,Blida,Blida,Agence Blida Centre,Commerce,Compte cheque,3389870,737743,Credit personnel,15712885,120,143288.73,1146309.84,240,Creance compromise,917047.87,2021-01-23,Actif
+CL-00321,Grande entreprise,Hamdi,Farid,Alger,Alger,Agence Alger Centre,Agriculture,Compte courant,1910430,1471998,Credit immobilier,19855484,12,1900974.43,0.0,0,Saine,0.0,2026-03-03,Actif
+CL-00322,Professionnel,Mansouri,Amine,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte courant,1732000,1218628,Credit immobilier,8100317,84,103191.62,103191.62,45,Creance classee,20638.32,2022-04-02,Inactif
+CL-00323,PME,Boudiaf,Nassim,Setif,Setif,Agence Setif Centre,Services,Compte cheque,160327,439575,Credit exploitation,4408903,48,96963.41,0.0,0,Saine,0.0,2024-05-02,Actif
+CL-00324,Particulier,Cherif,Farid,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte cheque,3369589,431026,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-09-08,Prospect
+CL-00325,Professionnel,Slimani,Walid,Alger,Alger,Agence Alger Centre,Industrie,Compte cheque,899148,421586,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-06-12,Actif
+CL-00326,PME,Hamdi,Samir,Setif,Setif,Agence Setif Centre,Imprimerie,Compte epargne,1893214,147591,Credit exploitation,25852395,24,1223756.13,0.0,0,Saine,0.0,2024-08-27,Inactif
+CL-00327,Professionnel,Meziane,Sofiane,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Transport,Compte cheque,2075170,1336641,Credit exploitation,13968292,84,192379.93,0.0,0,Saine,0.0,2025-01-07,Prospect
+CL-00328,Professionnel,Mansouri,Yacine,Batna,Batna,Agence Batna Centre,Informatique,Compte epargne,537118,1704043,Credit exploitation,26394836,72,400380.45,3203043.6,240,Creance compromise,2562434.88,2024-05-14,Inactif
+CL-00329,PME,Belkacem,Ahmed,Setif,Setif,Agence Setif Centre,Imprimerie,Compte epargne,2367991,1497106,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-02,Actif
+CL-00330,Grande entreprise,Amrani,Farid,Batna,Batna,Agence Batna Centre,Informatique,Compte courant,3269005,538468,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-05-18,Actif
+CL-00331,Particulier,Khelifi,Nabil,Boumerdes,Boumerdes,Agence Boumerdes Centre,Distribution,Compte courant,2424681,175290,Credit investissement,21257918,36,648152.74,0.0,0,Saine,0.0,2023-04-17,Inactif
+CL-00332,PME,Mansouri,Walid,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte epargne,304761,807329,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-06-18,Inactif
+CL-00333,Professionnel,Dahmani,Mohamed,Bejaia,Bejaia,Agence Bejaia Centre,Informatique,Compte epargne,1475124,816792,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-11-05,Inactif
+CL-00334,Professionnel,Khelifi,Yacine,Setif,Setif,Agence Setif Centre,Services,Compte cheque,1800446,256317,Credit personnel,22408695,48,503025.9,0.0,0,Saine,0.0,2024-09-26,Inactif
+CL-00335,PME,Hamdi,Sofiane,Annaba,Annaba,Agence Annaba Centre,Distribution,Compte courant,2282144,609045,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-03-30,Actif
+CL-00336,PME,Khelifi,Adel,Alger,Alger,Agence Alger Centre,Agriculture,Compte courant,3278344,1435684,Credit equipement,5607062,36,162390.47,0.0,0,Saine,0.0,2021-01-02,Actif
+CL-00337,Particulier,Belkacem,Farid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Informatique,Compte courant,1797026,1492840,Credit personnel,27632783,120,249915.85,0.0,0,Saine,0.0,2025-02-02,Actif
+CL-00338,PME,Saidi,Nassim,Oran,Oran,Agence Oran Centre,Services,Compte courant,368333,697397,Credit personnel,14388406,48,347159.58,0.0,0,Saine,0.0,2025-11-08,Prospect
+CL-00339,PME,Rahmani,Sofiane,Setif,Setif,Agence Setif Centre,Transport,Compte cheque,2982246,571453,Credit immobilier,29064561,24,1300840.05,0.0,0,Saine,0.0,2021-04-12,Actif
+CL-00340,PME,Khelifi,Karim,Bejaia,Bejaia,Agence Bejaia Centre,Informatique,Compte cheque,3347107,457175,Credit exploitation,18249379,120,168423.04,0.0,0,Saine,0.0,2023-02-21,Prospect
+CL-00341,Grande entreprise,Amrani,Farid,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte epargne,1083811,1558732,Credit immobilier,25867020,24,1178235.09,0.0,0,Saine,0.0,2023-08-08,Actif
+CL-00342,Grande entreprise,Touati,Bilal,Annaba,Annaba,Agence Annaba Centre,Transport,Compte cheque,3345327,981026,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-07-19,Actif
+CL-00343,PME,Guediri,Anis,Batna,Batna,Agence Batna Centre,Imprimerie,Compte cheque,2811032,218944,Credit personnel,267309,72,4267.39,0.0,0,Saine,0.0,2024-02-02,Inactif
+CL-00344,PME,Benali,Ahmed,Boumerdes,Boumerdes,Agence Boumerdes Centre,Industrie,Compte cheque,676097,1039713,Credit immobilier,14617574,60,260727.95,1564367.7,180,Creance douteuse,782183.85,2022-01-24,Inactif
+CL-00345,Grande entreprise,Meziane,Rayan,Bejaia,Bejaia,Agence Bejaia Centre,Distribution,Compte cheque,874330,1101601,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-02-19,Actif
+CL-00346,Professionnel,Ferhat,Rayan,Batna,Batna,Agence Batna Centre,Informatique,Compte cheque,3221217,242127,Credit investissement,16659854,36,484950.19,0.0,0,Saine,0.0,2026-08-19,Actif
+CL-00347,Professionnel,Benali,Walid,Skikda,Skikda,Agence Skikda Centre,Distribution,Compte professionnel,2090661,568504,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-04-06,Inactif
+CL-00348,PME,Mansouri,Nassim,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte courant,3344790,1293145,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-06-25,Actif
+CL-00349,PME,Amrani,Farid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte courant,1611695,464417,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-10-29,Prospect
+CL-00350,PME,Brahimi,Youcef,Oran,Oran,Agence Oran Centre,BTP,Compte professionnel,2935646,823842,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-10-28,Actif
+CL-00351,PME,Dahmani,Rayan,Setif,Setif,Agence Setif Centre,Commerce,Compte cheque,2108862,647403,Credit immobilier,24422848,12,2145085.37,0.0,0,Saine,0.0,2021-07-07,Actif
+CL-00352,Particulier,Brahimi,Lyes,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte courant,1470700,139848,Credit equipement,23017167,12,2002870.95,0.0,0,Saine,0.0,2025-11-05,Prospect
+CL-00353,Particulier,Guediri,Rayan,Bejaia,Bejaia,Agence Bejaia Centre,Transport,Compte epargne,306351,480680,Credit personnel,2381291,72,35890.82,0.0,0,Saine,0.0,2025-05-23,Actif
+CL-00354,Particulier,Mansouri,Rayan,Batna,Batna,Agence Batna Centre,Industrie,Compte cheque,1121668,1611610,Credit exploitation,25484373,60,485343.16,0.0,0,Saine,0.0,2023-01-14,Prospect
+CL-00355,Grande entreprise,Rahmani,Sofiane,Setif,Setif,Agence Setif Centre,Commerce,Compte courant,906398,1634364,Credit exploitation,26129858,36,817277.49,4903664.94,180,Creance douteuse,2451832.47,2026-05-26,Prospect
+CL-00356,PME,Slimani,Mohamed,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte cheque,2549164,909820,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-07-02,Actif
+CL-00357,Grande entreprise,Amrani,Lyes,Batna,Batna,Agence Batna Centre,Industrie,Compte cheque,316704,1223038,Credit equipement,18632939,84,255583.21,0.0,0,Saine,0.0,2023-04-01,Actif
+CL-00358,Particulier,Guediri,Bilal,Oran,Oran,Agence Oran Centre,Transport,Compte professionnel,3282167,1233761,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-02-26,Prospect
+CL-00359,Particulier,Bensalem,Nassim,Setif,Setif,Agence Setif Centre,Informatique,Compte cheque,2409211,463165,Credit exploitation,18286798,12,1763521.81,0.0,0,Saine,0.0,2026-03-27,Prospect
+CL-00360,Grande entreprise,Boudiaf,Lyes,Alger,Alger,Agence Alger Centre,Imprimerie,Compte cheque,3348500,1073806,Credit immobilier,5177484,72,77206.46,0.0,0,Saine,0.0,2023-08-12,Inactif
+CL-00361,PME,Haddad,Nabil,Alger,Alger,Agence Alger Centre,Industrie,Compte cheque,2898245,130069,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-09-13,Inactif
+CL-00362,Professionnel,Dahmani,Mourad,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte epargne,2384347,1115551,Credit exploitation,25901063,60,479645.93,0.0,0,Saine,0.0,2021-08-05,Prospect
+CL-00363,PME,Benali,Hichem,Setif,Setif,Agence Setif Centre,Transport,Compte professionnel,373841,828521,Credit investissement,12837923,24,581605.93,0.0,0,Saine,0.0,2022-12-28,Inactif
+CL-00364,Particulier,Haddad,Bilal,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte professionnel,1982843,1120594,Credit personnel,17772185,72,286535.2,0.0,0,Saine,0.0,2026-03-21,Actif
+CL-00365,Professionnel,Haddad,Amine,Ouargla,Ouargla,Agence Ouargla Centre,Informatique,Compte courant,600681,1055763,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-12-17,Actif
+CL-00366,Professionnel,Slimani,Mohamed,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte courant,395853,1428377,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-10-16,Actif
+CL-00367,Grande entreprise,Slimani,Yacine,Constantine,Constantine,Agence Constantine Centre,Transport,Compte epargne,1582120,1403917,Credit exploitation,12811998,60,228335.14,0.0,0,Saine,0.0,2023-02-15,Actif
+CL-00368,PME,Cherif,Nassim,Alger,Alger,Agence Alger Centre,BTP,Compte epargne,3186858,1083600,Credit immobilier,29234547,72,439901.0,0.0,0,Saine,0.0,2023-12-20,Actif
+CL-00369,Professionnel,Guediri,Amine,Skikda,Skikda,Agence Skikda Centre,Agriculture,Compte courant,2823897,1506203,Credit exploitation,26739943,72,409276.32,0.0,0,Saine,0.0,2024-02-06,Actif
+CL-00370,Grande entreprise,Guediri,Rayan,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte professionnel,2297840,1708268,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-08-22,Prospect
+CL-00371,Particulier,Slimani,Walid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte courant,1858486,1663000,Credit exploitation,22300971,36,709543.54,0.0,0,Saine,0.0,2023-08-26,Actif
+CL-00372,PME,Amrani,Youcef,Constantine,Constantine,Agence Constantine Centre,Informatique,Compte epargne,2452934,1225693,Credit immobilier,7986386,24,350059.84,0.0,0,Saine,0.0,2023-09-26,Actif
+CL-00373,Professionnel,Hamdi,Rayan,Constantine,Constantine,Agence Constantine Centre,Services,Compte professionnel,1762952,1444057,Credit personnel,8325761,84,110930.68,0.0,0,Saine,0.0,2025-11-29,Actif
+CL-00374,Professionnel,Amrani,Amine,Skikda,Skikda,Agence Skikda Centre,Industrie,Compte courant,1572904,1308294,Credit investissement,17309951,120,170179.58,0.0,0,Saine,0.0,2025-05-13,Actif
+CL-00375,Particulier,Brahimi,Adel,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte courant,1910730,766138,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-06-18,Actif
+CL-00376,Professionnel,Touati,Samir,Blida,Blida,Agence Blida Centre,Informatique,Compte cheque,1573693,879862,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-10-06,Prospect
+CL-00377,PME,Touati,Lyes,Skikda,Skikda,Agence Skikda Centre,BTP,Compte epargne,2185926,164189,Credit equipement,22790763,36,722981.66,0.0,0,Saine,0.0,2023-06-26,Actif
+CL-00378,Particulier,Guediri,Farid,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte epargne,3316256,902117,Credit equipement,11970896,84,165369.31,661477.24,120,Creance douteuse,330738.62,2022-11-17,Actif
+CL-00379,Professionnel,Slimani,Karim,Ouargla,Ouargla,Agence Ouargla Centre,Agriculture,Compte courant,1821134,784796,Credit investissement,22152855,60,391582.58,0.0,0,Saine,0.0,2026-04-04,Actif
+CL-00380,PME,Hamdi,Nabil,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte professionnel,2167252,335695,Credit personnel,27474269,36,823591.6,0.0,0,Saine,0.0,2022-04-17,Actif
+CL-00381,PME,Rahmani,Bilal,Oran,Oran,Agence Oran Centre,BTP,Compte cheque,1906890,628528,Credit immobilier,25563789,12,2498899.39,0.0,0,Saine,0.0,2024-04-05,Actif
+CL-00382,Grande entreprise,Boudiaf,Lyes,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte cheque,3316179,1772866,Credit personnel,17242602,120,154694.0,618776.0,120,Creance douteuse,309388.0,2023-01-31,Actif
+CL-00383,Grande entreprise,Mebarki,Lyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte courant,2556087,292878,Credit equipement,17068825,84,211674.05,0.0,0,Saine,0.0,2022-12-21,Actif
+CL-00384,Particulier,Ferhat,Ilyes,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte professionnel,2779307,1435593,Credit exploitation,29960183,72,438665.77,0.0,0,Saine,0.0,2025-11-22,Actif
+CL-00385,Particulier,Slimani,Hichem,Bejaia,Bejaia,Agence Bejaia Centre,BTP,Compte cheque,1178928,1541217,Credit exploitation,9365654,12,898693.55,0.0,0,Saine,0.0,2024-06-29,Inactif
+CL-00386,PME,Saidi,Rayan,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte epargne,143387,410897,Credit investissement,9141045,72,141396.3,0.0,0,Saine,0.0,2025-03-09,Prospect
+CL-00387,PME,Slimani,Hichem,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte epargne,299117,306632,Credit exploitation,5498747,48,126680.36,0.0,0,Saine,0.0,2022-06-24,Actif
+CL-00388,PME,Mansouri,Anis,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Transport,Compte cheque,1148322,1038423,Credit immobilier,15844616,84,221562.35,0.0,0,Saine,0.0,2021-12-20,Actif
+CL-00389,Particulier,Cherif,Youcef,Blida,Blida,Agence Blida Centre,Transport,Compte epargne,1114775,1204009,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-07-04,Actif
+CL-00390,PME,Amrani,Youcef,Skikda,Skikda,Agence Skikda Centre,Agroalimentaire,Compte cheque,547586,1447307,Credit investissement,23256243,48,526974.04,526974.04,35,Creance classee,105394.81,2024-09-29,Prospect
+CL-00391,PME,Benali,Farid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Commerce,Compte epargne,1298908,1435805,Credit immobilier,9783003,12,925676.72,0.0,0,Saine,0.0,2023-06-10,Prospect
+CL-00392,Particulier,Cherif,Walid,Batna,Batna,Agence Batna Centre,Agroalimentaire,Compte epargne,1758277,84463,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-01-08,Inactif
+CL-00393,Particulier,Cherif,Karim,Alger,Alger,Agence Alger Centre,Transport,Compte cheque,2288107,225621,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-02-04,Actif
+CL-00394,PME,Benali,Yacine,Bejaia,Bejaia,Agence Bejaia Centre,Services,Compte cheque,2333793,1745676,Credit exploitation,15662318,84,195810.78,0.0,0,Saine,0.0,2022-11-19,Prospect
+CL-00395,Particulier,Mansouri,Nabil,Oran,Oran,Agence Oran Centre,Services,Compte courant,2549058,1067263,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-03-06,Inactif
+CL-00396,Particulier,Guediri,Adel,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte courant,2973496,46170,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-05-09,Prospect
+CL-00397,PME,Touati,Adel,Skikda,Skikda,Agence Skikda Centre,Informatique,Compte courant,2934932,138608,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-04-08,Actif
+CL-00398,Professionnel,Rahmani,Rayan,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte courant,806338,164742,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-05-16,Actif
+CL-00399,PME,Mebarki,Hichem,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte cheque,3075345,600790,Credit exploitation,15692217,120,142752.5,0.0,0,Saine,0.0,2023-05-04,Inactif
+CL-00400,Grande entreprise,Brahimi,Youcef,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte courant,2756589,1323802,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-05-28,Inactif
+CL-00401,Professionnel,Benali,Walid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte cheque,2245962,230974,Credit personnel,18888465,12,1837215.4,3674430.8,60,Creance classee,734886.16,2022-09-01,Prospect
+CL-00402,PME,Belkacem,Karim,Setif,Setif,Agence Setif Centre,Transport,Compte courant,2458433,439516,Credit personnel,11147118,60,214484.09,0.0,0,Saine,0.0,2021-03-18,Actif
+CL-00403,Particulier,Mebarki,Hichem,Alger,Alger,Agence Alger Centre,Distribution,Compte courant,2188120,543780,Credit immobilier,3696394,60,70709.99,0.0,0,Saine,0.0,2023-12-01,Actif
+CL-00404,PME,Brahimi,Samir,Annaba,Annaba,Agence Annaba Centre,Distribution,Compte cheque,1987529,953332,Credit immobilier,13481084,24,610614.25,0.0,0,Saine,0.0,2026-06-30,Actif
+CL-00405,Professionnel,Mebarki,Bilal,Blida,Blida,Agence Blida Centre,Agriculture,Compte cheque,2066545,401877,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-12-04,Actif
+CL-00406,Grande entreprise,Ferhat,Amine,Constantine,Constantine,Agence Constantine Centre,Informatique,Compte professionnel,2811820,1121124,Credit exploitation,29983580,120,267131.61,801394.83,90,Creance classee,160278.97,2024-12-17,Actif
+CL-00407,Grande entreprise,Boudiaf,Bilal,Oran,Oran,Agence Oran Centre,Imprimerie,Compte courant,3217789,81103,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-07-01,Actif
+CL-00408,Grande entreprise,Boudiaf,Nassim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte courant,527636,636383,Credit personnel,5718952,84,77758.71,0.0,0,Saine,0.0,2021-05-21,Prospect
+CL-00409,Particulier,Belkacem,Ilyes,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte epargne,912042,520994,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-25,Actif
+CL-00410,Professionnel,Rahmani,Adel,Annaba,Annaba,Agence Annaba Centre,BTP,Compte courant,3223483,1713514,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-05-13,Actif
+CL-00411,PME,Slimani,Nabil,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte professionnel,1439651,1137839,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-11-01,Actif
+CL-00412,PME,Dahmani,Hichem,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Commerce,Compte cheque,2948807,1714949,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-03-09,Actif
+CL-00413,Professionnel,Bensalem,Anis,Boumerdes,Boumerdes,Agence Boumerdes Centre,Commerce,Compte professionnel,1689116,1199010,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-08-27,Prospect
+CL-00414,PME,Khelifi,Yacine,Ouargla,Ouargla,Agence Ouargla Centre,Informatique,Compte cheque,2650693,1573296,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-04-23,Prospect
+CL-00415,Particulier,Guediri,Karim,Blida,Blida,Agence Blida Centre,Distribution,Compte epargne,3229622,981252,Credit personnel,16178278,120,148470.16,0.0,0,Saine,0.0,2024-11-29,Actif
+CL-00416,Particulier,Touati,Bilal,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte epargne,3008509,840234,Credit equipement,14425261,12,1345602.11,0.0,0,Saine,0.0,2026-02-09,Actif
+CL-00417,Particulier,Touati,Walid,Alger,Alger,Agence Alger Centre,Industrie,Compte cheque,997102,564563,Credit investissement,20341078,48,489451.0,0.0,0,Saine,0.0,2024-05-03,Actif
+CL-00418,PME,Mansouri,Ilyes,Ouargla,Ouargla,Agence Ouargla Centre,Agriculture,Compte courant,3315815,1748756,Credit personnel,22904567,12,1988730.25,0.0,0,Saine,0.0,2022-04-10,Actif
+CL-00419,Particulier,Ferhat,Youcef,Bejaia,Bejaia,Agence Bejaia Centre,Informatique,Compte courant,2822865,1709683,Credit personnel,18615461,60,334397.67,0.0,0,Saine,0.0,2023-07-13,Actif
+CL-00420,Grande entreprise,Mebarki,Nabil,Ouargla,Ouargla,Agence Ouargla Centre,Distribution,Compte epargne,1412382,238380,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-02-07,Prospect
+CL-00421,Professionnel,Brahimi,Ilyes,Bejaia,Bejaia,Agence Bejaia Centre,Agriculture,Compte professionnel,795892,467594,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-27,Actif
+CL-00422,Professionnel,Slimani,Lyes,Setif,Setif,Agence Setif Centre,Commerce,Compte courant,308429,960750,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-09-03,Prospect
+CL-00423,PME,Brahimi,Ahmed,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agriculture,Compte courant,2749266,1260423,Credit equipement,29424317,120,282278.99,0.0,0,Saine,0.0,2025-02-24,Inactif
+CL-00424,Particulier,Touati,Youcef,Batna,Batna,Agence Batna Centre,Distribution,Compte professionnel,1785374,1483141,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-11,Actif
+CL-00425,Particulier,Cherif,Walid,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte courant,1525205,783620,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-12-02,Actif
+CL-00426,PME,Boudiaf,Rayan,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte professionnel,1198191,142572,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-12-08,Actif
+CL-00427,PME,Bensalem,Bilal,Batna,Batna,Agence Batna Centre,Imprimerie,Compte professionnel,693429,1035215,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-02-01,Actif
+CL-00428,Grande entreprise,Bensalem,Ahmed,Bejaia,Bejaia,Agence Bejaia Centre,Distribution,Compte courant,2521715,152936,Credit personnel,23368443,60,442288.86,0.0,0,Saine,0.0,2025-10-23,Inactif
+CL-00429,PME,Slimani,Rayan,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte professionnel,2280390,1011980,Credit exploitation,24171101,24,1101626.81,0.0,0,Saine,0.0,2025-05-05,Actif
+CL-00430,PME,Haddad,Adel,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte professionnel,3246779,1418998,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-06-17,Prospect
+CL-00431,Particulier,Benali,Anis,Bejaia,Bejaia,Agence Bejaia Centre,Imprimerie,Compte courant,1351970,214424,Credit exploitation,7914785,60,150445.68,601782.72,120,Creance douteuse,300891.36,2026-09-03,Actif
+CL-00432,Grande entreprise,Meziane,Ilyes,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte epargne,1344488,207418,Credit personnel,4404147,120,41996.73,0.0,0,Saine,0.0,2022-03-05,Actif
+CL-00433,Professionnel,Dahmani,Ilyes,Bejaia,Bejaia,Agence Bejaia Centre,Services,Compte professionnel,2597216,1587841,Credit personnel,27528083,48,673001.97,0.0,0,Saine,0.0,2024-10-21,Actif
+CL-00434,PME,Amrani,Yacine,Blida,Blida,Agence Blida Centre,Agriculture,Compte professionnel,662891,1615551,Credit exploitation,2402439,72,35755.14,0.0,0,Saine,0.0,2021-02-09,Inactif
+CL-00435,PME,Boudiaf,Mohamed,Bejaia,Bejaia,Agence Bejaia Centre,Transport,Compte epargne,1853198,1309578,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-11-11,Inactif
+CL-00436,Professionnel,Khelifi,Samir,Batna,Batna,Agence Batna Centre,Services,Compte epargne,2530812,1528937,Credit investissement,10124719,72,152745.56,305491.12,60,Creance classee,61098.22,2022-03-28,Actif
+CL-00437,Professionnel,Rahmani,Lyes,Setif,Setif,Agence Setif Centre,Informatique,Compte cheque,3221058,784264,Credit investissement,13719235,24,660978.61,0.0,0,Saine,0.0,2021-02-09,Prospect
+CL-00438,PME,Benali,Mourad,Alger,Alger,Agence Alger Centre,BTP,Compte cheque,71220,1305236,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-03-04,Actif
+CL-00439,PME,Dahmani,Farid,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte cheque,2625824,656053,Credit investissement,5853287,12,543157.96,0.0,0,Saine,0.0,2025-08-06,Actif
+CL-00440,Grande entreprise,Haddad,Ahmed,Alger,Alger,Agence Alger Centre,Informatique,Compte cheque,3432880,1312696,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-07-15,Actif
+CL-00441,PME,Belkacem,Nabil,Batna,Batna,Agence Batna Centre,Commerce,Compte professionnel,2923564,263093,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-07-12,Actif
+CL-00442,PME,Rahmani,Anis,Alger,Alger,Agence Alger Centre,Commerce,Compte epargne,1692409,1691972,Credit personnel,26830050,84,349695.13,0.0,0,Saine,0.0,2022-07-19,Actif
+CL-00443,Particulier,Haddad,Youcef,Ouargla,Ouargla,Agence Ouargla Centre,Commerce,Compte epargne,1793029,204538,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-07-30,Actif
+CL-00444,Professionnel,Belkacem,Mourad,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte professionnel,1786321,1180321,Credit exploitation,5698291,36,180908.74,0.0,0,Saine,0.0,2025-01-14,Actif
+CL-00445,Grande entreprise,Mebarki,Sofiane,Constantine,Constantine,Agence Constantine Centre,Imprimerie,Compte professionnel,1279595,159527,Credit investissement,22016323,72,339327.53,0.0,0,Saine,0.0,2026-04-23,Actif
+CL-00446,Particulier,Rahmani,Rayan,Constantine,Constantine,Agence Constantine Centre,Services,Compte epargne,3116106,195815,Credit investissement,11280207,120,98165.13,0.0,0,Saine,0.0,2026-01-13,Actif
+CL-00447,Professionnel,Guediri,Mohamed,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte courant,3212401,872064,Credit equipement,913845,36,26606.66,0.0,0,Saine,0.0,2024-01-27,Prospect
+CL-00448,Particulier,Mansouri,Walid,Batna,Batna,Agence Batna Centre,Industrie,Compte courant,1677735,278043,Credit immobilier,10990695,24,515872.06,0.0,0,Saine,0.0,2021-08-25,Actif
+CL-00449,PME,Boudiaf,Amine,Batna,Batna,Agence Batna Centre,Agriculture,Compte professionnel,1308948,1287421,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-09-21,Actif
+CL-00450,Professionnel,Benali,Farid,Alger,Alger,Agence Alger Centre,Services,Compte courant,2345701,242366,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-04-25,Actif
+CL-00451,Particulier,Cherif,Samir,Annaba,Annaba,Agence Annaba Centre,Services,Compte professionnel,1115293,1663575,Credit exploitation,16345691,60,285598.95,0.0,0,Saine,0.0,2022-01-25,Actif
+CL-00452,Particulier,Slimani,Farid,Ouargla,Ouargla,Agence Ouargla Centre,Distribution,Compte courant,1561581,948463,Credit personnel,5054167,84,63873.9,0.0,0,Saine,0.0,2022-12-13,Actif
+CL-00453,Professionnel,Saidi,Lyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agriculture,Compte professionnel,2440978,1408015,Credit personnel,24096957,84,334542.64,0.0,0,Saine,0.0,2025-09-30,Actif
+CL-00454,Grande entreprise,Dahmani,Adel,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte cheque,947479,1244146,Credit exploitation,14381726,48,329299.3,1975795.8,180,Creance douteuse,987897.9,2021-03-17,Actif
+CL-00455,Professionnel,Khelifi,Rayan,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte cheque,3185376,1328634,Credit equipement,12403076,60,236416.05,0.0,0,Saine,0.0,2023-04-14,Actif
+CL-00456,Grande entreprise,Hamdi,Karim,Blida,Blida,Agence Blida Centre,Informatique,Compte professionnel,2375540,1637508,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-01-01,Actif
+CL-00457,PME,Touati,Bilal,Alger,Alger,Agence Alger Centre,Commerce,Compte epargne,2429552,741226,Credit immobilier,926773,60,16138.56,0.0,0,Saine,0.0,2023-12-02,Inactif
+CL-00458,Particulier,Rahmani,Ahmed,Ouargla,Ouargla,Agence Ouargla Centre,Informatique,Compte epargne,2851440,962066,Credit immobilier,25255658,60,452056.91,0.0,0,Saine,0.0,2024-06-26,Actif
+CL-00459,PME,Bensalem,Farid,Ouargla,Ouargla,Agence Ouargla Centre,Transport,Compte cheque,616219,1058002,Credit personnel,23416747,36,717800.99,0.0,0,Saine,0.0,2024-09-30,Prospect
+CL-00460,Professionnel,Hamdi,Ahmed,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte epargne,3176132,175014,Credit investissement,1710226,84,21701.17,0.0,0,Saine,0.0,2024-11-01,Actif
+CL-00461,Particulier,Haddad,Samir,Ouargla,Ouargla,Agence Ouargla Centre,Commerce,Compte courant,3115223,1408308,Credit investissement,10944289,72,174986.56,0.0,0,Saine,0.0,2025-04-27,Prospect
+CL-00462,PME,Guediri,Ilyes,Alger,Alger,Agence Alger Centre,Commerce,Compte courant,126023,247600,Credit equipement,22525122,12,2197101.38,0.0,0,Saine,0.0,2023-09-25,Actif
+CL-00463,Grande entreprise,Meziane,Adel,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte courant,511903,854126,Credit exploitation,5334143,60,97762.62,0.0,0,Saine,0.0,2022-01-30,Actif
+CL-00464,PME,Mansouri,Nabil,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte professionnel,1577238,790435,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-09-01,Actif
+CL-00465,Grande entreprise,Ferhat,Hichem,Alger,Alger,Agence Alger Centre,BTP,Compte professionnel,2511917,1449084,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-09-01,Inactif
+CL-00466,Grande entreprise,Rahmani,Mohamed,Skikda,Skikda,Agence Skikda Centre,Agroalimentaire,Compte courant,671087,1623405,Credit immobilier,16118685,120,151454.62,0.0,0,Saine,0.0,2021-09-09,Inactif
+CL-00467,Professionnel,Brahimi,Mohamed,Annaba,Annaba,Agence Annaba Centre,Services,Compte courant,2667161,717644,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-12-09,Actif
+CL-00468,Grande entreprise,Belkacem,Samir,Alger,Alger,Agence Alger Centre,Services,Compte epargne,2651235,1735143,Credit exploitation,15097068,60,261805.17,1047220.68,120,Creance douteuse,523610.34,2021-06-05,Inactif
+CL-00469,Grande entreprise,Benali,Youcef,Constantine,Constantine,Agence Constantine Centre,Transport,Compte epargne,1306313,1248388,Credit exploitation,4810510,120,43010.62,0.0,0,Saine,0.0,2025-04-28,Actif
+CL-00470,Particulier,Boudiaf,Lyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte courant,3031316,1711616,Credit personnel,23057405,84,316095.72,2528765.76,240,Creance compromise,2023012.61,2021-03-07,Actif
+CL-00471,Particulier,Benali,Amine,Constantine,Constantine,Agence Constantine Centre,Imprimerie,Compte cheque,876129,109798,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-03-06,Actif
+CL-00472,Professionnel,Belkacem,Anis,Oran,Oran,Agence Oran Centre,BTP,Compte cheque,1794618,958007,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-08-25,Actif
+CL-00473,Grande entreprise,Amrani,Anis,Bejaia,Bejaia,Agence Bejaia Centre,Services,Compte professionnel,449407,1279902,Credit investissement,9533042,120,85130.7,0.0,0,Saine,0.0,2025-11-13,Actif
+CL-00474,Grande entreprise,Mansouri,Rayan,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agriculture,Compte courant,2402701,327948,Credit exploitation,17499134,12,1629673.19,0.0,0,Saine,0.0,2026-04-03,Actif
+CL-00475,Professionnel,Boudiaf,Karim,Batna,Batna,Agence Batna Centre,Agriculture,Compte epargne,476547,1384300,Credit immobilier,14494615,72,229741.08,0.0,0,Saine,0.0,2022-04-17,Inactif
+CL-00476,Professionnel,Saidi,Mourad,Constantine,Constantine,Agence Constantine Centre,Services,Compte professionnel,2612433,1459609,Credit investissement,8857571,36,288856.02,0.0,0,Saine,0.0,2025-03-06,Actif
+CL-00477,Grande entreprise,Brahimi,Nabil,Boumerdes,Boumerdes,Agence Boumerdes Centre,Transport,Compte professionnel,2649135,410189,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-04-07,Actif
+CL-00478,PME,Bensalem,Mourad,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte cheque,854882,1068793,Credit immobilier,22124273,60,434036.3,0.0,0,Saine,0.0,2021-03-26,Prospect
+CL-00479,Professionnel,Saidi,Amine,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte epargne,781196,1443465,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-08-03,Actif
+CL-00480,PME,Brahimi,Samir,Setif,Setif,Agence Setif Centre,Imprimerie,Compte cheque,2998043,1185528,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-12-22,Inactif
+CL-00481,Professionnel,Cherif,Amine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte courant,1328430,1180095,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-05-28,Prospect
+CL-00482,Particulier,Mebarki,Ahmed,Ouargla,Ouargla,Agence Ouargla Centre,Services,Compte courant,3293534,1473249,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-05-03,Inactif
+CL-00483,Professionnel,Mansouri,Adel,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte courant,2825709,55250,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-04-22,Actif
+CL-00484,Grande entreprise,Benali,Samir,Batna,Batna,Agence Batna Centre,Industrie,Compte professionnel,1819298,312927,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-11-06,Actif
+CL-00485,PME,Rahmani,Walid,Constantine,Constantine,Agence Constantine Centre,Transport,Compte epargne,629293,967071,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-05-08,Prospect
+CL-00486,Professionnel,Khelifi,Nassim,Skikda,Skikda,Agence Skikda Centre,Informatique,Compte epargne,550883,505064,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-05-18,Actif
+CL-00487,PME,Bensalem,Nabil,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte cheque,48125,300390,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-08-03,Actif
+CL-00488,Professionnel,Bensalem,Walid,Alger,Alger,Agence Alger Centre,Distribution,Compte cheque,197894,1499256,Credit investissement,21619892,120,193720.33,0.0,0,Saine,0.0,2026-08-16,Actif
+CL-00489,Professionnel,Brahimi,Rayan,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte epargne,1339989,951502,Credit exploitation,16162004,36,514714.79,0.0,0,Saine,0.0,2026-06-13,Inactif
+CL-00490,Particulier,Slimani,Ilyes,Batna,Batna,Agence Batna Centre,Informatique,Compte courant,2320170,907769,Credit investissement,5132934,24,238574.8,477149.6,60,Creance classee,95429.92,2025-02-15,Inactif
+CL-00491,PME,Mebarki,Yacine,Batna,Batna,Agence Batna Centre,Agroalimentaire,Compte professionnel,665814,1687211,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-08-23,Actif
+CL-00492,Professionnel,Meziane,Mourad,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte professionnel,431745,824848,Credit immobilier,4230675,60,81587.28,0.0,0,Saine,0.0,2025-03-11,Actif
+CL-00493,Professionnel,Guediri,Nabil,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte epargne,2060538,734780,Credit exploitation,23222086,12,2103132.05,0.0,0,Saine,0.0,2025-10-01,Actif
+CL-00494,Grande entreprise,Belkacem,Nabil,Constantine,Constantine,Agence Constantine Centre,Distribution,Compte professionnel,1982300,1150049,Credit equipement,22763475,84,302811.52,0.0,0,Saine,0.0,2026-01-21,Actif
+CL-00495,Grande entreprise,Rahmani,Ilyes,Alger,Alger,Agence Alger Centre,Commerce,Compte courant,1828523,1139905,Credit exploitation,26091067,24,1192042.62,0.0,0,Saine,0.0,2024-12-27,Prospect
+CL-00496,Particulier,Belkacem,Nassim,Skikda,Skikda,Agence Skikda Centre,Distribution,Compte cheque,2806902,1226339,Credit personnel,3587894,84,46676.38,0.0,0,Saine,0.0,2024-12-09,Actif
+CL-00497,Professionnel,Boudiaf,Anis,Annaba,Annaba,Agence Annaba Centre,Distribution,Compte professionnel,79887,1713919,Credit immobilier,20971467,60,392927.45,0.0,0,Saine,0.0,2021-10-26,Actif
+CL-00498,Professionnel,Benali,Adel,Blida,Blida,Agence Blida Centre,Commerce,Compte epargne,956380,1143198,Credit immobilier,11787014,12,1141758.21,0.0,0,Saine,0.0,2024-09-30,Actif
+CL-00499,Professionnel,Dahmani,Anis,Batna,Batna,Agence Batna Centre,Transport,Compte courant,2264747,169656,Credit exploitation,11154102,24,534717.59,0.0,0,Saine,0.0,2024-05-07,Actif
+CL-00500,Particulier,Mebarki,Nassim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte cheque,2814368,487449,Credit immobilier,16798328,72,270954.21,0.0,0,Saine,0.0,2024-12-23,Actif
+CL-00501,PME,Brahimi,Sofiane,Constantine,Constantine,Agence Constantine Centre,Distribution,Compte cheque,2195747,1352792,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-01-10,Prospect
+CL-00502,Professionnel,Hamdi,Hichem,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte courant,2323226,125463,Credit exploitation,26094681,36,754395.09,0.0,0,Saine,0.0,2024-07-27,Actif
+CL-00503,PME,Boudiaf,Mohamed,Setif,Setif,Agence Setif Centre,Imprimerie,Compte courant,3265446,231258,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-05-20,Actif
+CL-00504,PME,Mebarki,Rayan,Alger,Alger,Agence Alger Centre,Agriculture,Compte cheque,594920,1210632,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-09-17,Actif
+CL-00505,Professionnel,Dahmani,Bilal,Setif,Setif,Agence Setif Centre,Industrie,Compte courant,3423771,565938,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-09-19,Actif
+CL-00506,Particulier,Guediri,Hichem,Blida,Blida,Agence Blida Centre,Commerce,Compte epargne,3372231,1711742,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-11-03,Inactif
+CL-00507,Professionnel,Guediri,Lyes,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte professionnel,2389926,383593,Credit exploitation,3944798,12,354282.98,354282.98,35,Creance classee,70856.6,2023-04-22,Prospect
+CL-00508,Professionnel,Benali,Samir,Batna,Batna,Agence Batna Centre,Informatique,Compte courant,3278173,1090843,Credit immobilier,24334812,84,329467.84,2635742.72,240,Creance compromise,2108594.18,2022-05-06,Actif
+CL-00509,PME,Brahimi,Samir,Alger,Alger,Agence Alger Centre,Agriculture,Compte courant,972151,1782225,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-05-14,Actif
+CL-00510,PME,Ferhat,Ilyes,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte courant,3053651,1408228,Credit immobilier,2657429,60,52120.46,0.0,0,Saine,0.0,2023-05-18,Actif
+CL-00511,Particulier,Belkacem,Farid,Ouargla,Ouargla,Agence Ouargla Centre,Imprimerie,Compte cheque,1236068,1518964,Credit exploitation,27030400,48,621110.21,0.0,0,Saine,0.0,2024-04-28,Actif
+CL-00512,Particulier,Haddad,Mohamed,Skikda,Skikda,Agence Skikda Centre,Agroalimentaire,Compte cheque,1818412,1360896,Credit exploitation,934045,48,22803.78,0.0,0,Saine,0.0,2023-07-24,Inactif
+CL-00513,Grande entreprise,Bensalem,Adel,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte professionnel,6034,1267812,Credit immobilier,8647525,120,75092.02,150184.04,75,Creance classee,30036.81,2025-05-12,Prospect
+CL-00514,Grande entreprise,Mebarki,Youcef,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte courant,1181803,258834,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-07-20,Inactif
+CL-00515,Grande entreprise,Benali,Walid,Batna,Batna,Agence Batna Centre,BTP,Compte epargne,495708,769118,Credit immobilier,21637160,120,204978.44,0.0,0,Saine,0.0,2023-11-06,Actif
+CL-00516,Professionnel,Khelifi,Ahmed,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte epargne,567459,1466300,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-05-09,Prospect
+CL-00517,Particulier,Haddad,Adel,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte cheque,2563854,1276249,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-03-20,Inactif
+CL-00518,Professionnel,Belkacem,Anis,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte professionnel,2709525,331023,Credit investissement,23262217,36,754485.05,4526910.3,180,Creance douteuse,2263455.15,2025-01-24,Prospect
+CL-00519,Grande entreprise,Rahmani,Lyes,Blida,Blida,Agence Blida Centre,BTP,Compte courant,2353214,1754895,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-19,Actif
+CL-00520,Professionnel,Brahimi,Youcef,Setif,Setif,Agence Setif Centre,Transport,Compte courant,1202000,594006,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-08,Inactif
+CL-00521,PME,Dahmani,Mourad,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte courant,1857680,1459121,Credit immobilier,12369995,60,223552.84,0.0,0,Saine,0.0,2025-07-12,Prospect
+CL-00522,Particulier,Rahmani,Nabil,Setif,Setif,Agence Setif Centre,Commerce,Compte cheque,1450753,44919,Credit immobilier,7568747,36,220128.83,0.0,0,Saine,0.0,2025-10-24,Inactif
+CL-00523,Grande entreprise,Brahimi,Bilal,Boumerdes,Boumerdes,Agence Boumerdes Centre,Transport,Compte courant,2117620,413308,Credit investissement,3576307,84,49038.83,0.0,0,Saine,0.0,2023-05-27,Actif
+CL-00524,Grande entreprise,Amrani,Ilyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte epargne,75654,174069,Credit exploitation,18145076,24,834622.88,5007737.28,180,Creance douteuse,2503868.64,2022-08-20,Inactif
+CL-00525,Professionnel,Belkacem,Nabil,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte epargne,3206036,577387,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-01-12,Prospect
+CL-00526,PME,Boudiaf,Nassim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte professionnel,792214,261246,Credit personnel,19463245,24,915718.19,0.0,0,Saine,0.0,2023-10-28,Actif
+CL-00527,Particulier,Hamdi,Amine,Oran,Oran,Agence Oran Centre,Services,Compte professionnel,2772193,157202,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-03-29,Prospect
+CL-00528,PME,Cherif,Nassim,Constantine,Constantine,Agence Constantine Centre,Imprimerie,Compte professionnel,124355,1621310,Credit immobilier,4385308,24,194340.7,0.0,0,Saine,0.0,2025-05-27,Inactif
+CL-00529,Grande entreprise,Boudiaf,Rayan,Batna,Batna,Agence Batna Centre,BTP,Compte professionnel,542541,1652128,Credit personnel,28130703,12,2748038.21,0.0,0,Saine,0.0,2024-06-19,Actif
+CL-00530,Grande entreprise,Hamdi,Youcef,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte epargne,2033240,615755,Credit immobilier,21718602,120,210048.62,0.0,0,Saine,0.0,2021-09-05,Actif
+CL-00531,Grande entreprise,Dahmani,Yacine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Informatique,Compte cheque,1570960,731586,Credit exploitation,28489440,12,2484060.79,0.0,0,Saine,0.0,2021-04-11,Actif
+CL-00532,Grande entreprise,Guediri,Bilal,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte courant,2979381,788314,Credit exploitation,28737801,60,498383.31,0.0,0,Saine,0.0,2022-04-29,Actif
+CL-00533,PME,Meziane,Nassim,Constantine,Constantine,Agence Constantine Centre,Distribution,Compte epargne,3491704,68024,Credit exploitation,12124240,36,375897.2,0.0,0,Saine,0.0,2025-11-23,Inactif
+CL-00534,PME,Ferhat,Amine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte epargne,3114166,605564,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-06-14,Actif
+CL-00535,PME,Bensalem,Bilal,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte courant,1469795,784879,Credit personnel,19275475,60,359867.63,359867.63,45,Creance classee,71973.53,2023-07-02,Inactif
+CL-00536,PME,Benali,Walid,Alger,Alger,Agence Alger Centre,BTP,Compte epargne,345277,1289938,Credit immobilier,10993902,24,536733.12,0.0,0,Saine,0.0,2025-06-07,Actif
+CL-00537,Grande entreprise,Saidi,Sofiane,Ouargla,Ouargla,Agence Ouargla Centre,Services,Compte epargne,213827,968639,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-09-25,Actif
+CL-00538,PME,Ferhat,Ahmed,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte courant,90051,143224,Credit personnel,10229498,48,249110.05,249110.05,35,Creance classee,49822.01,2024-02-16,Inactif
+CL-00539,Professionnel,Slimani,Samir,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte epargne,1281554,872241,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-03-22,Inactif
+CL-00540,PME,Touati,Bilal,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte professionnel,645635,1315439,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-11-04,Inactif
+CL-00541,Grande entreprise,Slimani,Sofiane,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte epargne,548824,1353340,Credit equipement,11241072,120,101097.81,202195.62,60,Creance classee,40439.12,2021-11-05,Prospect
+CL-00542,Particulier,Belkacem,Amine,Setif,Setif,Agence Setif Centre,BTP,Compte courant,2166825,393335,Credit personnel,23620646,24,1087399.17,0.0,0,Saine,0.0,2025-08-28,Actif
+CL-00543,PME,Mansouri,Anis,Batna,Batna,Agence Batna Centre,Services,Compte cheque,3433761,1146885,Credit exploitation,18819452,48,452610.2,0.0,0,Saine,0.0,2026-05-22,Inactif
+CL-00544,Particulier,Mansouri,Adel,Alger,Alger,Agence Alger Centre,Commerce,Compte courant,3036151,1687457,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-05-16,Actif
+CL-00545,Professionnel,Mansouri,Amine,Batna,Batna,Agence Batna Centre,Informatique,Compte epargne,239615,1359906,Credit exploitation,19961682,48,481028.71,0.0,0,Saine,0.0,2022-09-06,Actif
+CL-00546,Grande entreprise,Benali,Sofiane,Setif,Setif,Agence Setif Centre,Commerce,Compte courant,1351531,1488676,Credit exploitation,22526043,120,216883.71,0.0,0,Saine,0.0,2023-08-02,Actif
+CL-00547,PME,Slimani,Ahmed,Setif,Setif,Agence Setif Centre,Industrie,Compte courant,926660,647993,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-03-20,Prospect
+CL-00548,Particulier,Rahmani,Nabil,Batna,Batna,Agence Batna Centre,Industrie,Compte courant,1554344,664870,Credit investissement,6186983,120,57741.05,115482.1,75,Creance classee,23096.42,2021-08-07,Actif
+CL-00549,Grande entreprise,Khelifi,Mohamed,Alger,Alger,Agence Alger Centre,Informatique,Compte cheque,2164448,1660033,Credit immobilier,21367934,120,194939.55,0.0,0,Saine,0.0,2025-01-24,Actif
+CL-00550,PME,Amrani,Yacine,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte courant,56851,1393271,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-06-20,Inactif
+CL-00551,PME,Cherif,Farid,Skikda,Skikda,Agence Skikda Centre,BTP,Compte professionnel,802423,769454,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-05-25,Prospect
+CL-00552,Professionnel,Cherif,Mohamed,Constantine,Constantine,Agence Constantine Centre,Services,Compte professionnel,2935003,1009663,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-09-19,Actif
+CL-00553,Grande entreprise,Amrani,Adel,Skikda,Skikda,Agence Skikda Centre,Transport,Compte epargne,1802823,892477,Credit investissement,7242062,120,64156.81,0.0,0,Saine,0.0,2023-02-19,Actif
+CL-00554,Grande entreprise,Belkacem,Mourad,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte professionnel,3176672,1193863,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-07-22,Actif
+CL-00555,Particulier,Saidi,Ahmed,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte epargne,2726285,536387,Credit exploitation,13248611,84,170525.18,0.0,0,Saine,0.0,2023-12-04,Inactif
+CL-00556,PME,Benali,Sofiane,Ouargla,Ouargla,Agence Ouargla Centre,Services,Compte epargne,28587,1517967,Credit investissement,21620961,60,420357.4,0.0,0,Saine,0.0,2023-04-05,Prospect
+CL-00557,Professionnel,Haddad,Adel,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agriculture,Compte epargne,1675870,252429,Credit personnel,327908,48,7294.84,0.0,0,Saine,0.0,2026-06-10,Prospect
+CL-00558,Professionnel,Boudiaf,Sofiane,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte epargne,1054908,153226,Credit exploitation,22352193,60,390195.89,0.0,0,Saine,0.0,2024-06-23,Actif
+CL-00559,Professionnel,Benali,Samir,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte professionnel,1360640,879712,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-06-28,Prospect
+CL-00560,Particulier,Cherif,Mourad,Oran,Oran,Agence Oran Centre,Services,Compte cheque,939961,521912,Credit exploitation,12923332,84,175570.3,0.0,0,Saine,0.0,2025-02-23,Actif
+CL-00561,Particulier,Touati,Bilal,Alger,Alger,Agence Alger Centre,Informatique,Compte epargne,1404776,1189129,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-08-04,Actif
+CL-00562,PME,Saidi,Lyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte professionnel,609394,701921,Credit immobilier,3649512,24,170971.74,1025830.44,180,Creance douteuse,512915.22,2024-07-04,Actif
+CL-00563,Particulier,Boudiaf,Adel,Batna,Batna,Agence Batna Centre,Agroalimentaire,Compte epargne,917588,1365213,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-01-28,Actif
+CL-00564,PME,Bensalem,Anis,Bejaia,Bejaia,Agence Bejaia Centre,Commerce,Compte courant,2884670,1416941,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-05-10,Inactif
+CL-00565,PME,Mansouri,Walid,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte epargne,643750,1529523,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-04-06,Actif
+CL-00566,PME,Slimani,Rayan,Setif,Setif,Agence Setif Centre,Transport,Compte courant,735791,1419885,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-01-06,Prospect
+CL-00567,Particulier,Boudiaf,Anis,Setif,Setif,Agence Setif Centre,Industrie,Compte cheque,2308931,403820,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-01-22,Actif
+CL-00568,PME,Touati,Hichem,Bejaia,Bejaia,Agence Bejaia Centre,Agroalimentaire,Compte professionnel,1190776,1605568,Credit personnel,27299223,36,883758.12,0.0,0,Saine,0.0,2022-07-28,Actif
+CL-00569,PME,Bensalem,Nassim,Ouargla,Ouargla,Agence Ouargla Centre,Commerce,Compte courant,1283925,1784079,Credit equipement,26602576,72,427570.68,0.0,0,Saine,0.0,2021-01-11,Actif
+CL-00570,Grande entreprise,Ferhat,Ahmed,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte courant,2205906,415095,Credit exploitation,9924632,60,180984.28,0.0,0,Saine,0.0,2022-10-02,Prospect
+CL-00571,PME,Hamdi,Walid,Bejaia,Bejaia,Agence Bejaia Centre,BTP,Compte courant,1092725,1428362,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-09-16,Actif
+CL-00572,Particulier,Ferhat,Amine,Bejaia,Bejaia,Agence Bejaia Centre,Agroalimentaire,Compte professionnel,1838000,909153,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-04-16,Inactif
+CL-00573,PME,Dahmani,Karim,Bejaia,Bejaia,Agence Bejaia Centre,Commerce,Compte cheque,977488,1730961,Credit immobilier,4066205,48,92378.34,0.0,0,Saine,0.0,2024-09-18,Actif
+CL-00574,Professionnel,Cherif,Nabil,Oran,Oran,Agence Oran Centre,Agroalimentaire,Compte cheque,2374594,781554,Credit investissement,16900602,48,415446.71,415446.71,35,Creance classee,83089.34,2025-04-08,Inactif
+CL-00575,Professionnel,Meziane,Rayan,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte epargne,3190829,1452137,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-02-05,Inactif
+CL-00576,Professionnel,Brahimi,Lyes,Constantine,Constantine,Agence Constantine Centre,BTP,Compte courant,3012795,1281953,Credit equipement,23515145,36,740045.91,0.0,0,Saine,0.0,2021-05-03,Actif
+CL-00577,Grande entreprise,Rahmani,Adel,Skikda,Skikda,Agence Skikda Centre,Transport,Compte cheque,2528606,983877,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-08-10,Prospect
+CL-00578,Professionnel,Dahmani,Anis,Bejaia,Bejaia,Agence Bejaia Centre,Agriculture,Compte epargne,776081,293650,Credit personnel,8437691,72,127364.91,0.0,0,Saine,0.0,2021-02-05,Actif
+CL-00579,PME,Haddad,Anis,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte cheque,1465279,158245,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-03-03,Inactif
+CL-00580,Particulier,Belkacem,Sofiane,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agriculture,Compte epargne,3486503,1290760,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-07-17,Actif
+CL-00581,Grande entreprise,Mansouri,Samir,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte courant,1743011,620372,Credit exploitation,16334030,72,254432.35,0.0,0,Saine,0.0,2026-05-24,Inactif
+CL-00582,Grande entreprise,Benali,Sofiane,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte cheque,1487691,139056,Credit immobilier,5421975,120,51201.53,0.0,0,Saine,0.0,2025-03-07,Actif
+CL-00583,Grande entreprise,Khelifi,Sofiane,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte courant,2851844,1269801,Credit exploitation,1382378,48,32799.52,0.0,0,Saine,0.0,2026-09-02,Actif
+CL-00584,Grande entreprise,Guediri,Rayan,Annaba,Annaba,Agence Annaba Centre,Services,Compte cheque,2106717,294142,Credit personnel,3704220,120,35563.0,0.0,0,Saine,0.0,2022-09-19,Prospect
+CL-00585,Professionnel,Khelifi,Anis,Blida,Blida,Agence Blida Centre,Commerce,Compte professionnel,1254635,873600,Credit investissement,7108845,48,156593.34,0.0,0,Saine,0.0,2023-06-04,Actif
+CL-00586,Grande entreprise,Cherif,Farid,Boumerdes,Boumerdes,Agence Boumerdes Centre,Distribution,Compte professionnel,3406766,894766,Credit investissement,29119058,36,850198.0,850198.0,45,Creance classee,170039.6,2023-04-10,Actif
+CL-00587,Professionnel,Guediri,Sofiane,Oran,Oran,Agence Oran Centre,Industrie,Compte cheque,61627,468251,Credit personnel,14943434,24,714880.05,0.0,0,Saine,0.0,2026-06-19,Actif
+CL-00588,Particulier,Saidi,Anis,Bejaia,Bejaia,Agence Bejaia Centre,Imprimerie,Compte courant,3441907,950921,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-02-02,Actif
+CL-00589,PME,Belkacem,Anis,Ouargla,Ouargla,Agence Ouargla Centre,Imprimerie,Compte professionnel,2911582,57238,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-27,Actif
+CL-00590,Particulier,Benali,Rayan,Oran,Oran,Agence Oran Centre,Agroalimentaire,Compte cheque,3308825,1277078,Credit investissement,17376800,24,828200.12,0.0,0,Saine,0.0,2022-06-26,Prospect
+CL-00591,Particulier,Benali,Hichem,Oran,Oran,Agence Oran Centre,Industrie,Compte professionnel,2522584,1223927,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-04-14,Prospect
+CL-00592,Grande entreprise,Bensalem,Samir,Ouargla,Ouargla,Agence Ouargla Centre,Agriculture,Compte cheque,1043522,1029919,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-02-13,Actif
+CL-00593,Grande entreprise,Khelifi,Mourad,Ouargla,Ouargla,Agence Ouargla Centre,Imprimerie,Compte professionnel,1529386,1073677,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-12-12,Inactif
+CL-00594,Professionnel,Haddad,Lyes,Oran,Oran,Agence Oran Centre,Agriculture,Compte courant,94006,1183049,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-12-26,Actif
+CL-00595,Professionnel,Belkacem,Karim,Alger,Alger,Agence Alger Centre,Informatique,Compte courant,56121,313271,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-07-26,Inactif
+CL-00596,Grande entreprise,Slimani,Adel,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte epargne,1937774,771324,Credit immobilier,11814073,24,513796.17,0.0,0,Saine,0.0,2023-10-29,Inactif
+CL-00597,Professionnel,Hamdi,Ilyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Commerce,Compte courant,597855,1455330,Credit personnel,3176231,120,30454.58,0.0,0,Saine,0.0,2025-10-04,Actif
+CL-00598,PME,Amrani,Sofiane,Setif,Setif,Agence Setif Centre,Informatique,Compte cheque,2720958,155035,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-07-21,Actif
+CL-00599,Particulier,Rahmani,Karim,Skikda,Skikda,Agence Skikda Centre,Services,Compte cheque,1518328,1735757,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-08-30,Actif
+CL-00600,Grande entreprise,Bensalem,Mohamed,Skikda,Skikda,Agence Skikda Centre,Agriculture,Compte cheque,3198166,1175820,Credit immobilier,28532354,12,2688778.32,0.0,0,Saine,0.0,2024-08-07,Inactif
+CL-00601,Grande entreprise,Dahmani,Farid,Alger,Alger,Agence Alger Centre,Agroalimentaire,Compte cheque,1172206,471027,Credit investissement,13404223,120,131022.89,0.0,0,Saine,0.0,2022-10-23,Prospect
+CL-00602,Particulier,Ferhat,Nassim,Setif,Setif,Agence Setif Centre,Agriculture,Compte epargne,731692,1475109,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-08-05,Actif
+CL-00603,Professionnel,Amrani,Sofiane,Oran,Oran,Agence Oran Centre,Distribution,Compte courant,254600,962733,Credit equipement,7065116,24,347360.71,0.0,0,Saine,0.0,2024-09-21,Actif
+CL-00604,Grande entreprise,Rahmani,Samir,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Informatique,Compte professionnel,3436880,1026306,Credit exploitation,23888258,72,378670.69,0.0,0,Saine,0.0,2024-07-06,Inactif
+CL-00605,PME,Haddad,Rayan,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte courant,435618,368211,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-01-06,Inactif
+CL-00606,Particulier,Touati,Nassim,Skikda,Skikda,Agence Skikda Centre,Informatique,Compte courant,3456517,1518798,Credit immobilier,9864454,24,443346.95,1330040.85,90,Creance classee,266008.17,2024-06-29,Actif
+CL-00607,Grande entreprise,Boudiaf,Hichem,Oran,Oran,Agence Oran Centre,Industrie,Compte cheque,3027833,1642739,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-12-08,Actif
+CL-00608,Professionnel,Dahmani,Adel,Alger,Alger,Agence Alger Centre,Industrie,Compte epargne,1913405,1716074,Credit personnel,4265144,36,127576.16,0.0,0,Saine,0.0,2022-09-27,Actif
+CL-00609,Particulier,Hamdi,Ahmed,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte cheque,455622,735930,Credit immobilier,28083593,84,351470.66,1054411.98,90,Creance classee,210882.4,2024-10-26,Inactif
+CL-00610,Grande entreprise,Mansouri,Hichem,Annaba,Annaba,Agence Annaba Centre,Services,Compte professionnel,2477041,501862,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-02-23,Actif
+CL-00611,Professionnel,Bensalem,Anis,Annaba,Annaba,Agence Annaba Centre,Services,Compte professionnel,762204,1597461,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-03-29,Inactif
+CL-00612,Professionnel,Mansouri,Adel,Annaba,Annaba,Agence Annaba Centre,Services,Compte courant,2611589,1129950,Credit personnel,3456431,72,55971.8,0.0,0,Saine,0.0,2026-05-12,Inactif
+CL-00613,Particulier,Bensalem,Mohamed,Boumerdes,Boumerdes,Agence Boumerdes Centre,Imprimerie,Compte epargne,1728219,1060681,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-11-19,Actif
+CL-00614,Grande entreprise,Mebarki,Farid,Bejaia,Bejaia,Agence Bejaia Centre,Imprimerie,Compte courant,2028720,155645,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-04-15,Actif
+CL-00615,Particulier,Slimani,Sofiane,Ouargla,Ouargla,Agence Ouargla Centre,Agriculture,Compte courant,2164260,750804,Credit equipement,15353287,48,336874.7,2021248.2,180,Creance douteuse,1010624.1,2026-01-18,Actif
+CL-00616,Particulier,Benali,Ilyes,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte courant,178209,245682,Credit personnel,7914711,48,176084.34,1056506.04,180,Creance douteuse,528253.02,2021-03-13,Actif
+CL-00617,Professionnel,Bensalem,Ilyes,Skikda,Skikda,Agence Skikda Centre,Industrie,Compte courant,490245,852722,Credit immobilier,1048499,120,9611.77,57670.62,180,Creance douteuse,28835.31,2024-10-11,Actif
+CL-00618,Particulier,Belkacem,Karim,Skikda,Skikda,Agence Skikda Centre,Industrie,Compte epargne,2200093,458176,Credit exploitation,15502551,12,1508893.31,0.0,0,Saine,0.0,2022-12-09,Actif
+CL-00619,Grande entreprise,Slimani,Mourad,Batna,Batna,Agence Batna Centre,Imprimerie,Compte cheque,2223650,999433,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-05-31,Actif
+CL-00620,Grande entreprise,Mansouri,Bilal,Bejaia,Bejaia,Agence Bejaia Centre,Agriculture,Compte professionnel,2858194,1019548,Credit exploitation,25948001,12,2288523.56,2288523.56,45,Creance classee,457704.71,2025-10-07,Prospect
+CL-00621,Particulier,Cherif,Anis,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte courant,1807642,834109,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-11-05,Prospect
+CL-00622,Grande entreprise,Brahimi,Adel,Alger,Alger,Agence Alger Centre,Distribution,Compte courant,2542326,758105,Credit exploitation,15238686,12,1353888.57,0.0,0,Saine,0.0,2022-04-15,Prospect
+CL-00623,PME,Belkacem,Sofiane,Blida,Blida,Agence Blida Centre,BTP,Compte epargne,2968930,921514,Credit personnel,20908724,48,463942.95,927885.9,60,Creance classee,185577.18,2026-04-29,Actif
+CL-00624,Particulier,Brahimi,Bilal,Blida,Blida,Agence Blida Centre,Distribution,Compte professionnel,2681204,1071277,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-01-01,Prospect
+CL-00625,PME,Ferhat,Yacine,Boumerdes,Boumerdes,Agence Boumerdes Centre,Industrie,Compte cheque,1366878,679617,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-01-31,Actif
+CL-00626,Particulier,Mansouri,Lyes,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte epargne,896458,1689512,Credit personnel,18626032,36,586244.41,0.0,0,Saine,0.0,2023-02-09,Actif
+CL-00627,Grande entreprise,Mebarki,Nassim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte courant,81717,1446674,Credit immobilier,2186327,84,30245.86,0.0,0,Saine,0.0,2024-07-25,Inactif
+CL-00628,Particulier,Boudiaf,Bilal,Blida,Blida,Agence Blida Centre,BTP,Compte courant,1317741,916409,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-02-03,Inactif
+CL-00629,PME,Bensalem,Nabil,Constantine,Constantine,Agence Constantine Centre,Informatique,Compte epargne,2918948,383557,Credit investissement,4901696,36,160215.33,0.0,0,Saine,0.0,2025-09-19,Actif
+CL-00630,PME,Boudiaf,Karim,Setif,Setif,Agence Setif Centre,BTP,Compte cheque,1466458,43370,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-01-29,Actif
+CL-00631,Particulier,Belkacem,Karim,Skikda,Skikda,Agence Skikda Centre,Transport,Compte epargne,1630017,1462854,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-07-03,Actif
+CL-00632,Grande entreprise,Bensalem,Nabil,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agriculture,Compte professionnel,1047142,560892,Credit immobilier,26291719,120,256530.54,0.0,0,Saine,0.0,2025-10-18,Inactif
+CL-00633,Particulier,Dahmani,Anis,Batna,Batna,Agence Batna Centre,BTP,Compte courant,1804376,1075087,Credit personnel,27729842,36,812329.23,0.0,0,Saine,0.0,2025-11-02,Actif
+CL-00634,PME,Bensalem,Adel,Ouargla,Ouargla,Agence Ouargla Centre,Imprimerie,Compte courant,3042865,992130,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-03,Inactif
+CL-00635,Particulier,Dahmani,Adel,Alger,Alger,Agence Alger Centre,Services,Compte cheque,746242,1416368,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-12-05,Prospect
+CL-00636,Particulier,Touati,Walid,Oran,Oran,Agence Oran Centre,Informatique,Compte epargne,2254967,1689932,Credit personnel,19511130,36,569689.21,0.0,0,Saine,0.0,2021-02-11,Prospect
+CL-00637,Grande entreprise,Mansouri,Nassim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Commerce,Compte courant,264546,606732,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-09-25,Prospect
+CL-00638,Professionnel,Mansouri,Farid,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte cheque,497563,1246865,Credit personnel,21845210,72,342140.5,0.0,0,Saine,0.0,2026-05-17,Actif
+CL-00639,PME,Haddad,Samir,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte cheque,3423857,1139093,Credit personnel,19557611,72,303128.63,0.0,0,Saine,0.0,2024-04-04,Actif
+CL-00640,Grande entreprise,Boudiaf,Samir,Oran,Oran,Agence Oran Centre,Agroalimentaire,Compte courant,1869772,1757183,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-03-07,Inactif
+CL-00641,Professionnel,Brahimi,Adel,Bejaia,Bejaia,Agence Bejaia Centre,Industrie,Compte courant,2941767,142823,Credit immobilier,1741285,12,162367.83,0.0,0,Saine,0.0,2022-04-05,Actif
+CL-00642,Grande entreprise,Brahimi,Ilyes,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte epargne,898314,1453199,Credit exploitation,28394580,36,834676.45,0.0,0,Saine,0.0,2026-03-08,Actif
+CL-00643,Professionnel,Rahmani,Hichem,Alger,Alger,Agence Alger Centre,Commerce,Compte courant,2374875,106092,Credit exploitation,3732321,60,69681.41,0.0,0,Saine,0.0,2025-09-24,Actif
+CL-00644,Grande entreprise,Meziane,Karim,Setif,Setif,Agence Setif Centre,Transport,Compte epargne,2014961,289703,Credit personnel,1676559,24,74265.55,0.0,0,Saine,0.0,2021-10-26,Actif
+CL-00645,Professionnel,Dahmani,Nabil,Ouargla,Ouargla,Agence Ouargla Centre,Transport,Compte epargne,3121430,703826,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-12-22,Prospect
+CL-00646,Particulier,Haddad,Sofiane,Ouargla,Ouargla,Agence Ouargla Centre,Agriculture,Compte courant,1886636,569131,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-02-01,Actif
+CL-00647,PME,Haddad,Amine,Batna,Batna,Agence Batna Centre,Distribution,Compte cheque,3467425,1480117,Credit immobilier,26302847,48,627581.58,0.0,0,Saine,0.0,2024-03-09,Actif
+CL-00648,Particulier,Ferhat,Yacine,Bejaia,Bejaia,Agence Bejaia Centre,Services,Compte cheque,2444632,1277415,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-04-04,Inactif
+CL-00649,PME,Guediri,Bilal,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agriculture,Compte courant,3169778,431603,Credit personnel,2878966,24,135603.57,0.0,0,Saine,0.0,2024-05-21,Actif
+CL-00650,PME,Belkacem,Farid,Ouargla,Ouargla,Agence Ouargla Centre,Services,Compte cheque,3469859,451739,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-06-12,Prospect
+CL-00651,Grande entreprise,Hamdi,Yacine,Skikda,Skikda,Agence Skikda Centre,BTP,Compte epargne,2620277,851569,Credit immobilier,21175546,12,1947445.99,5842337.97,90,Creance classee,1168467.59,2023-09-06,Prospect
+CL-00652,PME,Slimani,Adel,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte professionnel,2274729,1129619,Credit immobilier,4900167,120,43095.01,0.0,0,Saine,0.0,2025-10-11,Actif
+CL-00653,Particulier,Guediri,Ilyes,Alger,Alger,Agence Alger Centre,Transport,Compte epargne,376033,1013378,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-11-01,Actif
+CL-00654,Professionnel,Bensalem,Walid,Blida,Blida,Agence Blida Centre,BTP,Compte epargne,634687,1022193,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-09,Actif
+CL-00655,PME,Hamdi,Mourad,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte cheque,1717430,589795,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-10-05,Actif
+CL-00656,Professionnel,Ferhat,Nassim,Blida,Blida,Agence Blida Centre,Distribution,Compte courant,1384286,522101,Credit exploitation,18307553,36,589593.48,0.0,0,Saine,0.0,2022-08-27,Inactif
+CL-00657,Particulier,Dahmani,Farid,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte professionnel,1959195,437723,Credit personnel,1127122,120,10593.03,0.0,0,Saine,0.0,2022-09-28,Inactif
+CL-00658,Particulier,Cherif,Sofiane,Batna,Batna,Agence Batna Centre,Services,Compte cheque,1483988,1055593,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-06-01,Actif
+CL-00659,Particulier,Guediri,Mohamed,Skikda,Skikda,Agence Skikda Centre,Agroalimentaire,Compte courant,583797,445544,Credit exploitation,19077015,24,908857.9,0.0,0,Saine,0.0,2025-08-15,Prospect
+CL-00660,Particulier,Mebarki,Mourad,Constantine,Constantine,Agence Constantine Centre,Transport,Compte professionnel,1668658,1514070,Credit investissement,9347001,60,175215.91,1401727.28,240,Creance compromise,1121381.82,2025-05-29,Prospect
+CL-00661,PME,Meziane,Mourad,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte cheque,130999,1078635,Credit equipement,27626171,72,404207.11,1616828.44,120,Creance douteuse,808414.22,2022-01-13,Prospect
+CL-00662,Professionnel,Boudiaf,Rayan,Constantine,Constantine,Agence Constantine Centre,Informatique,Compte cheque,880119,80035,Credit immobilier,7337110,72,111701.05,893608.4,240,Creance compromise,714886.72,2021-12-03,Actif
+CL-00663,PME,Cherif,Samir,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte cheque,1610363,738122,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-10-14,Prospect
+CL-00664,PME,Dahmani,Karim,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte courant,3385352,361402,Credit exploitation,13438395,24,601443.63,0.0,0,Saine,0.0,2023-08-02,Actif
+CL-00665,PME,Boudiaf,Anis,Ouargla,Ouargla,Agence Ouargla Centre,Agriculture,Compte cheque,3057864,1747609,Credit personnel,12752693,12,1156360.67,0.0,0,Saine,0.0,2022-04-19,Actif
+CL-00666,Particulier,Bensalem,Farid,Constantine,Constantine,Agence Constantine Centre,BTP,Compte professionnel,3089590,1170494,Credit personnel,20521962,12,1917186.2,0.0,0,Saine,0.0,2024-12-05,Prospect
+CL-00667,Particulier,Benali,Bilal,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte courant,1449835,1165195,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-04,Actif
+CL-00668,Particulier,Saidi,Nabil,Blida,Blida,Agence Blida Centre,Agriculture,Compte professionnel,2557904,1214463,Credit exploitation,17293082,12,1699019.94,0.0,0,Saine,0.0,2021-07-21,Actif
+CL-00669,PME,Bensalem,Nabil,Alger,Alger,Agence Alger Centre,Agroalimentaire,Compte cheque,1466486,1410429,Credit investissement,4157630,12,404051.21,0.0,0,Saine,0.0,2024-01-31,Prospect
+CL-00670,Particulier,Brahimi,Mohamed,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte cheque,1840313,940898,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-09-18,Actif
+CL-00671,Professionnel,Cherif,Samir,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte epargne,3272708,84498,Credit immobilier,26950598,84,337078.84,0.0,0,Saine,0.0,2024-04-26,Prospect
+CL-00672,Particulier,Mebarki,Hichem,Boumerdes,Boumerdes,Agence Boumerdes Centre,Industrie,Compte epargne,3367719,646397,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-12-26,Actif
+CL-00673,Professionnel,Touati,Yacine,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte cheque,2145914,962167,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-07-08,Prospect
+CL-00674,Particulier,Haddad,Ilyes,Bejaia,Bejaia,Agence Bejaia Centre,Distribution,Compte cheque,2811394,1121937,Credit investissement,17521708,60,331198.04,0.0,0,Saine,0.0,2024-06-11,Actif
+CL-00675,Grande entreprise,Rahmani,Karim,Setif,Setif,Agence Setif Centre,Industrie,Compte professionnel,626295,333644,Credit exploitation,16792238,72,270746.6,0.0,0,Saine,0.0,2024-08-22,Actif
+CL-00676,Professionnel,Ferhat,Ahmed,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agroalimentaire,Compte professionnel,1053607,376716,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-02-15,Actif
+CL-00677,Particulier,Guediri,Amine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Agroalimentaire,Compte courant,2009554,973658,Credit personnel,18278734,12,1796699.54,0.0,0,Saine,0.0,2025-07-16,Actif
+CL-00678,PME,Brahimi,Sofiane,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte cheque,1293343,541365,Credit exploitation,1809474,24,81492.85,0.0,0,Saine,0.0,2026-02-17,Actif
+CL-00679,Particulier,Rahmani,Yacine,Batna,Batna,Agence Batna Centre,Transport,Compte cheque,635917,57947,Credit personnel,5442412,48,126296.58,0.0,0,Saine,0.0,2026-05-03,Inactif
+CL-00680,Professionnel,Mansouri,Walid,Boumerdes,Boumerdes,Agence Boumerdes Centre,BTP,Compte professionnel,2925056,1556667,Credit exploitation,15044600,36,464715.79,0.0,0,Saine,0.0,2024-03-30,Actif
+CL-00681,Grande entreprise,Cherif,Adel,Constantine,Constantine,Agence Constantine Centre,Transport,Compte cheque,1508892,215760,Credit personnel,20925176,120,203279.49,203279.49,35,Creance classee,40655.9,2021-10-30,Prospect
+CL-00682,Particulier,Haddad,Rayan,Ouargla,Ouargla,Agence Ouargla Centre,Commerce,Compte cheque,185502,185913,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-05-15,Actif
+CL-00683,Particulier,Khelifi,Ahmed,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte cheque,2619677,1740540,Credit investissement,19523644,84,263909.27,0.0,0,Saine,0.0,2021-04-08,Actif
+CL-00684,Particulier,Cherif,Nassim,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte courant,2567667,842740,Credit personnel,7875134,84,108547.61,0.0,0,Saine,0.0,2025-03-03,Actif
+CL-00685,Professionnel,Meziane,Yacine,Batna,Batna,Agence Batna Centre,Distribution,Compte cheque,1765094,1359974,Credit immobilier,12978855,36,420284.8,0.0,0,Saine,0.0,2021-03-31,Actif
+CL-00686,Grande entreprise,Hamdi,Ahmed,Oran,Oran,Agence Oran Centre,Transport,Compte cheque,2716836,1158473,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-17,Inactif
+CL-00687,PME,Mebarki,Lyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Informatique,Compte professionnel,1281368,1154505,Credit exploitation,19397773,84,240550.53,0.0,0,Saine,0.0,2024-06-27,Actif
+CL-00688,PME,Ferhat,Karim,Blida,Blida,Agence Blida Centre,Transport,Compte epargne,718126,1362189,Credit exploitation,28309605,12,2531518.95,0.0,0,Saine,0.0,2023-02-07,Prospect
+CL-00689,Professionnel,Ferhat,Farid,Alger,Alger,Agence Alger Centre,Services,Compte courant,149299,947959,Credit personnel,6771808,12,595836.04,0.0,0,Saine,0.0,2024-02-09,Actif
+CL-00690,PME,Hamdi,Nassim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte courant,1814466,68146,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-04-05,Actif
+CL-00691,Professionnel,Saidi,Hichem,Boumerdes,Boumerdes,Agence Boumerdes Centre,Imprimerie,Compte professionnel,2901381,407184,Credit immobilier,13853909,24,664789.74,664789.74,45,Creance classee,132957.95,2021-06-27,Actif
+CL-00692,PME,Benali,Rayan,Skikda,Skikda,Agence Skikda Centre,Distribution,Compte epargne,218536,99655,Credit immobilier,5956952,84,80615.92,0.0,0,Saine,0.0,2024-12-17,Prospect
+CL-00693,PME,Meziane,Samir,Batna,Batna,Agence Batna Centre,Industrie,Compte courant,1201261,613937,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-04-02,Prospect
+CL-00694,Professionnel,Bensalem,Karim,Alger,Alger,Agence Alger Centre,Agriculture,Compte epargne,879053,1162692,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-01-11,Prospect
+CL-00695,Particulier,Mebarki,Yacine,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte courant,1519761,1445734,Credit personnel,10401113,48,242542.08,0.0,0,Saine,0.0,2023-05-10,Prospect
+CL-00696,Particulier,Saidi,Lyes,Skikda,Skikda,Agence Skikda Centre,Agroalimentaire,Compte epargne,1631120,1338409,Credit immobilier,18201925,60,353253.41,0.0,0,Saine,0.0,2021-01-17,Actif
+CL-00697,PME,Hamdi,Mohamed,Annaba,Annaba,Agence Annaba Centre,Agriculture,Compte professionnel,3274816,1579871,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-12-24,Prospect
+CL-00698,Particulier,Ferhat,Yacine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte epargne,484452,1732156,Credit investissement,14587206,12,1413986.33,2827972.66,75,Creance classee,565594.53,2022-12-23,Prospect
+CL-00699,PME,Slimani,Walid,Batna,Batna,Agence Batna Centre,BTP,Compte cheque,997949,647069,Credit equipement,20206526,24,883693.5,0.0,0,Saine,0.0,2023-10-05,Actif
+CL-00700,PME,Saidi,Hichem,Annaba,Annaba,Agence Annaba Centre,Commerce,Compte professionnel,263638,1016249,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-02-18,Actif
+CL-00701,Professionnel,Amrani,Nassim,Skikda,Skikda,Agence Skikda Centre,Agroalimentaire,Compte courant,835868,768415,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-11-10,Actif
+CL-00702,PME,Slimani,Youcef,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Informatique,Compte cheque,601597,118347,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-11-02,Actif
+CL-00703,Grande entreprise,Meziane,Amine,Boumerdes,Boumerdes,Agence Boumerdes Centre,Commerce,Compte courant,2199346,672200,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-12-19,Actif
+CL-00704,Particulier,Ferhat,Mourad,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte courant,792525,1703426,Credit personnel,1691946,120,15680.9,0.0,0,Saine,0.0,2025-11-07,Inactif
+CL-00705,Professionnel,Khelifi,Youcef,Annaba,Annaba,Agence Annaba Centre,Transport,Compte courant,219784,437689,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-03-25,Actif
+CL-00706,Professionnel,Hamdi,Nassim,Constantine,Constantine,Agence Constantine Centre,Agriculture,Compte cheque,1845684,757201,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-09-12,Actif
+CL-00707,Grande entreprise,Cherif,Rayan,Setif,Setif,Agence Setif Centre,Transport,Compte courant,1912009,534944,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-10-25,Inactif
+CL-00708,PME,Slimani,Lyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte professionnel,861030,491072,Credit exploitation,27310838,24,1186765.66,0.0,0,Saine,0.0,2026-01-25,Actif
+CL-00709,Particulier,Khelifi,Adel,Blida,Blida,Agence Blida Centre,Services,Compte cheque,345746,1045929,Credit investissement,14033259,12,1358439.78,2716879.56,75,Creance classee,543375.91,2025-05-11,Prospect
+CL-00710,PME,Amrani,Ilyes,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte professionnel,3014418,707106,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-01-10,Actif
+CL-00711,Particulier,Guediri,Sofiane,Batna,Batna,Agence Batna Centre,Agriculture,Compte courant,3160737,1009505,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-04-19,Actif
+CL-00712,Grande entreprise,Khelifi,Nassim,Batna,Batna,Agence Batna Centre,Services,Compte epargne,1331135,1558975,Credit investissement,10600939,24,514154.75,3084928.5,180,Creance douteuse,1542464.25,2026-07-24,Actif
+CL-00713,Grande entreprise,Meziane,Ilyes,Alger,Alger,Agence Alger Centre,Services,Compte courant,227424,1475138,Credit exploitation,27201669,60,507123.29,0.0,0,Saine,0.0,2022-12-06,Actif
+CL-00714,Particulier,Mansouri,Yacine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte courant,824787,351448,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-10-27,Actif
+CL-00715,Professionnel,Saidi,Nassim,Setif,Setif,Agence Setif Centre,Agriculture,Compte epargne,2590251,666674,Credit investissement,5875558,72,92218.8,0.0,0,Saine,0.0,2025-09-15,Actif
+CL-00716,Particulier,Mansouri,Youcef,Batna,Batna,Agence Batna Centre,Industrie,Compte cheque,1728544,1659574,Credit personnel,10635111,36,317142.58,0.0,0,Saine,0.0,2025-10-19,Actif
+CL-00717,Professionnel,Cherif,Hichem,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Commerce,Compte cheque,2123192,1164593,Credit investissement,25651860,120,239314.74,0.0,0,Saine,0.0,2025-04-10,Inactif
+CL-00718,Particulier,Slimani,Samir,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte cheque,1446612,567932,Credit immobilier,6645194,12,640647.59,0.0,0,Saine,0.0,2021-09-28,Actif
+CL-00719,Particulier,Boudiaf,Anis,Bejaia,Bejaia,Agence Bejaia Centre,Commerce,Compte courant,427853,1422603,Credit exploitation,13150697,24,623022.73,1246045.46,60,Creance classee,249209.09,2025-06-16,Actif
+CL-00720,Professionnel,Haddad,Amine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte epargne,312160,729496,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-06-06,Inactif
+CL-00721,PME,Haddad,Amine,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte professionnel,171165,804415,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-23,Actif
+CL-00722,Particulier,Mansouri,Amine,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte courant,3049046,1529952,Credit equipement,2144215,48,48002.31,0.0,0,Saine,0.0,2026-03-09,Actif
+CL-00723,PME,Mansouri,Amine,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte cheque,373838,817392,Credit exploitation,20604597,36,634030.06,0.0,0,Saine,0.0,2022-04-18,Inactif
+CL-00724,Particulier,Touati,Ilyes,Batna,Batna,Agence Batna Centre,Informatique,Compte cheque,3432010,1566141,Credit personnel,20673430,120,186377.49,0.0,0,Saine,0.0,2023-11-02,Prospect
+CL-00725,Professionnel,Haddad,Hichem,Skikda,Skikda,Agence Skikda Centre,Transport,Compte cheque,1627085,370626,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-02-03,Prospect
+CL-00726,PME,Khelifi,Rayan,Blida,Blida,Agence Blida Centre,Imprimerie,Compte epargne,3354591,577236,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-01,Inactif
+CL-00727,Professionnel,Haddad,Amine,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte courant,1391463,662297,Credit investissement,22322216,84,310468.43,0.0,0,Saine,0.0,2022-04-05,Actif
+CL-00728,Grande entreprise,Meziane,Karim,Skikda,Skikda,Agence Skikda Centre,BTP,Compte courant,1512513,1213463,Credit exploitation,27730336,84,381023.16,2286138.96,180,Creance douteuse,1143069.48,2021-11-25,Actif
+CL-00729,Grande entreprise,Benali,Nabil,Boumerdes,Boumerdes,Agence Boumerdes Centre,Services,Compte professionnel,2540143,1398013,Credit immobilier,13691280,24,619682.91,0.0,0,Saine,0.0,2021-04-02,Actif
+CL-00730,Professionnel,Hamdi,Rayan,Skikda,Skikda,Agence Skikda Centre,Agriculture,Compte courant,1379089,1225205,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-06-20,Actif
+CL-00731,PME,Slimani,Nabil,Annaba,Annaba,Agence Annaba Centre,Services,Compte courant,905712,559320,Credit equipement,14185328,36,410391.9,0.0,0,Saine,0.0,2022-08-08,Actif
+CL-00732,Professionnel,Meziane,Mourad,Ouargla,Ouargla,Agence Ouargla Centre,Transport,Compte cheque,186790,370652,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-08-11,Actif
+CL-00733,Professionnel,Saidi,Walid,Boumerdes,Boumerdes,Agence Boumerdes Centre,Industrie,Compte epargne,2439268,1456994,Credit personnel,613053,36,17770.86,0.0,0,Saine,0.0,2022-03-07,Prospect
+CL-00734,PME,Khelifi,Yacine,Batna,Batna,Agence Batna Centre,BTP,Compte cheque,804062,322936,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-10-04,Inactif
+CL-00735,Particulier,Bensalem,Karim,Annaba,Annaba,Agence Annaba Centre,Services,Compte cheque,2555007,1047298,Credit investissement,24286043,120,234349.51,0.0,0,Saine,0.0,2025-06-23,Actif
+CL-00736,Professionnel,Bensalem,Adel,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte epargne,1154774,1044295,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-03-07,Actif
+CL-00737,Particulier,Hamdi,Nassim,Bejaia,Bejaia,Agence Bejaia Centre,Transport,Compte professionnel,1444639,40666,Credit exploitation,16367513,24,790039.35,0.0,0,Saine,0.0,2025-02-08,Actif
+CL-00738,Grande entreprise,Dahmani,Bilal,Annaba,Annaba,Agence Annaba Centre,BTP,Compte professionnel,1147960,1721379,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-08-06,Actif
+CL-00739,Particulier,Dahmani,Lyes,Constantine,Constantine,Agence Constantine Centre,Imprimerie,Compte cheque,1351697,1513506,Credit personnel,14199391,60,255809.83,0.0,0,Saine,0.0,2024-06-26,Inactif
+CL-00740,Professionnel,Mebarki,Amine,Ouargla,Ouargla,Agence Ouargla Centre,Distribution,Compte epargne,2461918,1567270,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-02-01,Inactif
+CL-00741,Professionnel,Dahmani,Samir,Annaba,Annaba,Agence Annaba Centre,Commerce,Compte epargne,1826511,993166,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-06-10,Actif
+CL-00742,Professionnel,Guediri,Nabil,Blida,Blida,Agence Blida Centre,Agriculture,Compte courant,1395829,676376,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-01-24,Inactif
+CL-00743,Grande entreprise,Haddad,Ilyes,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte epargne,830594,850690,Credit immobilier,366257,120,3287.24,19723.44,180,Creance douteuse,9861.72,2026-07-31,Actif
+CL-00744,PME,Khelifi,Anis,Batna,Batna,Agence Batna Centre,Industrie,Compte cheque,1667413,521741,Credit personnel,18359225,24,828187.86,0.0,0,Saine,0.0,2026-05-26,Inactif
+CL-00745,Grande entreprise,Rahmani,Lyes,Setif,Setif,Agence Setif Centre,Informatique,Compte courant,689549,1686995,Credit immobilier,10410691,120,91881.7,0.0,0,Saine,0.0,2025-08-22,Actif
+CL-00746,PME,Hamdi,Karim,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte professionnel,13416,1691906,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-03-18,Actif
+CL-00747,Grande entreprise,Guediri,Nassim,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte professionnel,3282781,1297228,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-06-14,Inactif
+CL-00748,Particulier,Belkacem,Mohamed,Batna,Batna,Agence Batna Centre,BTP,Compte epargne,185811,1274842,Credit investissement,28562420,12,2598179.14,10392716.56,120,Creance douteuse,5196358.28,2023-04-07,Actif
+CL-00749,Professionnel,Meziane,Bilal,Blida,Blida,Agence Blida Centre,Informatique,Compte epargne,2744796,1464075,Credit personnel,8915523,48,195284.52,0.0,0,Saine,0.0,2022-06-05,Inactif
+CL-00750,Particulier,Mansouri,Anis,Skikda,Skikda,Agence Skikda Centre,Distribution,Compte cheque,1175525,1451042,Credit personnel,878153,60,16066.87,0.0,0,Saine,0.0,2023-08-15,Inactif
+CL-00751,Particulier,Slimani,Youcef,Oran,Oran,Agence Oran Centre,Imprimerie,Compte epargne,783485,162996,Credit personnel,17708157,72,275926.48,827779.44,90,Creance classee,165555.89,2024-04-14,Actif
+CL-00752,Professionnel,Cherif,Farid,Alger,Alger,Agence Alger Centre,Services,Compte courant,863538,1741544,Credit exploitation,26212820,84,360412.14,0.0,0,Saine,0.0,2022-11-03,Inactif
+CL-00753,Particulier,Brahimi,Mourad,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte professionnel,772772,988365,Credit personnel,20205344,12,1942789.92,0.0,0,Saine,0.0,2021-08-11,Actif
+CL-00754,PME,Rahmani,Youcef,Bejaia,Bejaia,Agence Bejaia Centre,BTP,Compte professionnel,1590914,874907,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-10-26,Actif
+CL-00755,PME,Khelifi,Yacine,Annaba,Annaba,Agence Annaba Centre,Distribution,Compte professionnel,1565594,927902,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-07-29,Actif
+CL-00756,Professionnel,Brahimi,Mourad,Skikda,Skikda,Agence Skikda Centre,Distribution,Compte epargne,620983,1654688,Credit exploitation,12972291,60,244389.55,0.0,0,Saine,0.0,2025-05-06,Actif
+CL-00757,PME,Touati,Nabil,Annaba,Annaba,Agence Annaba Centre,Commerce,Compte professionnel,3376578,1263578,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-01,Actif
+CL-00758,Grande entreprise,Slimani,Bilal,Skikda,Skikda,Agence Skikda Centre,Distribution,Compte professionnel,590199,183455,Credit exploitation,24737565,12,2162348.04,0.0,0,Saine,0.0,2021-10-01,Actif
+CL-00759,Grande entreprise,Guediri,Mourad,Bejaia,Bejaia,Agence Bejaia Centre,Imprimerie,Compte cheque,3007480,445651,Credit exploitation,23896806,36,716783.89,0.0,0,Saine,0.0,2021-02-27,Actif
+CL-00760,Professionnel,Meziane,Rayan,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte cheque,3264478,558792,Credit personnel,5489995,48,122610.17,367830.51,90,Creance classee,73566.1,2023-10-03,Prospect
+CL-00761,PME,Boudiaf,Ahmed,Batna,Batna,Agence Batna Centre,Agriculture,Compte cheque,888257,1524840,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-11-26,Actif
+CL-00762,Grande entreprise,Brahimi,Mohamed,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte professionnel,2019281,306193,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-12-30,Actif
+CL-00763,Grande entreprise,Benali,Ilyes,Blida,Blida,Agence Blida Centre,Agriculture,Compte cheque,775811,522397,Credit exploitation,24957077,120,239978.02,0.0,0,Saine,0.0,2024-08-24,Inactif
+CL-00764,Professionnel,Amrani,Mourad,Alger,Alger,Agence Alger Centre,Distribution,Compte epargne,1021845,1644968,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-11-19,Actif
+CL-00765,Grande entreprise,Guediri,Adel,Boumerdes,Boumerdes,Agence Boumerdes Centre,Imprimerie,Compte courant,2630501,799816,Credit personnel,14038530,60,255726.08,0.0,0,Saine,0.0,2024-08-29,Inactif
+CL-00766,Particulier,Brahimi,Yacine,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte professionnel,992640,1360759,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-10-28,Prospect
+CL-00767,Grande entreprise,Touati,Bilal,Bejaia,Bejaia,Agence Bejaia Centre,Transport,Compte professionnel,2769578,896099,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-05-26,Prospect
+CL-00768,Particulier,Hamdi,Amine,Annaba,Annaba,Agence Annaba Centre,BTP,Compte cheque,3068510,989568,Credit immobilier,15734573,36,504760.62,0.0,0,Saine,0.0,2023-10-04,Actif
+CL-00769,Grande entreprise,Slimani,Mourad,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte professionnel,634679,1197918,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-11-07,Prospect
+CL-00770,Particulier,Hamdi,Ahmed,Setif,Setif,Agence Setif Centre,BTP,Compte courant,429155,978936,Credit equipement,24006547,24,1062759.17,0.0,0,Saine,0.0,2025-11-14,Actif
+CL-00771,PME,Dahmani,Anis,Skikda,Skikda,Agence Skikda Centre,Industrie,Compte cheque,1960635,568924,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-03-31,Actif
+CL-00772,PME,Ferhat,Yacine,Setif,Setif,Agence Setif Centre,Services,Compte courant,268972,759790,Credit immobilier,7361261,36,234586.92,0.0,0,Saine,0.0,2021-08-16,Prospect
+CL-00773,Professionnel,Belkacem,Youcef,Oran,Oran,Agence Oran Centre,Informatique,Compte cheque,831463,159474,Credit equipement,3840812,120,35822.65,0.0,0,Saine,0.0,2026-05-05,Inactif
+CL-00774,Particulier,Brahimi,Sofiane,Alger,Alger,Agence Alger Centre,Industrie,Compte professionnel,1187672,1191988,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-10-19,Actif
+CL-00775,Grande entreprise,Haddad,Lyes,Batna,Batna,Agence Batna Centre,Transport,Compte epargne,3071185,910715,Credit exploitation,4969083,24,235153.61,0.0,0,Saine,0.0,2021-08-03,Actif
+CL-00776,PME,Brahimi,Sofiane,Alger,Alger,Agence Alger Centre,Distribution,Compte cheque,2321967,529522,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-03-11,Actif
+CL-00777,PME,Haddad,Bilal,Blida,Blida,Agence Blida Centre,Distribution,Compte epargne,3391384,929226,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-12-16,Prospect
+CL-00778,Grande entreprise,Cherif,Mohamed,Boumerdes,Boumerdes,Agence Boumerdes Centre,Imprimerie,Compte courant,2632600,833520,Credit exploitation,3287732,36,107666.01,0.0,0,Saine,0.0,2025-01-17,Actif
+CL-00779,Particulier,Ferhat,Ahmed,Alger,Alger,Agence Alger Centre,Industrie,Compte cheque,326539,1502119,Credit personnel,18084213,48,402285.07,0.0,0,Saine,0.0,2022-05-27,Actif
+CL-00780,Particulier,Mebarki,Ilyes,Setif,Setif,Agence Setif Centre,Imprimerie,Compte cheque,2172217,737550,Credit immobilier,26623622,60,486070.79,0.0,0,Saine,0.0,2024-10-13,Prospect
+CL-00781,Grande entreprise,Khelifi,Karim,Ouargla,Ouargla,Agence Ouargla Centre,Commerce,Compte professionnel,2732435,1290445,Credit personnel,8054605,72,119427.03,238854.06,60,Creance classee,47770.81,2022-11-13,Actif
+CL-00782,Professionnel,Saidi,Mohamed,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte epargne,2272414,819236,Credit exploitation,17517285,72,280041.27,280041.27,35,Creance classee,56008.25,2026-02-17,Inactif
+CL-00783,Grande entreprise,Belkacem,Walid,Annaba,Annaba,Agence Annaba Centre,Commerce,Compte epargne,1885718,1206256,Credit investissement,10404800,36,338657.64,0.0,0,Saine,0.0,2022-04-30,Actif
+CL-00784,Grande entreprise,Mebarki,Adel,Constantine,Constantine,Agence Constantine Centre,BTP,Compte professionnel,2213883,421213,Credit personnel,7698122,84,96533.51,0.0,0,Saine,0.0,2026-08-26,Prospect
+CL-00785,Professionnel,Belkacem,Adel,Bejaia,Bejaia,Agence Bejaia Centre,BTP,Compte cheque,1748411,668800,Credit equipement,12051532,72,183896.31,0.0,0,Saine,0.0,2023-04-14,Actif
+CL-00786,Grande entreprise,Boudiaf,Adel,Batna,Batna,Agence Batna Centre,Transport,Compte epargne,251874,488878,Credit immobilier,1100263,48,24482.48,0.0,0,Saine,0.0,2023-02-01,Prospect
+CL-00787,Grande entreprise,Dahmani,Farid,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte professionnel,344968,918832,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-07-10,Inactif
+CL-00788,PME,Hamdi,Yacine,Blida,Blida,Agence Blida Centre,Transport,Compte professionnel,3284601,1452906,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-07-24,Actif
+CL-00789,Grande entreprise,Meziane,Amine,Ouargla,Ouargla,Agence Ouargla Centre,Agriculture,Compte professionnel,2598552,1338875,Credit immobilier,7085609,48,168617.9,0.0,0,Saine,0.0,2026-06-03,Actif
+CL-00790,Professionnel,Mebarki,Samir,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte cheque,2533477,272204,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-06-09,Actif
+CL-00791,Grande entreprise,Touati,Adel,Alger,Alger,Agence Alger Centre,Informatique,Compte cheque,1748664,786629,Credit immobilier,1725191,60,30204.69,0.0,0,Saine,0.0,2021-01-14,Prospect
+CL-00792,Particulier,Touati,Nassim,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte cheque,373737,51049,Credit personnel,1802670,72,29231.41,0.0,0,Saine,0.0,2023-12-25,Actif
+CL-00793,Particulier,Mebarki,Walid,Setif,Setif,Agence Setif Centre,Commerce,Compte courant,1922372,1666024,Credit exploitation,6850013,84,93244.47,0.0,0,Saine,0.0,2022-12-07,Prospect
+CL-00794,PME,Guediri,Hichem,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte epargne,2080583,310336,Credit equipement,7212507,36,220485.11,0.0,0,Saine,0.0,2024-10-28,Actif
+CL-00795,PME,Haddad,Farid,Alger,Alger,Agence Alger Centre,Commerce,Compte courant,1274392,780419,Credit investissement,15995642,120,149375.34,0.0,0,Saine,0.0,2022-07-18,Actif
+CL-00796,Grande entreprise,Meziane,Rayan,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte professionnel,3477538,179967,Credit exploitation,3970604,60,68927.6,0.0,0,Saine,0.0,2025-04-22,Actif
+CL-00797,Particulier,Hamdi,Bilal,Setif,Setif,Agence Setif Centre,Transport,Compte cheque,53551,784030,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-05-05,Inactif
+CL-00798,Grande entreprise,Belkacem,Samir,Batna,Batna,Agence Batna Centre,Commerce,Compte courant,698286,878293,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-06-24,Actif
+CL-00799,Professionnel,Mebarki,Yacine,Bejaia,Bejaia,Agence Bejaia Centre,Agriculture,Compte epargne,2497203,955946,Credit personnel,7063521,12,663729.11,0.0,0,Saine,0.0,2021-03-18,Prospect
+CL-00800,Particulier,Bensalem,Adel,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte courant,31549,350444,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-22,Inactif
+CL-00801,Grande entreprise,Touati,Rayan,Batna,Batna,Agence Batna Centre,Services,Compte cheque,1194323,1263126,Credit immobilier,24658338,36,762531.22,0.0,0,Saine,0.0,2026-07-16,Inactif
+CL-00802,Professionnel,Bensalem,Walid,Setif,Setif,Agence Setif Centre,BTP,Compte courant,1732998,181518,Credit personnel,29887711,60,576870.82,0.0,0,Saine,0.0,2024-07-25,Actif
+CL-00803,Grande entreprise,Mansouri,Bilal,Batna,Batna,Agence Batna Centre,Services,Compte cheque,2300155,84736,Credit exploitation,12520737,120,108626.97,0.0,0,Saine,0.0,2021-11-16,Actif
+CL-00804,Particulier,Touati,Nassim,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte epargne,2899958,952297,Credit immobilier,24400116,60,458922.09,0.0,0,Saine,0.0,2024-07-31,Prospect
+CL-00805,Particulier,Haddad,Adel,Batna,Batna,Agence Batna Centre,Commerce,Compte epargne,2898237,1380490,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-02-26,Actif
+CL-00806,PME,Slimani,Youcef,Boumerdes,Boumerdes,Agence Boumerdes Centre,Industrie,Compte cheque,922838,708066,Credit investissement,1696198,24,75738.17,0.0,0,Saine,0.0,2021-01-12,Actif
+CL-00807,Professionnel,Cherif,Rayan,Constantine,Constantine,Agence Constantine Centre,Imprimerie,Compte cheque,2101846,1105167,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-03-25,Actif
+CL-00808,PME,Haddad,Nassim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte professionnel,255866,490411,Credit exploitation,520440,48,12685.17,101481.36,240,Creance compromise,81185.09,2024-01-14,Actif
+CL-00809,PME,Brahimi,Samir,Skikda,Skikda,Agence Skikda Centre,Informatique,Compte cheque,3404993,302935,Credit exploitation,9748557,12,936514.06,0.0,0,Saine,0.0,2024-09-02,Inactif
+CL-00810,Particulier,Rahmani,Ilyes,Boumerdes,Boumerdes,Agence Boumerdes Centre,Transport,Compte professionnel,33954,1795355,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-02-09,Actif
+CL-00811,PME,Bensalem,Walid,Bejaia,Bejaia,Agence Bejaia Centre,Agroalimentaire,Compte cheque,1030182,1010926,Credit investissement,26023419,48,566395.8,0.0,0,Saine,0.0,2024-07-21,Actif
+CL-00812,Professionnel,Touati,Walid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Commerce,Compte cheque,3201757,653725,Credit exploitation,13220297,36,403591.77,0.0,0,Saine,0.0,2025-11-30,Prospect
+CL-00813,Particulier,Haddad,Nassim,Alger,Alger,Agence Alger Centre,Industrie,Compte epargne,2390406,1043406,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-07-05,Prospect
+CL-00814,Grande entreprise,Cherif,Anis,Oran,Oran,Agence Oran Centre,Agroalimentaire,Compte cheque,1407824,916774,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-28,Actif
+CL-00815,PME,Mansouri,Ilyes,Oran,Oran,Agence Oran Centre,Agriculture,Compte professionnel,1371723,81760,Credit exploitation,27915094,12,2526529.96,0.0,0,Saine,0.0,2024-02-22,Actif
+CL-00816,Grande entreprise,Belkacem,Karim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte cheque,807014,495468,Credit immobilier,27763668,12,2601347.18,0.0,0,Saine,0.0,2022-05-04,Inactif
+CL-00817,Professionnel,Mebarki,Nabil,Setif,Setif,Agence Setif Centre,Distribution,Compte courant,1569209,1345361,Credit investissement,18351700,36,549925.3,0.0,0,Saine,0.0,2025-03-12,Inactif
+CL-00818,Particulier,Khelifi,Youcef,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte epargne,3041567,713400,Credit investissement,10576966,84,138532.09,277064.18,60,Creance classee,55412.84,2024-09-16,Prospect
+CL-00819,PME,Haddad,Mohamed,Blida,Blida,Agence Blida Centre,Imprimerie,Compte courant,433785,169901,Credit exploitation,27278346,24,1207461.8,0.0,0,Saine,0.0,2023-06-16,Actif
+CL-00820,Particulier,Saidi,Lyes,Alger,Alger,Agence Alger Centre,Imprimerie,Compte epargne,2924845,1225866,Credit immobilier,27289913,120,254352.85,0.0,0,Saine,0.0,2023-04-15,Prospect
+CL-00821,Professionnel,Mebarki,Adel,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte professionnel,1632857,1275640,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-06-22,Actif
+CL-00822,PME,Belkacem,Adel,Constantine,Constantine,Agence Constantine Centre,Distribution,Compte courant,1322168,636478,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-04-16,Prospect
+CL-00823,Professionnel,Amrani,Yacine,Bejaia,Bejaia,Agence Bejaia Centre,Informatique,Compte professionnel,3352554,461591,Credit personnel,26689245,84,346484.79,0.0,0,Saine,0.0,2025-08-24,Actif
+CL-00824,Particulier,Dahmani,Nabil,Blida,Blida,Agence Blida Centre,Transport,Compte professionnel,3328506,546710,Credit immobilier,20877444,48,454334.04,0.0,0,Saine,0.0,2023-07-22,Actif
+CL-00825,PME,Meziane,Hichem,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Industrie,Compte professionnel,3032787,429942,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-06-18,Actif
+CL-00826,PME,Belkacem,Samir,Bejaia,Bejaia,Agence Bejaia Centre,Industrie,Compte epargne,3090486,1135564,Credit exploitation,25361838,72,388001.29,0.0,0,Saine,0.0,2024-02-27,Actif
+CL-00827,Professionnel,Guediri,Nassim,Constantine,Constantine,Agence Constantine Centre,Transport,Compte epargne,1474645,574365,Credit immobilier,10641041,120,96661.7,0.0,0,Saine,0.0,2024-11-19,Actif
+CL-00828,Professionnel,Brahimi,Nassim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Distribution,Compte epargne,1862376,343772,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-02-14,Actif
+CL-00829,Grande entreprise,Dahmani,Lyes,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte professionnel,2853868,831230,Credit investissement,28571872,48,637535.28,0.0,0,Saine,0.0,2024-05-29,Prospect
+CL-00830,Grande entreprise,Mansouri,Samir,Constantine,Constantine,Agence Constantine Centre,Informatique,Compte courant,1321988,439591,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-07-27,Inactif
+CL-00831,Professionnel,Ferhat,Karim,Batna,Batna,Agence Batna Centre,Agroalimentaire,Compte epargne,2291504,1751892,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-07-31,Prospect
+CL-00832,Professionnel,Amrani,Rayan,Blida,Blida,Agence Blida Centre,Informatique,Compte courant,2100684,1204981,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-02-03,Actif
+CL-00833,Particulier,Benali,Amine,Setif,Setif,Agence Setif Centre,Agriculture,Compte cheque,1966312,105408,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-06-20,Actif
+CL-00834,Professionnel,Slimani,Amine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Informatique,Compte epargne,3131200,186059,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-11-28,Actif
+CL-00835,Particulier,Cherif,Adel,Oran,Oran,Agence Oran Centre,Informatique,Compte epargne,2360236,242445,Credit personnel,29346032,24,1309339.02,10474712.16,240,Creance compromise,8379769.73,2023-05-24,Actif
+CL-00836,PME,Hamdi,Anis,Batna,Batna,Agence Batna Centre,Commerce,Compte cheque,337636,155232,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-04-10,Actif
+CL-00837,PME,Rahmani,Adel,Ouargla,Ouargla,Agence Ouargla Centre,Informatique,Compte courant,19377,1508580,Credit investissement,23240891,24,1027583.59,6165501.54,180,Creance douteuse,3082750.77,2025-07-17,Actif
+CL-00838,Professionnel,Mansouri,Yacine,Blida,Blida,Agence Blida Centre,BTP,Compte cheque,133023,580296,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-08-09,Actif
+CL-00839,Particulier,Boudiaf,Bilal,Boumerdes,Boumerdes,Agence Boumerdes Centre,Agriculture,Compte cheque,3157385,348205,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-07-14,Actif
+CL-00840,Particulier,Dahmani,Rayan,Batna,Batna,Agence Batna Centre,Transport,Compte cheque,917145,1345479,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-05-12,Actif
+CL-00841,Professionnel,Saidi,Youcef,Bejaia,Bejaia,Agence Bejaia Centre,Informatique,Compte courant,1917946,38829,Credit immobilier,18091690,36,587530.45,0.0,0,Saine,0.0,2024-11-20,Actif
+CL-00842,Particulier,Hamdi,Hichem,Setif,Setif,Agence Setif Centre,Distribution,Compte courant,289856,206713,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-09-27,Inactif
+CL-00843,Particulier,Slimani,Mohamed,Annaba,Annaba,Agence Annaba Centre,Distribution,Compte epargne,156229,1356786,Credit immobilier,9869920,120,96952.15,193904.3,60,Creance classee,38780.86,2022-12-06,Actif
+CL-00844,Particulier,Dahmani,Youcef,Alger,Alger,Agence Alger Centre,Agroalimentaire,Compte courant,2140506,1105174,Credit exploitation,28604367,84,400894.85,0.0,0,Saine,0.0,2025-04-22,Actif
+CL-00845,Grande entreprise,Amrani,Lyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte courant,126061,1698721,Credit exploitation,2367569,120,21825.3,0.0,0,Saine,0.0,2022-12-19,Actif
+CL-00846,PME,Saidi,Lyes,Alger,Alger,Agence Alger Centre,Agroalimentaire,Compte professionnel,1538290,1123525,Credit immobilier,7272070,48,164335.81,0.0,0,Saine,0.0,2021-07-06,Inactif
+CL-00847,Grande entreprise,Hamdi,Rayan,Ouargla,Ouargla,Agence Ouargla Centre,Services,Compte professionnel,1454560,1518137,Credit equipement,28044999,72,416693.19,0.0,0,Saine,0.0,2025-07-24,Inactif
+CL-00848,Grande entreprise,Guediri,Samir,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte cheque,661407,291762,Credit exploitation,16619891,12,1496104.25,8976625.5,180,Creance douteuse,4488312.75,2023-01-29,Actif
+CL-00849,Particulier,Cherif,Youcef,Setif,Setif,Agence Setif Centre,Imprimerie,Compte cheque,3110594,403010,Credit exploitation,3693158,12,346326.71,0.0,0,Saine,0.0,2025-02-22,Inactif
+CL-00850,Professionnel,Slimani,Nassim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Commerce,Compte cheque,1103350,516571,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-02-07,Inactif
+CL-00851,PME,Touati,Mohamed,Batna,Batna,Agence Batna Centre,Commerce,Compte epargne,3187907,70363,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-04-17,Prospect
+CL-00852,PME,Bensalem,Adel,Constantine,Constantine,Agence Constantine Centre,Distribution,Compte epargne,1142321,468116,Credit personnel,8674320,84,119805.59,0.0,0,Saine,0.0,2021-05-03,Actif
+CL-00853,PME,Khelifi,Mourad,Setif,Setif,Agence Setif Centre,Agriculture,Compte professionnel,852794,444843,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-04-21,Prospect
+CL-00854,Particulier,Hamdi,Bilal,Ouargla,Ouargla,Agence Ouargla Centre,Transport,Compte courant,554946,908004,Credit immobilier,16939808,60,314749.98,629499.96,60,Creance classee,125899.99,2026-01-13,Actif
+CL-00855,PME,Boudiaf,Walid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte courant,1741810,790599,Credit exploitation,1312552,84,17510.43,0.0,0,Saine,0.0,2024-04-29,Prospect
+CL-00856,Grande entreprise,Amrani,Farid,Bejaia,Bejaia,Agence Bejaia Centre,Agroalimentaire,Compte epargne,3244045,588390,Credit immobilier,26151252,48,590216.52,0.0,0,Saine,0.0,2024-02-25,Actif
+CL-00857,Particulier,Rahmani,Nassim,Annaba,Annaba,Agence Annaba Centre,Services,Compte cheque,3178398,1721099,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-02-20,Actif
+CL-00858,Particulier,Mebarki,Ilyes,Setif,Setif,Agence Setif Centre,Industrie,Compte professionnel,2240789,283429,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-07-18,Inactif
+CL-00859,Particulier,Hamdi,Lyes,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte cheque,2627048,585658,Credit exploitation,9118024,48,210516.06,0.0,0,Saine,0.0,2023-12-12,Actif
+CL-00860,Particulier,Mansouri,Amine,Batna,Batna,Agence Batna Centre,BTP,Compte epargne,299078,802010,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-30,Actif
+CL-00861,Professionnel,Haddad,Yacine,Setif,Setif,Agence Setif Centre,Services,Compte epargne,2576756,1078974,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-05-20,Prospect
+CL-00862,PME,Rahmani,Amine,Blida,Blida,Agence Blida Centre,Distribution,Compte professionnel,1916303,906563,Credit investissement,3391641,84,44461.68,0.0,0,Saine,0.0,2024-12-17,Actif
+CL-00863,Particulier,Mansouri,Sofiane,Oran,Oran,Agence Oran Centre,BTP,Compte professionnel,2910942,228568,Credit investissement,26563507,120,249344.17,0.0,0,Saine,0.0,2021-09-16,Actif
+CL-00864,PME,Khelifi,Karim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Commerce,Compte cheque,1558216,1240749,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-02-28,Actif
+CL-00865,Professionnel,Dahmani,Samir,Blida,Blida,Agence Blida Centre,Agriculture,Compte professionnel,3163264,407087,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-03-12,Prospect
+CL-00866,PME,Ferhat,Bilal,Bejaia,Bejaia,Agence Bejaia Centre,Imprimerie,Compte professionnel,1146926,795930,Credit exploitation,21071128,72,341867.13,0.0,0,Saine,0.0,2021-09-13,Actif
+CL-00867,Professionnel,Belkacem,Walid,Batna,Batna,Agence Batna Centre,Imprimerie,Compte epargne,2708944,1709656,Credit equipement,4914178,36,150720.1,0.0,0,Saine,0.0,2026-04-14,Actif
+CL-00868,PME,Boudiaf,Mohamed,Boumerdes,Boumerdes,Agence Boumerdes Centre,Distribution,Compte professionnel,249959,783843,Credit investissement,26107859,48,616699.24,0.0,0,Saine,0.0,2023-10-28,Inactif
+CL-00869,Particulier,Haddad,Nabil,Alger,Alger,Agence Alger Centre,Services,Compte cheque,2422805,887543,Credit personnel,5044937,120,45416.46,0.0,0,Saine,0.0,2022-06-09,Actif
+CL-00870,Particulier,Dahmani,Anis,Ouargla,Ouargla,Agence Ouargla Centre,Commerce,Compte cheque,1566078,420788,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-12-31,Inactif
+CL-00871,Particulier,Brahimi,Farid,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte epargne,1671599,734206,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-05-05,Actif
+CL-00872,Grande entreprise,Brahimi,Ahmed,Batna,Batna,Agence Batna Centre,Commerce,Compte professionnel,233459,1626807,Credit investissement,10655039,48,239393.44,0.0,0,Saine,0.0,2021-03-22,Inactif
+CL-00873,Grande entreprise,Brahimi,Ilyes,Blida,Blida,Agence Blida Centre,Distribution,Compte professionnel,3430822,482090,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-06-22,Prospect
+CL-00874,Professionnel,Brahimi,Bilal,Boumerdes,Boumerdes,Agence Boumerdes Centre,Industrie,Compte epargne,1171165,1087212,Credit investissement,3019732,72,47781.88,0.0,0,Saine,0.0,2024-05-13,Actif
+CL-00875,PME,Guediri,Yacine,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte epargne,1453627,1444427,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-08-26,Actif
+CL-00876,Professionnel,Slimani,Bilal,Bejaia,Bejaia,Agence Bejaia Centre,Agroalimentaire,Compte professionnel,1468766,1662193,Credit exploitation,24579291,36,760415.95,0.0,0,Saine,0.0,2021-09-20,Actif
+CL-00877,PME,Guediri,Farid,Annaba,Annaba,Agence Annaba Centre,Agriculture,Compte professionnel,3105510,747882,Credit immobilier,2016645,72,32737.38,0.0,0,Saine,0.0,2025-09-13,Actif
+CL-00878,PME,Belkacem,Rayan,Skikda,Skikda,Agence Skikda Centre,Imprimerie,Compte courant,1949539,1578410,Credit exploitation,4883220,24,224389.48,0.0,0,Saine,0.0,2023-08-12,Actif
+CL-00879,Professionnel,Bensalem,Mourad,Setif,Setif,Agence Setif Centre,Commerce,Compte epargne,1092968,348130,Credit immobilier,21967046,24,1005118.28,0.0,0,Saine,0.0,2024-04-03,Actif
+CL-00880,Professionnel,Brahimi,Nassim,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte epargne,2140665,390464,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-11-16,Actif
+CL-00881,Particulier,Ferhat,Walid,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte epargne,1031129,756022,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-12-02,Actif
+CL-00882,Particulier,Meziane,Samir,Oran,Oran,Agence Oran Centre,BTP,Compte courant,1883593,109657,Credit investissement,10644427,12,984998.46,0.0,0,Saine,0.0,2023-03-27,Prospect
+CL-00883,Particulier,Boudiaf,Adel,Ouargla,Ouargla,Agence Ouargla Centre,Informatique,Compte professionnel,222096,281694,Credit personnel,24586169,84,305476.27,0.0,0,Saine,0.0,2024-10-10,Actif
+CL-00884,PME,Benali,Amine,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte epargne,2255166,110497,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-06-15,Actif
+CL-00885,Particulier,Boudiaf,Samir,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte epargne,615875,1157093,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-12-28,Inactif
+CL-00886,PME,Ferhat,Ahmed,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte cheque,753867,1003930,Credit personnel,11364595,48,258731.47,0.0,0,Saine,0.0,2025-12-02,Inactif
+CL-00887,PME,Belkacem,Ahmed,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte courant,1045446,89128,Credit investissement,22252376,60,421168.77,0.0,0,Saine,0.0,2025-12-31,Actif
+CL-00888,Professionnel,Bensalem,Ilyes,Blida,Blida,Agence Blida Centre,Informatique,Compte cheque,1348639,1654120,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-03-23,Actif
+CL-00889,PME,Brahimi,Adel,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte epargne,1427627,308790,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-09-19,Actif
+CL-00890,Grande entreprise,Slimani,Yacine,Skikda,Skikda,Agence Skikda Centre,Industrie,Compte professionnel,3403809,763430,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-09-03,Actif
+CL-00891,Grande entreprise,Rahmani,Ilyes,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte professionnel,2352993,1078483,Credit personnel,16603096,72,258197.44,0.0,0,Saine,0.0,2024-05-09,Actif
+CL-00892,Particulier,Mebarki,Hichem,Blida,Blida,Agence Blida Centre,Industrie,Compte epargne,598189,975222,Credit equipement,25993766,72,381670.01,0.0,0,Saine,0.0,2022-09-07,Actif
+CL-00893,Particulier,Khelifi,Adel,Setif,Setif,Agence Setif Centre,Industrie,Compte professionnel,2713117,453531,Credit exploitation,25597759,72,392154.51,0.0,0,Saine,0.0,2022-02-21,Inactif
+CL-00894,PME,Slimani,Sofiane,Alger,Alger,Agence Alger Centre,Industrie,Compte professionnel,2778281,1003295,Credit exploitation,15239125,12,1466524.08,0.0,0,Saine,0.0,2022-01-01,Actif
+CL-00895,PME,Dahmani,Hichem,Alger,Alger,Agence Alger Centre,Commerce,Compte professionnel,1992767,1176234,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-02-28,Actif
+CL-00896,Particulier,Hamdi,Youcef,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte courant,2971097,49582,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-07-31,Actif
+CL-00897,Particulier,Touati,Mourad,Blida,Blida,Agence Blida Centre,Agroalimentaire,Compte epargne,2654738,1751759,Credit exploitation,26087468,84,353324.69,0.0,0,Saine,0.0,2026-05-22,Prospect
+CL-00898,Grande entreprise,Amrani,Rayan,Oran,Oran,Agence Oran Centre,Informatique,Compte cheque,1409901,44543,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-07-06,Inactif
+CL-00899,Professionnel,Belkacem,Yacine,Ouargla,Ouargla,Agence Ouargla Centre,BTP,Compte courant,232325,1329161,Credit immobilier,16246932,36,477207.67,0.0,0,Saine,0.0,2023-01-10,Actif
+CL-00900,Grande entreprise,Mebarki,Walid,Oran,Oran,Agence Oran Centre,Services,Compte professionnel,2864284,114646,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-07-30,Inactif
+CL-00901,Professionnel,Mebarki,Mourad,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte professionnel,2525261,815167,Credit investissement,27934736,24,1335259.2,0.0,0,Saine,0.0,2021-06-05,Actif
+CL-00902,Grande entreprise,Mebarki,Yacine,Annaba,Annaba,Agence Annaba Centre,Informatique,Compte courant,2032749,1144637,Credit exploitation,22247166,48,498705.71,3989645.68,240,Creance compromise,3191716.54,2023-04-06,Actif
+CL-00903,Grande entreprise,Hamdi,Mohamed,Constantine,Constantine,Agence Constantine Centre,Agroalimentaire,Compte professionnel,1598554,1177032,Credit personnel,27543982,84,383806.87,0.0,0,Saine,0.0,2025-12-24,Prospect
+CL-00904,Grande entreprise,Rahmani,Nabil,Blida,Blida,Agence Blida Centre,Commerce,Compte courant,765064,458385,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-10-01,Actif
+CL-00905,Professionnel,Slimani,Hichem,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte cheque,1637211,784736,Credit personnel,17628274,72,276189.07,828567.21,90,Creance classee,165713.44,2025-09-13,Actif
+CL-00906,Grande entreprise,Mebarki,Sofiane,Setif,Setif,Agence Setif Centre,Services,Compte epargne,1916772,119626,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-10-04,Prospect
+CL-00907,Particulier,Bensalem,Karim,Ouargla,Ouargla,Agence Ouargla Centre,Industrie,Compte professionnel,1633977,748578,Credit exploitation,27164241,36,844159.85,0.0,0,Saine,0.0,2023-08-01,Inactif
+CL-00908,PME,Mebarki,Yacine,Constantine,Constantine,Agence Constantine Centre,BTP,Compte epargne,1315320,1582097,Credit exploitation,29549761,120,273649.56,0.0,0,Saine,0.0,2024-03-26,Actif
+CL-00909,PME,Touati,Bilal,Alger,Alger,Agence Alger Centre,Informatique,Compte cheque,2759401,795844,Credit personnel,28689022,36,906211.74,0.0,0,Saine,0.0,2021-11-20,Actif
+CL-00910,Grande entreprise,Amrani,Adel,Oran,Oran,Agence Oran Centre,Imprimerie,Compte epargne,2643580,1755103,Credit equipement,12698877,84,175592.16,0.0,0,Saine,0.0,2022-07-10,Prospect
+CL-00911,Professionnel,Bensalem,Adel,Annaba,Annaba,Agence Annaba Centre,Transport,Compte courant,729908,389744,Credit immobilier,29899826,48,722822.31,0.0,0,Saine,0.0,2021-10-13,Actif
+CL-00912,Professionnel,Khelifi,Rayan,Constantine,Constantine,Agence Constantine Centre,Imprimerie,Compte cheque,239859,612481,Credit exploitation,19678400,60,347082.18,0.0,0,Saine,0.0,2025-01-03,Actif
+CL-00913,Grande entreprise,Rahmani,Samir,Alger,Alger,Agence Alger Centre,Transport,Compte cheque,669924,1039993,Credit exploitation,24347260,120,222140.22,444280.44,75,Creance classee,88856.09,2026-03-01,Actif
+CL-00914,Particulier,Belkacem,Mourad,Setif,Setif,Agence Setif Centre,Commerce,Compte professionnel,2767010,1688532,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-04-03,Prospect
+CL-00915,PME,Hamdi,Nassim,Blida,Blida,Agence Blida Centre,Informatique,Compte professionnel,2215847,451675,Credit exploitation,20131688,24,930623.32,930623.32,45,Creance classee,186124.66,2021-02-09,Inactif
+CL-00916,Professionnel,Guediri,Karim,Bejaia,Bejaia,Agence Bejaia Centre,BTP,Compte epargne,520268,652043,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-02-06,Actif
+CL-00917,Grande entreprise,Saidi,Farid,Setif,Setif,Agence Setif Centre,Agroalimentaire,Compte cheque,2595749,676147,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-04-22,Actif
+CL-00918,Professionnel,Khelifi,Youcef,Oran,Oran,Agence Oran Centre,Industrie,Compte cheque,903201,119440,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-09,Inactif
+CL-00919,Particulier,Rahmani,Anis,Blida,Blida,Agence Blida Centre,Imprimerie,Compte cheque,1166499,209364,Credit immobilier,12495838,84,171498.94,0.0,0,Saine,0.0,2023-01-05,Inactif
+CL-00920,PME,Meziane,Mourad,Annaba,Annaba,Agence Annaba Centre,BTP,Compte professionnel,2897042,712524,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-06-04,Actif
+CL-00921,Professionnel,Cherif,Ilyes,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte professionnel,3002686,273721,Credit investissement,16493814,72,253956.13,0.0,0,Saine,0.0,2024-05-08,Actif
+CL-00922,Particulier,Hamdi,Hichem,Bejaia,Bejaia,Agence Bejaia Centre,Agriculture,Compte courant,1675981,540361,Credit exploitation,7071813,72,105425.92,0.0,0,Saine,0.0,2022-06-24,Inactif
+CL-00923,PME,Rahmani,Bilal,Batna,Batna,Agence Batna Centre,BTP,Compte courant,1895185,817530,Credit equipement,1022284,48,22409.31,89637.24,120,Creance douteuse,44818.62,2026-08-10,Inactif
+CL-00924,Particulier,Slimani,Mourad,Constantine,Constantine,Agence Constantine Centre,Distribution,Compte professionnel,2006151,1031610,Credit investissement,27347940,60,510919.15,0.0,0,Saine,0.0,2024-03-09,Prospect
+CL-00925,Professionnel,Cherif,Rayan,Ouargla,Ouargla,Agence Ouargla Centre,Informatique,Compte courant,1029923,560152,Credit personnel,11907469,60,220799.42,0.0,0,Saine,0.0,2025-05-23,Actif
+CL-00926,Professionnel,Meziane,Yacine,Alger,Alger,Agence Alger Centre,BTP,Compte professionnel,1177652,580628,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-08-13,Prospect
+CL-00927,Particulier,Boudiaf,Yacine,Setif,Setif,Agence Setif Centre,Commerce,Compte epargne,3181767,1604287,Credit investissement,22662487,36,681685.74,1363371.48,60,Creance classee,272674.3,2025-05-02,Actif
+CL-00928,Grande entreprise,Slimani,Adel,Blida,Blida,Agence Blida Centre,Commerce,Compte professionnel,1039211,1635297,Credit personnel,7286917,24,321159.83,0.0,0,Saine,0.0,2025-12-28,Actif
+CL-00929,PME,Boudiaf,Yacine,Bejaia,Bejaia,Agence Bejaia Centre,Agroalimentaire,Compte courant,278667,342285,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-16,Inactif
+CL-00930,Particulier,Brahimi,Walid,Alger,Alger,Agence Alger Centre,Distribution,Compte epargne,1635824,95989,Credit exploitation,10160815,36,332921.82,0.0,0,Saine,0.0,2023-10-14,Actif
+CL-00931,Grande entreprise,Brahimi,Amine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Transport,Compte courant,2922434,1702570,Credit investissement,9119770,48,221837.22,1774697.76,240,Creance compromise,1419758.21,2024-11-07,Actif
+CL-00932,PME,Brahimi,Ahmed,Bejaia,Bejaia,Agence Bejaia Centre,Services,Compte epargne,1140163,1042613,Credit exploitation,23761380,60,413516.25,0.0,0,Saine,0.0,2022-04-11,Inactif
+CL-00933,PME,Haddad,Mohamed,Batna,Batna,Agence Batna Centre,Commerce,Compte professionnel,2025385,1088237,Credit exploitation,19111081,120,181212.39,1087274.34,180,Creance douteuse,543637.17,2021-01-13,Inactif
+CL-00934,Grande entreprise,Slimani,Rayan,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte professionnel,397456,1211806,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-06-11,Actif
+CL-00935,Professionnel,Benali,Rayan,Ouargla,Ouargla,Agence Ouargla Centre,Distribution,Compte cheque,2846354,1373971,Credit personnel,28168297,84,364050.5,0.0,0,Saine,0.0,2021-09-05,Actif
+CL-00936,Particulier,Khelifi,Hichem,Ouargla,Ouargla,Agence Ouargla Centre,Services,Compte courant,137926,1276631,Credit investissement,16196113,12,1587122.81,0.0,0,Saine,0.0,2024-09-25,Actif
+CL-00937,Professionnel,Amrani,Mohamed,Constantine,Constantine,Agence Constantine Centre,Commerce,Compte cheque,259265,633774,Credit equipement,14112663,72,214372.82,0.0,0,Saine,0.0,2024-05-26,Actif
+CL-00938,Grande entreprise,Touati,Walid,Annaba,Annaba,Agence Annaba Centre,Transport,Compte epargne,1308405,857968,Credit personnel,20949153,24,968670.01,0.0,0,Saine,0.0,2022-02-05,Inactif
+CL-00939,PME,Ferhat,Sofiane,Setif,Setif,Agence Setif Centre,BTP,Compte epargne,2811039,1513080,Credit exploitation,2826261,84,37568.61,0.0,0,Saine,0.0,2026-07-17,Actif
+CL-00940,Grande entreprise,Brahimi,Bilal,Skikda,Skikda,Agence Skikda Centre,Distribution,Compte professionnel,2754364,1440124,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-07-20,Actif
+CL-00941,Professionnel,Meziane,Nabil,Ouargla,Ouargla,Agence Ouargla Centre,Agroalimentaire,Compte courant,3240605,166228,Credit exploitation,24794363,36,723679.35,0.0,0,Saine,0.0,2021-01-30,Actif
+CL-00942,Grande entreprise,Dahmani,Lyes,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte cheque,768422,1752638,Credit personnel,14907834,36,488063.69,0.0,0,Saine,0.0,2025-07-28,Actif
+CL-00943,PME,Slimani,Ilyes,Bejaia,Bejaia,Agence Bejaia Centre,Agroalimentaire,Compte cheque,3042562,546288,Credit exploitation,25447137,36,831021.26,0.0,0,Saine,0.0,2024-09-11,Prospect
+CL-00944,Professionnel,Cherif,Rayan,Ouargla,Ouargla,Agence Ouargla Centre,Informatique,Compte cheque,716042,168987,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-02-15,Actif
+CL-00945,Particulier,Ferhat,Bilal,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Transport,Compte professionnel,2631420,1180231,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-04-14,Prospect
+CL-00946,Grande entreprise,Haddad,Lyes,Oran,Oran,Agence Oran Centre,Industrie,Compte professionnel,2365538,1010532,Credit exploitation,25870202,120,247556.34,0.0,0,Saine,0.0,2022-08-02,Inactif
+CL-00947,PME,Saidi,Yacine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Distribution,Compte cheque,3439167,535086,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-04-26,Actif
+CL-00948,Professionnel,Mansouri,Nassim,Skikda,Skikda,Agence Skikda Centre,Transport,Compte epargne,1675833,1255436,Credit equipement,24822637,60,452308.53,0.0,0,Saine,0.0,2023-03-30,Actif
+CL-00949,Grande entreprise,Ferhat,Mohamed,Annaba,Annaba,Agence Annaba Centre,Agroalimentaire,Compte cheque,2683801,1269889,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-23,Inactif
+CL-00950,Professionnel,Mansouri,Yacine,Alger,Alger,Agence Alger Centre,Distribution,Compte courant,866464,1680344,Credit exploitation,8594560,60,162210.57,0.0,0,Saine,0.0,2023-06-16,Actif
+CL-00951,Particulier,Amrani,Youcef,Skikda,Skikda,Agence Skikda Centre,Distribution,Compte epargne,2209800,1733391,Credit personnel,14530666,84,197011.06,0.0,0,Saine,0.0,2022-05-23,Actif
+CL-00952,Grande entreprise,Cherif,Amine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,BTP,Compte epargne,2494811,752280,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-05-13,Actif
+CL-00953,Grande entreprise,Hamdi,Nabil,Bejaia,Bejaia,Agence Bejaia Centre,Transport,Compte courant,778287,696888,Credit exploitation,15116069,36,455090.39,0.0,0,Saine,0.0,2026-08-03,Inactif
+CL-00954,Particulier,Khelifi,Mourad,Setif,Setif,Agence Setif Centre,Imprimerie,Compte epargne,1271149,1202933,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-08-09,Actif
+CL-00955,PME,Hamdi,Sofiane,Bejaia,Bejaia,Agence Bejaia Centre,Commerce,Compte courant,420497,699047,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-06-26,Actif
+CL-00956,Professionnel,Slimani,Nassim,Setif,Setif,Agence Setif Centre,Transport,Compte cheque,1426312,1317306,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-03-08,Inactif
+CL-00957,Professionnel,Benali,Ahmed,Oran,Oran,Agence Oran Centre,Agriculture,Compte professionnel,3296130,297905,Credit immobilier,23865341,72,345385.76,0.0,0,Saine,0.0,2024-09-11,Actif
+CL-00958,Professionnel,Boudiaf,Walid,Alger,Alger,Agence Alger Centre,Agriculture,Compte epargne,413699,899118,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-11-03,Actif
+CL-00959,Professionnel,Brahimi,Samir,Alger,Alger,Agence Alger Centre,Transport,Compte epargne,1473950,1690491,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-04-08,Actif
+CL-00960,PME,Amrani,Amine,Bejaia,Bejaia,Agence Bejaia Centre,Distribution,Compte cheque,2727148,1275078,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-04-14,Inactif
+CL-00961,Particulier,Saidi,Hichem,Bejaia,Bejaia,Agence Bejaia Centre,Agroalimentaire,Compte professionnel,1164401,1762381,Credit personnel,12041689,36,350713.34,350713.34,35,Creance classee,70142.67,2024-09-19,Actif
+CL-00962,Grande entreprise,Mansouri,Samir,Batna,Batna,Agence Batna Centre,Distribution,Compte epargne,186391,533009,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-08-03,Actif
+CL-00963,Professionnel,Ferhat,Ahmed,Annaba,Annaba,Agence Annaba Centre,Imprimerie,Compte epargne,493875,400593,Credit investissement,2008700,72,30638.51,0.0,0,Saine,0.0,2025-03-27,Actif
+CL-00964,Professionnel,Slimani,Sofiane,Batna,Batna,Agence Batna Centre,Informatique,Compte cheque,130698,1136310,Credit investissement,27274016,36,850409.05,0.0,0,Saine,0.0,2022-03-19,Actif
+CL-00965,Grande entreprise,Bensalem,Nassim,Boumerdes,Boumerdes,Agence Boumerdes Centre,Informatique,Compte courant,183362,598782,Credit exploitation,4284482,84,53592.25,0.0,0,Saine,0.0,2025-02-18,Actif
+CL-00966,Particulier,Amrani,Sofiane,Alger,Alger,Agence Alger Centre,Imprimerie,Compte epargne,3419050,101492,Credit equipement,3070377,36,95364.88,0.0,0,Saine,0.0,2024-10-08,Actif
+CL-00967,Grande entreprise,Slimani,Anis,Blida,Blida,Agence Blida Centre,Commerce,Compte epargne,2086098,1217714,Credit immobilier,5449549,120,49587.45,0.0,0,Saine,0.0,2026-05-03,Prospect
+CL-00968,PME,Rahmani,Nabil,Bejaia,Bejaia,Agence Bejaia Centre,Agriculture,Compte courant,2096177,1275521,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2026-02-24,Actif
+CL-00969,Grande entreprise,Bensalem,Ilyes,Blida,Blida,Agence Blida Centre,Transport,Compte epargne,1539483,1412778,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-09-06,Inactif
+CL-00970,Particulier,Cherif,Yacine,Alger,Alger,Agence Alger Centre,Agriculture,Compte epargne,1048868,1476726,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-01-23,Actif
+CL-00971,Professionnel,Rahmani,Nabil,Setif,Setif,Agence Setif Centre,Informatique,Compte cheque,2567165,1321838,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-12-12,Inactif
+CL-00972,Professionnel,Hamdi,Farid,Skikda,Skikda,Agence Skikda Centre,Commerce,Compte courant,1610011,39344,Credit equipement,15144579,72,244067.12,0.0,0,Saine,0.0,2025-02-06,Actif
+CL-00973,Particulier,Bensalem,Samir,Alger,Alger,Agence Alger Centre,Informatique,Compte cheque,696434,852693,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-12-14,Actif
+CL-00974,PME,Saidi,Hichem,Boumerdes,Boumerdes,Agence Boumerdes Centre,Transport,Compte courant,1941358,890289,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-07-18,Prospect
+CL-00975,Professionnel,Slimani,Samir,Batna,Batna,Agence Batna Centre,Informatique,Compte courant,2207724,1169428,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-26,Actif
+CL-00976,Particulier,Guediri,Walid,Bejaia,Bejaia,Agence Bejaia Centre,Agriculture,Compte courant,437886,450593,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-10-31,Inactif
+CL-00977,Professionnel,Bensalem,Sofiane,Oran,Oran,Agence Oran Centre,Informatique,Compte courant,544106,1350666,Credit exploitation,4099369,24,194140.91,0.0,0,Saine,0.0,2022-05-20,Actif
+CL-00978,Grande entreprise,Brahimi,Samir,Constantine,Constantine,Agence Constantine Centre,BTP,Compte cheque,1834174,63055,Credit exploitation,4715622,48,112251.26,673507.56,180,Creance douteuse,336753.78,2025-07-07,Actif
+CL-00979,Grande entreprise,Cherif,Bilal,Setif,Setif,Agence Setif Centre,Agriculture,Compte epargne,611568,1543814,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2022-07-25,Inactif
+CL-00980,Professionnel,Mebarki,Ahmed,Constantine,Constantine,Agence Constantine Centre,Services,Compte cheque,2873085,951647,Credit investissement,23558875,48,558420.33,0.0,0,Saine,0.0,2021-11-18,Actif
+CL-00981,Professionnel,Mansouri,Lyes,Constantine,Constantine,Agence Constantine Centre,Industrie,Compte epargne,1533635,274389,Credit investissement,6439233,24,298549.22,0.0,0,Saine,0.0,2021-01-10,Inactif
+CL-00982,Particulier,Brahimi,Karim,Bejaia,Bejaia,Agence Bejaia Centre,Industrie,Compte courant,2102940,150012,Credit exploitation,6383747,48,144426.27,0.0,0,Saine,0.0,2026-01-13,Actif
+CL-00983,Particulier,Khelifi,Amine,Alger,Alger,Agence Alger Centre,Transport,Compte cheque,1582033,45126,Credit investissement,15648740,24,701493.63,0.0,0,Saine,0.0,2024-11-18,Prospect
+CL-00984,Grande entreprise,Haddad,Farid,Constantine,Constantine,Agence Constantine Centre,Distribution,Compte professionnel,1049562,531476,Credit immobilier,6175421,36,190263.76,0.0,0,Saine,0.0,2026-07-21,Inactif
+CL-00985,Particulier,Haddad,Hichem,Batna,Batna,Agence Batna Centre,Distribution,Compte epargne,1287954,1184964,Credit immobilier,4153536,12,368934.64,2951477.12,240,Creance compromise,2361181.7,2021-04-13,Actif
+CL-00986,Professionnel,Meziane,Youcef,Annaba,Annaba,Agence Annaba Centre,Industrie,Compte courant,1298845,86220,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-03-17,Inactif
+CL-00987,Particulier,Saidi,Walid,Skikda,Skikda,Agence Skikda Centre,Transport,Compte epargne,1501785,1479167,Credit exploitation,19183235,120,182712.48,1096274.88,180,Creance douteuse,548137.44,2026-09-06,Prospect
+CL-00988,Professionnel,Khelifi,Bilal,Blida,Blida,Agence Blida Centre,Industrie,Compte courant,2382218,478672,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2024-03-23,Inactif
+CL-00989,Professionnel,Mebarki,Amine,Oran,Oran,Agence Oran Centre,BTP,Compte cheque,795941,1357862,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-02-20,Actif
+CL-00990,PME,Mansouri,Nassim,Oran,Oran,Agence Oran Centre,Agriculture,Compte cheque,3432681,1223663,Credit exploitation,3053759,48,73894.19,73894.19,35,Creance classee,14778.84,2022-04-23,Actif
+CL-00991,Grande entreprise,Amrani,Amine,Setif,Setif,Agence Setif Centre,Informatique,Compte courant,2488066,1068792,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-10-23,Inactif
+CL-00992,Particulier,Boudiaf,Yacine,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Imprimerie,Compte epargne,1124471,1146599,Credit investissement,24498648,120,222874.56,0.0,0,Saine,0.0,2023-05-30,Actif
+CL-00993,Particulier,Cherif,Ahmed,Ouargla,Ouargla,Agence Ouargla Centre,Transport,Compte epargne,1783903,1704805,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2025-11-22,Actif
+CL-00994,Grande entreprise,Ferhat,Amine,Ouargla,Ouargla,Agence Ouargla Centre,Distribution,Compte cheque,3351508,524389,Credit personnel,26630229,120,235902.32,0.0,0,Saine,0.0,2023-01-04,Actif
+CL-00995,Professionnel,Ferhat,Karim,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Commerce,Compte epargne,974054,791388,Credit personnel,16583633,120,160408.35,0.0,0,Saine,0.0,2025-10-01,Actif
+CL-00996,PME,Mebarki,Lyes,Blida,Blida,Agence Blida Centre,Industrie,Compte courant,2551886,1789378,Credit investissement,12498310,24,595876.73,0.0,0,Saine,0.0,2024-06-19,Actif
+CL-00997,Grande entreprise,Belkacem,Nabil,Skikda,Skikda,Agence Skikda Centre,Agriculture,Compte cheque,1070986,171478,Credit exploitation,6213681,24,273287.69,0.0,0,Saine,0.0,2023-12-28,Inactif
+CL-00998,Grande entreprise,Guediri,Bilal,Oran,Oran,Agence Oran Centre,Services,Compte courant,133624,823563,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2023-04-12,Actif
+CL-00999,Grande entreprise,Saidi,Walid,Alger,Alger,Agence Alger Centre,Transport,Compte courant,1877795,1186666,Credit personnel,25842976,120,247304.82,741914.46,90,Creance classee,148382.89,2022-02-08,Actif
+CL-01000,Grande entreprise,Touati,Ilyes,Tizi Ouzou,Tizi Ouzou,Agence Tizi Ouzou Centre,Services,Compte professionnel,3057898,657898,Aucun,0,0,0.0,0.0,0,Non concernee,0.0,2021-04-28,Inactif

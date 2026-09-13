@@ -21,6 +21,7 @@ const menuItems: { id: string; labelKey: TranslationKey; icon: any }[] = [
   { id: 'modeles',      labelKey: 'nav_modeles',     icon: Brain },
   { id: 'anomalies',    labelKey: 'nav_anomalies',   icon: AlertTriangle },
   { id: 'risques',      labelKey: 'nav_risques',     icon: ShieldAlert },
+  { id: 'credit_risk',  labelKey: 'nav_credit_risk', icon: Database },
   { id: 'fraude',       labelKey: 'nav_fraude',      icon: ShieldOff },
   { id: 'api',          labelKey: 'nav_api',         icon: Network },
   { id: 'xai',          labelKey: 'nav_xai',         icon: Lightbulb },

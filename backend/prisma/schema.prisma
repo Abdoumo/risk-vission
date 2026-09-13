@@ -330,4 +330,29 @@ model PerformanceTemporelle {
   transformer Float
 }
 
-
+model CreditClient {
+  id                     String   @id @default(uuid())
+  client_id              String   @unique
+  type_client            String
+  nom                    String
+  prenom                 String
+  wilaya                 String
+  ville                  String
+  agence                 String
+  secteur_activite       String
+  type_compte            String
+  solde_compte_dzd       Float
+  revenu_mensuel_dzd     Float
+  type_credit            String
+  montant_credit_dzd     Float
+  duree_credit_mois      Int
+  echeance_mensuelle_dzd Float
+  impayes_dzd            Float
+  jours_retard           Int
+  classe_creance         String
+  provision_dzd          Float
+  date_credit            String?
+  statut_client          String
+  cashflow_dzd           Float?
+  overdraft              String?
+}

@@ -111,10 +111,16 @@ setInterval(() => {
 // Auth Routes (Login, Register) - No auth required
 app.use('/api/auth', authRoutes);
 
+import creditRiskRoutes from './routes/credit_risk';
+import fraudRoutes from './routes/fraud';
+
 // Protect all other /api routes and log actions
 app.use('/api', authenticateToken, (req, res, next) => {
   auditLogger(req.method, req.path)(req as any, res, next);
 });
+
+app.use('/api/credit-risk', creditRiskRoutes);
+app.use('/api/fraude', fraudRoutes);
 
 // Routes for Bank Connectors
 app.get('/api/banking/connectors', async (req, res) => {

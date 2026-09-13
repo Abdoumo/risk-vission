@@ -7,6 +7,7 @@ import PredictionsView from './views/PredictionsView';
 import ModelesView from './views/ModelesView';
 import AnomaliesView from './views/AnomaliesView';
 import RisquesView from './views/RisquesView';
+import CreditRiskView from './views/CreditRiskView';
 import ApiConnectorsView from './views/ApiConnectorsView';
 import XaiView from './views/XaiView';
 import FraudEngineView from './views/FraudEngineView';
@@ -20,6 +21,7 @@ const tabTitles: Record<string, { title: TranslationKey; subtitle: TranslationKe
   modeles:     { title: 'nav_modeles',     subtitle: 'sub_modeles' },
   anomalies:   { title: 'nav_anomalies',   subtitle: 'sub_anomalies' },
   risques:     { title: 'nav_risques',     subtitle: 'sub_risques' },
+  credit_risk: { title: 'nav_credit_risk', subtitle: 'sub_credit_risk' },
   fraude:      { title: 'nav_fraude',      subtitle: 'sub_fraude' },
   api:         { title: 'nav_api',         subtitle: 'sub_api' },
   xai:         { title: 'nav_xai',         subtitle: 'sub_xai' },
@@ -49,6 +51,7 @@ function AppInner() {
       case 'modeles':     return <ModelesView />;
       case 'anomalies':   return <AnomaliesView />;
       case 'risques':     return <RisquesView />;
+      case 'credit_risk': return <CreditRiskView />;
       case 'fraude':      return <FraudEngineView />;
       case 'api':         return <ApiConnectorsView />;
       case 'xai':         return <XaiView />;
