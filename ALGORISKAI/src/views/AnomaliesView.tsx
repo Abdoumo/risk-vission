@@ -15,7 +15,7 @@ export default function AnomaliesView() {
   const [selectedDetails, setSelectedDetails] = useState<any>(null);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/anomalies`)
+    fetch('/api/anomalies')
       .then(r => r.json())
       .then(data => {
         setAnomalies(data);
