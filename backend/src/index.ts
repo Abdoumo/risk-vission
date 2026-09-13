@@ -1486,7 +1486,7 @@ app.delete('/api/system/reset-data', async (req, res) => {
 const port = process.env.PORT || 3636;
 try {
   console.log("Synchronisation de la base de données Prisma...");
-  execSync('npx prisma db push', { stdio: 'inherit' });
+  execSync('npx prisma db push --accept-data-loss', { stdio: 'inherit' });
   console.log("Base de données synchronisée avec succès.");
   
   console.log("Peuplement des Profils Clients (CreditRisk)...");

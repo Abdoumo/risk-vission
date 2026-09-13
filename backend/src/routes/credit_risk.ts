@@ -134,7 +134,7 @@ router.get('/analyze/:clientId', async (req, res) => {
 
 router.get('/clients', async (req, res) => {
   try {
-    const clients = await prisma.creditClient.findMany({ take: 50 });
+    const clients = await prisma.creditClient.findMany({ take: 1000 });
     res.json(clients);
   } catch (error) {
     console.error(error);

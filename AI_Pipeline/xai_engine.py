@@ -20,12 +20,29 @@ from datetime import datetime
 import numpy as np
 
 # ── Database connection ─────────────────────────────────────────────
-DB_URL = "postgresql://postgres:lightking@localhost:5432/algorisk"
-
 
 def get_connection():
     import psycopg2
-    return psycopg2.connect(DB_URL)
+    import os
+    
+    env_path = os.path.join(os.path.dirname(__file__), '../backend/.env')
+    db_url = "postgresql://postgres:lightking@localhost:5432/algorisk"
+    source = "FALLBACK (hardcoded)"
+    
+    if os.path.exists(env_path):
+        with open(env_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('DATABASE_URL='):
+                    db_url = line.split('=', 1)[1].strip().strip('"').strip("'")
+                    if '?' in db_url:
+                        db_url = db_url.split('?')[0]
+                    source = f"Fichier .env ({env_path})"
+                    break
+                    
+    print(f"[XAI] Source DB_URL: {source}")
+    print(f"[XAI] Connecting to DB: {db_url.split('@')[-1]}")
+    return psycopg2.connect(db_url)
 
 
 # ── Helpers ─────────────────────────────────────────────────────────
