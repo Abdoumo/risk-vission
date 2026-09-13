@@ -430,7 +430,7 @@ app.post('/api/clients/bulk', async (req, res) => {
       return res.status(400).json({ error: 'Invalid payload' });
     }
 
-    // Insert all clients as PENDING
+    // Insert all clients as PENDING for Fraud engine
     const createdClients = await prisma.$transaction(
       clients.map((client: any) => prisma.clientProfile.create({
         data: {
@@ -440,6 +440,67 @@ app.post('/api/clients/bulk', async (req, res) => {
         }
       }))
     );
+
+    // Auto-map and Upsert to CreditClient for the "Scoring des clients" view
+    try {
+      await prisma.$transaction(
+        clients.map((client: any) => {
+          const clientId = client.client_name;
+          const data = client.data || {};
+          
+          const income = Number(data.income) || 50;
+          const revenu_mensuel_dzd = income * 10000;
+          
+          const credit_limit_raw = String(data.credit_limit || '$1000');
+          const creditLimitVal = parseFloat(credit_limit_raw.replace('$', '')) || 1000;
+          const montant_credit_dzd = creditLimitVal * 140;
+          
+          const debtinc = Number(data.debtinc) || 10;
+          const echeance_mensuelle_dzd = (revenu_mensuel_dzd * debtinc) / 100;
+          
+          const hasDefault = String(data.default) === '1' || String(data.default).toLowerCase() === 'true';
+          const impayes_dzd = hasDefault ? montant_credit_dzd * 0.15 : 0;
+          const jours_retard = hasDefault ? 90 : 0;
+          const classe_creance = hasDefault ? 'Douteuse' : 'Courante';
+          const provision_dzd = impayes_dzd * 0.5;
+          const solde_compte_dzd = income * 2000;
+
+          const creditClientData = {
+            type_client: "Particulier",
+            nom: clientId,
+            prenom: "Client",
+            wilaya: "Alger",
+            ville: "Alger",
+            agence: "Agence Centrale",
+            secteur_activite: String(data.EmploymentStatus || 'Employé'),
+            type_compte: String(data.card_type || 'Courant'),
+            solde_compte_dzd,
+            revenu_mensuel_dzd,
+            type_credit: "Consommation",
+            montant_credit_dzd,
+            duree_credit_mois: 36,
+            echeance_mensuelle_dzd,
+            impayes_dzd,
+            jours_retard,
+            classe_creance,
+            provision_dzd,
+            statut_client: hasDefault ? 'En contentieux' : 'Actif'
+          };
+
+          return prisma.creditClient.upsert({
+            where: { client_id: clientId },
+            update: creditClientData,
+            create: {
+              client_id: clientId,
+              ...creditClientData
+            }
+          });
+        })
+      );
+      addSystemLog('INFO', `[Pipeline] Upserted ${clients.length} profiles to CreditRisk engine`);
+    } catch (e) {
+      console.error("Error upserting to CreditClient:", e);
+    }
 
     addSystemLog('INFO', `[Pipeline] Streaming ingestion: ${createdClients.length} transactions processed`);
 
@@ -1432,8 +1493,40 @@ try {
   execSync('npx ts-node prisma/seed_credit_clients.ts', { stdio: 'inherit' });
   console.log("Profils Clients générés avec succès.");
 } catch (error) {
-  console.error("Erreur lors de la synchronisation Prisma:", error);
+  console.error("Erreur lors de la synchronisation Prisma (tentative de fallback raw SQL):", error);
 }
+
+// Fallback raw SQL to ensure tables exist if npx fails on production
+prisma.$executeRawUnsafe(`
+  CREATE TABLE IF NOT EXISTS "CounterFactual" (
+    "id" TEXT NOT NULL,
+    "xaiDecisionId" TEXT NOT NULL,
+    "action_fr" TEXT NOT NULL,
+    "action_ar" TEXT NOT NULL,
+    "action_en" TEXT NOT NULL,
+    "impact" INTEGER NOT NULL,
+    "feasibility" TEXT NOT NULL,
+    CONSTRAINT "CounterFactual_pkey" PRIMARY KEY ("id")
+  );
+`).catch(() => {});
+
+prisma.$executeRawUnsafe(`
+  CREATE TABLE IF NOT EXISTS "ShapFeature" (
+    "id" TEXT NOT NULL,
+    "xaiDecisionId" TEXT NOT NULL,
+    "feature" TEXT NOT NULL,
+    "feature_ar" TEXT NOT NULL,
+    "feature_en" TEXT NOT NULL,
+    "shapValue" DOUBLE PRECISION NOT NULL,
+    "baselineValue" DOUBLE PRECISION NOT NULL,
+    "actualValue" TEXT NOT NULL,
+    "contribution" TEXT NOT NULL,
+    "importance" INTEGER NOT NULL,
+    "category" TEXT NOT NULL,
+    CONSTRAINT "ShapFeature_pkey" PRIMARY KEY ("id")
+  );
+`).catch(() => {});
+
 
 app.listen(port as number, '0.0.0.0', () => {
   console.log(`Serveur démarré sur le port ${port}`);
