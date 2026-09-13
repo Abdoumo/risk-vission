@@ -1423,6 +1423,14 @@ app.delete('/api/system/reset-data', async (req, res) => {
 });
 
 const port = process.env.PORT || 3636;
+try {
+  console.log("Synchronisation de la base de données Prisma...");
+  execSync('npx prisma db push', { stdio: 'inherit' });
+  console.log("Base de données synchronisée avec succès.");
+} catch (error) {
+  console.error("Erreur lors de la synchronisation Prisma:", error);
+}
+
 app.listen(port as number, '0.0.0.0', () => {
   console.log(`Serveur démarré sur le port ${port}`);
 });
