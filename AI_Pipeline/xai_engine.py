@@ -25,7 +25,7 @@ def get_connection():
     import psycopg2
     import os
     
-    env_path = os.path.join(os.path.dirname(__file__), '../backend/.env')
+    env_path = os.path.join(os.path.dirname(__file__), '../backend/.env' )
     db_url = "postgresql://postgres:lightking@localhost:5432/algorisk"
     source = "FALLBACK (hardcoded)"
     
