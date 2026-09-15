@@ -407,19 +407,23 @@ class CreditRiskEngine:
         portfolio = []
         
         for idx, row in df.iterrows():
+            revenu = float(row.get('Revenu_Mensuel_DZD', row.get('revenue', 80000)))
+            charges = float(row.get('Charges_Mensuelles_DZD', 0))
+            echeance = float(row.get('Echeance_Mensuelle_DZD', 0))
+            dti = ((charges + echeance) / revenu) * 100 if revenu > 0 else float(row.get('dti', 40))
+            
             client_data = {
-                "revenue": row.get("revenue", 80000),
-                "solde_compte": row.get("solde_compte", 150000),
-                "dti": row.get("dti", 40),
-                "impayes": row.get("impayes", 0),
-                "retard_paiement": row.get("retard_paiement", 0),
-                "cashflow": row.get("cashflow", 30000),
-                "historique_bancaire": row.get("historique_bancaire", 0.9),
-                "overdraft": row.get("overdraft", 0)
+                "revenue": revenu,
+                "solde_compte": float(row.get("Solde_Moyen_DZD", row.get("solde_compte", 150000))),
+                "dti": dti,
+                "impayes": float(row.get("Jours_Impayes", row.get("impayes", 0))),
+                "retard_paiement": float(row.get("Retards_30J", 0)) + float(row.get("Retards_90J", row.get("retard_paiement", 0))),
+                "cashflow": revenu - charges - echeance if 'Revenu_Mensuel_DZD' in row else float(row.get("cashflow", 30000)),
+                "historique_bancaire": float(row.get("Historique_Paiement", row.get("historique_bancaire", 0.9))),
+                "overdraft": float(row.get("Decouvert_90J", row.get("overdraft", 0)))
             }
             
-            # Using montant_credit or default 500k DZD
-            exposure = float(row.get("montant_credit") or row.get("credit_limit") or 500000)
+            exposure = float(row.get("Montant_Credit_DZD", row.get("montant_credit", row.get("credit_limit", 500000))))
             if np.isnan(exposure):
                 exposure = 500000.0
                 
@@ -473,42 +477,24 @@ class CreditRiskEngine:
 
 if __name__ == "__main__":
     engine = CreditRiskEngine()
-    engine.train()
+    
+    # Check if a custom path was provided via command line args
+    import sys
+    data_path = os.path.join(BASE_DIR, "DATASETS", "bna_credit_risk_ready.csv")
+    if len(sys.argv) > 1:
+        data_path = sys.argv[1]
+
+    engine.train(data_path=data_path)
 
     print("\n" + "=" * 60)
-    print("Testing Credit Risk Assessment")
+    print("Evaluating Portfolio & VaR")
     print("=" * 60)
 
-    # Test client (using new 8 variables)
-    client = {
-        "revenue": 180000,          # 180K DZD
-        "solde_compte": -45000,     # Negative balance
-        "dti": 49.5,                # High DTI
-        "impayes": 30,              # 30 days unpaid
-        "retard_paiement": 2,       # 2 late payments
-        "cashflow": -15000,         # Negative cashflow
-        "historique_bancaire": 0.4, # Poor history score
-        "overdraft": 3              # 3 overdrafts recently
-    }
-
-    loan = {
-        "amount": 1000000,      # 1M DZD
-        "collateral_value": 400000,
-        "amount_paid": 300000,
-        "undrawn_commitment": 0,
-    }
-
-    result = engine.assess(client, loan)
-
-    print(f"\nClient Assessment:")
-    print(f"  PD (Probability of Default): {result['pd_percentage']}")
-    print(f"  LGD (Loss Given Default):    {result['lgd_percentage']}")
-    print(f"  EAD (Exposure At Default):    {result['ead']:,.2f} DZD")
-    print(f"  EL  (Expected Loss):          {result['expected_loss']:,.2f} DZD")
-    print(f"  Risk Score:                   {result['risk_score']}/100")
-    print(f"  Rating:                       {result['rating']['rating']} - {result['rating']['description']}")
-    print(f"  Decision:                     {result['decision']['status']}")
-    if result["decision"]["conditions"]:
-        print(f"  Conditions:")
-        for c in result["decision"]["conditions"]:
-            print(f"    - {c}")
+    results = engine.evaluate_portfolio_from_csv(data_path)
+    
+    out_path = os.path.join(BASE_DIR, "risk_results.json")
+    import json
+    with open(out_path, 'w', encoding='utf-8') as f:
+        json.dump(results, f, ensure_ascii=False, indent=2)
+        
+    print(f"Credit Risk portfolio & VaR metrics generated at {out_path}")

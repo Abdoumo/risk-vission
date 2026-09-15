@@ -215,7 +215,17 @@ export default function ApiConnectorsView() {
       ]);
       
       if (resRisque.ok && resFraude.ok) {
-        alert("Upload réussi ! L'évaluation des risques et les modèles anti-fraude/anomalies ont été déclenchés.");
+        // Trigger XAI Generation automatically so "Décisions Analysées" gets populated
+        try {
+          await fetch('/api/xai/generate', { 
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+        } catch (e) {
+          console.error("Failed to generate XAI:", e);
+        }
+        
+        alert("Upload réussi ! L'évaluation des risques, les modèles anti-fraude et l'explication XAI ont été déclenchés.");
       } else {
         alert("Attention : Un ou plusieurs pipelines ont échoué lors de l'upload.");
       }

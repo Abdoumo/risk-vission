@@ -66,9 +66,9 @@ app.post('/api/fraude/upload', uploadFraud.single('csvFile'), async (req, res) =
     if (fs.existsSync(resultPath)) {
       const parsedData = JSON.parse(fs.readFileSync(resultPath, 'utf8'));
       await prisma.fraudHistoryItem.deleteMany();
-      for (const item of parsedData) {
-        await (prisma.fraudHistoryItem as any).create({ data: item });
-      }
+      await (prisma.fraudHistoryItem as any).createMany({
+        data: parsedData
+      });
     }
 
     res.status(200).send('File uploaded and fraud models retrained.');
@@ -78,7 +78,49 @@ app.post('/api/fraude/upload', uploadFraud.single('csvFile'), async (req, res) =
   }
 });
 
+app.post('/api/risques/upload', upload.single('csvFile'), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
 
+  try {
+    const pythonScript = path.join(__dirname, '../../AI_Pipeline/credit_risk_engine.py');
+    const pyVenvPath = os.platform() === 'win32' 
+      ? path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe')
+      : path.join(__dirname, '../../AI_Pipeline/.venv/bin/python');
+    const cwdPath = path.join(__dirname, '../../AI_Pipeline');
+    
+    // Synchronously run the credit risk engine
+    try {
+      require('child_process').execSync(`"${pyVenvPath}" "${pythonScript}" "${path.join(__dirname, '../../AI_Pipeline/DATASETS/sgbv_historical_prices.csv')}"`, { cwd: cwdPath, stdio: 'inherit' });
+      
+      const resPath = path.join(cwdPath, 'risk_results.json');
+      if (fs.existsSync(resPath)) {
+        const data = JSON.parse(fs.readFileSync(resPath, 'utf8'));
+        
+        // Populate portfolio
+        if (data.portfolio && data.portfolio.length > 0) {
+          await prisma.risqueActif.deleteMany();
+          await (prisma.risqueActif as any).createMany({ data: data.portfolio });
+        }
+        
+        // Populate VarData
+        if (data.var_data && data.var_data.length > 0) {
+          await prisma.varData.deleteMany();
+          await (prisma.varData as any).createMany({ data: data.var_data });
+        }
+        console.log("Risque portfolio populated successfully from CSV.");
+      }
+    } catch (e) {
+      console.error("Failed to execute credit risk engine or parse results:", e);
+    }
+
+    res.status(200).send('File uploaded and risk models retrained.');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error during risk training.');
+  }
+});
 
 // Global Tracking for API Latency and Throughput
 export let requestCount = 0;
@@ -231,7 +273,7 @@ app.get('/api/fraud-history', async (req, res) => {
   try {
     const history = await prisma.fraudHistoryItem.findMany({
       orderBy: { id: 'desc' }, // Order by id since date is a string format
-      take: 100
+      take: 5000
     });
     res.json(history);
   } catch (error) {
