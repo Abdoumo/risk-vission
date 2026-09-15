@@ -69,47 +69,58 @@ export default function CreditRiskView() {
         <div className="flex gap-4 items-end">
           <div className="flex-1 max-w-sm relative">
             <label className="block text-xs text-slate-400 mb-1">Sélectionner un client</label>
-            <div 
-              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white cursor-pointer flex justify-between items-center focus:border-emerald-500"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <span className="truncate text-sm">
-                {selectedClient ? `${selectedClient.client_id} - ${selectedClient.nom} ${selectedClient.prenom}` : 'Sélectionner un client...'}
-              </span>
-              <ChevronDown className="h-4 w-4 text-slate-400" />
+            <div className="relative">
+              <input 
+                type="text"
+                placeholder="Rechercher par ID ou nom..."
+                value={isDropdownOpen ? searchQuery : (selectedClient ? `${selectedClient.client_id} - ${selectedClient.nom} ${selectedClient.prenom}` : '')}
+                onChange={e => {
+                  setSearchQuery(e.target.value);
+                  if (!isDropdownOpen) setIsDropdownOpen(true);
+                }}
+                onFocus={() => {
+                  setSearchQuery('');
+                  setIsDropdownOpen(true);
+                }}
+                className="w-full bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-10 py-2 text-white text-sm focus:outline-none focus:border-emerald-500"
+              />
+              <Search className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              <ChevronDown 
+                className="h-4 w-4 text-slate-400 absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" 
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              />
             </div>
 
             {isDropdownOpen && (
-              <div className="absolute z-10 mt-1 w-full bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden">
-                <div className="p-2 border-b border-slate-700 flex items-center gap-2">
-                  <Search className="h-4 w-4 text-slate-400" />
-                  <input
-                    autoFocus
-                    type="text"
-                    className="bg-transparent border-none text-white focus:outline-none w-full text-sm"
-                    placeholder="Rechercher par ID ou nom..."
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
-                  />
+              <>
+                <div 
+                  className="fixed inset-0 z-40"
+                  onClick={() => {
+                    setIsDropdownOpen(false);
+                    setSearchQuery('');
+                  }}
+                />
+                <div className="absolute z-50 mt-1 w-full bg-slate-800 border border-slate-700 rounded-lg shadow-2xl overflow-hidden">
+                  <div className="max-h-60 overflow-y-auto">
+                    {filteredClients.length > 0 ? filteredClients.map(c => (
+                      <div
+                        key={c.client_id}
+                        className="px-4 py-2 hover:bg-slate-700 cursor-pointer text-sm text-slate-200 transition-colors border-b border-slate-700/50 last:border-0"
+                        onClick={() => {
+                          setSelectedClientId(c.client_id);
+                          setIsDropdownOpen(false);
+                          setSearchQuery('');
+                        }}
+                      >
+                        <div className="font-medium text-white">{c.client_id}</div>
+                        <div className="text-xs text-slate-400">{c.nom} {c.prenom}</div>
+                      </div>
+                    )) : (
+                      <div className="px-4 py-3 text-sm text-slate-400 text-center">Aucun résultat pour "{searchQuery}"</div>
+                    )}
+                  </div>
                 </div>
-                <div className="max-h-60 overflow-y-auto">
-                  {filteredClients.length > 0 ? filteredClients.map(c => (
-                    <div
-                      key={c.client_id}
-                      className="px-4 py-2 hover:bg-slate-700 cursor-pointer text-sm text-slate-200 transition-colors"
-                      onClick={() => {
-                        setSelectedClientId(c.client_id);
-                        setIsDropdownOpen(false);
-                        setSearchQuery('');
-                      }}
-                    >
-                      {c.client_id} - {c.nom} {c.prenom}
-                    </div>
-                  )) : (
-                    <div className="px-4 py-3 text-sm text-slate-400 text-center">Aucun résultat</div>
-                  )}
-                </div>
-              </div>
+              </>
             )}
           </div>
           <button 
