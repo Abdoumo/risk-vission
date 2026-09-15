@@ -197,24 +197,6 @@ async function main() {
   // --- Risques Data (Portfolio, KPIs, Stress Tests, VaR) ---
   await prisma.risqueActif.deleteMany();
   
-  const fs = require('fs');
-  const path = require('path');
-  const varResultPath = path.join(__dirname, '../../AI_Pipeline/var_results.json');
-  let risquesPortefeuille: any[] = [];
-  let varData: any[] = [];
-  
-  if (fs.existsSync(varResultPath)) {
-    const varJson = JSON.parse(fs.readFileSync(varResultPath, 'utf8'));
-    risquesPortefeuille = varJson.portfolio || [];
-    varData = varJson.var_data || [];
-  }
-  
-  if (risquesPortefeuille.length > 0) {
-    for (const r of risquesPortefeuille) {
-      await prisma.risqueActif.create({ data: r });
-    }
-  }
-
   await prisma.riskKpi.deleteMany();
   const riskStats = [
     { label: 'risk_market', value: '3.2/10', icon: 'ShieldAlert', color: 'text-amber-400', border: 'border-amber-500/20', bg: 'from-amber-500/10' },
@@ -240,11 +222,6 @@ async function main() {
   }
 
   await prisma.varData.deleteMany();
-  if (varData.length > 0) {
-    for (const vd of varData) {
-      await prisma.varData.create({ data: vd });
-    }
-  }
 
   // --- Modeles IA Data (Comparaison, Matrice, Perf Temporelle) ---
   await prisma.comparaisonModele.deleteMany();
@@ -314,9 +291,10 @@ async function main() {
     await prisma.predictionTarget.create({ data: pt });
   }
 
-
   await prisma.modelPerformance.deleteMany();
   
+  const fs = require('fs');
+  const path = require('path');
   const benchmarkPath = path.join(__dirname, '../../AI_Pipeline/benchmark_results.json');
   let fraudAcc = 0, fraudPrec = 0, fraudRec = 0, fraudF1 = 0, fraudMae = 0, fraudRmse = 0;
   let credAcc = 0, credPrec = 0, credRec = 0, credF1 = 0, credMae = 0, credRmse = 0;

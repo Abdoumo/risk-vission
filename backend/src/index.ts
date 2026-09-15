@@ -762,58 +762,36 @@ app.get('/api/mock/pipeline', async (req, res) => {
   }
 });
 
-// REAL DATA ENDPOINTS FOR RISQUES
-app.post('/api/risques/upload', upload.single('csvFile'), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
-    }
-
-    // Run the Python script
-    const pyScriptPath = path.join(__dirname, '../../AI_Pipeline/var_engine.py');
-    const pyVenvPath = os.platform() === 'win32' 
-      ? path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe')
-      : path.join(__dirname, '../../AI_Pipeline/.venv/bin/python');
-    const cwdPath = path.join(__dirname, '../../AI_Pipeline');
-
-    execSync(`"${pyVenvPath}" "${pyScriptPath}"`, { cwd: cwdPath });
-
-    // Read the results
-    const varResultPath = path.join(__dirname, '../../AI_Pipeline/var_results.json');
-    if (fs.existsSync(varResultPath)) {
-      const varJson = JSON.parse(fs.readFileSync(varResultPath, 'utf8'));
-      const risquesPortefeuille = varJson.portfolio || [];
-      const varData = varJson.var_data || [];
-
-      // Update Prisma
-      await prisma.risqueActif.deleteMany();
-      if (risquesPortefeuille.length > 0) {
-        for (const r of risquesPortefeuille) {
-          await prisma.risqueActif.create({ data: r });
-        }
-      }
-
-      await prisma.varData.deleteMany();
-      if (varData.length > 0) {
-        for (const vd of varData) {
-          await prisma.varData.create({ data: vd });
-        }
-      }
-      res.json({ success: true, message: 'Data updated successfully' });
-    } else {
-      res.status(500).json({ error: 'Failed to generate results' });
-    }
-  } catch (error) {
-    console.error('Upload error:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+// SGBV Upload Removed
 
 app.get('/api/risques/portfolio', async (req, res) => {
   try {
-    const risques = await prisma.risqueActif.findMany();
+    let risques = await prisma.risqueActif.findMany();
+    if (risques.length === 0) {
+      // Auto-populate from Python AI Pipeline using actual client data
+      const aiApiUrl = process.env.AI_API_URL || 'http://127.0.0.1:7676';
+      const response = await fetch(`${aiApiUrl}/calculate/credit_portfolio_var`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ csv_path: "DATASETS/clients_var.csv" })
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const portfolio = data.portfolio || [];
+        const varData = data.var_data || [];
+        
+        for (const p of portfolio) {
+          await prisma.risqueActif.create({ data: p });
+        }
+        for (const v of varData) {
+          await prisma.varData.create({ data: v });
+        }
+        risques = await prisma.risqueActif.findMany();
+      }
+    }
     res.json(risques);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to fetch risques portfolio' });
   }
 });
@@ -1361,27 +1339,28 @@ app.get('/api/predictions/real', async (req, res) => {
     const data = [];
     const baseDate = new Date();
 
-    // Add 10 days of historical 'reel' data
-    // Use a deterministic seed so the history doesn't jump around on every click
-    let lastReel = baseValue * 0.95; // start slightly lower
-    for (let i = -10; i < 0; i++) {
+    // Add 10 days of historical 'reel' data from database
+    const varData = await prisma.varData.findMany({ take: 10, orderBy: { id: 'asc' } });
+    
+    // Reverse logic to calculate starting from past
+    for (let i = 0; i < varData.length; i++) {
       const d = new Date(baseDate);
-      d.setDate(d.getDate() + i);
+      d.setDate(d.getDate() - (varData.length - i));
       const dateStr = d.toLocaleDateString('fr-DZ', { day: '2-digit', month: 'short' });
 
-      // Deterministic pseudo-random change based on index
-      const pseudoRandom = Math.sin(i * 12.345) * 0.5 + 0.5; // 0 to 1
-      const change = lastReel * (pseudoRandom * volatility * 2 - volatility + drift);
-      lastReel = lastReel + change;
+      // If we're displaying VaR, 'reel' could be the var95 magnitude or portfolio loss
+      const val = Math.abs(varData[i].var95);
 
       data.push({
         date: dateStr,
-        reel: isPercentage ? parseFloat(lastReel.toFixed(2)) : Math.round(lastReel),
+        reel: isPercentage ? parseFloat(val.toFixed(2)) : Math.round(val),
         predit: null,
         confMin: null,
         confMax: null
       });
     }
+
+    const lastReel = data.length > 0 ? data[data.length - 1].reel : baseValue;
 
     // Add prediction data
     for (let i = 0; i < results.length; i++) {
@@ -1389,12 +1368,10 @@ app.get('/api/predictions/real', async (req, res) => {
       date.setDate(date.getDate() + results[i].day);
       const dateStr = date.toLocaleDateString('fr-DZ', { day: '2-digit', month: 'short' });
 
-      // Connect the lines seamlessly: the first prediction point should also have 'reel' as the last known value,
-      // or we just let Recharts connect them. Recharts connects them if they are in the same array.
-
+      // Connect the lines seamlessly
       data.push({
         date: dateStr,
-        reel: i === 0 ? (isPercentage ? parseFloat(lastReel.toFixed(2)) : Math.round(lastReel)) : null,
+        reel: i === 0 ? lastReel : null,
         predit: isPercentage ? parseFloat(results[i].predit.toFixed(2)) : results[i].predit,
         confMin: isPercentage ? parseFloat(results[i].confMin.toFixed(2)) : results[i].confMin,
         confMax: isPercentage ? parseFloat(results[i].confMax.toFixed(2)) : results[i].confMax,

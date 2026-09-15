@@ -124,15 +124,13 @@ model PipelineStep {
 
 model RisqueActif {
   id      String @id @default(uuid())
-  ticker  String
   nom     String
   secteur String
   poids   Float
-  var95   Float
-  mcVar95 Float?
-  es95    Float?
-  beta    Float
-  sharpe  Float
+  pd      Float
+  lgd     Float
+  ead     Float
+  el      Float
   risque  String
 }
 

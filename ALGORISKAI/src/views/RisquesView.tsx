@@ -26,15 +26,22 @@ export default function RisquesView() {
 
 
 
-  const risqueColors = {
-    faible: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
-    moyen:  { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/20' },
-    élevé:  { bg: 'bg-rose-500/10',   text: 'text-rose-400',   border: 'border-rose-500/20' },
+  const risqueColors: Record<string, any> = {
+    "AAA": { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
+    "AA": { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
+    "A": { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
+    "BBB": { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/20' },
+    "BB": { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/20' },
+    "B": { bg: 'bg-rose-500/10', text: 'text-rose-400', border: 'border-rose-500/20' },
+    "CCC": { bg: 'bg-rose-500/10', text: 'text-rose-400', border: 'border-rose-500/20' },
+    "faible": { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
+    "moyen":  { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/20' },
+    "élevé":  { bg: 'bg-rose-500/10',   text: 'text-rose-400',   border: 'border-rose-500/20' },
   };
 
-  const totalVar = risquesPortefeuille.reduce((a, b) => a + Math.abs(b.var95) * b.poids / 100, 0);
-  const avgBeta = risquesPortefeuille.reduce((a, b) => a + b.beta * b.poids / 100, 0);
-  const avgSharpe = risquesPortefeuille.reduce((a, b) => a + b.sharpe * b.poids / 100, 0);
+  const totalEL = risquesPortefeuille.reduce((a, b) => a + (b.el || 0), 0);
+  const avgPd = risquesPortefeuille.length ? (risquesPortefeuille.reduce((a, b) => a + (b.pd || 0), 0) / risquesPortefeuille.length) : 0;
+  const avgLgd = risquesPortefeuille.length ? (risquesPortefeuille.reduce((a, b) => a + (b.lgd || 0), 0) / risquesPortefeuille.length) : 0;
 
   const iconMap: Record<string, any> = { ShieldAlert, TrendingDown, AlertTriangle, BarChart3 };
 
@@ -64,7 +71,7 @@ export default function RisquesView() {
           <UploadCloud className="h-16 w-16 text-slate-600 mb-4" />
           <h3 className="text-xl font-bold text-white tracking-tight mb-2">Aucune donnée de portefeuille</h3>
           <p className="text-[14px] font-medium text-slate-400 mb-6 max-w-md">
-            Il n'y a pas de données sur les risques de marché disponibles. Veuillez charger un portefeuille au format CSV via l'onglet <strong>Fichiers & Données</strong> dans <strong>Connecteurs API</strong>.
+            Il n'y a pas de données sur les risques de crédit disponibles. L'analyse Monte Carlo nécessite un portefeuille de clients avec des métriques de crédit.
           </p>
         </motion.div>
       ) : (
@@ -121,7 +128,7 @@ export default function RisquesView() {
             <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6">
               <div className={`mb-5 ${isRTL ? 'text-right' : ''}`}>
                 <h3 className="text-lg font-bold text-white tracking-tight">{t('stress_title')}</h3>
-                <p className="text-[13px] font-medium text-slate-400 mt-0.5">Simulations de chocs — Bourse d'Alger</p>
+                <p className="text-[13px] font-medium text-slate-400 mt-0.5">Simulations de chocs — Portefeuille Crédit</p>
               </div>
               <div className="space-y-4">
                 {stressTests.map((s, i) => (
@@ -153,15 +160,15 @@ export default function RisquesView() {
           <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6">
             <div className={`mb-5 flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
               <div className={isRTL ? 'text-right' : ''}>
-                <h3 className="text-lg font-bold text-white tracking-tight">Portefeuille — Bourse d'Alger (SGBV)</h3>
+                <h3 className="text-lg font-bold text-white tracking-tight">Portefeuille de Risques de Crédit</h3>
                 <p className="text-[13px] font-medium text-slate-400 mt-0.5">
-                  VaR globale: -{totalVar.toFixed(2)}% | Beta: {avgBeta.toFixed(2)} | Sharpe: {avgSharpe.toFixed(2)}
+                  Perte Attendue Globale (EL): {totalEL.toLocaleString('fr-DZ', { maximumFractionDigits: 0 })} DZD | PD Moyen: {(avgPd * 100).toFixed(2)}% | LGD Moyen: {(avgLgd * 100).toFixed(2)}%
                 </p>
               </div>
               <div className={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
                 <div className="text-center bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-2.5 px-4 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-                  <p className="text-2xl font-black text-emerald-400">{risquesPortefeuille.reduce((a,b)=>a+b.poids,0)}%</p>
-                  <p className="text-[11px] font-bold text-emerald-500/70 uppercase tracking-wider">Allocation totale</p>
+                  <p className="text-2xl font-black text-emerald-400">{risquesPortefeuille.length}</p>
+                  <p className="text-[11px] font-bold text-emerald-500/70 uppercase tracking-wider">Clients Analysés</p>
                 </div>
               </div>
             </div>
@@ -169,34 +176,32 @@ export default function RisquesView() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-white/5 bg-slate-800/30">
-                    {['Ticker', 'Société', 'Secteur', 'Poids', 'VaR 95%', 'MC VaR 95%', 'ES 95%', 'Beta', 'Sharpe', 'Risque'].map((h) => (
+                    {['ID Client', 'Nom', 'Secteur', 'Exposition (EAD)', 'Prob. Défaut (PD)', 'Perte en Cas Défaut (LGD)', 'Perte Attendue (EL)', 'Rating / Risque'].map((h) => (
                       <th key={h} className={`px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 ${isRTL ? 'text-right' : 'text-left'}`}>{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   {risquesPortefeuille.map((a, i) => {
-                    const rc = risqueColors[a.risque];
+                    const rc = risqueColors[a.risque] || risqueColors["CCC"];
                     return (
                       <tr key={i} className="hover:bg-emerald-500/5 transition-colors group">
                         <td className="px-4 py-3.5">
-                          <span className="font-mono text-[14px] font-bold text-emerald-400">{a.ticker}</span>
+                          <span className="font-mono text-[14px] font-bold text-emerald-400">{a.id?.substring(0, 10)}</span>
                         </td>
                         <td className="px-4 py-3.5 text-[13px] font-medium text-slate-200">{a.nom}</td>
                         <td className="px-4 py-3.5 text-[13px] font-medium text-slate-400">{a.secteur}</td>
+                        <td className="px-4 py-3.5 text-[13px] font-black text-cyan-400">{a.ead ? a.ead.toLocaleString('fr-DZ', { maximumFractionDigits: 0 }) : '0'} DZD</td>
                         <td className="px-4 py-3.5">
                           <div className={`flex items-center gap-2.5 ${isRTL ? 'flex-row-reverse' : ''}`}>
                             <div className="h-1.5 w-16 overflow-hidden rounded-full bg-slate-800">
-                              <div className="h-full rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.5)]" style={{ width: `${(a.poids / 20) * 100}%` }} />
+                              <div className={`h-full rounded-full bg-gradient-to-r ${(a.pd||0) > 0.1 ? 'from-rose-600 to-rose-400' : 'from-cyan-600 to-cyan-400'}`} style={{ width: `${(a.pd || 0) * 100}%` }} />
                             </div>
-                            <span className="text-[13px] font-bold text-slate-300 w-8">{a.poids}%</span>
+                            <span className={`text-[13px] font-bold ${(a.pd||0) > 0.1 ? 'text-rose-400' : 'text-slate-300'} w-8`}>{((a.pd || 0) * 100).toFixed(1)}%</span>
                           </div>
                         </td>
-                        <td className="px-4 py-3.5 text-[13px] font-black text-rose-400">{a.var95}%</td>
-                        <td className="px-4 py-3.5 text-[13px] font-black text-rose-500">{a.mcVar95 !== undefined ? `${a.mcVar95}%` : '-'}</td>
-                        <td className="px-4 py-3.5 text-[13px] font-black text-rose-600">{a.es95 !== undefined ? `${a.es95}%` : '-'}</td>
-                        <td className="px-4 py-3.5 text-[13px] font-medium text-slate-300">{a.beta}</td>
-                        <td className="px-4 py-3.5 text-[13px] font-medium text-slate-300">{a.sharpe}</td>
+                        <td className="px-4 py-3.5 text-[13px] font-medium text-slate-300">{((a.lgd || 0) * 100).toFixed(1)}%</td>
+                        <td className="px-4 py-3.5 text-[13px] font-black text-rose-400">{a.el ? a.el.toLocaleString('fr-DZ', { maximumFractionDigits: 0 }) : '0'} DZD</td>
                         <td className="px-4 py-3.5">
                           <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${rc.bg} ${rc.text} border ${rc.border}`}>
                             {a.risque}

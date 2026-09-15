@@ -12,9 +12,7 @@ def generate_timeseries_forecast(model_type: str, horizon: int, base_value: floa
         drift = 0.005 # slightly increasing risk
         for i in range(1, horizon + 1):
             expected_val = base_value + (drift * i)
-            # Deterministic organic wobble
-            organic_wobble = np.sin(i * 0.8) * volatility * 0.3
-            current_val = max(0, expected_val + organic_wobble)
+            current_val = max(0, expected_val)
             
             spread = 1.96 * volatility * np.sqrt(i)
             results.append({
@@ -29,9 +27,7 @@ def generate_timeseries_forecast(model_type: str, horizon: int, base_value: floa
         for i in range(1, horizon + 1):
             # E[S_t] = S_0 * exp(drift * t)
             expected_val = base_value * np.exp(drift * i)
-            # Add a small deterministic sine wave to make it look realistic but stable
-            organic_wobble = expected_val * (np.sin(i * 0.5) * volatility * 0.2)
-            current_val = expected_val + organic_wobble
+            current_val = expected_val
             
             # Standard deviation spread for confidence intervals (~95% = 1.96 Z-score)
             std_dev = expected_val * volatility * np.sqrt(i)

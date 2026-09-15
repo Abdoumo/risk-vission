@@ -257,6 +257,18 @@ def calculate_credit_var(request: CreditVaRRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+class CreditPortfolioVarRequest(BaseModel):
+    csv_path: str = Field(default="DATASETS/clients_var.csv", description="Path to the clients CSV file")
+
+@app.post("/calculate/credit_portfolio_var")
+def calculate_credit_portfolio_var(request: CreditPortfolioVarRequest):
+    """Read clients from CSV and calculate full portfolio VaR."""
+    try:
+        csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.csv_path)
+        return engine.credit_engine.evaluate_portfolio_from_csv(csv_path)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.post("/calculate/stress_test")
 def calculate_stress_test(request: StressTestRequest):
     """Run a stress test scenario on a portfolio."""
