@@ -112,6 +112,67 @@ export default function CreditRiskView() {
                   </div>
                 </div>
              </div>
+
+             <div className="rounded-2xl border border-white/5 bg-slate-900/40 p-6">
+                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Données du Client (8 Variables Clés)</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-white/5">
+                    <p className="text-xs text-slate-400 mb-1">Revenu</p>
+                    <p className="text-sm font-bold text-white">{analysis.clientData.revenu_mensuel_dzd?.toLocaleString()} DZD</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-white/5">
+                    <p className="text-xs text-slate-400 mb-1">Solde Compte</p>
+                    <p className="text-sm font-bold text-white">{analysis.clientData.solde_compte_dzd?.toLocaleString()} DZD</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-white/5">
+                    <p className="text-xs text-slate-400 mb-1">DTI (Endettement)</p>
+                    <p className="text-sm font-bold text-white">
+                      {analysis.clientData.revenu_mensuel_dzd > 0 
+                        ? ((analysis.clientData.echeance_mensuelle_dzd / analysis.clientData.revenu_mensuel_dzd) * 100).toFixed(1) 
+                        : 0}%
+                    </p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-white/5">
+                    <p className="text-xs text-slate-400 mb-1">Impayés</p>
+                    <p className="text-sm font-bold text-white">{analysis.clientData.impayes_dzd?.toLocaleString()} DZD</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-white/5">
+                    <p className="text-xs text-slate-400 mb-1">Retards de Paiement</p>
+                    <p className="text-sm font-bold text-white">{analysis.clientData.jours_retard} Jours</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-white/5">
+                    <p className="text-xs text-slate-400 mb-1">Cashflow</p>
+                    <p className="text-sm font-bold text-white">{analysis.clientData.cashflow_dzd ? `${analysis.clientData.cashflow_dzd.toLocaleString()} DZD` : 'Inconnu'}</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-white/5">
+                    <p className="text-xs text-slate-400 mb-1">Historique Bancaire</p>
+                    <p className="text-sm font-bold text-white">{analysis.clientData.classe_creance}</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-white/5">
+                    <p className="text-xs text-slate-400 mb-1">Overdraft</p>
+                    <p className="text-sm font-bold text-white">{analysis.clientData.overdraft || 'Inconnu'}</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                    <p className="text-xs text-slate-400 mb-1">Type Client</p>
+                    <p className="text-sm font-bold text-slate-200">{analysis.clientData.type_client || 'Particulier'}</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                    <p className="text-xs text-slate-400 mb-1">Statut Client</p>
+                    <p className="text-sm font-bold text-slate-200">{analysis.clientData.statut_client || 'Actif'}</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                    <p className="text-xs text-slate-400 mb-1">Type Compte</p>
+                    <p className="text-sm font-bold text-slate-200">{analysis.clientData.type_compte || 'Courant'}</p>
+                  </div>
+                  <div className="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                    <p className="text-xs text-slate-400 mb-1">Type Crédit</p>
+                    <p className="text-sm font-bold text-slate-200">{analysis.clientData.type_credit || 'Consommation'}</p>
+                  </div>
+                </div>
+             </div>
              
              <div className="rounded-2xl border border-white/5 bg-slate-900/40 p-6 border-l-4 border-l-emerald-500">
                 <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Explication XAI (Natural Language)</h3>

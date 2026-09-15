@@ -1234,11 +1234,7 @@ app.get('/api/alertes', async (req, res) => {
   try {
     const history = await prisma.fraudHistoryItem.findMany({
       where: {
-        OR: [
-          { decision: 'blocked' },
-          { decision: 'review' },
-          { score: { gte: 50 } }
-        ]
+        score: { gte: 85 } // Only show highly critical anomalies as alerts to avoid flooding
       },
       orderBy: { id: 'desc' },
       take: 50
