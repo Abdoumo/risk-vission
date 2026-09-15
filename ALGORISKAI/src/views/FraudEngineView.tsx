@@ -822,12 +822,14 @@ export default function FraudEngineView() {
                    <div className="bg-slate-900/50 p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
                      <h4 className="font-bold text-emerald-400 mb-3 uppercase text-[11px] tracking-wider">Informations Financières</h4>
                      <div className="space-y-1.5">
-                       <p><span className="text-slate-400">Revenus:</span> <span className="font-medium text-slate-200">{selectedDetails.details.income} K DZD</span></p>
-                       <p><span className="text-slate-400">Dette:</span> <span className="font-medium text-slate-200">{(parseFloat(selectedDetails.details.creddebt || '0') + parseFloat(selectedDetails.details.othdebt || '0')).toFixed(2)} K DZD</span></p>
-                       <p><span className="text-slate-400">DTI:</span> <span className="font-medium text-slate-200">{selectedDetails.details.debtinc}%</span></p>
+                       <p><span className="text-slate-400">Revenus:</span> <span className="font-medium text-slate-200">{selectedDetails.details.income ? `${selectedDetails.details.income} K DZD` : 'N/A'}</span></p>
+                       <p><span className="text-slate-400">Solde Compte:</span> <span className="font-medium text-slate-200">{selectedDetails.details.solde_compte || 'N/A'}</span></p>
+                       <p><span className="text-slate-400">DTI:</span> <span className="font-medium text-slate-200">{selectedDetails.details.debtinc ? `${selectedDetails.details.debtinc}%` : 'N/A'}</span></p>
+                       <p><span className="text-slate-400">Impayés:</span> <span className="font-medium text-slate-200">{selectedDetails.details.impayes || 'N/A'}</span></p>
+                       <p><span className="text-slate-400">Retard de paiement:</span> <span className="font-medium text-slate-200">{selectedDetails.details.retard_paiement || (selectedDetails.details.default === '1' ? 'Oui' : 'Non')}</span></p>
                        <p><span className="text-slate-400">Cashflow:</span> <span className="font-medium text-slate-200">{selectedDetails.details.cashflow || 'N/A'}</span></p>
                        <p><span className="text-slate-400">Historique bancaire:</span> <span className="font-medium text-slate-200">{selectedDetails.details.banking_history || 'N/A'}</span></p>
-                       <p><span className="text-slate-400">Retard de paiement:</span> <span className="font-medium text-slate-200">{selectedDetails.details.default === '1' ? 'Oui' : 'Non'}</span></p>
+                       <p><span className="text-slate-400">Overdraft:</span> <span className="font-medium text-slate-200">{selectedDetails.details.overdraft || 'N/A'}</span></p>
                      </div>
                    </div>
                    <div className="bg-slate-900/50 p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
@@ -848,16 +850,6 @@ export default function FraudEngineView() {
                        <p><span className="text-slate-400">Emploi:</span> <span className="font-medium text-slate-200">{selectedDetails.details.EmploymentStatus}</span></p>
                        <p><span className="text-slate-400">Logement:</span> <span className="font-medium text-slate-200">{selectedDetails.details.HomeOwnershipStatus}</span></p>
                        <p><span className="text-slate-400">Faillite:</span> <span className="font-medium text-slate-200">{selectedDetails.details.BankruptcyHistory === '1' ? 'Oui' : 'Non'}</span></p>
-                     </div>
-                   </div>
-                   <div className="bg-slate-900/50 p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                     <h4 className="font-bold text-amber-400 mb-3 uppercase text-[11px] tracking-wider">Vérification Documents</h4>
-                     <div className="space-y-1.5">
-                       <p><span className="text-slate-400">Kashf Ratib:</span> <span className="font-medium text-slate-200">{selectedDetails.details.kashf_ratib === 'true' ? '✔' : '✘'}</span></p>
-                       <p><span className="text-slate-400">Sijil Tijari:</span> <span className="font-medium text-slate-200">{selectedDetails.details.sijil_tijari === 'true' ? '✔' : '✘'}</span></p>
-                       <p><span className="text-slate-400">Ouqoud:</span> <span className="font-medium text-slate-200">{selectedDetails.details.ouqoud === 'true' ? '✔' : '✘'}</span></p>
-                       <p><span className="text-slate-400">Damanat:</span> <span className="font-medium text-slate-200">{selectedDetails.details.damanat === 'true' ? '✔' : '✘'}</span></p>
-                       <p><span className="text-slate-400">Wathaiq Zoboun:</span> <span className="font-medium text-slate-200">{selectedDetails.details.wathaiq_zoboun === 'true' ? '✔' : '✘'}</span></p>
                      </div>
                    </div>
                  </div>
