@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShieldAlert, User, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
+import { ShieldAlert, User, CheckCircle2, AlertTriangle, ArrowRight, Search, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function CreditRiskView() {
@@ -7,6 +7,13 @@ export default function CreditRiskView() {
   const [selectedClientId, setSelectedClientId] = useState<string>('');
   const [analysis, setAnalysis] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const filteredClients = clients.filter(c => 
+    `${c.client_id} ${c.nom} ${c.prenom}`.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const selectedClient = clients.find(c => c.client_id === selectedClientId);
 
   useEffect(() => {
     fetch('/api/credit-risk/clients')
@@ -60,19 +67,50 @@ export default function CreditRiskView() {
           <User className="h-5 w-5 text-emerald-400" /> Profils Clients
         </h2>
         <div className="flex gap-4 items-end">
-          <div className="flex-1 max-w-sm">
+          <div className="flex-1 max-w-sm relative">
             <label className="block text-xs text-slate-400 mb-1">Sélectionner un client</label>
-            <select 
-              value={selectedClientId} 
-              onChange={(e) => setSelectedClientId(e.target.value)}
-              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500"
+            <div 
+              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white cursor-pointer flex justify-between items-center focus:border-emerald-500"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              {clients.map(c => (
-                <option key={c.client_id} value={c.client_id}>
-                  {c.client_id} - {c.nom} {c.prenom}
-                </option>
-              ))}
-            </select>
+              <span className="truncate text-sm">
+                {selectedClient ? `${selectedClient.client_id} - ${selectedClient.nom} ${selectedClient.prenom}` : 'Sélectionner un client...'}
+              </span>
+              <ChevronDown className="h-4 w-4 text-slate-400" />
+            </div>
+
+            {isDropdownOpen && (
+              <div className="absolute z-10 mt-1 w-full bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden">
+                <div className="p-2 border-b border-slate-700 flex items-center gap-2">
+                  <Search className="h-4 w-4 text-slate-400" />
+                  <input
+                    autoFocus
+                    type="text"
+                    className="bg-transparent border-none text-white focus:outline-none w-full text-sm"
+                    placeholder="Rechercher par ID ou nom..."
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                  />
+                </div>
+                <div className="max-h-60 overflow-y-auto">
+                  {filteredClients.length > 0 ? filteredClients.map(c => (
+                    <div
+                      key={c.client_id}
+                      className="px-4 py-2 hover:bg-slate-700 cursor-pointer text-sm text-slate-200 transition-colors"
+                      onClick={() => {
+                        setSelectedClientId(c.client_id);
+                        setIsDropdownOpen(false);
+                        setSearchQuery('');
+                      }}
+                    >
+                      {c.client_id} - {c.nom} {c.prenom}
+                    </div>
+                  )) : (
+                    <div className="px-4 py-3 text-sm text-slate-400 text-center">Aucun résultat</div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
           <button 
             onClick={handleAnalyze}
