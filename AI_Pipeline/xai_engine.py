@@ -99,12 +99,11 @@ FRAUD_FEATURE_LABELS = {
 }
 
 RISK_FEATURE_LABELS = {
-    "var95":   {"label_fr": "Value at Risk (95%)", "label_ar": "القيمة المعرضة للخطر (95%)", "label_en": "Value at Risk (95%)", "category": "marché"},
-    "beta":    {"label_fr": "Bêta du marché", "label_ar": "بيتا السوق", "label_en": "Market Beta", "category": "marché"},
-    "sharpe":  {"label_fr": "Ratio de Sharpe", "label_ar": "نسبة شارب", "label_en": "Sharpe Ratio", "category": "financier"},
+    "pd":      {"label_fr": "Probabilité de Défaut (PD)", "label_ar": "احتمالية التخلف عن السداد", "label_en": "Probability of Default", "category": "crédit"},
+    "lgd":     {"label_fr": "Perte en Cas de Défaut (LGD)", "label_ar": "الخسارة عند التخلف عن السداد", "label_en": "Loss Given Default", "category": "crédit"},
+    "ead":     {"label_fr": "Exposition au Moment du Défaut", "label_ar": "التعرض عند التخلف عن السداد", "label_en": "Exposure at Default", "category": "crédit"},
     "poids":   {"label_fr": "Poids dans le portefeuille", "label_ar": "الوزن في المحفظة", "label_en": "Portfolio weight", "category": "financier"},
-    "mcVar95": {"label_fr": "Monte Carlo VaR", "label_ar": "مونتي كارلو VaR", "label_en": "Monte Carlo VaR", "category": "marché"},
-    "es95":    {"label_fr": "Expected Shortfall", "label_ar": "العجز المتوقع", "label_en": "Expected Shortfall", "category": "macro"},
+    "el":      {"label_fr": "Perte Attendue (EL)", "label_ar": "الخسارة المتوقعة", "label_en": "Expected Loss", "category": "crédit"},
 }
 
 
@@ -160,10 +159,10 @@ def compute_fraud_baselines(cur) -> dict:
 def compute_risk_baselines(cur) -> dict:
     """Compute real mean/std baselines from RisqueActif table in the database."""
     print("[XAI] Computing risk baselines from real data...")
-    cur.execute('SELECT poids, var95, "mcVar95", es95, beta, sharpe FROM "RisqueActif"')
+    cur.execute('SELECT poids, pd, lgd, ead, el FROM "RisqueActif"')
     rows = cur.fetchall()
 
-    columns = ["poids", "var95", "mcVar95", "es95", "beta", "sharpe"]
+    columns = ["poids", "pd", "lgd", "ead", "el"]
     feature_values: dict[str, list] = {k: [] for k in columns}
 
     for row in rows:
@@ -232,13 +231,13 @@ def compute_shap_features(record: dict, baselines: dict, record_score: float) ->
         # For the 8 variables: 
         # Aggravating: high dti, high impayes, high retard_paiement, high overdraft
         # Mitigating: high revenue, high solde_compte, high cashflow, high historique_bancaire
-        if z > 0 and key in ("dti", "impayes", "retard_paiement", "overdraft", "var95", "beta", "es95", "mcVar95"):
+        if z > 0 and key in ("dti", "impayes", "retard_paiement", "overdraft", "pd", "lgd", "el"):
             shap_value = abs(shap_value)
-        elif z < 0 and key in ("revenue", "solde_compte", "cashflow", "historique_bancaire", "sharpe"):
+        elif z < 0 and key in ("revenue", "solde_compte", "cashflow", "historique_bancaire"):
             shap_value = abs(shap_value)
         elif z < 0 and key in ("dti", "impayes", "retard_paiement", "overdraft"):
             shap_value = -abs(shap_value)
-        elif z > 0 and key in ("revenue", "solde_compte", "cashflow", "historique_bancaire", "sharpe"):
+        elif z > 0 and key in ("revenue", "solde_compte", "cashflow", "historique_bancaire"):
             shap_value = -abs(shap_value)
 
         # Format actual value for display
@@ -316,38 +315,29 @@ def compute_counterfactuals(record: dict, baselines: dict, score: float) -> list
         })
 
     # For risk portfolio records
-    if "var95" in record and float(record.get("var95", 0)) > 5:
+    if "pd" in record and float(record.get("pd", 0)) > 5:
         suggestions.append({
-            "action_fr": "Réduire l'exposition VaR en diversifiant le portefeuille",
-            "action_ar": "تقليل التعرض للمخاطر عبر تنويع المحفظة",
-            "action_en": "Reduce VaR exposure through portfolio diversification",
+            "action_fr": "Réduire l'exposition aux clients à fort risque de défaut",
+            "action_ar": "تقليل التعرض للعملاء ذوي مخاطر التخلف عن السداد العالية",
+            "action_en": "Reduce exposure to high default risk clients",
             "impact": min(int(score * 0.2), 20),
             "feasibility": "moyen"
         })
 
-    if "beta" in record and float(record.get("beta", 1)) > 1.5:
+    if "lgd" in record and float(record.get("lgd", 1)) > 50:
         suggestions.append({
-            "action_fr": f"Rééquilibrer vers des actifs à bêta < 1.0 (actuel: {float(record['beta']):.2f})",
-            "action_ar": f"إعادة التوازن نحو أصول ذات بيتا < 1.0 (الحالي: {float(record['beta']):.2f})",
-            "action_en": f"Rebalance towards assets with beta < 1.0 (current: {float(record['beta']):.2f})",
+            "action_fr": f"Demander plus de garanties pour réduire LGD (actuel: {float(record['lgd']):.1f}%)",
+            "action_ar": f"طلب المزيد من الضمانات لتقليل الخسارة عند التخلف (الحالي: {float(record['lgd']):.1f}%)",
+            "action_en": f"Require more collateral to reduce LGD (current: {float(record['lgd']):.1f}%)",
             "impact": min(int(score * 0.15), 15),
             "feasibility": "difficile"
         })
 
-    if "sharpe" in record and float(record.get("sharpe", 1)) < 0.5:
+    if "poids" in record and float(record.get("poids", 0)) > 5000000:
         suggestions.append({
-            "action_fr": f"Améliorer le ratio de Sharpe (actuel: {float(record['sharpe']):.2f}) en optimisant le rendement ajusté au risque",
-            "action_ar": f"تحسين نسبة شارب (الحالية: {float(record['sharpe']):.2f}) عبر تحسين العائد المعدل للمخاطر",
-            "action_en": f"Improve Sharpe ratio (current: {float(record['sharpe']):.2f}) by optimizing risk-adjusted returns",
-            "impact": min(int(score * 0.15), 12),
-            "feasibility": "difficile"
-        })
-
-    if "poids" in record and float(record.get("poids", 0)) > 15:
-        suggestions.append({
-            "action_fr": f"Réduire le poids de l'actif dans le portefeuille (actuel: {float(record['poids']):.1f}%)",
-            "action_ar": f"تقليل وزن الأصل في المحفظة (الحالي: {float(record['poids']):.1f}%)",
-            "action_en": f"Reduce asset weight in portfolio (current: {float(record['poids']):.1f}%)",
+            "action_fr": f"Réduire le montant du crédit exposé (actuel: {float(record['poids']):,.0f} DZD)",
+            "action_ar": f"تقليل مبلغ الائتمان المعرض للخطر (الحالي: {float(record['poids']):,.0f} د.ج)",
+            "action_en": f"Reduce exposed credit amount (current: {float(record['poids']):,.0f} DZD)",
             "impact": min(int(score * 0.1), 10),
             "feasibility": "facile"
         })
@@ -531,7 +521,7 @@ def run_xai_analysis(limit=15, offset=0):
 
     # ── 3. Read risk portfolio ──────────────────────────────────────
     print(f"[XAI] Reading RisqueActif records...")
-    cur.execute(f'SELECT id, ticker, nom, secteur, poids, var95, "mcVar95", es95, beta, sharpe, risque FROM "RisqueActif" LIMIT {limit} OFFSET {offset}')
+    cur.execute(f'SELECT id, nom, secteur, poids, pd, lgd, ead, el, risque FROM "RisqueActif" LIMIT {limit} OFFSET {offset}')
     risk_rows = cur.fetchall()
     print(f"[XAI] Found {len(risk_rows)} risk portfolio records")
 
@@ -605,16 +595,15 @@ def run_xai_analysis(limit=15, offset=0):
 
     # ── 5. Process risk portfolio records ───────────────────────────
     for i, row in enumerate(risk_rows[:10]):  # top 10
-        rid, ticker, nom, secteur, poids, var95, mcVar95, es95, beta, sharpe, risque = row
+        rid, nom, secteur, poids, pd_val, lgd, ead, el, risque = row
 
         record = {
-            "ticker": ticker, "nom": nom, "secteur": secteur,
+            "nom": nom, "secteur": secteur,
             "poids": float(poids) if poids else 0,
-            "var95": float(var95) if var95 else 0,
-            "mcVar95": float(mcVar95) if mcVar95 else 0,
-            "es95": float(es95) if es95 else 0,
-            "beta": float(beta) if beta else 0,
-            "sharpe": float(sharpe) if sharpe else 0,
+            "pd": float(pd_val) if pd_val else 0,
+            "lgd": float(lgd) if lgd else 0,
+            "ead": float(ead) if ead else 0,
+            "el": float(el) if el else 0,
         }
 
         # Compute a composite risk score from real baselines
@@ -623,11 +612,11 @@ def run_xai_analysis(limit=15, offset=0):
             if not b: return 0
             return (record.get(key, 0) - b["mean"]) / max(b["std"], 0.01)
 
-        var_z = _z("var95")
-        beta_z = _z("beta")
-        sharpe_z = -_z("sharpe")  # negative: low sharpe = higher risk
+        pd_z = _z("pd")
+        lgd_z = _z("lgd")
+        el_z = _z("el")
         weight_z = _z("poids")
-        composite = 50 + (var_z + beta_z + sharpe_z + weight_z) * 8
+        composite = 50 + (pd_z + lgd_z + el_z + weight_z) * 5
         composite = max(5, min(95, composite))
 
         shap_features = compute_shap_features(record, risk_baselines, composite)
@@ -641,10 +630,10 @@ def run_xai_analysis(limit=15, offset=0):
         xai_decision = {
             "id": xai_id,
             "type": "marche",
-            "label_fr": f"Risque Portefeuille — {nom} ({ticker})",
-            "label_ar": f"مخاطر المحفظة — {nom} ({ticker})",
-            "label_en": f"Portfolio Risk — {nom} ({ticker})",
-            "entity": f"{nom} ({ticker}) — {secteur}",
+            "label_fr": f"Risque Crédit — {nom}",
+            "label_ar": f"مخاطر الائتمان — {nom}",
+            "label_en": f"Credit Risk — {nom}",
+            "entity": f"{nom} — {secteur}",
             "decision_fr": dec["fr"],
             "decision_ar": dec["ar"],
             "decision_en": dec["en"],
@@ -652,7 +641,7 @@ def run_xai_analysis(limit=15, offset=0):
             "confidence": min(93, 75 + len(shap_features) * 2),
             "riskLevel": risk,
             "timestamp": datetime.now().strftime("%d/%m/%Y %H:%M"),
-            "model": "Analyse Multi-Factorielle (VaR + Beta + Sharpe)",
+            "model": "Modèle PD/LGD (Analyse Multi-Factorielle)",
             "naturalExplanation_fr": explanation["fr"],
             "naturalExplanation_ar": explanation["ar"],
             "naturalExplanation_en": explanation["en"],
