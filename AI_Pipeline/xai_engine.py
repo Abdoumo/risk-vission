@@ -88,12 +88,14 @@ def decision_from_score(score: float) -> dict:
 # ── Feature labels (only UI strings, no hardcoded values) ───────────
 
 FRAUD_FEATURE_LABELS = {
-    "income":            {"label_fr": "Revenu Annuel", "label_ar": "الدخل السنوي", "label_en": "Annual Income", "category": "financier"},
-    "debtinc":           {"label_fr": "Ratio Dette/Revenu", "label_ar": "نسبة الدين إلى الدخل", "label_en": "Debt-to-Income Ratio", "category": "financier"},
-    "creddebt":          {"label_fr": "Dettes de Cartes", "label_ar": "ديون البطاقات", "label_en": "Credit Card Debt", "category": "financier"},
-    "othdebt":           {"label_fr": "Autres Dettes", "label_ar": "ديون أخرى", "label_en": "Other Debt", "category": "financier"},
-    "default":           {"label_fr": "Défaut Antérieur", "label_ar": "تخلف سابق", "label_en": "Previous Default", "category": "comportemental"},
-    "BankruptcyHistory": {"label_fr": "Historique Faillite", "label_ar": "تاريخ الإفلاس", "label_en": "Bankruptcy History", "category": "client"},
+    "revenue":              {"label_fr": "Revenus", "label_ar": "الدخل", "label_en": "Revenue", "category": "financier"},
+    "solde_compte":         {"label_fr": "Solde Compte", "label_ar": "رصيد الحساب", "label_en": "Account Balance", "category": "financier"},
+    "dti":                  {"label_fr": "DTI", "label_ar": "نسبة الدين إلى الدخل", "label_en": "DTI", "category": "financier"},
+    "impayes":              {"label_fr": "Impayés", "label_ar": "غير مدفوع", "label_en": "Unpaid", "category": "financier"},
+    "retard_paiement":      {"label_fr": "Retard de Paiement", "label_ar": "تأخير الدفع", "label_en": "Late Payment", "category": "comportemental"},
+    "cashflow":             {"label_fr": "Cashflow", "label_ar": "التدفق النقدي", "label_en": "Cashflow", "category": "financier"},
+    "historique_bancaire":  {"label_fr": "Historique Bancaire", "label_ar": "التاريخ المصرفي", "label_en": "Banking History", "category": "comportemental"},
+    "overdraft":            {"label_fr": "Overdraft", "label_ar": "السحب على المكشوف", "label_en": "Overdraft", "category": "financier"},
 }
 
 RISK_FEATURE_LABELS = {
@@ -227,14 +229,16 @@ def compute_shap_features(record: dict, baselines: dict, record_score: float) ->
         shap_value = weight * (record_score - 50) / 50  # normalized around base 50
 
         # Positive SHAP = increases risk, negative = decreases
-        # Generally, higher debt, default, or bankruptcy history increases risk
-        if z > 0 and key in ("debtinc", "creddebt", "othdebt", "default", "BankruptcyHistory", "var95", "beta", "es95", "mcVar95"):
+        # For the 8 variables: 
+        # Aggravating: high dti, high impayes, high retard_paiement, high overdraft
+        # Mitigating: high revenue, high solde_compte, high cashflow, high historique_bancaire
+        if z > 0 and key in ("dti", "impayes", "retard_paiement", "overdraft", "var95", "beta", "es95", "mcVar95"):
             shap_value = abs(shap_value)
-        elif z < 0 and key in ("sharpe", "income"):  # lower sharpe or lower income = higher risk
+        elif z < 0 and key in ("revenue", "solde_compte", "cashflow", "historique_bancaire", "sharpe"):
             shap_value = abs(shap_value)
-        elif z < 0 and key in ("debtinc", "creddebt", "default", "BankruptcyHistory"):
+        elif z < 0 and key in ("dti", "impayes", "retard_paiement", "overdraft"):
             shap_value = -abs(shap_value)
-        elif z > 0 and key in ("income", "sharpe"):
+        elif z > 0 and key in ("revenue", "solde_compte", "cashflow", "historique_bancaire", "sharpe"):
             shap_value = -abs(shap_value)
 
         # Format actual value for display
@@ -361,133 +365,66 @@ def generate_explanation(record: dict, score: float, record_type: str, shap_feat
 
     risk = risk_level_from_score(score)
 
-    # ── Helper: format a positive-risk factor (increases risk) ──
-    def fmt_pos_fr(f):
-        name = f['feature']
-        val  = f['actualValue']
-        base = f['baselineValue']
-        # Map known features to the narrative style the user loves
-        if name in ("Ratio Dette/Revenu", "Debt-to-Income Ratio"):
-            return f"un **ratio d'endettement élevé ({val} vs {base} en moyenne)**"
-        if name in ("Défaut Antérieur", "Previous Default"):
-            return f"un **historique de paiement dégradé ({val})**"
-        if name in ("Dettes de Cartes", "Credit Card Debt"):
-            return f"des **dettes de cartes importantes ({val} vs {base})**"
-        if name in ("Autres Dettes", "Other Debt"):
-            return f"des **dettes diverses élevées ({val} vs {base})**"
-        if name in ("Revenu Annuel", "Annual Income"):
-            return f"un **revenu insuffisant ({val} vs {base} en moyenne)**"
-        if name in ("Historique Faillite", "Bankruptcy History"):
-            return f"un **historique de faillite préoccupant ({val} vs {base})**"
-        if name in ("Value at Risk (95%)", "Monte Carlo VaR", "Expected Shortfall"):
-            return f"une **Value at Risk élevée ({val} vs {base})**"
-        if name in ("Bêta du marché", "Market Beta"):
-            return f"une **forte volatilité marché (Bêta de {val} vs {base})**"
-        if name in ("Poids dans le portefeuille", "Portfolio weight"):
-            return f"un **poids excessif dans le portefeuille ({val}% vs {base}%)**"
-        if name in ("Ratio de Sharpe", "Sharpe Ratio"):
-            return f"un **ratio de Sharpe faible ({val} vs {base})**"
-        return f"un(e) **{name} critique ({val} vs {base} en moyenne)**"
-
-    def fmt_pos_ar(f):
-        return f"**{f['feature_ar']}** بقيمة **{f['actualValue']}** (المتوسط: {f['baselineValue']})"
-
-    def fmt_pos_en(f):
-        return f"a **{f['feature_en']} of {f['actualValue']}** (vs {f['baselineValue']} avg)"
-
-    # ── Helper: format a negative-risk factor (reduces exposure) ──
-    def fmt_neg_fr(f):
-        name = f['feature']
-        val  = f['actualValue']
-        if name in ("Revenu Annuel", "Annual Income"):
-            return f"des **revenus solides ({val})**"
-        if name in ("Ratio de Sharpe", "Sharpe Ratio"):
-            return f"un **ratio de Sharpe sain ({val})**"
-        if name in ("Défaut Antérieur", "Previous Default"):
-            return f"un **historique de paiement sain ({val})**"
-        if name in ("Historique Faillite", "Bankruptcy History"):
-            return f"une **absence de faillite ({val})**"
-        if name in ("Ratio Dette/Revenu", "Debt-to-Income Ratio"):
-            return f"un **endettement maîtrisé ({val})**"
-        if name in ("Bêta du marché", "Market Beta"):
-            return f"une **volatilité contenue (Bêta de {val})**"
-        return f"des **{name} solides ({val})**"
-
-    def fmt_neg_ar(f):
-        return f"**{f['feature_ar']}** جيدة ({f['actualValue']})"
-
-    def fmt_neg_en(f):
-        return f"solid **{f['feature_en']} ({f['actualValue']})**"
-
-    # ── Build the factor phrases ──
-    pos_fr = " et ".join([fmt_pos_fr(f) for f in top_pos[:2]]) if top_pos else "aucun facteur de risque majeur"
-    pos_ar = " و ".join([fmt_pos_ar(f) for f in top_pos[:2]]) if top_pos else "لا توجد عوامل مخاطر رئيسية"
-    pos_en = " and ".join([fmt_pos_en(f) for f in top_pos[:2]]) if top_pos else "no major risk factors"
-
-    neg_fr = " et ".join([fmt_neg_fr(f) for f in top_neg[:2]]) if top_neg else None
-    neg_ar = " و ".join([fmt_neg_ar(f) for f in top_neg[:2]]) if top_neg else None
-    neg_en = " and ".join([fmt_neg_en(f) for f in top_neg[:2]]) if top_neg else None
-
-    # ── Build mitigating sentence ──
-    mit_fr = f"En revanche, {neg_fr} réduisent l'exposition. " if neg_fr else ""
-    mit_ar = f"في المقابل، {neg_ar} يقلل من التعرض. " if neg_ar else ""
-    mit_en = f"However, {neg_en} reduce the exposure. " if neg_en else ""
-
-    # ── Build recommendation based on score ──
-    if score >= 75:
-        reco_fr = "Blocage immédiat recommandé ou couverture par produits dérivés urgente (Hedging)."
-        reco_ar = "يوصى بالحظر الفوري أو التغطية العاجلة بالمشتقات المالية."
-        reco_en = "Immediate block recommended or urgent hedging with derivatives."
-    elif score >= 50:
-        reco_fr = "Approbation sous réserve de garanties supplémentaires et d'un plan de désendettement sur 36 mois."
-        reco_ar = "الموافقة مشروطة بضمانات إضافية وخطة لتقليص الديون على 36 شهرًا."
-        reco_en = "Conditional approval with additional collateral and a 36-month debt reduction plan."
-    elif score >= 25:
-        reco_fr = "Surveillance renforcée recommandée avec réévaluation trimestrielle."
-        reco_ar = "يُوصى بمراقبة معززة مع إعادة تقييم ربع سنوية."
-        reco_en = "Enhanced monitoring recommended with quarterly reassessment."
-    else:
-        reco_fr = "Approbation recommandée, le profil de risque est sain."
-        reco_ar = "موافقة موصى بها، ملف المخاطر سليم."
-        reco_en = "Approval recommended, the risk profile is healthy."
+    def _build_structural_text(lang, r_score, r_level, t_pos, t_neg, rec):
+        lines = []
+        
+        # Client Profile section
+        lines.append("Client Profile:")
+        lines.append(f"• Type client: {rec.get('Type_Client', 'Donnée indisponible')}")
+        lines.append(f"• Statut Client: {rec.get('Statut_Client', 'Donnée indisponible')}")
+        lines.append(f"• Type compte: {rec.get('Type_Compte', 'Donnée indisponible')}")
+        lines.append(f"• Type crédit: {rec.get('Type_Credit', 'Donnée indisponible')}")
+        lines.append("")
+        
+        # Financial Data section
+        lines.append("Financial Data:")
+        lines.append(f"• Revenue: {rec.get('revenue', 'Donnée indisponible')}")
+        lines.append(f"• Solde compte: {rec.get('solde_compte', 'Donnée indisponible')}")
+        lines.append(f"• DTI: {rec.get('dti', 'Donnée indisponible')}")
+        lines.append(f"• Impayé: {rec.get('impayes', 'Donnée indisponible')}")
+        lines.append(f"• Retard de paiement: {rec.get('retard_paiement', 'Donnée indisponible')}")
+        lines.append(f"• Cashflow: {rec.get('cashflow', 'Donnée indisponible')}")
+        lines.append(f"• Historique bancaire: {rec.get('historique_bancaire', 'Donnée indisponible')}")
+        lines.append(f"• Overdraft: {rec.get('overdraft', 'Donnée indisponible')}")
+        lines.append("")
+        
+        # Risk Score & Level
+        lines.append(f"Risk Score = {r_score:.0f}")
+        lines.append(f"Risk Level = {r_level.capitalize()}")
+        lines.append("")
+        
+        # Risk factors title
+        if lang == 'fr': lines.append("Top Risk Factors:")
+        elif lang == 'ar': lines.append("عوامل الخطر الرئيسية:")
+        else: lines.append("Top Risk Factors:")
+        
+        if not t_pos:
+            lines.append("Aucun" if lang == 'fr' else "لا يوجد" if lang == 'ar' else "None")
+        else:
+            for f in t_pos:
+                key = f["feature"] if lang == 'fr' else f["feature_ar"] if lang == 'ar' else f["feature_en"]
+                lines.append(f"• {key}")
+                
+        lines.append("")
+        
+        # Mitigating factors title
+        if lang == 'fr': lines.append("Mitigating Factors:")
+        elif lang == 'ar': lines.append("العوامل المخففة:")
+        else: lines.append("Mitigating Factors:")
+        
+        if not t_neg:
+            lines.append("Aucun" if lang == 'fr' else "لا يوجد" if lang == 'ar' else "None")
+        else:
+            for f in t_neg:
+                key = f["feature"] if lang == 'fr' else f["feature_ar"] if lang == 'ar' else f["feature_en"]
+                lines.append(f"• {key}")
+                
+        return "\n".join(lines)
 
     # ── Build the full narrative per type ──
-    if record_type == "fraude":
-        fr = (f"Le modèle attribue un score de risque de **{score:.1f}/100** à ce dossier. "
-              f"La décision est principalement influencée par {pos_fr}. "
-              f"Ces facteurs augmentent significativement le risque. "
-              f"{mit_fr}"
-              f"**Recommandation : {reco_fr}**")
-        ar = (f"يمنح النموذج درجة مخاطر تبلغ **{score:.1f}/100** لهذا الملف. "
-              f"يتأثر القرار بشكل أساسي بـ {pos_ar}. "
-              f"هذه العوامل تزيد بشكل كبير من المخاطر. "
-              f"{mit_ar}"
-              f"**التوصية: {reco_ar}**")
-        en = (f"The model assigns a risk score of **{score:.1f}/100** to this case. "
-              f"The decision is primarily influenced by {pos_en}. "
-              f"These factors significantly increase the risk. "
-              f"{mit_en}"
-              f"**Recommendation: {reco_en}**")
-    else:
-        sector = record.get("secteur", "N/A")
-        fr = (f"Le modèle attribue un score de risque de **{score:.1f}/100** à ce dossier. "
-              f"La décision est principalement influencée par {pos_fr}. "
-              f"Ces facteurs augmentent significativement le risque. "
-              f"{mit_fr}"
-              f"Les dynamiques récentes du secteur **{sector}** ont également été intégrées dans l'évaluation. "
-              f"**Recommandation : {reco_fr}**")
-        ar = (f"يمنح النموذج درجة مخاطر تبلغ **{score:.1f}/100** لهذا الملف. "
-              f"يتأثر القرار بشكل أساسي بـ {pos_ar}. "
-              f"هذه العوامل تزيد بشكل كبير من المخاطر. "
-              f"{mit_ar}"
-              f"تم أيضًا تقييم الديناميكيات الأخيرة لقطاع **{sector}**. "
-              f"**التوصية: {reco_ar}**")
-        en = (f"The model assigns a risk score of **{score:.1f}/100** to this case. "
-              f"The decision is primarily influenced by {pos_en}. "
-              f"These factors significantly increase the risk. "
-              f"{mit_en}"
-              f"Recent dynamics of the **{sector}** sector were also factored into the assessment. "
-              f"**Recommendation: {reco_en}**")
+    fr = _build_structural_text('fr', score, risk, top_pos, top_neg, record)
+    ar = _build_structural_text('ar', score, risk, top_pos, top_neg, record)
+    en = _build_structural_text('en', score, risk, top_pos, top_neg, record)
 
     return {"fr": fr, "ar": ar, "en": en}
 

@@ -185,7 +185,7 @@ export default function ApiConnectorsView() {
     { id: 'uploads',    label_fr: 'Fichiers & Données', label_ar: 'ملفات وبيانات', label_en: 'Files & Data', icon: UploadCloud },
   ];
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUnifiedUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
     const file = e.target.files[0];
     
@@ -195,48 +195,29 @@ export default function ApiConnectorsView() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/risques/upload', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData,
-      });
-      if (response.ok) {
-        alert('Upload réussi et pipeline déclenchée !');
+      
+      // We send the file to both endpoints simultaneously
+      const [resRisque, resFraude] = await Promise.all([
+        fetch('/api/risques/upload', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          body: formData,
+        }),
+        fetch('/api/fraude/upload', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          body: formData,
+        })
+      ]);
+      
+      if (resRisque.ok && resFraude.ok) {
+        alert("Upload réussi ! L'évaluation des risques et les modèles anti-fraude/anomalies ont été déclenchés.");
       } else {
-        alert('Échec de l\'upload');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Erreur lors du téléchargement');
-    } finally {
-      setIsUploading(false);
-      e.target.value = '';
-    }
-  };
-
-  const handleFraudUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || e.target.files.length === 0) return;
-    const file = e.target.files[0];
-    
-    setIsUploading(true);
-    const formData = new FormData();
-    formData.append('csvFile', file);
-
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/fraude/upload', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData,
-      });
-      if (response.ok) {
-        alert('Upload réussi ! Les modèles anti-fraude vont être ré-entraînés.');
-      } else {
-        alert('Échec de l\'upload');
+        alert("Attention : Un ou plusieurs pipelines ont échoué lors de l'upload.");
       }
     } catch (err) {
       console.error(err);
@@ -477,34 +458,24 @@ export default function ApiConnectorsView() {
             <p className="text-[13px] text-slate-500 mt-1">Importation de données manuelles et fichiers de référence</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className={`rounded-xl border border-white/5 bg-slate-800/30 p-6 flex flex-col items-center justify-center text-center hover:bg-slate-800/50 transition-colors`}>
-              <div className="h-12 w-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4">
-                <FileText className="h-6 w-6 text-emerald-400" />
+          <div className="grid grid-cols-1 gap-6">
+            <div className={`rounded-xl border border-white/5 bg-slate-800/30 p-8 flex flex-col items-center justify-center text-center hover:bg-slate-800/50 transition-colors`}>
+              <div className="flex gap-4 mb-4">
+                <div className="h-12 w-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                  <FileText className="h-6 w-6 text-emerald-400" />
+                </div>
+                <div className="h-12 w-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center">
+                  <Database className="h-6 w-6 text-rose-400" />
+                </div>
               </div>
-              <h4 className="text-sm font-bold text-white mb-2">Portefeuille de Risques (SGBV)</h4>
-              <p className="text-[12px] text-slate-400 mb-6 max-w-[250px]">
-                Uploadez votre CSV contenant les actifs pour évaluer le VaR et les risques de marché.
+              <h4 className="text-lg font-bold text-white mb-2">Base de Données Unifiée (Risques & Fraudes)</h4>
+              <p className="text-[14px] text-slate-400 mb-6 max-w-[500px]">
+                Uploadez votre fichier CSV contenant les données globales. Il sera automatiquement traité pour évaluer les risques (VaR, Portefeuille) ET pour ré-entraîner les modèles anti-fraude et anomalies.
               </p>
-              <label className="flex cursor-pointer items-center gap-2 rounded-xl bg-emerald-500/10 px-5 py-2.5 text-[13px] font-bold text-emerald-400 transition-all hover:bg-emerald-500/20 border border-emerald-500/20 hover:shadow-[0_0_15px_rgba(16,185,129,0.2)] active:scale-[0.98]">
-                {isUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <UploadCloud className="h-4 w-4" />}
-                <span>{isUploading ? 'Chargement...' : 'Importer CSV'}</span>
-                <input type="file" accept=".csv" className="hidden" onChange={handleFileUpload} disabled={isUploading} />
-              </label>
-            </div>
-
-            <div className={`rounded-xl border border-white/5 bg-slate-800/30 p-6 flex flex-col items-center justify-center text-center hover:bg-slate-800/50 transition-colors`}>
-              <div className="h-12 w-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mb-4">
-                <Database className="h-6 w-6 text-rose-400" />
-              </div>
-              <h4 className="text-sm font-bold text-white mb-2">Dataset Détection Fraude</h4>
-              <p className="text-[12px] text-slate-400 mb-6 max-w-[250px]">
-                Importez les historiques de transactions pour ré-entraîner les modèles anti-fraude  et anomalies.
-              </p>
-              <label className="flex cursor-pointer items-center gap-2 rounded-xl bg-rose-500/10 px-5 py-2.5 text-[13px] font-bold text-rose-400 transition-all hover:bg-rose-500/20 border border-rose-500/20 hover:shadow-[0_0_15px_rgba(244,63,94,0.2)] active:scale-[0.98]">
-                {isUploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <UploadCloud className="h-4 w-4" />}
-                <span>{isUploading ? 'Chargement...' : 'Importer CSV'}</span>
-                <input type="file" accept=".csv" className="hidden" onChange={handleFraudUpload} disabled={isUploading} />
+              <label className="flex cursor-pointer items-center gap-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-3 text-[14px] font-bold text-white transition-all hover:from-emerald-500 hover:to-teal-500 shadow-[0_0_20px_rgba(16,185,129,0.3)] active:scale-[0.98]">
+                {isUploading ? <Loader2 className="h-5 w-5 animate-spin" /> : <UploadCloud className="h-5 w-5" />}
+                <span>{isUploading ? 'Chargement en cours...' : 'Importer CSV Unifié'}</span>
+                <input type="file" accept=".csv" className="hidden" onChange={handleUnifiedUpload} disabled={isUploading} />
               </label>
             </div>
           </div>

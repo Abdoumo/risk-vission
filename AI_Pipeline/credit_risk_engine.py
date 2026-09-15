@@ -83,8 +83,16 @@ class CreditRiskEngine:
             
         if df is None or len(df) == 0:
             if data_path is None:
-                data_path = os.path.join(BASE_DIR, "DATASETS", "bankloans.csv")
+                data_path = os.path.join(BASE_DIR, "DATASETS", "bna_credit_risk_ready.csv")
             df = pd.read_csv(data_path)
+
+        # Ensure we only use the 8 specified variables + default
+        features_to_keep = ["revenue", "solde_compte", "dti", "impayes", "retard_paiement", "cashflow", "historique_bancaire", "overdraft"]
+        
+        # Check if we have the necessary columns
+        missing = [c for c in features_to_keep if c not in df.columns]
+        if missing:
+            print(f"Warning: Missing columns {missing} in data. Attempting to proceed, but training may fail or be inaccurate.")
 
         if "default" not in df.columns:
             print("Warning: 'default' column missing from data. Ensure DB or CSV has correct labels.")
@@ -95,7 +103,9 @@ class CreditRiskEngine:
 
         # Separate target
         y = df["default"].astype(int)
-        X = df.drop(columns=["default"])
+        
+        # Keep only the 8 features for X
+        X = df[[c for c in features_to_keep if c in df.columns]].copy()
 
         # Encode categoricals
         for col in X.columns:
@@ -398,18 +408,18 @@ class CreditRiskEngine:
         
         for idx, row in df.iterrows():
             client_data = {
-                "age": row.get("age", 30),
-                "ed": row.get("ed", 2),
-                "employ": row.get("employ", 5),
-                "address": row.get("address", 5),
-                "income": row.get("income", 50),
-                "debtinc": row.get("debtinc", 10),
-                "creddebt": row.get("creddebt", 1),
-                "othdebt": row.get("othdebt", 1)
+                "revenue": row.get("revenue", 80000),
+                "solde_compte": row.get("solde_compte", 150000),
+                "dti": row.get("dti", 40),
+                "impayes": row.get("impayes", 0),
+                "retard_paiement": row.get("retard_paiement", 0),
+                "cashflow": row.get("cashflow", 30000),
+                "historique_bancaire": row.get("historique_bancaire", 0.9),
+                "overdraft": row.get("overdraft", 0)
             }
             
-            # Using credit_limit or default 500k DZD
-            exposure = float(row.get("credit_limit") or 500000)
+            # Using montant_credit or default 500k DZD
+            exposure = float(row.get("montant_credit") or row.get("credit_limit") or 500000)
             if np.isnan(exposure):
                 exposure = 500000.0
                 
@@ -469,16 +479,16 @@ if __name__ == "__main__":
     print("Testing Credit Risk Assessment")
     print("=" * 60)
 
-    # Test client (matches bankloans.csv features)
+    # Test client (using new 8 variables)
     client = {
-        "age": 35,
-        "ed": 2,
-        "employ": 8,
-        "address": 10,
-        "income": 55,
-        "debtinc": 12.5,
-        "creddebt": 3.5,
-        "othdebt": 3.4,
+        "revenue": 180000,          # 180K DZD
+        "solde_compte": -45000,     # Negative balance
+        "dti": 49.5,                # High DTI
+        "impayes": 30,              # 30 days unpaid
+        "retard_paiement": 2,       # 2 late payments
+        "cashflow": -15000,         # Negative cashflow
+        "historique_bancaire": 0.4, # Poor history score
+        "overdraft": 3              # 3 overdrafts recently
     }
 
     loan = {
