@@ -776,9 +776,12 @@ app.get('/api/mock/distribution', async (req, res) => {
   try {
     const distribution = await prisma.donneeDistribution.findMany();
     res.json(distribution.length ? distribution : [
-      { name: "Transactions Normales", value: 85, color: "bg-green-500" },
-      { name: "Fraudes Suspectées", value: 10, color: "bg-amber-500" },
-      { name: "Fraudes Confirmées", value: 5, color: "bg-red-500" }
+      { tranche: "< -5%", count: 5 },
+      { tranche: "-5% à -2%", count: 15 },
+      { tranche: "-2% à 0%", count: 45 },
+      { tranche: "0% à +2%", count: 55 },
+      { tranche: "+2% à +5%", count: 25 },
+      { tranche: "> +5%", count: 8 }
     ]);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch distribution' });
