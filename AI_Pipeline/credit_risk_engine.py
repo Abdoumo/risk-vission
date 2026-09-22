@@ -314,6 +314,136 @@ class CreditRiskEngine:
             "decision": decision,
         }
 
+    def evaluate_profile(self, client_data: dict) -> dict:
+        """
+        Evaluates a client profile using the 8 specific variables,
+        generates a Risk Score (0-100), Risk Level, XAI factors,
+        and a Natural Language Explanation.
+        """
+        score = 10
+        agg_factors = []
+        mit_factors = []
+        
+        # Extrait les 8 variables
+        revenu = float(client_data.get('revenu_mensuel_dzd', 0))
+        solde = float(client_data.get('solde_compte_dzd', 0))
+        echeance = float(client_data.get('echeance_mensuelle_dzd', 0))
+        dti = (echeance / revenu * 100) if revenu > 0 else 0
+        impayes = float(client_data.get('impayes_dzd', 0))
+        retard = float(client_data.get('jours_retard', 0))
+        cashflow = client_data.get('cashflow_dzd')
+        cashflow = float(cashflow) if cashflow is not None else None
+        historique = client_data.get('classe_creance', 'Saine')
+        overdraft = client_data.get('overdraft', 'Aucun')
+        
+        # XAI & Scoring Logic
+        if dti > 50:
+            score += 40
+            agg_factors.append(f"un DTI très élevé ({dti:.1f}%)")
+        elif dti > 30:
+            score += 20
+            agg_factors.append(f"un DTI relativement élevé ({dti:.1f}%)")
+        elif dti < 20:
+            score -= 5
+            mit_factors.append(f"un DTI faible ({dti:.1f}%)")
+            
+        if solde < 10000:
+            score += 15
+            agg_factors.append(f"un solde très faible ({solde:,.0f} DZD)")
+        elif solde > 300000:
+            score -= 10
+            mit_factors.append(f"un solde positif et stable ({solde:,.0f} DZD)")
+            
+        if impayes > 50000:
+            score += 35
+            agg_factors.append(f"des impayés importants ({impayes:,.0f} DZD)")
+        elif impayes > 0:
+            score += 15
+            agg_factors.append(f"des impayés existants ({impayes:,.0f} DZD)")
+        else:
+            mit_factors.append("l'absence d'impayés")
+            
+        if retard > 30:
+            score += 20
+            agg_factors.append(f"des retards de paiement importants ({retard} jours)")
+        elif retard > 0:
+            score += 10
+            agg_factors.append(f"quelques retards de paiement historiques ({retard} jours)")
+            
+        if historique not in ['Saine', 'Non concernee', 'Normale']:
+            score += 25
+            agg_factors.append(f"un historique bancaire défavorable (Classe: {historique})")
+        else:
+            mit_factors.append(f"un historique bancaire régulier (Classe: {historique})")
+            
+        if cashflow is not None and cashflow < 0:
+            score += 20
+            agg_factors.append(f"un cashflow négatif ({cashflow:,.0f} DZD)")
+        elif cashflow is not None and cashflow > 50000:
+            score -= 10
+            mit_factors.append(f"un cashflow positif ({cashflow:,.0f} DZD)")
+            
+        if overdraft in ['Frequent', 'Eleve', 'Élevé', 'Fréquent']:
+            score += 20
+            agg_factors.append(f"un recours fréquent au découvert bancaire ({overdraft})")
+        elif overdraft in ['Aucun', 'Faible', None]:
+            mit_factors.append("aucun découvert bancaire récent ou faible")
+            
+        if revenu > 200000:
+            score -= 5
+            mit_factors.append(f"un revenu mensuel confortable ({revenu:,.0f} DZD)")
+            
+        score = max(0, min(100, int(score)))
+        
+        # Policy Engine
+        if score <= 24:
+            risk_level = "faible"
+            decision = "décision standard, aucun risque majeur n'a été identifié."
+        elif score <= 49:
+            risk_level = "modéré"
+            decision = "analyse standard, situation acceptable mais nécessite une attention."
+        elif score <= 74:
+            risk_level = "élevé"
+            decision = "revue renforcée du dossier avant toute décision."
+        else:
+            risk_level = "critique"
+            decision = "revue manuelle obligatoire du dossier."
+
+        # LLM Generation
+        explanation = f"L'analyse du profil client a produit un score de risque de {score}/100, correspondant à un niveau de risque {risk_level}.\n"
+        
+        if risk_level == "critique":
+            explanation += f"Revue obligatoire — risque {risk_level} détecté.\n"
+            
+        if len(agg_factors) > 0:
+            explanation += f"Les principaux facteurs ayant contribué à l'augmentation du risque sont {', '.join(agg_factors[:3])}"
+            if len(agg_factors) > 3:
+                explanation += f", ainsi que d'autres signaux défavorables."
+            else:
+                explanation += "."
+            explanation += "\n"
+            
+        if len(mit_factors) > 0:
+            explanation += f"Parmi les éléments favorables, le profil présente {', '.join(mit_factors[:3])}, qui constituent des facteurs atténuants.\n"
+        else:
+            explanation += "Aucun facteur atténuant significatif n'a été identifié.\n"
+            
+        if score > 49 and len(agg_factors) > len(mit_factors):
+            explanation += "Dans l'ensemble, les facteurs défavorables sont actuellement plus importants que les facteurs favorables.\n"
+            
+        explanation += f"Recommandation : {decision}"
+        
+        return {
+            "score": score,
+            "riskLevel": risk_level,
+            "factors": {
+                "aggravating": agg_factors,
+                "mitigating": mit_factors
+            },
+            "explanation": explanation,
+            "clientData": client_data
+        }
+
     def _make_decision(self, pd: float, lgd: float, el: float,
                        exposure: float, rating: str) -> dict:
         """

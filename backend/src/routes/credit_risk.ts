@@ -15,125 +15,27 @@ router.get('/analyze/:clientId', async (req, res) => {
       return res.status(404).json({ error: 'Client not found' });
     }
 
-    let score = 10; // Base score
-    const aggFactors: string[] = [];
-    const mitFactors: string[] = [];
+    // Call the Python AI Pipeline
+    const aiResponse = await fetch('http://127.0.0.1:7676/predict/credit_risk_profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(client)
+    });
 
-    // 1. DTI
-    let dti = 0;
-    if (client.revenu_mensuel_dzd > 0) {
-      dti = (client.echeance_mensuelle_dzd / client.revenu_mensuel_dzd) * 100;
-    }
-    if (dti > 50) {
-      score += 40;
-      aggFactors.push(`un DTI très élevé (${dti.toFixed(1)}%)`);
-    } else if (dti > 30) {
-      score += 20;
-      aggFactors.push(`un DTI relativement élevé (${dti.toFixed(1)}%)`);
-    } else if (dti < 20) {
-      score -= 5;
-      mitFactors.push(`un DTI faible (${dti.toFixed(1)}%)`);
+    if (!aiResponse.ok) {
+      throw new Error(`AI API returned status: ${aiResponse.status}`);
     }
 
-    // 2. Solde
-    if (client.solde_compte_dzd < 10000) {
-      score += 15;
-      aggFactors.push(`un solde très faible (${client.solde_compte_dzd.toLocaleString()} DZD)`);
-    } else if (client.solde_compte_dzd > 300000) {
-      score -= 10;
-      mitFactors.push(`un solde positif et stable (${client.solde_compte_dzd.toLocaleString()} DZD)`);
-    }
+    const aiData = await aiResponse.json();
 
-    // 3. Impayés
-    if (client.impayes_dzd > 50000) {
-      score += 35;
-      aggFactors.push(`des impayés importants (${client.impayes_dzd.toLocaleString()} DZD)`);
-    } else if (client.impayes_dzd > 0) {
-      score += 15;
-      aggFactors.push(`des impayés existants (${client.impayes_dzd.toLocaleString()} DZD)`);
-    } else {
-      mitFactors.push(`l'absence d'impayés`);
-    }
-
-    // 4. Retards
-    if (client.jours_retard > 30) {
-      score += 20;
-      aggFactors.push(`des retards de paiement importants (${client.jours_retard} jours)`);
-    } else if (client.jours_retard > 0) {
-      score += 10;
-      aggFactors.push(`quelques retards de paiement historiques (${client.jours_retard} jours)`);
-    }
-
-    // 5. Historique Bancaire
-    if (client.classe_creance !== 'Saine' && client.classe_creance !== 'Non concernee') {
-      score += 25;
-      aggFactors.push(`un historique bancaire défavorable (Classe: ${client.classe_creance})`);
-    } else {
-      mitFactors.push(`un historique bancaire régulier (Classe: ${client.classe_creance})`);
-    }
-
-    // 6. Cashflow
-    if (client.cashflow_dzd !== null && client.cashflow_dzd < 0) {
-      score += 20;
-      aggFactors.push(`un cashflow négatif (${client.cashflow_dzd.toLocaleString()} DZD)`);
-    } else if (client.cashflow_dzd !== null && client.cashflow_dzd > 50000) {
-      score -= 10;
-      mitFactors.push(`un cashflow positif (${client.cashflow_dzd.toLocaleString()} DZD)`);
-    }
-
-    // 7. Overdraft
-    if (client.overdraft === 'Frequent' || client.overdraft === 'Eleve') {
-      score += 20;
-      aggFactors.push(`un recours fréquent au découvert bancaire (${client.overdraft})`);
-    } else if (client.overdraft === 'Aucun' || !client.overdraft) {
-      mitFactors.push(`aucun découvert bancaire récent`);
-    }
-    
-    // 8. Revenu (just an additional factor for completeness)
-    if (client.revenu_mensuel_dzd > 200000) {
-      score -= 5;
-      mitFactors.push(`un revenu mensuel confortable (${client.revenu_mensuel_dzd.toLocaleString()} DZD)`);
-    }
-
-    // Ensure score is within 0-100
-    score = Math.max(0, Math.min(100, Math.round(score)));
-
-    let riskLevel = '';
-    let recommendation = '';
-    if (score <= 24) {
-      riskLevel = 'faible';
-      recommendation = 'décision standard, aucun risque majeur n\'a été identifié.';
-    } else if (score <= 49) {
-      riskLevel = 'modéré';
-      recommendation = 'analyse standard, situation acceptable mais nécessite une attention.';
-    } else if (score <= 74) {
-      riskLevel = 'élevé';
-      recommendation = 'revue renforcée du dossier avant toute décision.';
-    } else {
-      riskLevel = 'critique';
-      recommendation = 'revue manuelle obligatoire, risque critique détecté.';
-    }
-
-    let explanation = `L'analyse du profil client a produit un score de risque de ${score}/100, correspondant à un niveau de risque ${riskLevel}.`;
-    if (aggFactors.length > 0) {
-      explanation += ` Les principaux facteurs de risque identifiés sont : ${aggFactors.join(', ')}.`;
-    }
-    if (mitFactors.length > 0) {
-      explanation += ` Parmi les éléments favorables, on note : ${mitFactors.join(', ')}.`;
-    }
-    explanation += ` Recommandation : ${recommendation}`;
-
+    // Include the original clientId in the response
     res.json({
       clientId: client.client_id,
-      score,
-      riskLevel,
-      factors: {
-        aggravating: aggFactors,
-        mitigating: mitFactors
-      },
-      explanation,
-      clientData: client
+      ...aiData
     });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });

@@ -193,6 +193,15 @@ def predict_credit_risk(request: CreditRiskRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/predict/credit_risk_profile")
+def predict_credit_risk_profile(client_data: dict):
+    """Specific 8-variable assessment returning Score, Level, Factors, Explanation."""
+    try:
+        result = engine.credit_engine.evaluate_profile(client_data)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/predict/full")
 def predict_full(request: FullAssessmentRequest):
