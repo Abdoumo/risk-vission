@@ -38,16 +38,14 @@ export default function PredictionsView() {
   const [resultData, setResultData] = useState<PredictionPoint[]>([]);
   const [stats, setStats] = useState<any>(null);
 
-  const handleRunAI = async () => {
-    if (runStatus === 'running') return;
-    
+  const handleRunAI = async (model = selectedModel, hor = horizon) => {
     setRunStatus('running');
     setErrorMsg('');
     setResultData([]);
     setStats(null);
 
     try {
-      const res = await fetch(`/api/predictions/real?model=${selectedModel}&horizon=${horizon}`);
+      const res = await fetch(`/api/predictions/real?model=${model}&horizon=${hor}`);
       const data = await res.json();
 
       if (!res.ok) {
@@ -69,6 +67,13 @@ export default function PredictionsView() {
       setErrorMsg('Erreur lors du calcul des prédictions. Vérifiez la connexion au serveur AI.');
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleRunAI(selectedModel, horizon);
+    }, 500); // debounce to avoid spamming while dragging slider
+    return () => clearTimeout(timer);
+  }, [selectedModel, horizon]);
 
   const currentModel = modelOptions.find(m => m.value === selectedModel) || modelOptions[0];
 
@@ -129,7 +134,7 @@ export default function PredictionsView() {
             </div>
           </div>
           <button
-            onClick={handleRunAI}
+            onClick={() => handleRunAI(selectedModel, horizon)}
             disabled={runStatus === 'running'}
             className="group flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-emerald-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 hover:shadow-emerald-500/40 disabled:opacity-50 disabled:hover:scale-100"
           >
@@ -138,7 +143,7 @@ export default function PredictionsView() {
             ) : (
               <Play className="h-4 w-4 fill-current" />
             )}
-            Lancer l'Inférence IA
+            Actualiser
           </button>
         </div>
 
