@@ -46,7 +46,7 @@ function AppInner() {
 
   const renderView = () => {
     switch (activeTab) {
-      case 'dashboard':   return <DashboardView />;
+      case 'dashboard':   return <DashboardView setActiveTab={setActiveTab} />;
       case 'predictions': return <PredictionsView />;
       case 'modeles':     return <ModelesView />;
       case 'anomalies':   return <AnomaliesView />;

@@ -5,9 +5,10 @@ import { useLang } from '../i18n/LangContext';
 
 interface AlertesListProps {
   alertes: Alerte[];
+  onNavigate?: (tab: string) => void;
 }
 
-export default function AlertesList({ alertes }: AlertesListProps) {
+export default function AlertesList({ alertes, onNavigate }: AlertesListProps) {
   const { lang, t, isRTL } = useLang();
   const [localAlertes, setLocalAlertes] = useState<Alerte[]>(alertes);
 
@@ -58,9 +59,14 @@ export default function AlertesList({ alertes }: AlertesListProps) {
           return (
             <div
               key={alerte.id}
+              onClick={() => {
+                if (onNavigate && alerte.lien_tab) {
+                  onNavigate(alerte.lien_tab);
+                }
+              }}
               className={`group flex items-start gap-3 rounded-xl border p-4 transition-all duration-300 hover:-translate-y-0.5 ${config.border} ${config.bg} ${
                 !alerte.vue ? 'opacity-100 shadow-sm' : 'opacity-60'
-              } ${isRTL ? 'flex-row-reverse' : ''}`}
+              } ${isRTL ? 'flex-row-reverse' : ''} ${alerte.lien_tab ? 'cursor-pointer hover:bg-slate-800/50' : ''}`}
             >
               <div className={`flex items-center justify-center w-8 h-8 rounded-lg ${config.bg} border ${config.border} shrink-0`}>
                 <Icon className={`h-4 w-4 ${config.color}`} />

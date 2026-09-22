@@ -21,7 +21,11 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
 };
 
-export default function DashboardView() {
+interface DashboardViewProps {
+  setActiveTab?: (tab: string) => void;
+}
+
+export default function DashboardView({ setActiveTab }: DashboardViewProps) {
   const { isRTL } = useLang();
   const [kpis, setKpis] = useState<KPI[]>([]);
   const [alertes, setAlertes] = useState<Alerte[]>([]);
@@ -129,7 +133,7 @@ export default function DashboardView() {
             />
           </motion.div>
           <motion.div variants={itemVariants}>
-            <AlertesList alertes={alertes} />
+            <AlertesList alertes={alertes} onNavigate={setActiveTab} />
           </motion.div>
         </div>
 

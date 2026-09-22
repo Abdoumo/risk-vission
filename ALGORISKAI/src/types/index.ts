@@ -28,6 +28,7 @@ export interface Alerte {
   timestamp_ar: string;
   timestamp_en: string;
   vue: boolean;
+  lien_tab?: string;
 }
 
 export interface KPI {

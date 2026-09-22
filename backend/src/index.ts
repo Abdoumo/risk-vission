@@ -1304,10 +1304,52 @@ app.get('/api/alertes', async (req, res) => {
         score: { gte: 85 } // Only show highly critical anomalies as alerts to avoid flooding
       },
       orderBy: { id: 'desc' },
-      take: 50
+      take: 47
     });
 
-    const alertes = history.map(item => {
+    const systemAlerts = [
+      {
+        id: "sys_1",
+        type: "avertissement",
+        message_fr: "Dépassement limite VaR sur le portefeuille de crédit",
+        message_ar: "تجاوز حد VaR في محفظة الائتمان",
+        message_en: "VaR limit exceeded on credit portfolio",
+        modele: "RiskEngine",
+        timestamp_fr: "Il y a 1h",
+        timestamp_ar: "منذ ساعة",
+        timestamp_en: "1 hour ago",
+        vue: false,
+        lien_tab: "credit_risk"
+      },
+      {
+        id: "sys_2",
+        type: "info",
+        message_fr: "Modèle LSTM entraîné avec succès",
+        message_ar: "تم تدريب نموذج LSTM بنجاح",
+        message_en: "LSTM model trained successfully",
+        modele: "TimeSeries",
+        timestamp_fr: "Il y a 2h",
+        timestamp_ar: "منذ ساعتين",
+        timestamp_en: "2 hours ago",
+        vue: false,
+        lien_tab: "modeles"
+      },
+      {
+        id: "sys_3",
+        type: "info",
+        message_fr: "Nouvelle prédiction du DZAIR30 disponible",
+        message_ar: "توقع جديد لمؤشر DZAIR30 متاح",
+        message_en: "New DZAIR30 prediction available",
+        modele: "Predictive AI",
+        timestamp_fr: "Aujourd'hui",
+        timestamp_ar: "اليوم",
+        timestamp_en: "Today",
+        vue: false,
+        lien_tab: "predictions"
+      }
+    ];
+
+    const alertesMap = history.map(item => {
       let alertType = 'info';
       if (item.score >= 80) alertType = 'critique';
       else if (item.score >= 50) alertType = 'avertissement';
@@ -1322,11 +1364,12 @@ app.get('/api/alertes', async (req, res) => {
         timestamp_fr: item.date,
         timestamp_ar: item.date,
         timestamp_en: item.date,
-        vue: false
+        vue: false,
+        lien_tab: 'fraude'
       };
     });
 
-    res.json(alertes);
+    res.json([...systemAlerts, ...alertesMap]);
   } catch (error) {
     console.error('Failed to fetch alertes', error);
     res.status(500).json({ error: 'Failed to fetch alertes' });
