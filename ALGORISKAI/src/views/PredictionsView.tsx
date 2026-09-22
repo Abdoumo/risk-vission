@@ -275,7 +275,11 @@ export default function PredictionsView() {
       {/* ── Chart ────────────────────────────────────────────────────── */}
       {runStatus === 'done' && (
         <motion.div variants={itemVariants} className={`transition-all duration-500 ring-1 ring-emerald-500/20 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.05)]`}>
-          <PredictionChart data={resultData} />
+          <PredictionChart 
+            data={resultData} 
+            activePeriod={parseInt(horizon)}
+            onPeriodChange={(val) => setHorizon(val.toString())}
+          />
         </motion.div>
       )}
 

@@ -841,6 +841,14 @@ app.get('/api/risques/portfolio', async (req, res) => {
 app.get('/api/risques/kpis', async (req, res) => {
   try {
     const kpis = await prisma.riskKpi.findMany();
+    if (kpis.length === 0) {
+      return res.json([
+        { label: 'Exposition Globale', value: '142.5M DZD', icon: 'BarChart3', color: 'text-cyan-400', border: 'border-cyan-500/20', bg: 'from-cyan-500/10' },
+        { label: 'Risque Moyen', value: 'Modéré', icon: 'ShieldAlert', color: 'text-emerald-400', border: 'border-emerald-500/20', bg: 'from-emerald-500/10' },
+        { label: 'NPL Ratio', value: '3.2%', icon: 'TrendingDown', color: 'text-rose-400', border: 'border-rose-500/20', bg: 'from-rose-500/10' },
+        { label: 'Stress VaR (99%)', value: '-12.4M', icon: 'AlertTriangle', color: 'text-amber-400', border: 'border-amber-500/20', bg: 'from-amber-500/10' }
+      ]);
+    }
     res.json(kpis);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch risk KPIs' });
@@ -850,6 +858,14 @@ app.get('/api/risques/kpis', async (req, res) => {
 app.get('/api/risques/stress-tests', async (req, res) => {
   try {
     const stressTests = await prisma.stressTest.findMany();
+    if (stressTests.length === 0) {
+      return res.json([
+        { scenario: 'Choc Pandémique (-25% PIB)', impact: -18.5, prob: 15, color: '#f43f5e' },
+        { scenario: 'Hausse Taux Directeurs (+200bps)', impact: -8.2, prob: 45, color: '#f43f5e' },
+        { scenario: 'Krach Immobilier (-30%)', impact: -12.4, prob: 25, color: '#f43f5e' },
+        { scenario: 'Reprise Économique Forte', impact: 5.4, prob: 30, color: '#047857' }
+      ]);
+    }
     res.json(stressTests);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch stress tests' });
@@ -959,11 +975,11 @@ app.get('/api/modeles/comparaison', async (req, res) => {
     const data = await prisma.comparaisonModele.findMany();
     if (data.length === 0) {
       return res.json([
-        {"subject": "Précision", "A": 89, "B": 95, "C": 86, "D": 90, "fullMark": 100},
-        {"subject": "Rappel", "A": 86, "B": 92, "C": 84, "D": 88, "fullMark": 100},
-        {"subject": "F1-Score", "A": 87, "B": 93, "C": 85, "D": 89, "fullMark": 100},
-        {"subject": "Vitesse", "A": 90, "B": 85, "C": 92, "D": 91, "fullMark": 100},
-        {"subject": "Robustesse", "A": 88, "B": 94, "C": 85, "D": 89, "fullMark": 100}
+        {"sujet": "Précision", "LSTM": 92.5, "XGBoost": 94.1, "RandomForest": 88.4, "Transformer": 95.8, "fullMark": 100},
+        {"sujet": "Rappel", "LSTM": 89.2, "XGBoost": 91.5, "RandomForest": 86.1, "Transformer": 93.4, "fullMark": 100},
+        {"sujet": "F1-Score", "LSTM": 90.8, "XGBoost": 92.7, "RandomForest": 87.2, "Transformer": 94.5, "fullMark": 100},
+        {"sujet": "Vitesse", "LSTM": 85.0, "XGBoost": 92.0, "RandomForest": 95.0, "Transformer": 80.0, "fullMark": 100},
+        {"sujet": "Robustesse", "LSTM": 91.0, "XGBoost": 93.0, "RandomForest": 89.0, "Transformer": 94.0, "fullMark": 100}
       ]);
     }
     res.json(data);
@@ -1004,11 +1020,11 @@ app.get('/api/modeles/performance', async (req, res) => {
     });
     if (data.length === 0) {
       return res.json([
-        {"name": "Jan", "Credit": 0.85, "Fraud": 0.91, "NPL": 0.80, "Islamic": 0.85},
-        {"name": "Feb", "Credit": 0.86, "Fraud": 0.92, "NPL": 0.82, "Islamic": 0.86},
-        {"name": "Mar", "Credit": 0.87, "Fraud": 0.92, "NPL": 0.84, "Islamic": 0.88},
-        {"name": "Apr", "Credit": 0.88, "Fraud": 0.94, "NPL": 0.85, "Islamic": 0.89},
-        {"name": "May", "Credit": 0.89, "Fraud": 0.95, "NPL": 0.86, "Islamic": 0.90}
+        {"date": "Jan", "lstm": 90, "xgboost": 91, "rf": 85, "transformer": 92},
+        {"date": "Fév", "lstm": 91, "xgboost": 92, "rf": 86, "transformer": 93},
+        {"date": "Mar", "lstm": 91.5, "xgboost": 92.5, "rf": 87, "transformer": 94},
+        {"date": "Avr", "lstm": 92, "xgboost": 93, "rf": 87.5, "transformer": 94.5},
+        {"date": "Mai", "lstm": 92.5, "xgboost": 94.1, "rf": 88.4, "transformer": 95.8}
       ]);
     }
     res.json(data);
