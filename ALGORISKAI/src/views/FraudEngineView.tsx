@@ -607,6 +607,7 @@ export default function FraudEngineView() {
   const [fraudHistory, setFraudHistory] = useState<FraudHistoryRecord[]>([]);
   const [selectedDetails, setSelectedDetails] = useState<any>(null);
   const [globalStats, setGlobalStats] = useState({ totalAnalyses: 0, blocked: 0, review: 0, detectionRate: '0%' });
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetch(`/api/fraud-stats`)
@@ -632,6 +633,10 @@ export default function FraudEngineView() {
     { id: 'historique', icon: FileSearch,  label_fr: 'Historique',        label_ar: 'السجل',            label_en: 'History' },
     { id: 'bulk_test',  icon: UploadCloud, label_fr: 'Test en Masse',     label_ar: 'اختبار جماعي',     label_en: 'Bulk Test' },
   ];
+
+  const itemsPerPage = 15;
+  const totalPages = Math.ceil(fraudHistory.length / itemsPerPage);
+  const paginatedHistory = fraudHistory.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   // Live stats
   const stats = [
@@ -761,7 +766,7 @@ export default function FraudEngineView() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {fraudHistory.map((item, i) => {
+                {paginatedHistory.map((item, i) => {
                   const dc2 = decisionCfg[item.decision as keyof typeof decisionCfg] || decisionCfg['review'];
                   return (
                     <tr key={i} className="hover:bg-emerald-500/5 transition-colors group">
@@ -805,6 +810,27 @@ export default function FraudEngineView() {
                 })}
               </tbody>
             </table>
+            {totalPages > 1 && (
+              <div className={`flex justify-between items-center px-4 py-3 bg-slate-800/30 border-t border-white/5 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <button 
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 bg-slate-700/50 hover:bg-slate-700 rounded text-sm text-white disabled:opacity-50 transition-colors"
+                >
+                  {isRTL ? 'السابق' : 'Précédent'}
+                </button>
+                <span className="text-sm text-slate-400 font-medium">
+                  {isRTL ? 'صفحة' : 'Page'} {currentPage} {isRTL ? 'من' : 'sur'} {totalPages}
+                </span>
+                <button 
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 bg-slate-700/50 hover:bg-slate-700 rounded text-sm text-white disabled:opacity-50 transition-colors"
+                >
+                  {isRTL ? 'التالي' : 'Suivant'}
+                </button>
+              </div>
+            )}
           </div>
         </motion.div>
       )}

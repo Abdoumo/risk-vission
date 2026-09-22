@@ -12,6 +12,7 @@ export default function RisquesView() {
   const [riskStats, setRiskStats] = useState<any[]>([]);
   const [stressTests, setStressTests] = useState<any[]>([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchData = () => {
     fetch('/api/risques/portfolio').then(r => r.json()).then(setRisquesPortefeuille);
@@ -42,6 +43,10 @@ export default function RisquesView() {
   const totalEL = risquesPortefeuille.reduce((a, b) => a + (b.el || 0), 0);
   const avgPd = risquesPortefeuille.length ? (risquesPortefeuille.reduce((a, b) => a + (b.pd || 0), 0) / risquesPortefeuille.length) : 0;
   const avgLgd = risquesPortefeuille.length ? (risquesPortefeuille.reduce((a, b) => a + (b.lgd || 0), 0) / risquesPortefeuille.length) : 0;
+
+  const itemsPerPage = 15;
+  const totalPages = Math.ceil(risquesPortefeuille.length / itemsPerPage);
+  const paginatedRisques = risquesPortefeuille.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const iconMap: Record<string, any> = { ShieldAlert, TrendingDown, AlertTriangle, BarChart3 };
 
@@ -182,7 +187,7 @@ export default function RisquesView() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
-                  {risquesPortefeuille.map((a, i) => {
+                  {paginatedRisques.map((a, i) => {
                     const rc = risqueColors[a.risque] || risqueColors["CCC"];
                     return (
                       <tr key={i} className="hover:bg-emerald-500/5 transition-colors group">
@@ -212,6 +217,27 @@ export default function RisquesView() {
                   })}
                 </tbody>
               </table>
+              {totalPages > 1 && (
+                <div className={`flex justify-between items-center px-4 py-3 bg-slate-800/30 border-t border-white/5 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <button 
+                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1 bg-slate-700/50 hover:bg-slate-700 rounded text-sm text-white disabled:opacity-50 transition-colors"
+                  >
+                    {isRTL ? 'السابق' : 'Précédent'}
+                  </button>
+                  <span className="text-sm text-slate-400 font-medium">
+                    {isRTL ? 'صفحة' : 'Page'} {currentPage} {isRTL ? 'من' : 'sur'} {totalPages}
+                  </span>
+                  <button 
+                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1 bg-slate-700/50 hover:bg-slate-700 rounded text-sm text-white disabled:opacity-50 transition-colors"
+                  >
+                    {isRTL ? 'التالي' : 'Suivant'}
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         </>
