@@ -92,6 +92,7 @@ function BankingPanel({ lang, isRTL }: { lang: string; isRTL: boolean }) {
     montant: 4500, heure: 14, velocite: 1,
     pays: 'DZ', canal: 'E-commerce',
     device: 'Appareil de confiance', typeCompte: 'Courant',
+    type_operation: 'Paiement', sous_type: 'Local', solde_avant: 100000, nouveau_beneficiaire: false, tentatives_precedentes: 0
   });
   const [result,    setResult]    = useState<FraudResult | null>(null);
   const [running,   setRunning]   = useState(false);
@@ -109,11 +110,16 @@ function BankingPanel({ lang, isRTL }: { lang: string; isRTL: boolean }) {
           client_id: 0,
           amount: inp.montant,
           transaction_hour: inp.heure,
-          transaction_type: "payment", 
+          transaction_type: inp.type_operation, 
           country: inp.pays,
           channel: inp.canal,
           amount_deviation: 0,
-          daily_txn_count: inp.velocite
+          daily_txn_count: inp.velocite,
+          sous_type: inp.sous_type,
+          solde_avant: inp.solde_avant,
+          nouveau_beneficiaire: inp.nouveau_beneficiaire,
+          tentatives_precedentes: inp.tentatives_precedentes,
+          historique_beneficiaire: "Aucun"
         };
         const res = await fetch('/api/predict/fraud/banking', {
           method: 'POST',
@@ -161,14 +167,53 @@ function BankingPanel({ lang, isRTL }: { lang: string; isRTL: boolean }) {
 
         {/* Inputs grid */}
         <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6 space-y-4">
-          {/* Montant */}
-          <div className={isRTL ? 'text-right' : ''}>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-              {t('Montant (DZD)', 'المبلغ (دج)', 'Amount (DZD)')} · {inp.montant.toLocaleString('fr-DZ')}
-            </label>
-            <input type="number" value={inp.montant} min={100} max={5000000}
-              onChange={e => setInp(p => ({ ...p, montant: +e.target.value }))}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm font-mono text-green-400 outline-none focus:border-green-500 transition-colors" />
+          {/* Montant & Solde */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className={isRTL ? 'text-right' : ''}>
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                {t('Montant (DZD)', 'المبلغ (دج)', 'Amount (DZD)')}
+              </label>
+              <input type="number" value={inp.montant} min={100} max={5000000}
+                onChange={e => setInp(p => ({ ...p, montant: +e.target.value }))}
+                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm font-mono text-green-400 outline-none focus:border-green-500 transition-colors" />
+            </div>
+            <div className={isRTL ? 'text-right' : ''}>
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                {t('Solde Avant', 'الرصيد السابق', 'Prior Balance')}
+              </label>
+              <input type="number" value={inp.solde_avant}
+                onChange={e => setInp(p => ({ ...p, solde_avant: +e.target.value }))}
+                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm font-mono text-blue-400 outline-none focus:border-blue-500 transition-colors" />
+            </div>
+          </div>
+          
+          {/* Opération & Sous-type */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className={isRTL ? 'text-right' : ''}>
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                {t('Opération', 'عملية', 'Operation')}
+              </label>
+              <select value={inp.type_operation} onChange={e => setInp(p => ({ ...p, type_operation: e.target.value }))}
+                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-200 outline-none focus:border-green-500">
+                <option value="Virement">Virement</option>
+                <option value="Retrait">Retrait</option>
+                <option value="Dépôt">Dépôt</option>
+                <option value="Paiement">Paiement</option>
+              </select>
+            </div>
+            <div className={isRTL ? 'text-right' : ''}>
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                {t('Sous-type', 'النوع الفرعي', 'Sub-type')}
+              </label>
+              <select value={inp.sous_type} onChange={e => setInp(p => ({ ...p, sous_type: e.target.value }))}
+                className="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-200 outline-none focus:border-green-500">
+                <option value="Interne">Interne</option>
+                <option value="Externe">Externe</option>
+                <option value="International">International</option>
+                <option value="ATM">ATM</option>
+                <option value="Local">Local</option>
+              </select>
+            </div>
           </div>
 
           {/* Heure + Vélocité */}

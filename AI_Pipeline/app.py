@@ -69,6 +69,11 @@ class TransactionRequest(BaseModel):
     channel: str = Field(default="mobile_app", description="Channel: mobile_app, card, agency, online")
     amount_deviation: float = Field(default=0, description="How many std devs from client's mean amount")
     daily_txn_count: int = Field(default=1, description="Number of transactions today")
+    sous_type: str = Field(default="", description="Sous-type (e.g. Interne, Externe, International)")
+    solde_avant: float = Field(default=100000.0, description="Solde disponible avant transaction")
+    nouveau_beneficiaire: bool = Field(default=False, description="Nouveau bénéficiaire : Oui / Non")
+    historique_beneficiaire: str = Field(default="Aucun", description="Historique avec le bénéficiaire")
+    tentatives_precedentes: int = Field(default=0, description="Nombre de tentatives précédentes")
 
 class InsuranceClaimRequest(BaseModel):
     montantDeclare: float = Field(..., description="Claim amount")

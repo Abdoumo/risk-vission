@@ -245,6 +245,25 @@ class FraudEngine:
             raw_score = float(self.model.decision_function(X_scaled)[0])
             fraud_score = int(np.clip(50 - (raw_score * 50), 0, 100))
 
+        # Rule-based score adjustments based on Les types d'opérations
+        txn_type = transaction.get("transaction_type", "")
+        sous_type = transaction.get("sous_type", "")
+        solde_avant = transaction.get("solde_avant", 100000.0)
+        nouveau_beneficiaire = transaction.get("nouveau_beneficiaire", False)
+        tentatives = transaction.get("tentatives_precedentes", 0)
+        amount = transaction.get("amount", 0)
+        
+        if txn_type.lower() == "virement" and sous_type.lower() == "international":
+            fraud_score += 15
+        if nouveau_beneficiaire:
+            fraud_score += 10
+        if tentatives > 2:
+            fraud_score += 15
+        if amount > 0 and solde_avant > 0 and amount > (solde_avant * 0.9):
+            fraud_score += 20
+            
+        fraud_score = int(np.clip(fraud_score, 0, 100))
+
         # Determine risk level
         if fraud_score < 30:
             risk_level = "LOW"
@@ -330,6 +349,23 @@ class FraudEngine:
             reasons.append(
                 EXPLAINABILITY_THRESHOLDS["frequency_anomaly"]["message_en"].format(count=daily_count)
             )
+
+        # New specific rule-based explanations
+        txn_type = txn.get("transaction_type", "")
+        sous_type = txn.get("sous_type", "")
+        solde_avant = txn.get("solde_avant", 100000.0)
+        nouveau_beneficiaire = txn.get("nouveau_beneficiaire", False)
+        tentatives = txn.get("tentatives_precedentes", 0)
+        amount = txn.get("amount", 0)
+
+        if txn_type.lower() == "virement" and sous_type.lower() == "international":
+            reasons.append("Virement international, risque géopolitique et financier élevé")
+        if nouveau_beneficiaire:
+            reasons.append("Transfert vers un nouveau bénéficiaire non répertorié")
+        if tentatives > 2:
+            reasons.append(f"Nombre de tentatives précédentes suspect ({tentatives})")
+        if amount > 0 and solde_avant > 0 and amount > (solde_avant * 0.9):
+            reasons.append("Le montant de la transaction épuise presque le solde disponible (Vidage de compte suspect)")
 
         if not reasons:
             reasons.append("No specific anomaly indicators detected")

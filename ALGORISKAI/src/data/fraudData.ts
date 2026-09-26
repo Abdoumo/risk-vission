@@ -41,6 +41,11 @@ export interface TransactionInput {
   canal: string;
   device: string;
   typeCompte: string;
+  type_operation: string;
+  sous_type: string;
+  solde_avant: number;
+  nouveau_beneficiaire: boolean;
+  tentatives_precedentes: number;
 }
 
 // ─── Insurance claim inputs ───────────────────────────────────────────────────
@@ -91,7 +96,7 @@ export const SCENARIOS_BANKING = [
     label_en: 'Normal purchase',
     color: 'text-green-400',
     border: 'border-green-500/30',
-    input: { montant: 4500, heure: 14, velocite: 1, pays: 'DZ', canal: 'E-commerce', device: 'Appareil de confiance', typeCompte: 'Courant' },
+    input: { montant: 4500, heure: 14, velocite: 1, pays: 'DZ', canal: 'E-commerce', device: 'Appareil de confiance', typeCompte: 'Courant', type_operation: 'Paiement', sous_type: 'Local', solde_avant: 100000, nouveau_beneficiaire: false, tentatives_precedentes: 0 },
   },
   {
     id: 'fraude_carte',
@@ -100,7 +105,7 @@ export const SCENARIOS_BANKING = [
     label_en: 'Card fraud',
     color: 'text-red-400',
     border: 'border-red-500/30',
-    input: { montant: 280000, heure: 3, velocite: 18, pays: 'XX', canal: 'ATM', device: 'Inconnu', typeCompte: 'Courant' },
+    input: { montant: 280000, heure: 3, velocite: 18, pays: 'XX', canal: 'ATM', device: 'Inconnu', typeCompte: 'Courant', type_operation: 'Retrait', sous_type: 'ATM', solde_avant: 300000, nouveau_beneficiaire: false, tentatives_precedentes: 4 },
   },
   {
     id: 'blanchiment',
@@ -109,7 +114,7 @@ export const SCENARIOS_BANKING = [
     label_en: 'Money laundering',
     color: 'text-amber-400',
     border: 'border-amber-500/30',
-    input: { montant: 950000, heure: 23, velocite: 7, pays: 'XX', canal: 'Virement', device: 'VPN détecté', typeCompte: 'Épargne' },
+    input: { montant: 950000, heure: 23, velocite: 7, pays: 'XX', canal: 'Virement', device: 'VPN détecté', typeCompte: 'Épargne', type_operation: 'Virement', sous_type: 'International', solde_avant: 1000000, nouveau_beneficiaire: true, tentatives_precedentes: 1 },
   },
   {
     id: 'habituel',
@@ -118,7 +123,7 @@ export const SCENARIOS_BANKING = [
     label_en: 'Usual payment',
     color: 'text-emerald-400',
     border: 'border-emerald-500/30',
-    input: { montant: 12000, heure: 10, velocite: 2, pays: 'DZ', canal: 'Mobile Banking', device: 'Appareil de confiance', typeCompte: 'Courant' },
+    input: { montant: 12000, heure: 10, velocite: 2, pays: 'DZ', canal: 'Mobile Banking', device: 'Appareil de confiance', typeCompte: 'Courant', type_operation: 'Virement', sous_type: 'Interne', solde_avant: 50000, nouveau_beneficiaire: false, tentatives_precedentes: 0 },
   },
 ];
 

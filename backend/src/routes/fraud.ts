@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/analyze', async (req, res) => {
   try {
-    const { montant, heure, localisation, beneficiaire, transactions24h, device } = req.body;
+    const { montant, heure, localisation, beneficiaire, transactions24h, device, type_operation, sous_type, solde_avant, tentatives_precedentes } = req.body;
 
     let score = 10; // Base score
     const riskFactors: string[] = [];
@@ -50,6 +50,26 @@ router.post('/analyze', async (req, res) => {
     if (device && device.toLowerCase() === 'nouveau') {
       score += 15;
       riskFactors.push('Device jamais utilisé auparavant');
+    }
+
+    // 7. Types d'opérations (Virement, Retrait, etc.)
+    if (type_operation) {
+      if (type_operation.toLowerCase() === 'virement' && sous_type?.toLowerCase() === 'international') {
+        score += 25;
+        riskFactors.push('Virement international (risque de blanchiment / fuite de capitaux)');
+      }
+    }
+
+    // 8. Ratio Montant / Solde
+    if (montant && solde_avant && montant > (solde_avant * 0.9)) {
+      score += 30;
+      riskFactors.push('Montant de la transaction épuise presque le solde disponible (Risque de vidage)');
+    }
+
+    // 9. Tentatives précédentes
+    if (tentatives_precedentes && tentatives_precedentes > 2) {
+      score += 20;
+      riskFactors.push(`Nombre de tentatives suspect (${tentatives_precedentes})`);
     }
 
     score = Math.max(0, Math.min(100, score));

@@ -557,9 +557,12 @@ class CreditRiskEngine:
             if np.isnan(exposure):
                 exposure = 500000.0
                 
+            has_damanat = str(row.get("damanat", "false")).lower() == "true"
+            collateral_pct = 0.7 if has_damanat else 0.15
+            
             loan_data = {
                 "amount": exposure,
-                "collateral_value": exposure * 0.4, # Assume 40% collateral
+                "collateral_value": exposure * collateral_pct,
                 "amount_paid": 0,
                 "undrawn_commitment": 0
             }
