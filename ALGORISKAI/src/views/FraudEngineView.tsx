@@ -648,7 +648,7 @@ interface FraudHistoryRecord {
 
 export default function FraudEngineView() {
   const { lang, isRTL } = useLang();
-  const [activeTab, setActiveTab] = useState<'banking' | 'assurance' | 'historique' | 'bulk_test'>('historique');
+  const [activeTab, setActiveTab] = useState<'banking' | 'assurance' | 'historique' | 'bulk_test'>('banking');
   const [fraudHistory, setFraudHistory] = useState<FraudHistoryRecord[]>([]);
   const [selectedDetails, setSelectedDetails] = useState<any>(null);
   const [globalStats, setGlobalStats] = useState({ totalAnalyses: 0, blocked: 0, review: 0, detectionRate: '0%' });
@@ -673,8 +673,8 @@ export default function FraudEngineView() {
   const t = (fr: string, ar: string, en: string) => lang === 'ar' ? ar : lang === 'en' ? en : fr;
 
   const tabs = [
-    // { id: 'banking',    icon: CreditCard,  label_fr: 'Fraude Bancaire',   label_ar: 'الاحتيال البنكي',  label_en: 'Banking Fraud' },
-    // { id: 'assurance',  icon: Building2,   label_fr: 'Fraude Assurance',  label_ar: 'احتيال التأمين',   label_en: 'Insurance Fraud' },
+    { id: 'banking',    icon: CreditCard,  label_fr: 'Fraude Bancaire',   label_ar: 'الاحتيال البنكي',  label_en: 'Banking Fraud' },
+    { id: 'assurance',  icon: Building2,   label_fr: 'Fraude Assurance',  label_ar: 'احتيال التأمين',   label_en: 'Insurance Fraud' },
     { id: 'historique', icon: FileSearch,  label_fr: 'Historique',        label_ar: 'السجل',            label_en: 'History' },
     { id: 'bulk_test',  icon: UploadCloud, label_fr: 'Test en Masse',     label_ar: 'اختبار جماعي',     label_en: 'Bulk Test' },
   ];
