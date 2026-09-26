@@ -276,10 +276,9 @@ class CreditPortfolioVarRequest(BaseModel):
 
 @app.post("/calculate/credit_portfolio_var")
 def calculate_credit_portfolio_var(request: CreditPortfolioVarRequest):
-    """Read clients from CSV and calculate full portfolio VaR."""
+    """Read clients from PostgreSQL database and calculate full portfolio VaR."""
     try:
-        csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.csv_path)
-        return engine.credit_engine.evaluate_portfolio_from_csv(csv_path)
+        return engine.credit_engine.evaluate_portfolio_from_db()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
