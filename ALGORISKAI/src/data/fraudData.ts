@@ -125,6 +125,15 @@ export const SCENARIOS_BANKING = [
     border: 'border-emerald-500/30',
     input: { montant: 12000, heure: 10, velocite: 2, pays: 'DZ', canal: 'Mobile Banking', device: 'Appareil de confiance', typeCompte: 'Courant', type_operation: 'Virement', sous_type: 'Interne', solde_avant: 50000, nouveau_beneficiaire: false, tentatives_precedentes: 0 },
   },
+  {
+    id: 'fraude_critique',
+    label_fr: 'Cas Critique',
+    label_ar: 'حالة حرجة',
+    label_en: 'Critical Case',
+    color: 'text-rose-500 animate-pulse',
+    border: 'border-rose-500/60 shadow-[0_0_10px_rgba(244,63,94,0.3)]',
+    input: { montant: 850000, heure: 3, velocite: 8, pays: 'XX', canal: 'Mobile Banking', device: 'Nouveau device', typeCompte: 'Courant', type_operation: 'Virement', sous_type: 'Externe', solde_avant: 900000, nouveau_beneficiaire: true, tentatives_precedentes: 0 },
+  },
 ];
 
 // ─── Scénarios sinistres prédéfinis ──────────────────────────────────────────
@@ -270,9 +279,22 @@ export function scoreBankingFraud(inp: TransactionInput): FraudResult {
   });
   score += canalRisk;
 
+  // 7. Nouveau bénéficiaire
+  const benefRisk = inp.nouveau_beneficiaire ? 15 : 0;
+  signals.push({
+    label: 'Nouveau bénéficiaire',            label_ar: 'مستفيد جديد',             label_en: 'New beneficiary',
+    detected: benefRisk > 0,
+    weight: benefRisk,
+    severity: benefRisk > 0 ? 'high' : 'low',
+    explanation_fr: inp.nouveau_beneficiaire ? `Virement vers un nouveau bénéficiaire sans historique` : `Bénéficiaire connu ou régulier`,
+    explanation_ar: inp.nouveau_beneficiaire ? `تحويل لمستفيد جديد بدون سجل سابق` : `مستفيد معروف أو منتظم`,
+    explanation_en: inp.nouveau_beneficiaire ? `Transfer to a new beneficiary with no history` : `Known or regular beneficiary`,
+  });
+  score += benefRisk;
+
   score = Math.min(100, Math.round(score));
   const decision: FraudDecision = score >= 70 ? 'blocked' : score >= 40 ? 'review' : 'approved';
-  const latencyMs = 28 + (Number(id.slice(1)) % 30);
+  const latencyMs = 28 + Math.floor(Math.random() * 30);
 
   const expl_fr = score >= 70
     ? `Score critique (${score}/100). Transaction bloquée : ${signals.filter(s=>s.detected).length} signaux suspects détectés simultanément — montant, heure, pays et device sont tous anormaux.`
@@ -295,7 +317,7 @@ export function scoreBankingFraud(inp: TransactionInput): FraudResult {
   return {
     score, decision, latencyMs,
     signals, modelUsed: 'XGBoost + Autoencodeur Fraude v3.0',
-    confidence: Math.round(88 + (Number(id.slice(1)) % 9)),
+    confidence: 88 + Math.floor(Math.random() * 9),
     explanation_fr: expl_fr, explanation_ar: expl_ar, explanation_en: expl_en,
   };
 }
@@ -420,7 +442,7 @@ export function scoreSinistreFraud(inp: SinistreInput): FraudResult {
 
   score = Math.min(100, Math.round(score));
   const decision: FraudDecision = score >= 65 ? 'blocked' : score >= 35 ? 'review' : 'approved';
-  const latencyMs = 35 + (Number(id.slice(1)) % 40);
+  const latencyMs = 35 + Math.floor(Math.random() * 40);
 
   const typeLabelFr: Record<SinistreType, string> = { vol: 'Vol', incendie: 'Incendie', accident: 'Accident', degat_eaux: 'Dégât des eaux', corporel: 'Corporel' };
 
@@ -445,7 +467,7 @@ export function scoreSinistreFraud(inp: SinistreInput): FraudResult {
   return {
     score, decision, latencyMs,
     signals, modelUsed: 'Random Forest + LSTM Sinistres DZ v2.4',
-    confidence: Math.round(85 + (Number(id.slice(1)) % 12)),
+    confidence: 85 + Math.floor(Math.random() * 12),
     explanation_fr: expl_fr, explanation_ar: expl_ar, explanation_en: expl_en,
   };
 }

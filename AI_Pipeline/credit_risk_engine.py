@@ -204,22 +204,37 @@ class CreditRiskEngine:
         return pd_score
 
     @staticmethod
-    def calculate_lgd(exposure: float, collateral_value: float, recovery_rate: float = 0.4) -> float:
+    def calculate_lgd(
+        ead: float, 
+        collateral_value: float, 
+        is_default: bool = False,
+        actual_recovery: float = 0.0,
+        historical_lgd: float = 0.35
+    ) -> float:
         """
         Calculate Loss Given Default.
-
-        LGD = (Exposure - Recovered) / Exposure
+        
+        If Defaulted (Observed LGD):
+            LGD = (EAD - Recovery) / EAD
+            
+        If Not Defaulted (Estimated LGD):
+            LGD = Historical LGD (based on similar profiles/collateral)
 
         Args:
-            exposure: Total loan amount
+            ead: Exposure At Default
             collateral_value: Value of collateral/guarantees
-            recovery_rate: Base recovery rate (default 40% per Basel)
+            is_default: True if the client has actually defaulted
+            actual_recovery: Real recovery amount if defaulted
+            historical_lgd: Estimated LGD from similar past cases
 
         Returns:
             LGD as float between 0 and 1
         """
-        recovered = min(collateral_value, exposure) * recovery_rate
-        lgd = (exposure - recovered) / exposure if exposure > 0 else 0.6
+        if is_default:
+            lgd = (ead - actual_recovery) / ead if ead > 0 else 0.0
+        else:
+            lgd = historical_lgd
+
         return np.clip(lgd, 0, 1)
 
     @staticmethod
@@ -279,16 +294,18 @@ class CreditRiskEngine:
         # 1. Calculate PD
         pd_score = self.predict_pd(client_data)
 
-        # 2. Calculate LGD
+        # 2. Calculate EAD
         exposure = loan_data.get("amount", 0)
-        collateral = loan_data.get("collateral_value", 0)
-        recovery_rate = loan_data.get("recovery_rate", 0.4)
-        lgd = self.calculate_lgd(exposure, collateral, recovery_rate)
-
-        # 3. Calculate EAD
         amount_paid = loan_data.get("amount_paid", 0)
         undrawn = loan_data.get("undrawn_commitment", 0)
         ead = self.calculate_ead(exposure, amount_paid, undrawn)
+
+        # 3. Calculate LGD
+        collateral = loan_data.get("collateral_value", 0)
+        is_default = loan_data.get("is_default", False)
+        actual_recovery = loan_data.get("actual_recovery", 0.0)
+        historical_lgd = loan_data.get("historical_lgd", 0.35)
+        lgd = self.calculate_lgd(ead, collateral, is_default, actual_recovery, historical_lgd)
 
         # 4. Calculate EL
         el = self.calculate_el(pd_score, lgd, ead)
@@ -392,6 +409,11 @@ class CreditRiskEngine:
         if revenu > 200000:
             score -= 5
             mit_factors.append(f"un revenu mensuel confortable ({revenu:,.0f} DZD)")
+        elif revenu < 50000:
+            score += 15
+            agg_factors.append(f"un revenu mensuel faible ({revenu:,.0f} DZD)")
+        else:
+            mit_factors.append(f"un revenu mensuel moyen ({revenu:,.0f} DZD)")
             
         score = max(0, min(100, int(score)))
         
