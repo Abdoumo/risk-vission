@@ -230,12 +230,18 @@ class CreditRiskEngine:
         Returns:
             LGD as float between 0 and 1
         """
+        if ead <= 0:
+            return 0.0
+            
         if is_default:
-            lgd = (ead - actual_recovery) / ead if ead > 0 else 0.0
+            lgd = (ead - actual_recovery) / ead
         else:
-            lgd = historical_lgd
+            # Dynamic Estimated LGD: (EAD - Adjusted Collateral) / EAD
+            # Assuming a 20% haircut (loss of value) on collateral during liquidation
+            adjusted_collateral = collateral_value * 0.8
+            lgd = (ead - adjusted_collateral) / ead
 
-        return np.clip(lgd, 0, 1)
+        return np.clip(lgd, 0.05, 1.0) # Floor at 5% minimum LGD
 
     @staticmethod
     def calculate_ead(original_amount: float, amount_paid: float, undrawn_commitment: float = 0,
@@ -688,7 +694,12 @@ class CreditRiskEngine:
             if np.isnan(exposure):
                 exposure = 500000.0
                 
-            has_damanat = False
+            has_damanat_val = row.get("damanat", False)
+            if isinstance(has_damanat_val, str):
+                has_damanat = has_damanat_val.lower() == 'true'
+            else:
+                has_damanat = bool(has_damanat_val)
+                
             collateral_pct = 0.7 if has_damanat else 0.15
             
             loan_data = {
