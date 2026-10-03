@@ -276,9 +276,17 @@ class CreditPortfolioVarRequest(BaseModel):
 
 @app.post("/calculate/credit_portfolio_var")
 def calculate_credit_portfolio_var(request: CreditPortfolioVarRequest):
-    """Read clients from PostgreSQL database and calculate full portfolio VaR."""
+    """Read clients from PostgreSQL database and calculate full portfolio VaR. Fallback to CSV if DB is empty."""
     try:
-        return engine.credit_engine.evaluate_portfolio_from_db()
+        res = engine.credit_engine.evaluate_portfolio_from_db()
+        if not res.get("portfolio"):
+            print("[Credit Risk] DB portfolio is empty. Falling back to CSV:", request.csv_path)
+            # Ensure absolute path for safety
+            import os
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            abs_csv_path = os.path.join(base_dir, request.csv_path)
+            res = engine.credit_engine.evaluate_portfolio_from_csv(abs_csv_path)
+        return res
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
