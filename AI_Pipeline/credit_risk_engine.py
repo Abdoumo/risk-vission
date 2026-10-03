@@ -664,9 +664,14 @@ class CreditRiskEngine:
             if pd.isna(cashflow) or cashflow is None:
                 cashflow = revenu - echeance
             
-            overdraft = row.get("overdraft")
-            if pd.isna(overdraft) or overdraft is None:
-                overdraft = 0
+            overdraft_val = row.get("overdraft")
+            try:
+                if pd.isna(overdraft_val) or overdraft_val is None or str(overdraft_val).lower() == 'aucun':
+                    overdraft_val = 0
+                else:
+                    overdraft_val = float(overdraft_val)
+            except ValueError:
+                overdraft_val = 0
 
             client_data = {
                 "revenue": revenu,
@@ -676,7 +681,7 @@ class CreditRiskEngine:
                 "retard_paiement": float(row.get("jours_retard", 0)),
                 "cashflow": float(cashflow),
                 "historique_bancaire": 0.9, 
-                "overdraft": float(overdraft)
+                "overdraft": overdraft_val
             }
             
             exposure = float(row.get("montant_credit_dzd", 500000))
