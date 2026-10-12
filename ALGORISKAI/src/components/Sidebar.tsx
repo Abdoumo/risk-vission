@@ -1,7 +1,8 @@
 import {
   LayoutDashboard, TrendingUp, Brain, AlertTriangle,
   Database, Settings, Activity, Search, ChevronLeft,
-  ChevronRight, ShieldAlert, Network, Lightbulb, ShieldOff, LogOut
+  ChevronRight, ShieldAlert, Network, Lightbulb, ShieldOff, LogOut,
+  MessageSquare
 } from 'lucide-react';
 import AlgoriskLogo from './AlgoriskLogo';
 import { useLang } from '../i18n/LangContext';
@@ -25,6 +26,7 @@ const menuItems: { id: string; labelKey: TranslationKey; icon: any }[] = [
   { id: 'fraude',       labelKey: 'nav_fraude',      icon: ShieldOff },
   { id: 'api',          labelKey: 'nav_api',         icon: Network },
   { id: 'xai',          labelKey: 'nav_xai',         icon: Lightbulb },
+  { id: 'chatbot',      labelKey: 'nav_chatbot',     icon: MessageSquare },
 
   { id: 'monitoring',   labelKey: 'nav_monitoring',  icon: Activity },
   { id: 'parametres',   labelKey: 'nav_parametres',  icon: Settings },

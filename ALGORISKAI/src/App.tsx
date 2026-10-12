@@ -11,6 +11,7 @@ import CreditRiskView from './views/CreditRiskView';
 import ApiConnectorsView from './views/ApiConnectorsView';
 import XaiView from './views/XaiView';
 import FraudEngineView from './views/FraudEngineView';
+import ChatbotView from './views/ChatbotView';
 import MonitoringView from './components/MonitoringView';
 import SettingsView from './components/SettingsView';
 import type { TranslationKey } from './i18n/translations';
@@ -25,6 +26,7 @@ const tabTitles: Record<string, { title: TranslationKey; subtitle: TranslationKe
   fraude:      { title: 'nav_fraude',      subtitle: 'sub_fraude' },
   api:         { title: 'nav_api',         subtitle: 'sub_api' },
   xai:         { title: 'nav_xai',         subtitle: 'sub_xai' },
+  chatbot:     { title: 'nav_chatbot',     subtitle: 'sub_chatbot' },
   monitoring:  { title: 'nav_monitoring',  subtitle: 'sub_monitoring' },
   parametres:  { title: 'nav_parametres',  subtitle: 'sub_parametres' },
 };
@@ -55,6 +57,7 @@ function AppInner() {
       case 'fraude':      return <FraudEngineView />;
       case 'api':         return <ApiConnectorsView />;
       case 'xai':         return <XaiView />;
+      case 'chatbot':     return <ChatbotView />;
       case 'monitoring':  return <MonitoringView />;
       case 'parametres':  return <SettingsView />;
       default:            return <DashboardView />;
