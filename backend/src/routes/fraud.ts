@@ -496,15 +496,15 @@ router.post('/analyze', async (req, res) => {
   }
 });
 
-// Preset Benchmark Scenarios directly from Detecteur du fraude.PDF
+// Preset Benchmark Scenarios
 router.get('/presets', (req, res) => {
   res.json({
     pdf_scenarios: [
       {
-        id: 'pdf_scenario_1',
-        title_fr: 'Scénario PDF Page 1 & 2 : Virement Nocturne 700 000 DA',
-        title_ar: 'سيناريو PDF صفحة 1 و 2 : تحويل ليلي 700,000 دج',
-        title_en: 'PDF Scenario Page 1 & 2: Night Transfer 700,000 DZD',
+        id: 'scenario_critique_700k',
+        title_fr: 'Scénario Critique : Virement Nocturne 700 000 DA',
+        title_ar: 'سيناريو حرج : تحويل ليلي 700,000 دج',
+        title_en: 'Critical Scenario: Night Transfer 700,000 DZD',
         montant: 700000,
         heure: '02:17',
         canal: 'Mobile Banking',
@@ -519,10 +519,10 @@ router.get('/presets', (req, res) => {
         expected_decision: 'HOLD'
       },
       {
-        id: 'pdf_scenario_2',
-        title_fr: 'Scénario PDF Page 7 & 8 : Transfert Critique 1 200 000 DA',
-        title_ar: 'سيناريو PDF صفحة 7 و 8 : تحويل حرج 1,200,000 دج',
-        title_en: 'PDF Scenario Page 7 & 8: Critical Transfer 1,200,000 DZD',
+        id: 'scenario_velocite_1200k',
+        title_fr: 'Scénario Vélocité : Transfert Élevé 1 200 000 DA',
+        title_ar: 'سيناريو تكرار مشبوه : تحويل حرج 1,200,000 دج',
+        title_en: 'Velocity Scenario: High Transfer 1,200,000 DZD',
         montant: 1200000,
         heure: '02:13',
         canal: 'Mobile Banking',
@@ -537,10 +537,10 @@ router.get('/presets', (req, res) => {
         expected_decision: 'HOLD'
       },
       {
-        id: 'pdf_nominal',
-        title_fr: 'Scénario Nominal Page 4 : Paiement Quotidien 4 500 DA',
-        title_ar: 'سيناريو طبيعي صفحة 4 : دفع يومي 4,500 دج',
-        title_en: 'Nominal Scenario Page 4: Daily Payment 4,500 DZD',
+        id: 'scenario_nominal',
+        title_fr: 'Scénario Nominal : Paiement Quotidien 4 500 DA',
+        title_ar: 'سيناريو طبيعي : دفع يومي 4,500 دج',
+        title_en: 'Nominal Scenario: Daily Payment 4,500 DZD',
         montant: 4500,
         heure: '14:30',
         canal: 'Paiement TPE',
@@ -555,10 +555,10 @@ router.get('/presets', (req, res) => {
         expected_decision: 'ALLOW'
       },
       {
-        id: 'pdf_medium',
-        title_fr: 'Scénario Risque Modéré Page 4 : Virement 85 000 DA',
-        title_ar: 'سيناريو خطر متوسط صفحة 4 : تحويل 85,000 دج',
-        title_en: 'Medium Risk Scenario Page 4: Transfer 85,000 DZD',
+        id: 'scenario_medium',
+        title_fr: 'Scénario Risque Modéré : Virement 85 000 DA',
+        title_ar: 'سيناريو خطر متوسط : تحويل 85,000 دج',
+        title_en: 'Medium Risk Scenario: Transfer 85,000 DZD',
         montant: 85000,
         heure: '20:15',
         canal: 'Mobile Banking',

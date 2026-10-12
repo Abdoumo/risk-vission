@@ -383,12 +383,12 @@ export default function FraudEngineView() {
   // Filtered ledger transactions
   const filteredHistory = fraudHistory.filter(item => {
     const matchesSearch = item.entite.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          item.montant.toLowerCase().includes(searchQuery.toLowerCase());
+      item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.montant.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = filterDecision === 'ALL' ||
-                          (filterDecision === 'BLOCK' && item.decision === 'blocked') ||
-                          (filterDecision === 'HOLD' && (item.decision === 'review' || item.score >= 70)) ||
-                          (filterDecision === 'ALLOW' && item.decision === 'approved');
+      (filterDecision === 'BLOCK' && item.decision === 'blocked') ||
+      (filterDecision === 'HOLD' && (item.decision === 'review' || item.score >= 70)) ||
+      (filterDecision === 'ALLOW' && item.decision === 'approved');
     return matchesSearch && matchesFilter;
   });
 
@@ -415,7 +415,7 @@ export default function FraudEngineView() {
                 </span>
               </div>
               <span className="rounded-full border border-slate-700/80 bg-slate-800/60 px-3 py-1 text-[11px] font-semibold text-slate-300">
-                {t('Spécification PDF (8 Pages) Active', 'مواصفة ملف PDF (8 صفحات) مفعلة', 'PDF Spec (8 Pages) Active')}
+                {t('Surveillance Comportementale Active', 'المراقبة السلوكية الذكية مفعلة', 'Behavioral Surveillance Active')}
               </span>
             </div>
 
@@ -452,13 +452,13 @@ export default function FraudEngineView() {
         </div>
       </div>
 
-      {/* ── 2. REAL-TIME PIPELINE ARCHITECTURE BAR (Page 6 of PDF) ──────────────────── */}
+      {/* ── 2. REAL-TIME PIPELINE ARCHITECTURE BAR ──────────────────── */}
       <div className="rounded-2xl border border-white/5 bg-slate-900/60 p-4 md:p-5 backdrop-blur-md">
         <div className={`flex items-center justify-between mb-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
           <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <GitBranch className="h-4 w-4 text-emerald-400" />
             <h3 className="text-xs font-black uppercase tracking-wider text-slate-200">
-              {t("Pipeline d'Ingestion & Inférence (Page 6 du PDF)", "مخطط تدفق العمليات والاستيعاب الفوري (صفحة 6)", "Ingestion & Inference Pipeline (Page 6 Spec)")}
+              {t("Pipeline d'Ingestion & Inférence en Temps Réel", "مخطط تدفق العمليات والاستيعاب الفوري", "Real-Time Ingestion & Inference Pipeline")}
             </h3>
           </div>
           <span className="text-[11px] font-mono text-slate-400">
@@ -484,13 +484,12 @@ export default function FraudEngineView() {
             const isLast = idx === 9;
             return (
               <div key={idx} className="flex items-center shrink-0">
-                <div className={`flex flex-col items-center px-3 py-2 rounded-xl border text-center transition-all ${
-                  isLast
+                <div className={`flex flex-col items-center px-3 py-2 rounded-xl border text-center transition-all ${isLast
                     ? `${currentTheme.bg} ${currentTheme.border} ${currentTheme.color}`
                     : isFlagged
-                    ? 'bg-amber-500/10 border-amber-500/30 text-amber-300'
-                    : 'bg-slate-800/40 border-slate-700/60 text-slate-300'
-                }`}>
+                      ? 'bg-amber-500/10 border-amber-500/30 text-amber-300'
+                      : 'bg-slate-800/40 border-slate-700/60 text-slate-300'
+                  }`}>
                   <span className="text-[9px] font-mono text-slate-500">#{step.step}</span>
                   <span className="text-[11px] font-bold whitespace-nowrap">
                     {lang === 'ar' ? step.name_ar : step.name}
@@ -504,11 +503,11 @@ export default function FraudEngineView() {
         </div>
       </div>
 
-      {/* ── 3. PRESET BENCHMARKS FROM PDF ────────────────────────────────────────── */}
+      {/* ── 3. PRESET BENCHMARK SCENARIOS ────────────────────────────────────────── */}
       <div className="rounded-2xl border border-white/5 bg-slate-900/40 p-4 backdrop-blur-md space-y-2">
         <div className={`flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            {t("Scénarios Référencés du PDF (Detecteur du fraude.PDF)", "السيناريوهات المرجعية من ملف PDF", "PDF Benchmark Scenarios")}
+            {t("Scénarios Référencés de Fraude", "السيناريوهات المرجعية لمكافحة الاحتيال", "Benchmark Fraud Scenarios")}
           </span>
           <span className="text-[10px] text-emerald-400 font-mono">
             {t("Test direct en un clic", "اختبار فوري بنقرة واحدة", "One-click test")}
@@ -516,7 +515,7 @@ export default function FraudEngineView() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5">
-          {/* Preset 1 (Pages 1 & 2) */}
+          {/* Preset 1 */}
           <button
             onClick={() => applyPreset({
               montant: 700000,
@@ -533,14 +532,14 @@ export default function FraudEngineView() {
             className="flex flex-col text-left p-3 rounded-xl border border-rose-500/30 bg-rose-500/5 hover:bg-rose-500/15 transition-all text-slate-200 group cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase text-rose-400">Page 1 & 2 · Virement 700k DA</span>
-              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300">Score 91</span>
+              <span className="text-[10px] font-black uppercase text-rose-400">Scénario Critique · Virement 700k DA</span>
+              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300">Score 91 · HOLD</span>
             </div>
             <p className="text-xs font-bold text-white mt-1">700 000 DA · 02:17 Nocturne</p>
             <p className="text-[10px] text-slate-400 mt-0.5">Mobile · Nouveau Bénéficiaire · 11 tx/24h · Nouvel Appareil</p>
           </button>
 
-          {/* Preset 2 (Pages 7 & 8) */}
+          {/* Preset 2 */}
           <button
             onClick={() => applyPreset({
               montant: 1200000,
@@ -557,14 +556,14 @@ export default function FraudEngineView() {
             className="flex flex-col text-left p-3 rounded-xl border border-orange-500/30 bg-orange-500/5 hover:bg-orange-500/15 transition-all text-slate-200 group cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase text-orange-400">Page 7 & 8 · Transfert 1.2M DA</span>
+              <span className="text-[10px] font-black uppercase text-orange-400">Scénario Vélocité · Transfert 1.2M DA</span>
               <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-orange-500/20 text-orange-300">Score 94 · HOLD</span>
             </div>
             <p className="text-xs font-bold text-white mt-1">1 200 000 DA · 02:13 AM</p>
             <p className="text-[10px] text-slate-400 mt-0.5">New device · New benef · Location unusual · 9 tx/h</p>
           </button>
 
-          {/* Preset 3 (Page 4 Nominal) */}
+          {/* Preset 3 */}
           <button
             onClick={() => applyPreset({
               montant: 4500,
@@ -581,14 +580,14 @@ export default function FraudEngineView() {
             className="flex flex-col text-left p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/5 hover:bg-emerald-500/15 transition-all text-slate-200 group cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase text-emerald-400">Page 4 · Paiement Nominal</span>
+              <span className="text-[10px] font-black uppercase text-emerald-400">Scénario Nominal · Paiement 4 500 DA</span>
               <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Score 18 · ALLOW</span>
             </div>
             <p className="text-xs font-bold text-white mt-1">4 500 DA · 14:30 TPE Alger</p>
             <p className="text-[10px] text-slate-400 mt-0.5">Bénéficiaire habituel · Appareil habituel · 1 tx/jour</p>
           </button>
 
-          {/* Preset 4 (Page 4 Medium Risk) */}
+          {/* Preset 4 */}
           <button
             onClick={() => applyPreset({
               montant: 85000,
@@ -605,7 +604,7 @@ export default function FraudEngineView() {
             className="flex flex-col text-left p-3 rounded-xl border border-amber-500/30 bg-amber-500/5 hover:bg-amber-500/15 transition-all text-slate-200 group cursor-pointer"
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black uppercase text-amber-400">Page 4 · Risque Modéré</span>
+              <span className="text-[10px] font-black uppercase text-amber-400">Scénario Modéré · Virement 85 000 DA</span>
               <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">Score 47 · VERIFY</span>
             </div>
             <p className="text-xs font-bold text-white mt-1">85 000 DA · 20:15 Mobile</p>
@@ -617,10 +616,10 @@ export default function FraudEngineView() {
       {/* ── 4. NAVIGATION TABS ─────────────────────────────────────────────────────── */}
       <div className={`flex gap-2 rounded-2xl border border-white/5 bg-slate-900/50 p-1.5 backdrop-blur-md ${isRTL ? 'flex-row-reverse' : ''}`}>
         {[
-          { id: 'detector', icon: ShieldAlert, label_fr: 'Détecteur & Comparatif PDF', label_ar: 'الكاشف والجدول المقارن', label_en: 'Detector & PDF Comparison' },
-          { id: 'rings',    icon: Network,     label_fr: 'Réseaux & Fraud Rings (Couche D)', label_ar: 'تحليل الشبكات والحلقات', label_en: 'Fraud Rings & Mules (Layer D)' },
-          { id: 'ledger',   icon: Database,    label_fr: 'Transactions Live SIB (250+)', label_ar: 'سجل المعاملات الحية', label_en: 'Live SIB Ledger (250+)' },
-          { id: 'bulk',     icon: UploadCloud, label_fr: 'Test en Masse (Bulk CSV)', label_ar: 'اختبار جماعي', label_en: 'Bulk CSV Test' },
+          { id: 'detector', icon: ShieldAlert, label_fr: 'Détecteur & Profil Comportemental', label_ar: 'الكاشف والجدول المقارن', label_en: 'Detector & Behavioral Profile' },
+          { id: 'rings', icon: Network, label_fr: 'Réseaux & Fraud Rings (Couche D)', label_ar: 'تحليل الشبكات والحلقات', label_en: 'Fraud Rings & Mules (Layer D)' },
+          { id: 'ledger', icon: Database, label_fr: 'Transactions Live SIB (250+)', label_ar: 'سجل المعاملات الحية', label_en: 'Live SIB Ledger (250+)' },
+          { id: 'bulk', icon: UploadCloud, label_fr: 'Test en Masse (Bulk CSV)', label_ar: 'اختبار جماعي', label_en: 'Bulk CSV Test' },
         ].map(tab => {
           const Icon = tab.icon;
           const active = activeTab === tab.id;
@@ -628,11 +627,10 @@ export default function FraudEngineView() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`flex flex-1 items-center justify-center gap-2 rounded-xl py-3 text-xs md:text-sm font-bold transition-all cursor-pointer ${
-                active
+              className={`flex flex-1 items-center justify-center gap-2 rounded-xl py-3 text-xs md:text-sm font-bold transition-all cursor-pointer ${active
                   ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.1)]'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800/40'
-              }`}
+                }`}
             >
               <Icon className="h-4 w-4" />
               <span>{lang === 'ar' ? tab.label_ar : lang === 'en' ? tab.label_en : tab.label_fr}</span>
@@ -897,14 +895,14 @@ export default function FraudEngineView() {
                   {(lang === 'ar'
                     ? analysis?.risk_factors?.ar
                     : lang === 'en'
-                    ? analysis?.risk_factors?.en
-                    : analysis?.risk_factors?.fr || [
-                      "Montant = 14.0x supérieur à la moyenne du client",
-                      "Nouveau bénéficiaire jamais contacté auparavant",
-                      "Device jamais utilisé auparavant (Nouvelle empreinte digitale)",
-                      "Transaction effectuée à une heure nocturne inhabituelle (02:17)",
-                      "11 transactions supplémentaires durant les dernières 24h"
-                    ]
+                      ? analysis?.risk_factors?.en
+                      : analysis?.risk_factors?.fr || [
+                        "Montant = 14.0x supérieur à la moyenne du client",
+                        "Nouveau bénéficiaire jamais contacté auparavant",
+                        "Device jamais utilisé auparavant (Nouvelle empreinte digitale)",
+                        "Transaction effectuée à une heure nocturne inhabituelle (02:17)",
+                        "11 transactions supplémentaires durant les dernières 24h"
+                      ]
                   )?.map((factor, i) => (
                     <div key={i} className={`flex items-start gap-2.5 text-xs text-slate-200 ${isRTL ? 'flex-row-reverse' : ''}`}>
                       <div className="h-1.5 w-1.5 rounded-full bg-rose-400 mt-1.5 shrink-0" />
@@ -984,13 +982,12 @@ export default function FraudEngineView() {
                           {lang === 'ar' ? row.ecart_ar : lang === 'en' ? row.ecart_en : row.ecart}
                         </td>
                         <td className="px-4 py-3.5 text-center">
-                          <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-black uppercase ${
-                            isCritique
+                          <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-black uppercase ${isCritique
                               ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
                               : isAttention
-                              ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
-                              : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                          }`}>
+                                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                                : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                            }`}>
                             {isCritique ? t('Anomalie Forte', 'شذوذ حرج', 'High Anomaly') : isAttention ? t('Attention', 'تنبيه', 'Warning') : t('Normal', 'طبيعي', 'Nominal')}
                           </span>
                         </td>
