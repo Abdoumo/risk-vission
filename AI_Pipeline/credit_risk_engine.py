@@ -564,11 +564,31 @@ class CreditRiskEngine:
         df = pd.read_csv(csv_path)
         portfolio = []
         
+        alerts = []
         for idx, row in df.iterrows():
             revenu = float(row.get('Revenu_Mensuel_DZD', row.get('revenue', 80000)))
             charges = float(row.get('Charges_Mensuelles_DZD', 0))
             echeance = float(row.get('Echeance_Mensuelle_DZD', 0))
-            dti = ((charges + echeance) / revenu) * 100 if revenu > 0 else float(row.get('dti', 40))
+            
+            client_id = f"CL-{idx}"
+            client_name = str(row.get("client_name", f"Client_{idx}"))
+            
+            if revenu <= 0:
+                dti = 0.0
+                alerts.append({
+                    "id": f"ALERT_{client_id}_{idx}",
+                    "date": "2026-10-08T18:00:00.000Z",
+                    "type": "Fraud",
+                    "sousType": "Anomalie KYC/Revenus",
+                    "entite": client_name,
+                    "score": 90.0,
+                    "decision": "A vérifier",
+                    "montant": str(float(row.get("Montant_Credit_DZD", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"Alerte : Revenu déclaré nul ou négatif ({revenu} DZD). DTI forcé à 0. Risque potentiel de fraude ou d'erreur de saisie."}
+                })
+            else:
+                dti = ((charges + echeance) / revenu) * 100
             
             client_data = {
                 "revenue": revenu,
@@ -580,6 +600,63 @@ class CreditRiskEngine:
                 "historique_bancaire": float(row.get("Historique_Paiement", row.get("historique_bancaire", 0.9))),
                 "overdraft": float(row.get("Decouvert_90J", row.get("overdraft", 0)))
             }
+            
+            # Additional Rules for CSV
+            if dti > 60:
+                alerts.append({
+                    "id": f"ALERT_DTI_{client_id}_{idx}",
+                    "date": "2026-10-08T18:00:00.000Z",
+                    "type": "Credit Risk",
+                    "sousType": "Surendettement",
+                    "entite": client_name,
+                    "score": 85.0,
+                    "decision": "A vérifier",
+                    "montant": str(float(row.get("Montant_Credit_DZD", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"DTI de {dti:.1f}% dépassant le seuil critique (60%). Risque d'insolvabilité élevé."}
+                })
+                
+            if client_data["cashflow"] < 0:
+                alerts.append({
+                    "id": f"ALERT_CF_{client_id}_{idx}",
+                    "date": "2026-10-08T18:00:00.000Z",
+                    "type": "Credit Risk",
+                    "sousType": "Cashflow Négatif",
+                    "entite": client_name,
+                    "score": 88.0,
+                    "decision": "Rejeté",
+                    "montant": str(float(row.get("Montant_Credit_DZD", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"Cashflow négatif détecté ({client_data['cashflow']} DZD). Capacité de remboursement insuffisante."}
+                })
+                
+            if client_data["retard_paiement"] > 60:
+                alerts.append({
+                    "id": f"ALERT_RETARD_{client_id}_{idx}",
+                    "date": "2026-10-08T18:00:00.000Z",
+                    "type": "Credit Risk",
+                    "sousType": "Défaut de Paiement",
+                    "entite": client_name,
+                    "score": 95.0,
+                    "decision": "Rejeté",
+                    "montant": str(float(row.get("Montant_Credit_DZD", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"Retard de paiement critique ({client_data['retard_paiement']} jours). Historique bancaire défavorable."}
+                })
+                
+            if client_data["impayes"] > 0:
+                alerts.append({
+                    "id": f"ALERT_IMPAYES_{client_id}_{idx}",
+                    "date": "2026-10-08T18:00:00.000Z",
+                    "type": "Credit Risk",
+                    "sousType": "Dettes Impayées",
+                    "entite": client_name,
+                    "score": 92.0,
+                    "decision": "A vérifier",
+                    "montant": str(float(row.get("Montant_Credit_DZD", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"Dettes impayées existantes ({client_data['impayes']} DZD). Risque de non-recouvrement."}
+                })
             
             exposure = float(row.get("Montant_Credit_DZD", row.get("montant_credit", row.get("credit_limit", 500000))))
             if np.isnan(exposure):
@@ -658,13 +735,36 @@ class CreditRiskEngine:
             print(f"Error reading from DB: {e}")
             return {"portfolio": [], "var_data": []}
 
+        alerts = []
         portfolio = []
+        import datetime
+        now_str = datetime.datetime.now().isoformat()
+        
         for idx, row in df.iterrows():
             revenu = float(row.get('revenu_mensuel_dzd', 80000))
             if np.isnan(revenu): revenu = 80000
             echeance = float(row.get('echeance_mensuelle_dzd', 0))
             if np.isnan(echeance): echeance = 0
-            dti = (echeance / revenu) * 100 if revenu > 0 else 40
+            
+            client_id = str(row.get("client_id", f"CL-{idx}"))
+            client_name = str(row.get("nom", "")) + " " + str(row.get("prenom", ""))
+            
+            if revenu <= 0:
+                dti = 0.0
+                alerts.append({
+                    "id": f"ALERT_{client_id}_{idx}",
+                    "date": now_str,
+                    "type": "Fraud",
+                    "sousType": "Anomalie KYC/Revenus",
+                    "entite": client_name,
+                    "score": 90.0,
+                    "decision": "A vérifier",
+                    "montant": str(float(row.get("montant_credit_dzd", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"Alerte : Revenu déclaré nul ou négatif ({revenu} DZD). DTI forcé à 0. Risque potentiel de fraude ou d'erreur de saisie."}
+                })
+            else:
+                dti = (echeance / revenu) * 100
             
             cashflow = row.get("cashflow_dzd")
             if pd.isna(cashflow) or cashflow is None:
@@ -690,6 +790,62 @@ class CreditRiskEngine:
                 "overdraft": overdraft_val
             }
             
+            # Additional Rules
+            if dti > 60:
+                alerts.append({
+                    "id": f"ALERT_DTI_{client_id}_{idx}",
+                    "date": now_str,
+                    "type": "Credit Risk",
+                    "sousType": "Surendettement",
+                    "entite": client_name,
+                    "score": 85.0,
+                    "decision": "A vérifier",
+                    "montant": str(float(row.get("montant_credit_dzd", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"DTI de {dti:.1f}% dépassant le seuil critique (60%). Risque d'insolvabilité élevé."}
+                })
+                
+            if client_data["cashflow"] < 0:
+                alerts.append({
+                    "id": f"ALERT_CF_{client_id}_{idx}",
+                    "date": now_str,
+                    "type": "Credit Risk",
+                    "sousType": "Cashflow Négatif",
+                    "entite": client_name,
+                    "score": 88.0,
+                    "decision": "Rejeté",
+                    "montant": str(float(row.get("montant_credit_dzd", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"Cashflow négatif détecté ({client_data['cashflow']} DZD). Capacité de remboursement insuffisante."}
+                })
+                
+            if client_data["retard_paiement"] > 60:
+                alerts.append({
+                    "id": f"ALERT_RETARD_{client_id}_{idx}",
+                    "date": now_str,
+                    "type": "Credit Risk",
+                    "sousType": "Défaut de Paiement",
+                    "entite": client_name,
+                    "score": 95.0,
+                    "decision": "Rejeté",
+                    "montant": str(float(row.get("montant_credit_dzd", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"Retard de paiement critique ({client_data['retard_paiement']} jours). Historique bancaire défavorable."}
+                })
+                
+            if client_data["impayes"] > 0:
+                alerts.append({
+                    "id": f"ALERT_IMPAYES_{client_id}_{idx}",
+                    "date": now_str,
+                    "type": "Credit Risk",
+                    "sousType": "Dettes Impayées",
+                    "entite": client_name,
+                    "score": 92.0,
+                    "decision": "A vérifier",
+                    "montant": str(float(row.get("montant_credit_dzd", 0))) + " DZD",
+                    "analyste": "Système Expert",
+                    "details": {"description": f"Dettes impayées existantes ({client_data['impayes']} DZD). Risque de non-recouvrement."}
+                })
             exposure = float(row.get("montant_credit_dzd", 500000))
             if np.isnan(exposure):
                 exposure = 500000.0
@@ -726,7 +882,7 @@ class CreditRiskEngine:
                 print(f"Error assessing client {idx}: {e}")
                 
         if not portfolio:
-            return {"portfolio": [], "var_data": []}
+            return {"portfolio": [], "var_data": [], "alerts": alerts}
             
         var_input = [{"pd": p["pd"], "ead": p["ead"], "lgd": p["lgd"]} for p in portfolio]
         var_result = self.calculate_monte_carlo_var(var_input, iterations=5000, confidence=0.99)
@@ -745,7 +901,8 @@ class CreditRiskEngine:
         return {
             "portfolio": portfolio,
             "var_data": var_history,
-            "monte_carlo_metrics": var_result
+            "monte_carlo_metrics": var_result,
+            "alerts": alerts
         }
 
 

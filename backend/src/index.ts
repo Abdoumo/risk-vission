@@ -49,6 +49,21 @@ import authRoutes from './routes/auth';
 app.use(cors());
 app.use(express.json());
 
+function getPythonExecutable(): string {
+  const candidates = [
+    path.join(__dirname, '../../AI_Pipeline/.venv/bin/python'),
+    path.join(__dirname, '../../AI_Pipeline/.venv/bin/python3'),
+    path.join(__dirname, '../../.venv/bin/python'),
+    path.join(__dirname, '../../.venv/bin/python3'),
+    path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe'),
+    path.join(__dirname, '../../.venv/Scripts/python.exe'),
+  ];
+  for (const c of candidates) {
+    if (fs.existsSync(c)) return c;
+  }
+  return os.platform() === 'win32' ? 'python' : 'python3';
+}
+
 app.post('/api/fraude/upload', uploadFraud.single('csvFile'), async (req, res) => {
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
@@ -56,9 +71,7 @@ app.post('/api/fraude/upload', uploadFraud.single('csvFile'), async (req, res) =
 
   try {
     const pythonScript = path.join(__dirname, '../../AI_Pipeline/fraud_upload_engine.py');
-    const pyVenvPath = os.platform() === 'win32' 
-      ? path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe')
-      : path.join(__dirname, '../../AI_Pipeline/.venv/bin/python');
+    const pyVenvPath = getPythonExecutable();
     const cwdPath = path.join(__dirname, '../../AI_Pipeline');
     execSync(`"${pyVenvPath}" "${pythonScript}"`, { cwd: cwdPath, stdio: 'inherit' });
 
@@ -85,9 +98,7 @@ app.post('/api/risques/upload', upload.single('csvFile'), async (req, res) => {
 
   try {
     const pythonScript = path.join(__dirname, '../../AI_Pipeline/credit_risk_engine.py');
-    const pyVenvPath = os.platform() === 'win32' 
-      ? path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe')
-      : path.join(__dirname, '../../AI_Pipeline/.venv/bin/python');
+    const pyVenvPath = getPythonExecutable();
     const cwdPath = path.join(__dirname, '../../AI_Pipeline');
     
     // Synchronously run the credit risk engine
@@ -109,6 +120,16 @@ app.post('/api/risques/upload', upload.single('csvFile'), async (req, res) => {
           await prisma.varData.deleteMany();
           await (prisma.varData as any).createMany({ data: data.var_data });
         }
+        
+        // Populate Alerts for Revenue <= 0
+        if (data.alerts && data.alerts.length > 0) {
+          await (prisma.fraudHistoryItem as any).createMany({ 
+            data: data.alerts,
+            skipDuplicates: true
+          });
+          console.log(`Inserted ${data.alerts.length} alerts for anomalies.`);
+        }
+        
         console.log("Risque portfolio populated successfully from CSV.");
       }
     } catch (e) {
@@ -155,6 +176,7 @@ app.use('/api/auth', authRoutes);
 
 import creditRiskRoutes from './routes/credit_risk';
 import fraudRoutes from './routes/fraud';
+import chatbotRoutes from './routes/chatbot';
 
 // Protect all other /api routes and log actions
 app.use('/api', authenticateToken, (req, res, next) => {
@@ -163,19 +185,331 @@ app.use('/api', authenticateToken, (req, res, next) => {
 
 app.use('/api/credit-risk', creditRiskRoutes);
 app.use('/api/fraude', fraudRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 // Routes for Bank Connectors
+export async function syncCoreBankingData(targetEndpoint?: string, targetApiKey?: string) {
+  const baseUrl = targetEndpoint || 'http://69.57.163.97:4545/api/open';
+  const apiKey = targetApiKey || 'riskvision_external_share_key_999';
+  const cleanBase = baseUrl.replace(/\/+$/, '');
+
+  const startTime = Date.now();
+  let latency = 45;
+
+  try {
+    // 1. Fetch Clients
+    const t0 = Date.now();
+    const clientsRes = await fetch(`${cleanBase}/clients?limit=100`, {
+      headers: { 'x-api-key': apiKey },
+      signal: AbortSignal.timeout(8000)
+    });
+    latency = Math.max(12, Date.now() - t0);
+
+    let clientsData: any[] = [];
+    if (clientsRes.ok) {
+      const json = await clientsRes.json();
+      clientsData = Array.isArray(json) ? json : (json.data || []);
+    }
+
+    // 2. Fetch Accounts
+    let accountsData: any[] = [];
+    try {
+      const accountsRes = await fetch(`${cleanBase}/accounts?limit=100`, {
+        headers: { 'x-api-key': apiKey },
+        signal: AbortSignal.timeout(8000)
+      });
+      if (accountsRes.ok) {
+        const json = await accountsRes.json();
+        accountsData = Array.isArray(json) ? json : (json.data || []);
+      }
+    } catch (e) {
+      console.warn('Accounts fetch warning:', e);
+    }
+
+    // 3. Fetch Transactions
+    let transactionsData: any[] = [];
+    try {
+      const txRes = await fetch(`${cleanBase}/transactions?limit=200`, {
+        headers: { 'x-api-key': apiKey },
+        signal: AbortSignal.timeout(8000)
+      });
+      if (txRes.ok) {
+        const json = await txRes.json();
+        transactionsData = Array.isArray(json) ? json : (json.data || []);
+      }
+    } catch (e) {
+      console.warn('Transactions fetch warning:', e);
+    }
+
+    // Ingest Clients into CreditClient
+    for (const c of clientsData) {
+      const clientId = String(c.customer_id || c.client_id);
+      const accounts = c.accounts || [];
+      const primaryAccount = accounts[0] || {};
+      const solde = parseFloat(primaryAccount.soldeActuel || 0);
+      const declaredIncome = parseFloat(String(c.kyc_engine?.financial?.declaredIncome || '85000').replace(/[^0-9.-]+/g, '')) || 85000;
+
+      await prisma.creditClient.upsert({
+        where: { client_id: clientId },
+        update: {
+          nom: c.nom,
+          prenom: c.prenom,
+          solde_compte_dzd: solde,
+          revenu_mensuel_dzd: declaredIncome,
+          statut_client: c.kyc_engine?.status || 'Active'
+        },
+        create: {
+          client_id: clientId,
+          type_client: c.type_client || 'Particulier',
+          nom: c.nom,
+          prenom: c.prenom,
+          wilaya: c.kyc_engine?.identity?.address?.split(',')?.pop()?.trim() || 'Alger',
+          ville: c.kyc_engine?.identity?.address || 'Alger',
+          agence: 'Agence Centrale SIB',
+          secteur_activite: c.kyc_engine?.business?.sector || 'Général',
+          type_compte: primaryAccount.typeCompte || 'Courant',
+          solde_compte_dzd: solde,
+          revenu_mensuel_dzd: declaredIncome,
+          type_credit: 'Immobilier / Consommation',
+          montant_credit_dzd: declaredIncome * 12,
+          duree_credit_mois: 36,
+          echeance_mensuelle_dzd: Math.round(declaredIncome * 0.3),
+          impayes_dzd: 0,
+          jours_retard: 0,
+          classe_creance: 'Courante',
+          provision_dzd: 0,
+          statut_client: c.kyc_engine?.status || 'Active'
+        }
+      });
+    }
+
+    // Ingest Transactions into FraudHistoryItem
+    for (const tx of transactionsData) {
+      const txId = `TX-${tx.transaction_id}`;
+      const amountNum = parseFloat(tx.montant || 0);
+      const isHigh = amountNum > 500000;
+      const isMedium = amountNum > 100000;
+      const score = isHigh ? 84.5 : isMedium ? 58.0 : 18.0;
+      const decision = isHigh ? 'blocked' : isMedium ? 'review' : 'approved';
+      const entite = `Compte #${tx.emetteur?.numero_compte || tx.beneficiaire?.numero_compte || 'SIB'}`;
+      const dateFormatted = tx.date ? new Date(tx.date).toLocaleDateString('fr-FR') + ' ' + new Date(tx.date).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) : new Date().toLocaleString('fr-FR');
+
+      await prisma.fraudHistoryItem.upsert({
+        where: { id: txId },
+        update: {
+          score,
+          decision,
+          montant: `${amountNum.toLocaleString('fr-FR')} ${tx.devise || 'DZD'}`
+        },
+        create: {
+          id: txId,
+          date: dateFormatted,
+          type: tx.type_operation || 'Virement',
+          sousType: tx.devise || 'DZD',
+          entite,
+          score,
+          decision,
+          montant: `${amountNum.toLocaleString('fr-FR')} ${tx.devise || 'DZD'}`,
+          analyste: 'Core Banking SIB Engine',
+          details: {
+            transaction_id: tx.transaction_id,
+            emetteur: tx.emetteur,
+            beneficiaire: tx.beneficiaire,
+            raw_status: tx.status
+          }
+        }
+      });
+    }
+
+    // Upsert or update BankConnector
+    const existing = await prisma.bankConnector.findFirst({
+      where: {
+        OR: [
+          { endpoint: { contains: '69.57.163.97' } },
+          { name: { contains: 'RiskVision' } },
+          { name: { contains: 'Core Banking' } }
+        ]
+      }
+    });
+
+    const nowStr = new Date().toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+    const volumeStr = `${((clientsData.length * 15 + transactionsData.length * 2) / 1024).toFixed(2)} MB`;
+
+    if (existing) {
+      await prisma.bankConnector.update({
+        where: { id: existing.id },
+        data: {
+          name: 'RiskVision — Core Banking & SIB',
+          system: 'Core Banking System (Temenos / SIB)',
+          type: 'CoreBanking',
+          bank: 'RiskVision Banking Simulator',
+          status: 'connected',
+          latency,
+          uptime: 99.8,
+          requestsPerMin: Math.floor(Math.random() * 20) + 35,
+          lastSync: nowStr,
+          dataVolume: volumeStr,
+          errorRate: 0.0,
+          endpoint: cleanBase,
+          apiKey
+        }
+      });
+    } else {
+      await prisma.bankConnector.create({
+        data: {
+          name: 'RiskVision — Core Banking & SIB',
+          system: 'Core Banking System (Temenos / SIB)',
+          type: 'CoreBanking',
+          bank: 'RiskVision Banking Simulator',
+          status: 'connected',
+          latency,
+          uptime: 99.8,
+          requestsPerMin: 45,
+          lastSync: nowStr,
+          endpoint: cleanBase,
+          authMethod: 'API Key (x-api-key)',
+          dataVolume: volumeStr,
+          errorRate: 0.0,
+          version: 'v2.4',
+          environment: 'Production',
+          apiKey
+        }
+      });
+    }
+
+    // Log the API calls in ApiLog
+    await prisma.apiLog.createMany({
+      data: [
+        {
+          timestamp: new Date().toLocaleTimeString('fr-FR', { hour12: false }),
+          method: 'GET',
+          endpoint: '/api/open/clients',
+          connector: 'RiskVision — Core Banking & SIB',
+          statusCode: 200,
+          latency: Math.round(latency * 0.8),
+          payload: `${clientsData.length} clients`,
+          level: 'INFO',
+          message: `Synchronisation réussie — ${clientsData.length} dossiers clients KYC importés`,
+          requestId: `REQ-${Math.floor(Math.random() * 89999) + 10000}`
+        },
+        {
+          timestamp: new Date().toLocaleTimeString('fr-FR', { hour12: false }),
+          method: 'GET',
+          endpoint: '/api/open/transactions',
+          connector: 'RiskVision — Core Banking & SIB',
+          statusCode: 200,
+          latency: latency,
+          payload: `${transactionsData.length} tx`,
+          level: 'INFO',
+          message: `Flux temps-réel — ${transactionsData.length} transactions bancaires auditées`,
+          requestId: `REQ-${Math.floor(Math.random() * 89999) + 10000}`
+        }
+      ]
+    });
+
+    // Update / ensure DataFlow entries exist
+    await prisma.dataFlow.deleteMany({
+      where: { source: { contains: 'Core Banking' } }
+    });
+    await prisma.dataFlow.createMany({
+      data: [
+        {
+          source: 'Core Banking (69.57.163.97)',
+          destination: 'Modèle Crédit & KYC',
+          type: 'Profils Clients & KYC',
+          volume: clientsData.length,
+          frequency: 'Temps réel (API)',
+          lastExec: nowStr,
+          status: 'active',
+          transformation: 'JSON -> Normalisation Algorisk'
+        },
+        {
+          source: 'Core Banking (69.57.163.97)',
+          destination: 'Moteur Anti-Fraude',
+          type: 'Transactions & Virements',
+          volume: transactionsData.length,
+          frequency: 'Temps réel (API)',
+          lastExec: nowStr,
+          status: 'active',
+          transformation: 'Inférence XGBoost / IsolationForest'
+        }
+      ]
+    });
+
+    return {
+      success: true,
+      latency,
+      clientsCount: clientsData.length,
+      accountsCount: accountsData.length,
+      transactionsCount: transactionsData.length,
+      syncedAt: nowStr
+    };
+  } catch (error: any) {
+    console.error('Error during Core Banking sync:', error);
+    return {
+      success: false,
+      error: error.message || 'Connection failed'
+    };
+  }
+}
+
 app.get('/api/banking/connectors', async (req, res) => {
   try {
-    const connectors = await prisma.bankConnector.findMany({
+    let connectors = await prisma.bankConnector.findMany({
       include: {
         flows: true
       }
     });
+
+    // If no Core Banking connector exists yet, seed it and run initial sync
+    const hasCoreBanking = connectors.some(c => c.endpoint.includes('69.57.163.97') || c.type === 'CoreBanking');
+    if (!hasCoreBanking) {
+      syncCoreBankingData().catch(err => console.error('Background initial sync error:', err));
+    }
+
     res.json(connectors);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch connectors' });
+  }
+});
+
+app.post('/api/banking/sync', async (req, res) => {
+  try {
+    const { endpoint, apiKey } = req.body || {};
+    const result = await syncCoreBankingData(endpoint, apiKey);
+    res.json(result);
+  } catch (error) {
+    console.error('Manual sync failed:', error);
+    res.status(500).json({ error: 'Sync failed' });
+  }
+});
+
+app.get('/api/banking/sync-status', async (req, res) => {
+  try {
+    const clientsCount = await prisma.creditClient.count();
+    const fraudItemsCount = await prisma.fraudHistoryItem.count();
+    const logsCount = await prisma.apiLog.count();
+    const connector = await prisma.bankConnector.findFirst({
+      where: {
+        OR: [
+          { endpoint: { contains: '69.57.163.97' } },
+          { type: 'CoreBanking' }
+        ]
+      }
+    });
+
+    res.json({
+      connected: !!connector,
+      connector,
+      clientsCount,
+      fraudItemsCount,
+      logsCount,
+      lastSync: connector?.lastSync || 'Jamais'
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch sync status' });
   }
 });
 
@@ -188,12 +522,12 @@ app.post('/api/banking/connectors', async (req, res) => {
       data: {
         name: name || 'API Externe',
         system: 'External API',
-        type: 'REST',
+        type: endpoint?.includes('open') || endpoint?.includes('69.57.163.97') ? 'CoreBanking' : 'REST',
         bank: 'Partenaire Externe',
         status: 'connected',
         latency: Math.floor(Math.random() * 50) + 10,
         uptime: 100.0,
-        requestsPerMin: 0,
+        requestsPerMin: 35,
         lastSync: new Date().toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }),
         endpoint: endpoint || 'https://api.example.com/v1',
         authMethod: 'API Key',
@@ -206,21 +540,10 @@ app.post('/api/banking/connectors', async (req, res) => {
       }
     });
 
-    // Generate a mock log for the new API to show it's active
-    await prisma.apiLog.create({
-      data: {
-        timestamp: new Date().toLocaleTimeString('fr-FR', { hour12: false }),
-        method: 'POST',
-        endpoint: '/auth/verify',
-        connector: newConnector.name,
-        statusCode: 200,
-        latency: 45,
-        payload: '{}',
-        level: 'INFO',
-        message: 'Authentication successful for new API key',
-        requestId: `REQ-${Math.floor(Math.random() * 90000) + 10000}`
-      }
-    });
+    // If it's the Core Banking endpoint, trigger sync immediately!
+    if (endpoint?.includes('69.57.163.97') || endpoint?.includes('/api/open')) {
+      syncCoreBankingData(endpoint, apiKey).catch(console.error);
+    }
 
     res.json(newConnector);
   } catch (error) {
@@ -647,9 +970,7 @@ app.post('/api/xai/generate', async (req, res) => {
     const path = require('path');
     const scriptPath = path.join(__dirname, '..', '..', 'AI_Pipeline', 'xai_engine.py');
 
-    const pyVenvPath = os.platform() === 'win32' 
-      ? path.join(__dirname, '../../AI_Pipeline/.venv/Scripts/python.exe')
-      : path.join(__dirname, '../../AI_Pipeline/.venv/bin/python');
+    const pyVenvPath = getPythonExecutable();
 
     const py = spawn(pyVenvPath, [scriptPath, '--limit', limit.toString(), '--offset', offset.toString()], {
       cwd: path.join(__dirname, '..', '..', 'AI_Pipeline'),
@@ -1618,9 +1939,9 @@ try {
   execSync('npx prisma db push --accept-data-loss', { stdio: 'inherit' });
   console.log("Base de données synchronisée avec succès.");
   
-  console.log("Peuplement des Profils Clients (CreditRisk)...");
-  execSync('npx ts-node prisma/seed_credit_clients.ts', { stdio: 'inherit' });
-  console.log("Profils Clients générés avec succès.");
+  // console.log("Peuplement des Profils Clients (CreditRisk)...");
+  // execSync('npx ts-node prisma/seed_credit_clients.ts', { stdio: 'inherit' });
+  // console.log("Profils Clients générés avec succès.");
 } catch (error) {
   console.error("Erreur lors de la synchronisation Prisma (tentative de fallback raw SQL):", error);
 }

@@ -1,5 +1,6 @@
-# Datasets
+# Datasets & Generated Results
 AI_Pipeline/DATASETS/
+AI_Pipeline/*_results.json
 
 # Virtual Environment
 .venv/
@@ -16,6 +17,14 @@ __pycache__/
 # Node
 node_modules/
 .npm/
+dist/
+
+# External repositories & Scratch
+AI_Pipeline/FinGPT/
+AI_Pipeline/experiments/
+ss
+ss.txt
+things to do/
 
 # OS generated files
 .DS_Store

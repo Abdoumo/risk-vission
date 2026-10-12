@@ -34,7 +34,19 @@ const flowStatusConfig = {
   error:  { color: 'text-red-400',   bg: 'bg-red-500/10',   border: 'border-red-500/20',   dot: 'bg-red-400 animate-pulse' },
 };
 
-function ConnectorCard({ connector, isRTL, lang }: { connector: BankConnector; isRTL: boolean; lang: string }) {
+function ConnectorCard({ 
+  connector, 
+  isRTL, 
+  lang,
+  onSync,
+  isSyncing
+}: { 
+  connector: BankConnector; 
+  isRTL: boolean; 
+  lang: string;
+  onSync?: (connector: BankConnector) => void;
+  isSyncing?: boolean;
+}) {
   const [expanded, setExpanded] = useState(false);
   const st = statusConfig[connector.status as keyof typeof statusConfig] || statusConfig.disconnected;
   const StatusIcon = st.icon;
@@ -80,6 +92,20 @@ function ConnectorCard({ connector, isRTL, lang }: { connector: BankConnector; i
               <p className="text-slate-600">req/min</p>
             </div>
           </div>
+          {onSync && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onSync(connector);
+              }}
+              disabled={isSyncing}
+              className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-slate-800/80 hover:bg-emerald-500/20 hover:border-emerald-500/30 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:text-emerald-400 transition-all shadow-sm active:scale-95 disabled:opacity-50"
+              title="Synchroniser les données réelles"
+            >
+              <RefreshCw className={`h-3 w-3 ${isSyncing ? 'animate-spin text-emerald-400' : ''}`} />
+              <span className="hidden sm:inline">Sync</span>
+            </button>
+          )}
           <div className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${st.bg} ${st.color}`}>
             <StatusIcon className={`h-3 w-3 ${connector.status === 'syncing' ? 'animate-spin' : ''}`} />
             {lang === 'ar' ? st.label_ar : lang === 'en' ? st.label_en : st.label_fr}
@@ -149,27 +175,91 @@ export default function ApiConnectorsView() {
   
   const [showNewModal, setShowNewModal] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncingConnectorId, setSyncingConnectorId] = useState<string | null>(null);
+  const [syncStatus, setSyncStatus] = useState<{
+    connected: boolean;
+    clientsCount: number;
+    fraudItemsCount: number;
+    logsCount: number;
+    lastSync: string;
+  } | null>(null);
+  const [livePreviewItems, setLivePreviewItems] = useState<any[]>([]);
+
+  const fetchData = async () => {
+    try {
+      const [connectorsRes, logsRes, flowsRes, metricsRes] = await Promise.all([
+        fetch('/api/banking/connectors'),
+        fetch('/api/banking/logs'),
+        fetch('/api/banking/flows'),
+        fetch('/api/banking/metrics')
+      ]);
+      
+      setBankConnectors(await connectorsRes.json());
+      setApiLogs(await logsRes.json());
+      setDataFlows(await flowsRes.json());
+      setMetrics(await metricsRes.json());
+    } catch (error) {
+      console.error('Failed to fetch data', error);
+    }
+  };
+
+  const fetchSyncStatus = async () => {
+    try {
+      const res = await fetch('/api/banking/sync-status');
+      if (res.ok) {
+        setSyncStatus(await res.json());
+      }
+      const historyRes = await fetch('/api/fraud-history');
+      if (historyRes.ok) {
+        const hist = await historyRes.json();
+        setLivePreviewItems(hist.slice(0, 8));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [connectorsRes, logsRes, flowsRes, metricsRes] = await Promise.all([
-          fetch('/api/banking/connectors'),
-          fetch('/api/banking/logs'),
-          fetch('/api/banking/flows'),
-          fetch('/api/banking/metrics')
-        ]);
-        
-        setBankConnectors(await connectorsRes.json());
-        setApiLogs(await logsRes.json());
-        setDataFlows(await flowsRes.json());
-        setMetrics(await metricsRes.json());
-      } catch (error) {
-        console.error('Failed to fetch data', error);
-      }
-    };
     fetchData();
+    fetchSyncStatus();
   }, []);
+
+  const handleSyncCoreBanking = async (customEndpoint?: string, customApiKey?: string) => {
+    setIsSyncing(true);
+    try {
+      const res = await fetch('/api/banking/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          endpoint: customEndpoint || 'http://69.57.163.97:4545/api/open',
+          apiKey: customApiKey || 'riskvision_external_share_key_999'
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert(`Synchronisation réussie avec le Core Banking !\n\n• ${data.clientsCount} Dossiers clients KYC importés\n• ${data.transactionsCount} Transactions bancaires auditées\n• Latence API mesurée: ${data.latency}ms`);
+      } else {
+        alert(`Avertissement de synchronisation: ${data.error || 'Erreur de connexion'}`);
+      }
+      await fetchData();
+      await fetchSyncStatus();
+    } catch (e) {
+      console.error(e);
+      alert('Erreur lors de la synchronisation avec le Core Banking.');
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
+  const handleSyncConnector = async (connector: BankConnector) => {
+    setSyncingConnectorId(connector.id);
+    try {
+      await handleSyncCoreBanking(connector.endpoint, connector.apiKey || undefined);
+    } finally {
+      setSyncingConnectorId(null);
+    }
+  };
 
   const connected    = bankConnectors.filter(c => c.status === 'connected').length;
   const degraded     = bankConnectors.filter(c => c.status === 'degraded').length;
@@ -326,7 +416,14 @@ export default function ApiConnectorsView() {
                   <div className="h-px flex-1 bg-slate-800" />
                 </div>
                 {group.map(c => (
-                  <ConnectorCard key={c.id} connector={c} isRTL={isRTL} lang={lang} />
+                  <ConnectorCard 
+                    key={c.id} 
+                    connector={c} 
+                    isRTL={isRTL} 
+                    lang={lang} 
+                    onSync={handleSyncConnector}
+                    isSyncing={syncingConnectorId === c.id || isSyncing}
+                  />
                 ))}
               </div>
             );
@@ -462,31 +559,169 @@ export default function ApiConnectorsView() {
       )}
 
       {activeSection === 'uploads' && (
-        <motion.div variants={itemVariants} className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6">
-          <div className={`mb-6 ${isRTL ? 'text-right' : ''}`}>
-            <h3 className="text-lg font-bold text-white tracking-tight">Fichiers & Données</h3>
-            <p className="text-[13px] text-slate-500 mt-1">Importation de données manuelles et fichiers de référence</p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            <div className={`rounded-xl border border-white/5 bg-slate-800/30 p-8 flex flex-col items-center justify-center text-center hover:bg-slate-800/50 transition-colors`}>
-              <div className="flex gap-4 mb-4">
-                <div className="h-12 w-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-emerald-400" />
+        <motion.div variants={itemVariants} className="space-y-6">
+          {/* Card 1: Live Core Banking Gateway */}
+          <div className="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-slate-900/90 via-slate-900/60 to-emerald-950/20 backdrop-blur-xl p-6 shadow-[0_0_30px_rgba(16,185,129,0.05)]">
+            <div className={`flex flex-wrap items-center justify-between gap-4 mb-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <div className={`flex items-center gap-3.5 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                  <Database className="h-6 w-6 text-emerald-400" />
                 </div>
-                <div className="h-12 w-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center">
-                  <Database className="h-6 w-6 text-rose-400" />
+                <div className={isRTL ? 'text-right' : ''}>
+                  <div className="flex items-center gap-2.5">
+                    <h3 className="text-lg font-bold text-white tracking-tight">Passerelle Core Banking Direct (SIB / Open API)</h3>
+                    <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 text-[11px] font-bold text-emerald-400">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Live Connecté
+                    </span>
+                  </div>
+                  <p className="text-[13px] text-slate-400 mt-1 font-mono">
+                    Endpoint: <span className="text-emerald-300">http://69.57.163.97:4545/api/open</span> • Clé: <span className="text-slate-500">riskvision_***_999</span>
+                  </p>
                 </div>
               </div>
-              <h4 className="text-lg font-bold text-white mb-2">Base de Données Unifiée (Risques & Fraudes)</h4>
-              <p className="text-[14px] text-slate-400 mb-6 max-w-[500px]">
-                Uploadez votre fichier CSV contenant les données globales. Il sera automatiquement traité pour évaluer les risques (VaR, Portefeuille) ET pour ré-entraîner les modèles anti-fraude et anomalies.
-              </p>
-              <label className="flex cursor-pointer items-center gap-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-3 text-[14px] font-bold text-white transition-all hover:from-emerald-500 hover:to-teal-500 shadow-[0_0_20px_rgba(16,185,129,0.3)] active:scale-[0.98]">
-                {isUploading ? <Loader2 className="h-5 w-5 animate-spin" /> : <UploadCloud className="h-5 w-5" />}
-                <span>{isUploading ? 'Chargement en cours...' : 'Importer CSV Unifié'}</span>
-                <input type="file" accept=".csv" className="hidden" onChange={handleUnifiedUpload} disabled={isUploading} />
-              </label>
+
+              <button
+                onClick={() => handleSyncCoreBanking()}
+                disabled={isSyncing}
+                className="flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-2.5 text-[13px] font-bold text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:from-emerald-500 hover:to-teal-500 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
+              >
+                <RefreshCw className={`h-4 w-4 ${isSyncing ? 'animate-spin' : ''}`} />
+                <span>{isSyncing ? 'Synchronisation en cours...' : 'Synchroniser les Données Live'}</span>
+              </button>
+            </div>
+
+            {/* Ingestion Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="rounded-xl border border-white/5 bg-slate-800/40 p-4">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Dossiers Clients & KYC</p>
+                <p className="mt-1.5 text-2xl font-black text-emerald-400">{syncStatus?.clientsCount ?? '—'}</p>
+                <p className="text-[10px] text-slate-500 mt-1">Alimente le Scoring Crédit</p>
+              </div>
+              <div className="rounded-xl border border-white/5 bg-slate-800/40 p-4">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Transactions Auditées</p>
+                <p className="mt-1.5 text-2xl font-black text-cyan-400">{syncStatus?.fraudItemsCount ?? '—'}</p>
+                <p className="text-[10px] text-slate-500 mt-1">Alimente l'Anti-Fraude</p>
+              </div>
+              <div className="rounded-xl border border-white/5 bg-slate-800/40 p-4">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Appels & Logs API</p>
+                <p className="mt-1.5 text-2xl font-black text-violet-400">{syncStatus?.logsCount ?? '—'}</p>
+                <p className="text-[10px] text-slate-500 mt-1">Surveillance continue</p>
+              </div>
+              <div className="rounded-xl border border-white/5 bg-slate-800/40 p-4">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Dernière Synchronisation</p>
+                <p className="mt-1.5 text-base font-bold text-slate-200 truncate">{syncStatus?.lastSync || 'Jamais'}</p>
+                <p className="text-[10px] text-emerald-400 mt-1">Statut: Prêt</p>
+              </div>
+            </div>
+
+            {/* Target Integration Modules Badges */}
+            <div className="rounded-xl border border-white/5 bg-slate-950/40 p-3.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <span className="text-slate-400 font-medium">Pipelines IA alimentés automatiquement :</span>
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-emerald-300 font-semibold">
+                  Scoring Clients & KYC (/credit-risk)
+                </span>
+                <span className="rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 text-cyan-300 font-semibold">
+                  Détection Anti-Fraude (/fraude)
+                </span>
+                <span className="rounded-lg border border-purple-500/30 bg-purple-500/10 px-2.5 py-1 text-purple-300 font-semibold">
+                  Explicabilité XAI (/xai)
+                </span>
+                <span className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-amber-300 font-semibold">
+                  Portefeuille & VaR (/marche)
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Live Ingested Data Preview Table */}
+          {livePreviewItems.length > 0 && (
+            <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6">
+              <div className={`flex items-center justify-between mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <div className={isRTL ? 'text-right' : ''}>
+                  <h4 className="text-base font-bold text-white tracking-tight">Aperçu en Direct des Données Ingestées (Dernières Transactions)</h4>
+                  <p className="text-xs text-slate-500 mt-0.5">Flux en temps réel traité par le moteur anti-fraude et le portefeuille</p>
+                </div>
+                <span className="text-xs text-slate-500 font-mono">
+                  {livePreviewItems.length} transactions récentes
+                </span>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs text-slate-300">
+                  <thead className="bg-slate-800/40 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-white/5">
+                    <tr>
+                      <th className="px-4 py-3">ID Transaction</th>
+                      <th className="px-4 py-3">Date</th>
+                      <th className="px-4 py-3">Entité / Compte</th>
+                      <th className="px-4 py-3">Type</th>
+                      <th className="px-4 py-3">Montant</th>
+                      <th className="px-4 py-3 text-center">Score Risque</th>
+                      <th className="px-4 py-3 text-right">Décision IA</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5 font-mono">
+                    {livePreviewItems.map((item) => (
+                      <tr key={item.id} className="hover:bg-slate-800/30 transition-colors">
+                        <td className="px-4 py-3 text-emerald-400 font-bold">{item.id}</td>
+                        <td className="px-4 py-3 text-slate-400 font-sans">{item.date}</td>
+                        <td className="px-4 py-3 text-white font-sans truncate max-w-[200px]">{item.entite}</td>
+                        <td className="px-4 py-3 text-slate-400">{item.type}</td>
+                        <td className="px-4 py-3 font-bold text-white">{item.montant}</td>
+                        <td className="px-4 py-3 text-center">
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                            item.score >= 70 ? 'bg-rose-500/20 text-rose-400' :
+                            item.score >= 40 ? 'bg-amber-500/20 text-amber-400' :
+                            'bg-emerald-500/20 text-emerald-400'
+                          }`}>
+                            {item.score}/100
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <span className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase ${
+                            item.decision === 'blocked' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' :
+                            item.decision === 'review' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' :
+                            'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                          }`}>
+                            {item.decision}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* Card 3: Manual Unified CSV Import */}
+          <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6">
+            <div className={`mb-6 ${isRTL ? 'text-right' : ''}`}>
+              <h3 className="text-lg font-bold text-white tracking-tight">Importation Manuelle de Fichiers CSV</h3>
+              <p className="text-[13px] text-slate-500 mt-1">Importation alternative de fichiers CSV historiques ou datasets de référence</p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+              <div className="rounded-xl border border-white/5 bg-slate-800/30 p-8 flex flex-col items-center justify-center text-center hover:bg-slate-800/50 transition-colors">
+                <div className="flex gap-4 mb-4">
+                  <div className="h-12 w-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                    <FileText className="h-6 w-6 text-emerald-400" />
+                  </div>
+                  <div className="h-12 w-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center">
+                    <Database className="h-6 w-6 text-rose-400" />
+                  </div>
+                </div>
+                <h4 className="text-lg font-bold text-white mb-2">Base de Données Unifiée (CSV Hors-Ligne)</h4>
+                <p className="text-[14px] text-slate-400 mb-6 max-w-[500px]">
+                  Uploadez votre fichier CSV contenant les données globales. Il sera automatiquement traité pour évaluer les risques (VaR, Portefeuille) ET pour ré-entraîner les modèles anti-fraude.
+                </p>
+                <label className="flex cursor-pointer items-center gap-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 px-6 py-3 text-[14px] font-bold text-white transition-all shadow-md active:scale-[0.98]">
+                  {isUploading ? <Loader2 className="h-5 w-5 animate-spin" /> : <UploadCloud className="h-5 w-5" />}
+                  <span>{isUploading ? 'Chargement en cours...' : 'Importer CSV Unifié'}</span>
+                  <input type="file" accept=".csv" className="hidden" onChange={handleUnifiedUpload} disabled={isUploading} />
+                </label>
+              </div>
             </div>
           </div>
         </motion.div>

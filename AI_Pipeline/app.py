@@ -20,6 +20,7 @@ from islamic_engine import IslamicRiskEngine
 from stress_engine import StressEngine
 from npl_engine import NPLEngine
 from insurance_fraud_engine import InsuranceFraudEngine
+from kyc_engine import KYCEngine
 
 # ─── App Setup ───────────────────────────────────────────────
 app = FastAPI(
@@ -48,6 +49,7 @@ islamic_engine = IslamicRiskEngine()
 stress_engine = StressEngine()
 npl_engine = NPLEngine()
 insurance_engine = InsuranceFraudEngine()
+kyc_engine = KYCEngine()
 
 @app.on_event("startup")
 def startup():
@@ -152,6 +154,15 @@ class CreditVaRRequest(BaseModel):
     iterations: int = Field(default=5000, description="Monte Carlo iterations")
     confidence: float = Field(default=0.95, description="Confidence level")
 
+class ChatbotRequest(BaseModel):
+    message: str = Field(..., description="Message from the user")
+
+class KYCDynamicRequest(BaseModel):
+    declared: dict = Field(..., description="The declared KYC profile of the customer")
+    observed: dict = Field(..., description="The observed behavior of the customer")
+
+class KYCStaticRequest(BaseModel):
+    profile: dict = Field(..., description="The KYC risk dimension scores (0-100)")
 
 # ─── Endpoints ───────────────────────────────────────────────
 
@@ -232,6 +243,42 @@ def predict_islamic(request: IslamicContractRequest):
     """Assess Sharia compliance and specific Islamic contract risk."""
     try:
         return islamic_engine.assess_islamic_contract(request.contract_type, request.contract_data)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/predict/kyc/static")
+def predict_kyc_static(request: KYCStaticRequest):
+    """Evaluate a customer's static KYC profile based on risk dimensions."""
+    try:
+        return kyc_engine.evaluate_static_risk(request.profile)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/predict/kyc/dynamic")
+def predict_kyc_dynamic(request: KYCDynamicRequest):
+    """Compare declared KYC profile with observed behavior."""
+    try:
+        return kyc_engine.detect_changes(request.declared, request.observed)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/chatbot/ask")
+def chatbot_ask(request: ChatbotRequest):
+    """Process message using FinGPT AI."""
+    try:
+        from fingpt_inference import fingpt_engine
+    except Exception as e:
+        print(f"Failed to load FinGPT: {e}")
+        return {"reply": "L'IA est actuellement indisponible en raison d'une erreur de chargement du modèle (PyTorch). Veuillez vérifier la configuration de votre environnement."}
+
+    try:
+        # Request now contains the full context constructed by the Node.js backend
+        prompt = request.message
+        
+        # We call FinGPT Engine to generate a response
+        reply = fingpt_engine.ask(prompt)
+            
+        return {"reply": reply}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -516,4 +563,4 @@ def get_mock_predictions():
 
 # ─── Run ─────────────────────────────────────────────────────
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=7676, reload=True)
+    uvicorn.run("app:app", host="127.0.0.1", port=7676, reload=True)
