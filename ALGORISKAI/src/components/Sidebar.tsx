@@ -1,5 +1,5 @@
 import {
-  LayoutDashboard, TrendingUp, Brain, AlertTriangle,
+  LayoutDashboard, UserCheck, TrendingUp, Brain, AlertTriangle,
   Database, Settings, Activity, Search, ChevronLeft,
   ChevronRight, ShieldAlert, Network, Lightbulb, ShieldOff, LogOut,
   MessageSquare
@@ -18,6 +18,7 @@ interface SidebarProps {
 
 const menuItems: { id: string; labelKey: TranslationKey; icon: any }[] = [
   { id: 'dashboard',    labelKey: 'nav_dashboard',   icon: LayoutDashboard },
+  { id: 'kyc',          labelKey: 'nav_kyc',         icon: UserCheck },
   { id: 'predictions',  labelKey: 'nav_predictions', icon: TrendingUp },
   { id: 'modeles',      labelKey: 'nav_modeles',     icon: Brain },
   { id: 'anomalies',    labelKey: 'nav_anomalies',   icon: AlertTriangle },

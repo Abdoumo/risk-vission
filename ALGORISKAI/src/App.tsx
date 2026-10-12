@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LangProvider, useLang } from './i18n/LangContext';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import DashboardView from './views/DashboardView';
+import KycEngineView from './views/KycEngineView';
 import PredictionsView from './views/PredictionsView';
 import ModelesView from './views/ModelesView';
 import AnomaliesView from './views/AnomaliesView';
@@ -18,6 +19,7 @@ import type { TranslationKey } from './i18n/translations';
 
 const tabTitles: Record<string, { title: TranslationKey; subtitle: TranslationKey }> = {
   dashboard:   { title: 'nav_dashboard',   subtitle: 'sub_dashboard' },
+  kyc:         { title: 'nav_kyc',         subtitle: 'sub_kyc' },
   predictions: { title: 'nav_predictions', subtitle: 'sub_predictions' },
   modeles:     { title: 'nav_modeles',     subtitle: 'sub_modeles' },
   anomalies:   { title: 'nav_anomalies',   subtitle: 'sub_anomalies' },
@@ -37,8 +39,29 @@ import LoginView from './views/LoginView';
 function AppInner() {
   const { t, isRTL } = useLang();
   const { user } = useAuth();
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState(() => {
+    const path = window.location.pathname.replace(/^\//, '').toLowerCase();
+    if (path === 'kyc') return 'kyc';
+    return 'dashboard';
+  });
   const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    const expected = activeTab === 'dashboard' ? '/' : `/${activeTab}`;
+    if (window.location.pathname !== expected) {
+      window.history.pushState(null, '', expected);
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    const handlePop = () => {
+      const path = window.location.pathname.replace(/^\//, '').toLowerCase();
+      if (path === 'kyc') setActiveTab('kyc');
+      else if (path === '') setActiveTab('dashboard');
+    };
+    window.addEventListener('popstate', handlePop);
+    return () => window.removeEventListener('popstate', handlePop);
+  }, []);
 
   if (!user) {
     return <LoginView />;
@@ -49,6 +72,7 @@ function AppInner() {
   const renderView = () => {
     switch (activeTab) {
       case 'dashboard':   return <DashboardView setActiveTab={setActiveTab} />;
+      case 'kyc':         return <KycEngineView />;
       case 'predictions': return <PredictionsView />;
       case 'modeles':     return <ModelesView />;
       case 'anomalies':   return <AnomaliesView />;

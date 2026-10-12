@@ -14,6 +14,7 @@ export const translations = {
 
     // Nav
     nav_dashboard: 'Tableau de Bord',
+    nav_kyc: 'Moteur KYC & EWS',
     nav_predictions: 'Prédictions',
     nav_modeles: 'Modèles IA',
     nav_anomalies: 'Anomalies',
@@ -30,6 +31,7 @@ export const translations = {
 
     // Header subtitles
     sub_dashboard: 'Vue d\'ensemble de la plateforme — Bourse d\'Alger (SGBV)',
+    sub_kyc: 'Conformité KYC 360°, Détection Dynamique des Changements et EWS',
     sub_predictions: 'Prédictions des cours boursiers en temps réel',
     sub_modeles: 'Gestion et comparaison des modèles de machine learning',
     sub_anomalies: 'Surveillance et analyse des anomalies détectées',
@@ -205,6 +207,7 @@ export const translations = {
     refresh: 'تحديث',
 
     nav_dashboard: 'لوحة التحكم',
+    nav_kyc: 'محرك اعرف عميلك KYC & EWS',
     nav_predictions: 'التنبؤات',
     nav_modeles: 'نماذج الذكاء الاصطناعي',
     nav_anomalies: 'الشذوذات',
@@ -220,6 +223,7 @@ export const translations = {
     nav_islamic: 'النظام الإسلامي',
 
     sub_dashboard: 'نظرة عامة على المنصة — بورصة الجزائر (SGBV)',
+    sub_kyc: 'ملف العميل 360°، كشف التغيرات الديناميكية ونظام الإنذار المبكر EWS',
     sub_predictions: 'تنبؤات أسعار الأسهم في الوقت الفعلي',
     sub_modeles: 'إدارة ومقارنة نماذج التعلم الآلي',
     sub_anomalies: 'مراقبة وتحليل الشذوذات المكتشفة',
@@ -383,6 +387,7 @@ export const translations = {
     refresh: 'Refresh',
 
     nav_dashboard: 'Dashboard',
+    nav_kyc: 'KYC Engine & EWS',
     nav_predictions: 'Predictions',
     nav_modeles: 'AI Models',
     nav_anomalies: 'Anomalies',
@@ -398,6 +403,7 @@ export const translations = {
     nav_islamic: 'Islamic System',
 
     sub_dashboard: 'Platform overview — Algiers Stock Exchange (SGBV)',
+    sub_kyc: '360° KYC Dossier, Dynamic Profile Changes & Early Warning System',
     sub_predictions: 'Real-time stock price predictions',
     sub_modeles: 'ML model management and comparison',
     sub_anomalies: 'Anomaly surveillance and analysis',
