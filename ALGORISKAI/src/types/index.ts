@@ -45,13 +45,55 @@ export interface DonneeDistribution {
 }
 
 export interface AnomaliePoint {
+  id?: string;
   date: string;
   valeur: number;
   anomalie: boolean;
   score: number;
+  score_raw?: number;
   entite?: string;
+  client_id?: string;
+  compte_numero?: string;
   decision?: string;
   details?: any;
+
+  // Spécification PDF Anomaly Detection (Tasks / Anomaly detection.PDF)
+  type_operation?: string;
+  sous_type?: string;
+  montant?: number;
+  devise?: string;
+  date_heure_operation?: string;
+  frequence_actuelle?: string;
+
+  montant_habituel?: number;
+  montant_maximum_habituel?: number;
+  nombre_moyen_operations?: number;
+  frequence_habituelle?: string;
+  types_operations_habituels?: string;
+  horaires_habituels?: string;
+  localisation_habituelle?: string;
+  canal_habituel?: string;
+  device_habituel?: string;
+  beneficiaire_habituel?: string;
+
+  localisation_actuelle?: string;
+  canal_actuel?: string;
+  device_actuel?: string;
+  adresse_ip?: string;
+  nouveau_beneficiaire?: string;
+  nouveau_device?: string;
+
+  ecart_montant?: string;
+  ecart_frequence?: string;
+  ecart_horaire?: string;
+  ecart_geographique?: string;
+  ecart_device?: string;
+  ecart_comportemental?: string;
+  anomalies_recentes_count?: number;
+  niveau?: string;
+
+  motifs?: string[];
+  actions?: string[];
 }
 
 export interface PipelineStep {
