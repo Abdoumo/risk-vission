@@ -206,11 +206,13 @@ export default function XaiView() {
   const [clientDropdownOpen, setClientDropdownOpen] = useState(false);
   const [availableClients, setAvailableClients] = useState<any[]>([]);
 
-  const fetchXaiData = () => {
-    fetch('/api/xai/decisions').then(r => r.json()).then(data => {
-      setXaiDecisions(data);
-      if (data.length > 0 && !selectedDecisionId) {
-        setSelectedDecisionId(data[0].id);
+  const fetchXaiData = (pageToFetch = currentPage) => {
+    fetch(`/api/xai/decisions?page=${pageToFetch}`).then(r => r.json()).then(data => {
+      if (Array.isArray(data)) {
+        setXaiDecisions(data);
+        if (data.length > 0) {
+          setSelectedDecisionId(prev => (prev && data.some(d => d.id === prev)) ? prev : data[0].id);
+        }
       }
     }).catch(() => {});
     fetch(`/api/xai/feature-importance`).then(r => r.json()).then(setGlobalFeatureImportance).catch(() => {});
@@ -240,7 +242,7 @@ export default function XaiView() {
   };
 
   useEffect(() => {
-    fetchXaiData();
+    fetchXaiData(1);
     const savedId = sessionStorage.getItem('riskvision_selected_client_id');
     if (savedId) {
       handleSelectClient(savedId);
@@ -250,7 +252,7 @@ export default function XaiView() {
   const handlePageChange = (newPage: number) => {
     if (newPage < 1) return;
     setCurrentPage(newPage);
-    handleGenerate(newPage);
+    fetchXaiData(newPage);
   };
 
   const handleGenerate = async (pageToFetch = currentPage) => {
@@ -264,8 +266,8 @@ export default function XaiView() {
       const result = await resp.json();
       if (result.status === 'ok' || result.decisions > 0) {
         setLastGenerated(new Date().toLocaleTimeString());
-        // Re-fetch all data
-        fetchXaiData();
+        // Re-fetch all data for current page
+        fetchXaiData(pageToFetch);
       }
     } catch (err) {
       console.error('XAI generation failed:', err);

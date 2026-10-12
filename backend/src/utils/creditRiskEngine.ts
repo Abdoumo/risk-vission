@@ -377,33 +377,55 @@ export function evaluateCreditRiskAndXai(client: CreditClientData): CreditAnalys
   }
 
   // -------------------------------------------------------------
-  // EXPLICATION IA EN LANGAGE NATUREL (Pages 18-22 du PDF)
-  // EXACT TEXT GENERATED "Kima goultili ektebli a bro"
-  // -------------------------------------------------------------
+  const aggText = topAggravating.length > 0 ? topAggravating.join(', ') : 'aucun facteur aggravant majeur';
+  const mitText = topMitigating.length > 0 ? topMitigating.join(', ') : 'aucun facteur atténuant significatif identifié';
+
   let explanation = '';
   let explanation_ar = '';
   let explanation_en = '';
 
-  const aggText = topAggravating.length > 0 ? topAggravating.join(', ') : 'aucun facteur aggravant majeur';
-  const mitText = topMitigating.length > 0 ? topMitigating.join(', ') : 'aucun facteur atténuant significatif identifié';
+  const clientTypeStr = client.type_client || 'Particulier';
+  const clientStatusStr = client.statut_client || 'Actif';
+  const accountTypeStr = client.type_compte || 'Courant Commercial';
+  const creditTypeStr = client.type_credit || 'Credit_Consommation';
+
+  const clientProfileFr = `Client Profile: • Type client: ${clientTypeStr} • Statut Client: ${clientStatusStr} • Type compte: ${accountTypeStr} • Type crédit: ${creditTypeStr}`;
+  const financialDataFr = `Financial Data: • Revenue: ${revenue.toLocaleString('fr-FR')} DZD/mois • Solde compte: ${solde.toLocaleString('fr-FR')} DZD • DTI: ${dti}% • Impayé: ${impayes > 0 ? impayes.toLocaleString('fr-FR') + ' DZD' : '0 DZD'} • Retard de paiement: ${retardJours} jours • Cashflow: ${cashflow >= 0 ? '+' : ''}${cashflow.toLocaleString('fr-FR')} DZD/mois • Historique bancaire: ${historique} • Overdraft: ${overdraft}`;
+  const factorsSummaryFr = `Risk Score = ${finalScore} • Risk Level = ${riskLevel.charAt(0).toUpperCase() + riskLevel.slice(1)} • Top Risk Factors: ${topAggravating.length > 0 ? topAggravating.join(' • ') : 'Aucun'} • Mitigating Factors: ${topMitigating.length > 0 ? topMitigating.join(' • ') : 'Aucun'}`;
+
+  const clientProfileAr = `الملف الشخصي: • نوع العميل: ${clientTypeStr} • حالة العميل: ${clientStatusStr} • نوع الحساب: ${accountTypeStr} • نوع القرض: ${creditTypeStr}`;
+  const financialDataAr = `البيانات المالية: • الدخل: ${revenue.toLocaleString('fr-FR')} دج/شهر • رصيد الحساب: ${solde.toLocaleString('fr-FR')} دج • DTI: %${dti} • المستحقات: ${impayes > 0 ? impayes.toLocaleString('fr-FR') + ' دج' : '0 دج'} • التأخير: ${retardJours} يوم • التدفق النقدي: ${cashflow >= 0 ? '+' : ''}${cashflow.toLocaleString('fr-FR')} دج/شهر • السجل المصرفي: ${historique} • السحب على المكشوف: ${overdraft}`;
+  const factorsSummaryAr = `درجة المخاطر = ${finalScore} • مستوى المخاطر = ${riskLevel} • عوامل الخطر الرئيسية: ${topAggravating.length > 0 ? topAggravating.join(' • ') : 'لا يوجد'} • العوامل المخففة: ${topMitigating.length > 0 ? topMitigating.join(' • ') : 'لا يوجد'}`;
+
+  const clientProfileEn = `Client Profile: • Client Type: ${clientTypeStr} • Status: ${clientStatusStr} • Account Type: ${accountTypeStr} • Credit Type: ${creditTypeStr}`;
+  const financialDataEn = `Financial Data: • Revenue: ${revenue.toLocaleString('fr-FR')} DZD/mo • Account Balance: ${solde.toLocaleString('fr-FR')} DZD • DTI: ${dti}% • Unpaid: ${impayes > 0 ? impayes.toLocaleString('fr-FR') + ' DZD' : '0 DZD'} • Delays: ${retardJours} days • Cashflow: ${cashflow >= 0 ? '+' : ''}${cashflow.toLocaleString('fr-FR')} DZD/mo • Banking History: ${historique} • Overdraft: ${overdraft}`;
+  const factorsSummaryEn = `Risk Score = ${finalScore} • Risk Level = ${riskLevel.charAt(0).toUpperCase() + riskLevel.slice(1)} • Top Risk Factors: ${topAggravating.length > 0 ? topAggravating.join(' • ') : 'None'} • Mitigating Factors: ${topMitigating.length > 0 ? topMitigating.join(' • ') : 'None'}`;
+
+  let narrativeFr = '';
+  let narrativeAr = '';
+  let narrativeEn = '';
 
   if (riskLevel === 'critique') {
-    explanation = `L'analyse du profil client a produit un score de risque de ${finalScore}/100, correspondant à un niveau de risque critique. Les principaux facteurs ayant contribué à l'augmentation du risque sont ${aggText}. ${topMitigating.length > 0 ? `Parmi les éléments favorables, on note ${mitText}, qui constitue un facteur atténuant partiel.` : 'Aucun facteur atténuant significatif n\'a été identifié.'} Dans l'ensemble, les facteurs défavorables sont actuellement plus importants que les facteurs favorables. Recommandation : revue manuelle obligatoire du dossier avant toute décision de crédit.`;
-    explanation_ar = `أنتج تحليل ملف العميل درجة مخاطر بلغت ${finalScore}/100، مما يتوافق مع مستوى مخاطر حرج. العوامل الرئيسية التي ساهمت في زيادة المخاطر هي: ${aggText}. ${topMitigating.length > 0 ? `من بين العناصر الإيجابية، نلاحظ: ${mitText}.` : 'لم يتم تحديد أي عامل مخفف مهم.'} التوصية: مراجعة يدوية إلزامية للملف قبل اتخاذ أي قرار ائتماني.`;
-    explanation_en = `Client profile analysis yielded a risk score of ${finalScore}/100, corresponding to a critical risk level. Key drivers increasing risk are ${aggText}. ${topMitigating.length > 0 ? `Among favorable aspects, note ${mitText}.` : 'No significant mitigating factor was identified.'} Overall, unfavorable factors outweigh favorable ones. Recommendation: mandatory manual dossier review before any credit decision.`;
+    narrativeFr = `L'analyse du profil client a produit un score de risque de ${finalScore}/100, correspondant à un niveau de risque critique. Les principaux facteurs ayant contribué à l'augmentation du risque sont ${aggText}. ${topMitigating.length > 0 ? `Parmi les éléments favorables, on note ${mitText}, qui constitue un facteur atténuant partiel.` : 'Aucun facteur atténuant significatif n\'a été identifié.'} Dans l'ensemble, les facteurs défavorables sont actuellement plus importants que les facteurs favorables. Recommandation : revue manuelle obligatoire du dossier avant toute décision de crédit.`;
+    narrativeAr = `أنتج تحليل ملف العميل درجة مخاطر بلغت ${finalScore}/100، مما يتوافق مع مستوى مخاطر حرج. العوامل الرئيسية التي ساهمت في زيادة المخاطر هي: ${aggText}. ${topMitigating.length > 0 ? `من بين العناصر الإيجابية، نلاحظ: ${mitText}.` : 'لم يتم تحديد أي عامل مخفف مهم.'} التوصية: مراجعة يدوية إلزامية للملف قبل اتخاذ أي قرار ائتماني.`;
+    narrativeEn = `Client profile analysis yielded a risk score of ${finalScore}/100, corresponding to a critical risk level. Key drivers increasing risk are ${aggText}. ${topMitigating.length > 0 ? `Among favorable aspects, note ${mitText}.` : 'No significant mitigating factor was identified.'} Overall, unfavorable factors outweigh favorable ones. Recommendation: mandatory manual dossier review before any credit decision.`;
   } else if (riskLevel === 'eleve') {
-    explanation = `L'analyse du profil client a produit un score de risque de ${finalScore}/100, correspondant à un niveau de risque élevé. Les principaux facteurs de risque identifiés sont ${aggText}. ${topMitigating.length > 0 ? `Le client dispose toutefois d'éléments atténuants tels que ${mitText}.` : ''} Le dossier nécessite une analyse approfondie avant toute décision.`;
-    explanation_ar = `أنتج تحليل ملف العميل درجة مخاطر بلغت ${finalScore}/100، مما يتوافق مع مستوى مخاطر مرتفع. عوامل المخاطر الرئيسية المحددة هي: ${aggText}. يتطلب الملف تحليلاً معمقاً قبل اتخاذ أي قرار.`;
-    explanation_en = `Client profile analysis yielded a risk score of ${finalScore}/100, corresponding to a high risk level. Key identified risk factors are ${aggText}. The file requires thorough assessment before any decision.`;
+    narrativeFr = `L'analyse du profil client a produit un score de risque de ${finalScore}/100, correspondant à un niveau de risque élevé. Les principaux facteurs de risque identifiés sont ${aggText}. ${topMitigating.length > 0 ? `Le client dispose toutefois d'éléments atténuants tels que ${mitText}.` : ''} Le dossier nécessite une analyse approfondie avant toute décision.`;
+    narrativeAr = `أنتج تحليل ملف العميل درجة مخاطر بلغت ${finalScore}/100، مما يتوافق مع مستوى مخاطر مرتفع. عوامل المخاطر الرئيسية المحددة هي: ${aggText}. يتطلب الملف تحليلاً معمقاً قبل اتخاذ أي قرار.`;
+    narrativeEn = `Client profile analysis yielded a risk score of ${finalScore}/100, corresponding to a high risk level. Key identified risk factors are ${aggText}. The file requires thorough assessment before any decision.`;
   } else if (riskLevel === 'modere') {
-    explanation = `L'analyse du profil client a produit un score de risque de ${finalScore}/100, correspondant à un niveau de risque modéré. Le profil présente une situation financière globalement acceptable, mais certains éléments nécessitent une attention particulière, notamment ${aggText}. ${topMitigating.length > 0 ? `Les facteurs atténuants identifiés incluent ${mitText}.` : ''} Recommandation : surveillance standard et analyse complémentaire du dossier.`;
-    explanation_ar = `أنتج تحليل ملف العميل درجة مخاطر بلغت ${finalScore}/100، مما يتوافق مع مستوى مخاطر معتدل. يقدم الملف وضعاً مالياً مقبولاً بشكل عام، مع عناصر تتطلب متابعة مثل: ${aggText}. التوصية: مراقبة قياسية وتحليل تكميلي للملف.`;
-    explanation_en = `Client profile analysis yielded a risk score of ${finalScore}/100, corresponding to a moderate risk level. The profile shows a generally acceptable financial situation, with points requiring monitoring such as ${aggText}. Recommendation: standard monitoring and dossier follow-up.`;
+    narrativeFr = `L'analyse du profil client a produit un score de risque de ${finalScore}/100, correspondant à un niveau de risque modéré. Le profil présente une situation financière globalement acceptable, mais certains éléments nécessitent une attention particulière, notamment ${aggText}. ${topMitigating.length > 0 ? `Les facteurs atténuants identifiés incluent ${mitText}.` : ''} Recommandation : surveillance standard et analyse complémentaire du dossier.`;
+    narrativeAr = `أنتج تحليل ملف العميل درجة مخاطر بلغت ${finalScore}/100، مما يتوافق مع مستوى مخاطر معتدل. يقدم الملف وضعاً مالياً مقبولاً بشكل عام، مع عناصر تتطلب متابعة مثل: ${aggText}. التوصية: مراقبة قياسية وتحليل تكميلي للملف.`;
+    narrativeEn = `Client profile analysis yielded a risk score of ${finalScore}/100, corresponding to a moderate risk level. The profile shows a generally acceptable financial situation, with points requiring monitoring such as ${aggText}. Recommendation: standard monitoring and dossier follow-up.`;
   } else {
-    explanation = `L'analyse du profil client a produit un score de risque de ${finalScore}/100, correspondant à un niveau de risque faible. Le profil présente plusieurs éléments favorables, notamment ${mitText}. Aucun facteur de risque majeur n'a été identifié. Recommandation : accord standard favorable.`;
-    explanation_ar = `أنتج تحليل ملف العميل درجة مخاطر بلغت ${finalScore}/100، مما يتوافق مع مستوى مخاطر منخفض. يظهر الملف عدة عناصر إيجابية منها: ${mitText}. لم يتم رصد أي عامل خطر رئيسي. التوصية: موافقة قياسية إيجابية.`;
-    explanation_en = `Client profile analysis yielded a risk score of ${finalScore}/100, corresponding to a low risk level. The profile presents several favorable elements including ${mitText}. No major risk factor was identified. Recommendation: standard favorable approval.`;
+    narrativeFr = `L'analyse du profil client a produit un score de risque de ${finalScore}/100, correspondant à un niveau de risque faible. Le profil présente plusieurs éléments favorables, notamment ${mitText}. Aucun facteur de risque majeur n'a été identifié. Recommandation : accord standard favorable.`;
+    narrativeAr = `أنتج تحليل ملف العميل درجة مخاطر بلغت ${finalScore}/100، مما يتوافق مع مستوى مخاطر منخفض. يظهر الملف عدة عناصر إيجابية منها: ${mitText}. لم يتم رصد أي عامل خطر رئيسي. التوصية: موافقة قياسية إيجابية.`;
+    narrativeEn = `Client profile analysis yielded a risk score of ${finalScore}/100, corresponding to a low risk level. The profile presents several favorable elements including ${mitText}. No major risk factor was identified. Recommendation: standard favorable approval.`;
   }
+
+  explanation = `${clientProfileFr}\n\n${financialDataFr}\n\n${factorsSummaryFr}\n\n${narrativeFr}`;
+  explanation_ar = `${clientProfileAr}\n\n${financialDataAr}\n\n${factorsSummaryAr}\n\n${narrativeAr}`;
+  explanation_en = `${clientProfileEn}\n\n${financialDataEn}\n\n${factorsSummaryEn}\n\n${narrativeEn}`;
 
   // -------------------------------------------------------------
   // CONTRE-FACTUELS (Counterfactuals)
