@@ -26,6 +26,16 @@ export default defineConfig(({ mode }) => {
           target: "http://127.0.0.1:3636",
           changeOrigin: true,
         },
+        "/models": {
+          target: "http://127.0.0.1:3636/api",
+          changeOrigin: true,
+          rewrite: (path) => `/api${path}`,
+        },
+        "/calculate": {
+          target: "http://127.0.0.1:3636/api",
+          changeOrigin: true,
+          rewrite: (path) => `/api${path}`,
+        },
       },
     },
   };

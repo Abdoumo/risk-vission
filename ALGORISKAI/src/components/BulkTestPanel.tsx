@@ -40,7 +40,7 @@ export default function BulkTestPanel() {
       // If no portfolio yet, provide a dummy one so the chart isn't empty
       const finalPortfolio = portfolio.length > 0 ? portfolio : Array(100).fill(0).map(() => ({pd: 0.05 + Math.random()*0.1, ead: 50000 + Math.random()*10000, lgd: 0.6}));
 
-      const response = await fetch(`${import.meta.env.VITE_AI_API_URL}/calculate/credit_var`, {
+      const response = await fetch(`${import.meta.env.VITE_AI_API_URL || '/api'}/calculate/credit_var`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -164,7 +164,7 @@ export default function BulkTestPanel() {
 
     try {
       // 1. Call Python ML API
-      const mlResponse = await fetch(`${import.meta.env.VITE_AI_API_URL}/predict/full`, {
+      const mlResponse = await fetch(`${import.meta.env.VITE_AI_API_URL || '/api'}/predict/full`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

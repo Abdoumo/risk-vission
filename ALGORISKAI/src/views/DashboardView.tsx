@@ -89,15 +89,32 @@ export default function DashboardView({ setActiveTab }: DashboardViewProps) {
           setKpis(kpisList);
         } else {
           // Fallback if API fails
-          fetch('/api/mock/kpis').then(r => r.json()).then(setKpis);
+          fetch('/api/mock/kpis').then(r => r.ok ? r.json() : []).then(d => setKpis(Array.isArray(d) ? d : [])).catch(() => {});
         }
       })
-      .catch(() => fetch('/api/mock/kpis').then(r => r.json()).then(setKpis));
+      .catch(() => {
+        fetch('/api/mock/kpis').then(r => r.ok ? r.json() : []).then(d => setKpis(Array.isArray(d) ? d : [])).catch(() => {});
+      });
 
-    fetch('/api/alertes').then(r => r.json()).then(d => setAlertes(Array.isArray(d) ? d : []));
-    fetch('/api/mock/distribution').then(r => r.json()).then(d => setDistributionDonnees(Array.isArray(d) ? d : []));
-    fetch(`/api/predictions/real?model=monte_carlo&horizon=${predictionHorizon}`).then(r => r.json()).then(data => setPredictions(data.results || []));
-    fetch('/api/modeles/performance').then(r => r.json()).then(d => setPerf(Array.isArray(d) ? d : []));
+    fetch('/api/alertes')
+      .then(r => r.ok ? r.json().catch(() => []) : [])
+      .then(d => setAlertes(Array.isArray(d) ? d : []))
+      .catch(() => setAlertes([]));
+
+    fetch('/api/mock/distribution')
+      .then(r => r.ok ? r.json().catch(() => []) : [])
+      .then(d => setDistributionDonnees(Array.isArray(d) ? d : []))
+      .catch(() => setDistributionDonnees([]));
+
+    fetch(`/api/predictions/real?model=monte_carlo&horizon=${predictionHorizon}`)
+      .then(r => r.ok ? r.json().catch(() => ({})) : {})
+      .then(data => setPredictions(data?.results || []))
+      .catch(() => setPredictions([]));
+
+    fetch('/api/modeles/performance')
+      .then(r => r.ok ? r.json().catch(() => []) : [])
+      .then(d => setPerf(Array.isArray(d) ? d : []))
+      .catch(() => setPerf([]));
   }, [predictionHorizon]);
 
   return (

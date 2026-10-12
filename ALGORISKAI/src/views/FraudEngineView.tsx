@@ -4,7 +4,7 @@ import {
   Eye, TrendingUp, Flame, Car, Droplets,
   User, Building2, FileSearch, ChevronRight, Radio,
   ArrowUpRight, ArrowDownRight,
-  CreditCard, Activity, UploadCloud,
+  CreditCard, Activity, UploadCloud, RefreshCw,
 } from 'lucide-react';
 import {
   scoreBankingFraud, scoreSinistreFraud,
@@ -653,22 +653,44 @@ export default function FraudEngineView() {
   const [selectedDetails, setSelectedDetails] = useState<any>(null);
   const [globalStats, setGlobalStats] = useState({ totalAnalyses: 0, blocked: 0, review: 0, detectionRate: '0%' });
   const [currentPage, setCurrentPage] = useState(1);
+  const [syncing, setSyncing] = useState(false);
+
+  const fetchAllData = () => {
+    fetch('/api/fraud-stats')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data) setGlobalStats(data); })
+      .catch(err => console.error("Error fetching global stats", err));
+
+    fetch('/api/fraud-history')
+      .then(r => r.ok ? r.json() : [])
+      .then(data => { if (Array.isArray(data)) setFraudHistory(data); })
+      .catch(err => console.error("Error fetching history", err));
+  };
 
   useEffect(() => {
-    fetch(`/api/fraud-stats`)
-      .then(r => r.json())
-      .then(setGlobalStats)
-      .catch(err => console.error("Error fetching global stats", err));
+    fetchAllData();
   }, []);
 
   useEffect(() => {
     if (activeTab === 'historique') {
-      fetch(`/api/fraud-history`)
-        .then(r => r.json())
-        .then(setFraudHistory)
+      fetch('/api/fraud-history')
+        .then(r => r.ok ? r.json() : [])
+        .then(data => { if (Array.isArray(data)) setFraudHistory(data); })
         .catch(err => console.error("Error fetching history", err));
     }
   }, [activeTab]);
+
+  const handleSync = async () => {
+    setSyncing(true);
+    try {
+      await fetch('/api/banking/sync', { method: 'POST' });
+      fetchAllData();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setTimeout(() => setSyncing(false), 800);
+    }
+  };
 
   const t = (fr: string, ar: string, en: string) => lang === 'ar' ? ar : lang === 'en' ? en : fr;
 
@@ -733,10 +755,18 @@ export default function FraudEngineView() {
               )}
             </p>
           </div>
-          <div className="hidden md:flex flex-col items-end gap-1.5 shrink-0">
+          <div className="hidden md:flex flex-col items-end gap-2 shrink-0">
             <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Powered by</span>
             <span className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400">RiskVisionAI</span>
             <span className="text-[11px] font-medium text-slate-400">XGBoost · LSTM · Autoencodeur</span>
+            <button
+              onClick={handleSync}
+              disabled={syncing}
+              className="mt-2 flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-bold text-xs transition-all shadow-[0_0_15px_rgba(16,185,129,0.15)] disabled:opacity-50 cursor-pointer"
+            >
+              <RefreshCw className={`h-3.5 w-3.5 ${syncing ? 'animate-spin' : ''}`} />
+              <span>{syncing ? t('Synchronisation...', 'جاري المزامنة...', 'Syncing...') : t('Synchroniser SIB (69.57.163.97)', 'مزامنة SIB (69.57.163.97)', 'Sync Core Banking')}</span>
+            </button>
           </div>
         </div>
       </motion.div>
