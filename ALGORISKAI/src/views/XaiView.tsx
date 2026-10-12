@@ -283,7 +283,7 @@ export default function XaiView() {
     lang === 'ar' ? d.naturalExplanation_ar : lang === 'en' ? d.naturalExplanation_en : d.naturalExplanation_fr;
 
   const tabs = [
-    { id: 'variables',     icon: ShieldCheck,   label_fr: '8 Variables Clés (PDF)', label_ar: 'المتغيرات الثمانية', label_en: '8 Core Variables' },
+    { id: 'variables',     icon: ShieldCheck,   label_fr: '8 Variables Clés ', label_ar: 'المتغيرات الثمانية', label_en: '8 Core Variables' },
     { id: 'shap',          icon: BarChart3,     label_fr: 'SHAP Values',       label_ar: 'قيم SHAP',        label_en: 'SHAP Values' },
     { id: 'counterfactual',icon: Lightbulb,     label_fr: 'Contre-Factuels',   label_ar: 'السيناريوهات',    label_en: 'Counter-Factuals' },
     { id: 'global',        icon: Eye,           label_fr: 'Importance Globale', label_ar: 'الأهمية العامة',  label_en: 'Global Importance' },

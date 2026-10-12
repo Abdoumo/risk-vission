@@ -111,20 +111,45 @@ export default function CreditRiskView() {
                 />
                 <div className="absolute z-50 mt-1 w-full bg-slate-800 border border-slate-700 rounded-lg shadow-2xl overflow-hidden">
                   <div className="max-h-60 overflow-y-auto">
-                    {filteredClients.length > 0 ? filteredClients.map(c => (
-                      <div
-                        key={c.client_id}
-                        className="px-4 py-2 hover:bg-slate-700 cursor-pointer text-sm text-slate-200 transition-colors border-b border-slate-700/50 last:border-0"
-                        onClick={() => {
-                          setSelectedClientId(c.client_id);
-                          setIsDropdownOpen(false);
-                          setSearchQuery('');
-                        }}
-                      >
-                        <div className="font-medium text-white">{c.client_id}</div>
-                        <div className="text-xs text-slate-400">{c.nom} {c.prenom}</div>
-                      </div>
-                    )) : (
+                    {filteredClients.length > 0 ? (
+                      <>
+                        {filteredClients.slice(0, 50).map(c => (
+                          <div
+                            key={c.client_id}
+                            className="px-4 py-2 hover:bg-slate-700 cursor-pointer text-sm text-slate-200 transition-colors border-b border-slate-700/50 last:border-0"
+                            onClick={() => {
+                              setSelectedClientId(c.client_id);
+                              sessionStorage.setItem('riskvision_selected_client_id', c.client_id);
+                              setIsDropdownOpen(false);
+                              setSearchQuery('');
+                            }}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-white">{c.nom} {c.prenom}</span>
+                              <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-slate-900 text-emerald-400 border border-slate-700">{c.client_id}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
+                              <span>{c.type_client || 'Particulier'}</span>
+                              <span>•</span>
+                              <span className={c.statut_client?.includes('HIGH') ? 'text-rose-400 font-semibold' : 'text-slate-400'}>
+                                {c.statut_client || 'Actif'}
+                              </span>
+                              {c.score !== undefined && (
+                                <>
+                                  <span>•</span>
+                                  <span className="text-emerald-400 font-medium">Score: {c.score}/100</span>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                        {filteredClients.length > 50 && (
+                          <div className="px-4 py-1.5 text-[11px] text-slate-400 bg-slate-900/80 text-center border-t border-slate-700">
+                            Affichage des 50 premiers résultats sur {filteredClients.length.toLocaleString()} clients
+                          </div>
+                        )}
+                      </>
+                    ) : (
                       <div className="px-4 py-3 text-sm text-slate-400 text-center">Aucun résultat pour "{searchQuery}"</div>
                     )}
                   </div>

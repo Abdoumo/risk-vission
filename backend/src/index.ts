@@ -178,6 +178,7 @@ app.use('/api/auth', authRoutes);
 import creditRiskRoutes from './routes/credit_risk';
 import fraudRoutes from './routes/fraud';
 import chatbotRoutes from './routes/chatbot';
+import { getLiveCoreBankingClients, findLiveClientById } from './utils/liveClientsService';
 
 // Protect all other /api routes and log actions (allow models, calculate, mock, auth, kyc, banking without strict token block)
 app.use('/api', (req, res, next) => {
@@ -717,21 +718,40 @@ app.get('/api/banking/flows', async (req, res) => {
   }
 });
 
-// Endpoint to generate metrics (this keeps the original dynamic generation)
-app.get('/api/banking/metrics', (req, res) => {
-  const data = [];
-  for (let i = 0; i < 60; i++) {
-    const h = Math.floor(i / 6);
-    const m = (i % 6) * 10;
-    data.push({
-      time: `${String(8 + h).padStart(2, '0')}:${String(m).padStart(2, '0')}`,
-      sib: Math.round(20 + Math.sin(i / 8) * 15 + Math.random() * 10),
-      ged: Math.round(8 + Math.sin(i / 5) * 4 + Math.random() * 5),
-      corebanking: Math.round(60 + Math.sin(i / 6) * 25 + Math.random() * 15),
-      swift: Math.round(6 + Math.sin(i / 10) * 3 + Math.random() * 3),
-    });
+// Endpoint to generate metrics (dynamically mapped to existing bank connectors)
+app.get('/api/banking/metrics', async (req, res) => {
+  try {
+    const connectors = await prisma.bankConnector.findMany();
+    const data = [];
+    for (let i = 0; i < 60; i++) {
+      const h = Math.floor(i / 6);
+      const m = (i % 6) * 10;
+      const point: any = {
+        time: `${String(8 + h).padStart(2, '0')}:${String(m).padStart(2, '0')}`,
+        sib: Math.round(25 + Math.sin(i / 8) * 12 + Math.random() * 8),
+        ged: Math.round(12 + Math.sin(i / 5) * 5 + Math.random() * 4),
+        corebanking: Math.round(65 + Math.sin(i / 6) * 20 + Math.random() * 12),
+        swift: Math.round(8 + Math.sin(i / 10) * 3 + Math.random() * 2),
+      };
+
+      // Ensure every connector's exact name has time-series data
+      connectors.forEach((conn, cIdx) => {
+        const baseReq = conn.requestsPerMin || 45;
+        const wave = Math.round(Math.sin((i + cIdx * 7) / 7) * 18 + Math.random() * 10);
+        point[conn.name] = Math.max(15, baseReq + wave);
+      });
+
+      // Ensure all variations of Core Banking & SIB connector names are present
+      point['RiskVision - Core Banking & SIB'] = point['RiskVision - Core Banking & SIB'] || point.corebanking;
+      point['RiskVision — Core Banking & SIB'] = point['RiskVision — Core Banking & SIB'] || point['RiskVision - Core Banking & SIB'] || point.corebanking;
+
+      data.push(point);
+    }
+    res.json(data);
+  } catch (error) {
+    console.error('Failed to generate metrics:', error);
+    res.status(500).json({ error: 'Failed to fetch metrics' });
   }
-  res.json(data);
 });
 
 // ========================================================
@@ -1552,11 +1572,12 @@ app.get('/api/xai/decisions', async (req, res) => {
       orderBy: { score: 'desc' }
     });
 
-    // If empty or fewer than 5 decisions, dynamically populate from prisma.creditClient using evaluateCreditRiskAndXai
+    // If empty or fewer than 5 decisions, dynamically populate from live Core Banking clients using evaluateCreditRiskAndXai
     if (decisions.length < 5) {
-      const creditClients = await prisma.creditClient.findMany({ take: 25, orderBy: { jours_retard: 'desc' } });
-      for (const client of creditClients) {
-        const evalRes = evaluateCreditRiskAndXai(client as any);
+      const liveClients = await getLiveCoreBankingClients();
+      const topClients = liveClients.slice(0, 25);
+      for (const client of topClients) {
+        const evalRes = client.evaluation || evaluateCreditRiskAndXai(client as any);
         const decisionId = `xai-cred-${client.client_id}`;
         
         await prisma.xaiDecision.upsert({
@@ -1635,41 +1656,19 @@ app.get('/api/xai/decisions', async (req, res) => {
 app.get('/api/xai/client/:clientId', async (req, res) => {
   try {
     const { clientId } = req.params;
-    let client: any = await prisma.creditClient.findUnique({
-      where: { client_id: clientId }
-    });
+    let client: any = await findLiveClientById(clientId);
 
     if (!client) {
-      // Check cached KYC clients
-      const foundKyc = cachedKycClients.find(c => String(c.client_id) === String(clientId) || String(c.customer_id) === String(clientId));
-      if (foundKyc) {
-        client = {
-          client_id: String(foundKyc.customer_id || foundKyc.client_id),
-          nom: foundKyc.nom || 'Client',
-          prenom: foundKyc.prenom || '',
-          type_client: foundKyc.type_client || 'Particulier',
-          statut_client: foundKyc.kyc_engine?.ews_status || 'Actif',
-          type_compte: foundKyc.accounts?.[0]?.typeCompte || 'Courant Commercial',
-          type_credit: 'Credit_Consommation',
-          solde_compte_dzd: foundKyc.accounts?.[0]?.soldeActuel || 150000,
-          revenu_mensuel_dzd: parseFloat(String(foundKyc.kyc_engine?.financial?.declaredIncome || '85000').replace(/[^0-9.-]+/g, '')) || 85000,
-          montant_credit_dzd: 1200000,
-          duree_credit_mois: 36,
-          echeance_mensuelle_dzd: 28000,
-          impayes_dzd: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? 65000 : 0,
-          jours_retard: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? 45 : 0,
-          classe_creance: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? 'Défavorable' : 'Courante',
-          cashflow_dzd: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? -15000 : 35000,
-          overdraft: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? 'Frequent' : 'Aucun'
-        };
-      }
+      client = await prisma.creditClient.findUnique({
+        where: { client_id: clientId }
+      });
     }
 
     if (!client) {
       return res.status(404).json({ error: 'Client non trouvé pour analyse XAI' });
     }
 
-    const evalRes = evaluateCreditRiskAndXai(client);
+    const evalRes = client.evaluation || evaluateCreditRiskAndXai(client);
     res.json({
       id: `xai-live-${client.client_id}`,
       type: 'credit',
@@ -1688,7 +1687,7 @@ app.get('/api/xai/client/:clientId', async (req, res) => {
       naturalExplanation_fr: evalRes.explanation,
       naturalExplanation_ar: evalRes.explanation_ar,
       naturalExplanation_en: evalRes.explanation_en,
-      shapFeatures: evalRes.shapFeatures.map(sf => ({
+      shapFeatures: evalRes.shapFeatures.map((sf: any) => ({
         feature: sf.feature,
         feature_ar: sf.feature_ar,
         feature_en: sf.feature,
@@ -1703,14 +1702,14 @@ app.get('/api/xai/client/:clientId', async (req, res) => {
       factors: evalRes.factors,
       variables: evalRes.variables,
       policyDecision: evalRes.policyDecision,
-      projections: evalRes.projections,
-      clientData: client
+      projections: evalRes.projections
     });
   } catch (error) {
-    console.error('Failed to get client XAI:', error);
-    res.status(500).json({ error: 'Failed to get client XAI' });
+    console.error('Failed to analyze client XAI:', error);
+    res.status(500).json({ error: 'Failed to analyze client XAI' });
   }
 });
+
 
 app.get('/api/xai/feature-importance', async (req, res) => {
   try {
@@ -2981,27 +2980,23 @@ function getCpuLoad() {
 app.get('/api/predictions/clients', async (req, res) => {
   try {
     const search = (req.query.search as string || '').trim().toLowerCase();
-    const limit = Math.min(200, parseInt(req.query.limit as string) || 100);
+    const limit = Math.min(10500, parseInt(req.query.limit as string) || 1000);
 
-    let whereClause: any = {};
+    const allClients = await getLiveCoreBankingClients();
+
+    let filtered = allClients;
     if (search) {
-      whereClause = {
-        OR: [
-          { client_id: { contains: search } },
-          { nom: { contains: search } },
-          { prenom: { contains: search } }
-        ]
-      };
+      filtered = allClients.filter(c =>
+        c.client_id.toLowerCase().includes(search) ||
+        c.customer_id.toLowerCase().includes(search) ||
+        c.nom.toLowerCase().includes(search) ||
+        (c.prenom && c.prenom.toLowerCase().includes(search)) ||
+        (c.type_client && c.type_client.toLowerCase().includes(search))
+      );
     }
 
-    const dbClients = await prisma.creditClient.findMany({
-      where: whereClause,
-      take: limit,
-      orderBy: { jours_retard: 'desc' }
-    });
-
-    const clients = dbClients.map(c => {
-      const evalRes = evaluateCreditRiskAndXai(c as any);
+    const clients = filtered.slice(0, limit).map(c => {
+      const evalRes = c.evaluation || evaluateCreditRiskAndXai(c as any);
       return {
         id: c.client_id,
         client_id: c.client_id,
@@ -3020,47 +3015,6 @@ app.get('/api/predictions/clients', async (req, res) => {
       };
     });
 
-    // Also include any cachedKycClients not already present
-    for (const kc of cachedKycClients.slice(0, 50)) {
-      const cid = String(kc.customer_id || kc.client_id);
-      if (!clients.some(c => c.client_id === cid)) {
-        if (!search || (kc.nom?.toLowerCase().includes(search) || cid.toLowerCase().includes(search))) {
-          const clientData = {
-            client_id: cid,
-            nom: kc.nom || 'Client',
-            prenom: kc.prenom || '',
-            type_client: kc.type_client || 'Particulier',
-            statut_client: kc.kyc_engine?.ews_status || 'Actif',
-            revenu_mensuel_dzd: parseFloat(String(kc.kyc_engine?.financial?.declaredIncome || '85000').replace(/[^0-9.-]+/g, '')) || 85000,
-            solde_compte_dzd: kc.accounts?.[0]?.soldeActuel || 150000,
-            echeance_mensuelle_dzd: 28000,
-            impayes_dzd: kc.kyc_engine?.ews_status?.includes('HIGH') ? 65000 : 0,
-            jours_retard: kc.kyc_engine?.ews_status?.includes('HIGH') ? 45 : 0,
-            classe_creance: kc.kyc_engine?.ews_status?.includes('HIGH') ? 'Défavorable' : 'Courante',
-            cashflow_dzd: kc.kyc_engine?.ews_status?.includes('HIGH') ? -15000 : 35000,
-            overdraft: kc.kyc_engine?.ews_status?.includes('HIGH') ? 'Frequent' : 'Aucun'
-          };
-          const evalRes = evaluateCreditRiskAndXai(clientData as any);
-          clients.push({
-            id: cid,
-            client_id: cid,
-            nom: kc.nom || 'Client',
-            prenom: kc.prenom || '',
-            type_client: kc.type_client || 'Particulier',
-            statut_client: kc.kyc_engine?.ews_status || 'Actif',
-            revenu_mensuel_dzd: clientData.revenu_mensuel_dzd,
-            solde_compte_dzd: clientData.solde_compte_dzd,
-            dti: evalRes.variables.dti.value,
-            score: evalRes.score,
-            riskLevel: evalRes.riskLevel,
-            jours_retard: clientData.jours_retard,
-            impayes_dzd: clientData.impayes_dzd,
-            projections: evalRes.projections
-          });
-        }
-      }
-    }
-
     res.json(clients);
   } catch (error) {
     console.error('Failed to fetch prediction clients:', error);
@@ -3078,40 +3032,19 @@ app.get('/api/predictions/real', async (req, res) => {
     // CAS 1 : PRÉDICTION CIBLÉE SUR UN CLIENT (Dossier Client 30/60/90j)
     // ─────────────────────────────────────────────────────────────
     if (clientId) {
-      let client: any = await prisma.creditClient.findUnique({
-        where: { client_id: clientId }
-      });
+      let client: any = await findLiveClientById(clientId);
 
       if (!client) {
-        const foundKyc = cachedKycClients.find(c => String(c.client_id) === String(clientId) || String(c.customer_id) === String(clientId));
-        if (foundKyc) {
-          client = {
-            client_id: String(foundKyc.customer_id || foundKyc.client_id),
-            nom: foundKyc.nom || 'Client',
-            prenom: foundKyc.prenom || '',
-            type_client: foundKyc.type_client || 'Particulier',
-            statut_client: foundKyc.kyc_engine?.ews_status || 'Actif',
-            type_compte: foundKyc.accounts?.[0]?.typeCompte || 'Courant Commercial',
-            type_credit: 'Credit_Consommation',
-            solde_compte_dzd: foundKyc.accounts?.[0]?.soldeActuel || 150000,
-            revenu_mensuel_dzd: parseFloat(String(foundKyc.kyc_engine?.financial?.declaredIncome || '85000').replace(/[^0-9.-]+/g, '')) || 85000,
-            montant_credit_dzd: 1200000,
-            duree_credit_mois: 36,
-            echeance_mensuelle_dzd: 28000,
-            impayes_dzd: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? 65000 : 0,
-            jours_retard: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? 45 : 0,
-            classe_creance: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? 'Défavorable' : 'Courante',
-            cashflow_dzd: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? -15000 : 35000,
-            overdraft: foundKyc.kyc_engine?.ews_status?.includes('HIGH') ? 'Frequent' : 'Aucun'
-          };
-        }
+        client = await prisma.creditClient.findUnique({
+          where: { client_id: clientId }
+        });
       }
 
       if (!client) {
         return res.status(404).json({ error: 'Client non trouvé' });
       }
 
-      const evalRes = evaluateCreditRiskAndXai(client);
+      const evalRes = client.evaluation || evaluateCreditRiskAndXai(client);
       const basePD = evalRes.score; // Base probability of default %
       const baseDate = new Date();
       const data = [];

@@ -554,13 +554,42 @@ export default function ApiConnectorsView() {
                 <YAxis tick={{ fill: '#64748b', fontSize: 11 }} tickLine={false} axisLine={false} />
                 <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px', fontSize: '12px', color: '#e2e8f0' }} />
                 <Legend wrapperStyle={{ fontSize: '11px' }} />
-                {bankConnectors.map((conn, idx) => {
-                  const colors = ['#22c55e', '#3b82f6', '#8b5cf6', '#f59e0b', '#ec4899'];
-                  const color = colors[idx % colors.length];
-                  return (
-                    <Area key={conn.id} type="monotone" dataKey={conn.name} stroke={color} fill="url(#grad_api)" strokeWidth={2} dot={false} name={conn.name} />
-                  );
-                })}
+                {bankConnectors.length > 0 ? (
+                  bankConnectors.map((conn, idx) => {
+                    const colors = ['#22c55e', '#3b82f6', '#8b5cf6', '#f59e0b', '#ec4899'];
+                    const color = colors[idx % colors.length];
+                    const firstMetric = metrics && metrics[0] ? metrics[0] : {};
+                    let keyToUse = conn.name;
+                    if (!(keyToUse in firstMetric)) {
+                      if ('RiskVision - Core Banking & SIB' in firstMetric) keyToUse = 'RiskVision - Core Banking & SIB';
+                      else if ('RiskVision — Core Banking & SIB' in firstMetric) keyToUse = 'RiskVision — Core Banking & SIB';
+                      else if ('corebanking' in firstMetric) keyToUse = 'corebanking';
+                      else if ('sib' in firstMetric) keyToUse = 'sib';
+                    }
+                    return (
+                      <Area
+                        key={conn.id}
+                        type="monotone"
+                        dataKey={keyToUse}
+                        stroke={color}
+                        fill="url(#grad_api)"
+                        strokeWidth={2.5}
+                        dot={false}
+                        name={conn.name}
+                      />
+                    );
+                  })
+                ) : (
+                  <Area
+                    type="monotone"
+                    dataKey="corebanking"
+                    stroke="#22c55e"
+                    fill="url(#grad_api)"
+                    strokeWidth={2.5}
+                    dot={false}
+                    name="RiskVision — Core Banking & SIB"
+                  />
+                )}
               </AreaChart>
             </ResponsiveContainer>
           </div>

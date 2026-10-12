@@ -286,28 +286,35 @@ export default function PredictionsView() {
                   <div className="fixed inset-0 z-40" onClick={() => setIsDropdownOpen(false)} />
                   <div className="absolute z-50 mt-1 w-full bg-slate-900 border border-slate-700/80 rounded-xl shadow-2xl overflow-hidden max-h-64 overflow-y-auto">
                     {filteredClients.length > 0 ? (
-                      filteredClients.map(c => (
-                        <div
-                          key={c.client_id}
-                          className="px-4 py-2.5 hover:bg-slate-800 cursor-pointer text-sm border-b border-slate-800/80 last:border-0 transition-colors"
-                          onClick={() => {
-                            setSelectedClientId(c.client_id);
-                            sessionStorage.setItem('riskvision_selected_client_id', c.client_id);
-                            setIsDropdownOpen(false);
-                            setClientSearch('');
-                          }}
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="font-bold text-white">{c.nom} {c.prenom}</span>
-                            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-emerald-400">{c.client_id}</span>
+                      <>
+                        {filteredClients.slice(0, 50).map(c => (
+                          <div
+                            key={c.client_id}
+                            className="px-4 py-2.5 hover:bg-slate-800 cursor-pointer text-sm border-b border-slate-800/80 last:border-0 transition-colors"
+                            onClick={() => {
+                              setSelectedClientId(c.client_id);
+                              sessionStorage.setItem('riskvision_selected_client_id', c.client_id);
+                              setIsDropdownOpen(false);
+                              setClientSearch('');
+                            }}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-white">{c.nom} {c.prenom}</span>
+                              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-emerald-400">{c.client_id}</span>
+                            </div>
+                            <div className="flex items-center gap-2 mt-1 text-xs text-slate-400">
+                              <span>Score PD: <strong className={c.score && c.score >= 50 ? 'text-rose-400' : 'text-emerald-400'}>{c.score || 25}%</strong></span>
+                              <span>•</span>
+                              <span className={c.statut_client?.includes('HIGH') ? 'text-amber-400 font-bold' : 'text-slate-400'}>{c.statut_client || 'Actif'}</span>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2 mt-1 text-xs text-slate-400">
-                            <span>Score PD: <strong className={c.score && c.score >= 50 ? 'text-rose-400' : 'text-emerald-400'}>{c.score || 25}%</strong></span>
-                            <span>•</span>
-                            <span className={c.statut_client?.includes('HIGH') ? 'text-amber-400 font-bold' : 'text-slate-400'}>{c.statut_client || 'Actif'}</span>
+                        ))}
+                        {filteredClients.length > 50 && (
+                          <div className="px-4 py-1.5 text-[11px] text-slate-500 bg-slate-950/60 text-center border-t border-slate-800">
+                            Affichage des 50 premiers résultats sur {filteredClients.length.toLocaleString()} clients
                           </div>
-                        </div>
-                      ))
+                        )}
+                      </>
                     ) : (
                       <div className="p-4 text-center text-xs text-slate-500">Aucun client trouvé</div>
                     )}
