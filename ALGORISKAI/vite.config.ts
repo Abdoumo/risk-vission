@@ -21,18 +21,19 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       host: true,
+      port: 5173,
       proxy: {
         "/api": {
           target: "http://127.0.0.1:3636",
           changeOrigin: true,
         },
         "/models": {
-          target: "http://127.0.0.1:3636/api",
+          target: "http://127.0.0.1:3636",
           changeOrigin: true,
           rewrite: (path) => `/api${path}`,
         },
         "/calculate": {
-          target: "http://127.0.0.1:3636/api",
+          target: "http://127.0.0.1:3636",
           changeOrigin: true,
           rewrite: (path) => `/api${path}`,
         },
