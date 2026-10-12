@@ -57,10 +57,10 @@ export default function LoginView() {
 
   return (
     <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background decorations — Algerian flag orbs */}
-      <div className="absolute top-0 right-0 -mr-32 -mt-32 w-[500px] h-[500px] rounded-full bg-emerald-500/8 blur-[150px] orb-green" />
-      <div className="absolute bottom-0 left-0 -ml-32 -mb-32 w-[500px] h-[500px] rounded-full bg-red-500/6 blur-[150px] orb-red" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-white/[0.02] blur-[100px]" />
+      {/* Background decorations — Algerian flag layout: Green on left, Red small in center, White on right */}
+      <div className="absolute top-1/3 left-0 -ml-32 w-[500px] h-[500px] rounded-full bg-[#006233]/15 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] rounded-full bg-[#d21034]/15 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 right-0 -mr-32 w-[500px] h-[500px] rounded-full bg-white/[0.04] blur-[160px] pointer-events-none" />
 
       <div className="max-w-md w-full bg-slate-900/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl shadow-2xl relative z-10 overflow-hidden">
         {/* Algerian flag accent strip */}

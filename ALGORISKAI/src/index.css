@@ -102,12 +102,13 @@ select {
 }
 
 /* ═══════════════════════════════════════════
-   Algerian Flag Tricolor Accent Bar (Docs Page)
+   Algerian Flag Tricolor Accent Bar
+   Drapeau National : Vert à gauche (50%), Rouge petit au milieu (croissant & étoile), Blanc à droite (50%)
    ═══════════════════════════════════════════ */
 .flag-bar, .flag-strip {
-  height: 4px;
-  background: linear-gradient(90deg, #006233 0%, #006233 45%, #ffffff 45%, #ffffff 55%, #d21034 55%, #d21034 100%);
-  border-radius: 999px;
+  height: 3px;
+  background: linear-gradient(90deg, #006233 0%, #006233 48.5%, #d21034 48.5%, #d21034 51.5%, #ffffff 51.5%, #ffffff 100%);
+  box-shadow: 0 0 10px rgba(0, 98, 51, 0.4), 0 0 8px rgba(210, 16, 52, 0.3);
 }
 
 /* Badge DZ Docs Style */

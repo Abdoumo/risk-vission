@@ -124,10 +124,11 @@ export default function DashboardView({ setActiveTab }: DashboardViewProps) {
       animate="visible"
       variants={containerVariants}
     >
-      {/* Background Orbs — Algerian palette */}
+      {/* Background Orbs — Algerian flag: Green on left, Red small in middle, White on right */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-10 left-1/4 w-[400px] h-[400px] bg-emerald-500/5 blur-[100px] rounded-full mix-blend-screen orb-green" />
-        <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-red-500/3 blur-[120px] rounded-full mix-blend-screen orb-red" />
+        <div className="absolute top-10 left-10 w-[450px] h-[450px] bg-[#006233]/10 blur-[130px] rounded-full mix-blend-screen" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[180px] h-[180px] bg-[#d21034]/10 blur-[90px] rounded-full mix-blend-screen" />
+        <div className="absolute top-10 right-10 w-[450px] h-[450px] bg-white/[0.03] blur-[130px] rounded-full mix-blend-screen" />
       </div>
 
       <div className="relative z-10 space-y-6">
