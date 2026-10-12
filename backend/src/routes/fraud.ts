@@ -498,8 +498,7 @@ router.post('/analyze', async (req, res) => {
 
 // Preset Benchmark Scenarios
 router.get('/presets', (req, res) => {
-  res.json({
-    pdf_scenarios: [
+  const benchmark_scenarios = [
       {
         id: 'scenario_critique_700k',
         title_fr: 'Scénario Critique : Virement Nocturne 700 000 DA',

@@ -13,7 +13,7 @@ import BulkTestPanel from '../components/BulkTestPanel';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ═══════════════════════════════════════════════════════
-// TYPES & INTERFACES (PDF Specification Alignment)
+// TYPES & INTERFACES (Anti-Fraud & Behavioral Engine Architecture)
 // ═══════════════════════════════════════════════════════
 export type FraudDecisionCode = 'ALLOW' | 'VERIFY' | 'HOLD' | 'BLOCK';
 
@@ -214,7 +214,7 @@ export default function FraudEngineView() {
   const { lang, isRTL } = useLang();
   const [activeTab, setActiveTab] = useState<'detector' | 'rings' | 'ledger' | 'bulk'>('detector');
 
-  // Transaction Inputs State (Defaulting to PDF Scenario 1 from Page 1 & 2)
+  // Transaction Inputs State (Defaulting to Critical Scenario: 700k DA Nocturne)
   const [montant, setMontant] = useState<number>(700000);
   const [heure, setHeure] = useState<string>('02:17');
   const [hourSlider, setHourSlider] = useState<number>(2);
@@ -256,7 +256,8 @@ export default function FraudEngineView() {
     fetch('/api/fraude/presets')
       .then(r => r.ok ? r.json() : null)
       .then(data => {
-        if (data?.pdf_scenarios) setPresets(data.pdf_scenarios);
+        if (data?.scenarios) setPresets(data.scenarios);
+        else if (data?.pdf_scenarios) setPresets(data.pdf_scenarios);
       })
       .catch(console.error);
 
@@ -639,7 +640,7 @@ export default function FraudEngineView() {
         })}
       </div>
 
-      {/* ── TAB 1: DETECTOR & BEHAVIORAL COMPARISON (Core PDF Specification) ──────── */}
+      {/* ── TAB 1: DETECTOR & BEHAVIORAL COMPARISON ──────── */}
       {activeTab === 'detector' && (
         <div className="space-y-6">
           {/* Top Grid: Simulation Controls (Left) vs Real-Time Output (Right) */}
@@ -865,7 +866,7 @@ export default function FraudEngineView() {
                     {/* Action Callout Box */}
                     <div className={`rounded-xl border p-3 mt-2 text-left ${currentTheme.border} bg-slate-900/60`}>
                       <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                        {t("Action Bancaire Requise (Spécification PDF)", "الإجراء المصرفي المطلوب (مواصفة PDF)", "Required Banking Action (PDF Spec)")}
+                        {t("Action Bancaire Requise", "الإجراء المصرفي المطلوب", "Required Banking Action")}
                       </span>
                       <p className={`text-xs font-extrabold ${currentTheme.color}`}>
                         {lang === 'ar'
@@ -877,7 +878,7 @@ export default function FraudEngineView() {
                 </div>
               </div>
 
-              {/* Explainable AI (XAI) - Main Risk Factors (Page 5 & 8) */}
+              {/* Explainable AI (XAI) - Main Risk Factors */}
               <div className="rounded-2xl border border-white/5 bg-slate-900/60 p-6 backdrop-blur-md space-y-3">
                 <div className={`flex items-center justify-between border-b border-slate-800 pb-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
@@ -914,7 +915,7 @@ export default function FraudEngineView() {
             </div>
           </div>
 
-          {/* ── BOTTOM FULL-WIDTH: BEHAVIORAL COMPARATIVE TABLE (Page 2 of PDF) ─────── */}
+          {/* ── BOTTOM FULL-WIDTH: BEHAVIORAL COMPARATIVE TABLE ─────── */}
           <div className="rounded-2xl border border-white/5 bg-slate-900/60 p-6 backdrop-blur-md space-y-4">
             <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-800 pb-3 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
               <div>
@@ -923,9 +924,9 @@ export default function FraudEngineView() {
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
                   {t(
-                    "Conforme Page 2 du PDF : L'IA évalue si l'opération est naturelle pour CE client spécifique",
-                    "مطابق تماماً لصفحة 2 من PDF: الذكاء الاصطناعي لا يكتفي بفحص المبلغ، بل يسأل: هل هو طبيعي لهذا العميل بالذات؟",
-                    "Matches Page 2 Spec: AI assesses whether the operation is habitual for THIS specific client"
+                    "L'IA évalue en temps réel si l'opération est naturelle pour ce client spécifique (Habituel vs Observé)",
+                    "الذكاء الاصطناعي لا يكتفي بفحص المبلغ، بل يقيّم: هل العملية طبيعية لهذا العميل بالذات؟",
+                    "AI evaluates in real-time whether the operation is natural for this specific client (Baseline vs Observed)"
                   )}
                 </p>
               </div>
@@ -999,11 +1000,11 @@ export default function FraudEngineView() {
             </div>
           </div>
 
-          {/* ── HYBRID 4-LAYER FRAUD ENGINE CARDS (Pages 3 & 4 of PDF) ─────────────── */}
+          {/* ── HYBRID 4-LAYER FRAUD ENGINE CARDS ─────────────── */}
           <div className="space-y-3">
             <h3 className="text-sm font-black uppercase tracking-wider text-slate-300 flex items-center gap-2">
               <Layers className="h-4 w-4 text-emerald-400" />
-              <span>{t("Évaluation Hybride à 4 Couches (Pages 3 & 4 du PDF)", "تقييم المحرك الهجين ذي الطبقات الأربع (صفحة 3 و 4)", "Hybrid 4-Layer Engine Evaluation")}</span>
+              <span>{t("Évaluation Hybride à 4 Couches (Règles · ML · Anomalies · GNN)", "تقييم المحرك الهجين ذي الطبقات الأربع (قواعد · تعلم آلي · شذوذ · شبكات)", "Hybrid 4-Layer Engine Evaluation (Rules · ML · Anomalies · GNN)")}</span>
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1233,7 +1234,7 @@ export default function FraudEngineView() {
                     <th className="px-4 py-3">Montant</th>
                     <th className="px-4 py-3">Score</th>
                     <th className="px-4 py-3">Décision</th>
-                    <th className="px-4 py-3 text-center">Action Spécification PDF</th>
+                    <th className="px-4 py-3 text-center">{t("Action Recommandée", "الإجراء الموصى به", "Recommended Action")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800/60 text-xs">
@@ -1270,7 +1271,7 @@ export default function FraudEngineView() {
                             onClick={() => inspectLiveTransaction(item)}
                             className="px-3 py-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg font-bold text-[11px] transition-all cursor-pointer"
                           >
-                            {t("Inspecter selon PDF", "فحص وفق PDF", "Inspect in PDF View")}
+                            {t("Inspecter l'Opération", "فحص العملية", "Inspect Transaction")}
                           </button>
                         </td>
                       </tr>
