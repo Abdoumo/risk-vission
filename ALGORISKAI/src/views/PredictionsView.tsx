@@ -76,8 +76,9 @@ export default function PredictionsView() {
           const savedId = sessionStorage.getItem('riskvision_selected_client_id');
           if (savedId && data.some(c => c.client_id === savedId)) {
             setSelectedClientId(savedId);
-          } else if (!selectedClientId) {
+          } else {
             setSelectedClientId(data[0].client_id);
+            sessionStorage.setItem('riskvision_selected_client_id', data[0].client_id);
           }
         }
       })
@@ -90,6 +91,11 @@ export default function PredictionsView() {
     model = selectedModel,
     hor = horizon
   ) => {
+    const effectiveClientId = clientId || (clients.length > 0 ? clients[0].client_id : '');
+    if (mode === 'client' && !effectiveClientId) {
+      return;
+    }
+
     setRunStatus('running');
     setErrorMsg('');
     setResultData([]);
@@ -97,8 +103,8 @@ export default function PredictionsView() {
 
     try {
       let url = '';
-      if (mode === 'client' && clientId) {
-        url = `/api/predictions/real?clientId=${encodeURIComponent(clientId)}&horizon=${hor}`;
+      if (mode === 'client' && effectiveClientId) {
+        url = `/api/predictions/real?clientId=${encodeURIComponent(effectiveClientId)}&horizon=${hor}`;
       } else {
         url = `/api/predictions/real?model=${model}&horizon=${hor}`;
       }
@@ -132,9 +138,10 @@ export default function PredictionsView() {
   };
 
   useEffect(() => {
+    if (predictionMode === 'client' && !selectedClientId) return;
     const timer = setTimeout(() => {
       handleRunAI(predictionMode, selectedClientId, selectedModel, horizon);
-    }, 350);
+    }, 300);
     return () => clearTimeout(timer);
   }, [predictionMode, selectedClientId, selectedModel, horizon]);
 

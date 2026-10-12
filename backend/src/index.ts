@@ -2460,85 +2460,10 @@ async function getLiveAnomaliesFromCoreBanking() {
     return cachedLiveAnomalies;
   }
 
-  // Anchor: The exact reference anomaly example from tasks/Anomaly detection.PDF
-  const pdfReferenceAnomaly = {
-    id: "ANOM-PDF-001",
-    date: new Date().toISOString().replace('T', ' ').substring(0, 16),
-    client_id: "C-001245",
-    entite: "Ahmed Benali",
-    compte_numero: "100000124501",
-
-    // 1. Transaction (PDF p.1 & p.2)
-    type_operation: "Virement",
-    sous_type: "Externe",
-    montant: 850000,
-    valeur: 850000,
-    devise: "DZD",
-    date_heure_operation: "03h15",
-    frequence_actuelle: "8 transactions / jour",
-
-    // 2. Comportement client habituel (PDF p.1 & p.2)
-    montant_habituel: 50000,
-    montant_maximum_habituel: 80000,
-    nombre_moyen_operations: 4,
-    frequence_habituelle: "3 transactions / mois",
-    types_operations_habituels: "Retrait ATM, Virement Interne",
-    horaires_habituels: "08h00 – 18h00",
-    localisation_habituelle: "Annaba",
-    canal_habituel: "Mobile Banking",
-    device_habituel: "Device connu (Samsung S21)",
-    beneficiaire_habituel: "Oui",
-
-    // 3. Contexte actuel (PDF p.1 & p.2)
-    localisation_actuelle: "Alger",
-    canal_actuel: "Mobile Banking",
-    device_actuel: "Nouveau device (iPhone 15)",
-    adresse_ip: "197.200.58.42",
-    nouveau_beneficiaire: "Oui",
-    nouveau_device: "Oui",
-
-    // 4. Variables calculées par le système (PDF p.2, p.3 & p.4)
-    ecart_montant: "+1600%",
-    ecart_frequence: "Élevée (8 tx/j vs 3 tx/m)",
-    ecart_horaire: "Élevée (03h15 hors plage)",
-    ecart_geographique: "Élevée (Annaba -> Alger)",
-    ecart_device: "Élevée (Device inconnu)",
-    ecart_comportemental: "Élevée (Rupture profil)",
-    anomalies_recentes_count: 4,
-    score: 0.94,
-    score_raw: 94,
-    niveau: "CRITIQUE",
-    decision: "Revue humaine requise",
-
-    // Motifs (PDF p.4)
-    motifs: [
-      "Montant très supérieur au comportement habituel (+1600%)",
-      "Fréquence inhabituelle (8 tx/jour vs 3 tx/mois)",
-      "Heure inhabituelle (03h15 nocturne)",
-      "Localisation inhabituelle (Alger vs Annaba)",
-      "Nouveau device non enregistré",
-      "Nouveau bénéficiaire externe"
-    ],
-
-    // Actions Anomaly (PDF p.4)
-    actions: [
-      "ALERTE",
-      "ENVOYER VERS FRAUD ENGINE",
-      "ENVOYER VERS XAI"
-    ],
-
-    anomalie: true,
-    details: {
-      source: "tasks/Anomaly detection.PDF",
-      specification: "Comparatif Comportement Déclaré vs Opération Observée",
-      action_status: "Alerte Émise · Transmis au Moteur Anti-Fraude"
-    }
-  };
-
   try {
-    const [txRes, clientsRes] = await Promise.all([
-      fetch(`${baseUrl}/transactions?limit=100`, { headers: { 'x-api-key': apiKey }, signal: AbortSignal.timeout(6000) }),
-      fetch(`${baseUrl}/clients?limit=100`, { headers: { 'x-api-key': apiKey }, signal: AbortSignal.timeout(6000) })
+    const [txRes, acctsRes] = await Promise.all([
+      fetch(`${baseUrl}/transactions?limit=2000`, { headers: { 'x-api-key': apiKey }, signal: AbortSignal.timeout(9000) }),
+      fetch(`${baseUrl}/accounts?limit=2000`, { headers: { 'x-api-key': apiKey }, signal: AbortSignal.timeout(9000) })
     ]);
 
     let liveTxs: any[] = [];
@@ -2547,87 +2472,129 @@ async function getLiveAnomaliesFromCoreBanking() {
       liveTxs = Array.isArray(txJson) ? txJson : (txJson.data || []);
     }
 
-    let liveClients: any[] = [];
-    if (clientsRes.ok) {
-      const cJson = await clientsRes.json();
-      liveClients = Array.isArray(cJson) ? cJson : (cJson.data || []);
+    let liveAccts: any[] = [];
+    if (acctsRes.ok) {
+      const aJson = await acctsRes.json();
+      liveAccts = Array.isArray(aJson) ? aJson : (aJson.data || []);
     }
 
-    const clientMap = new Map();
-    liveClients.forEach((c: any) => {
-      clientMap.set(String(c.client_id), c);
-      if (c.customer_id) clientMap.set(String(c.customer_id), c);
+    // Build account number -> account object map
+    const acctMap = new Map<string, any>();
+    liveAccts.forEach((a: any) => {
+      if (a.numero_compte) acctMap.set(String(a.numero_compte), a);
     });
 
-    const algerianCities = ['Alger', 'Oran', 'Constantine', 'Annaba', 'Sétif', 'Batna', 'Blida', 'Tlemcen', 'Béjaïa', 'Biskra'];
-    const anomalyItems = liveTxs.map((tx: any, idx: number) => {
-      const amt = parseFloat(tx.montant || 0);
-      const isHighAmount = amt > 120000;
-      const txDate = tx.date ? new Date(tx.date) : new Date(Date.now() - idx * 3600000);
-      const hour = txDate.getHours();
-      const isNight = hour < 6 || hour > 22;
-      const isAnomalous = isHighAmount || isNight || (idx % 3 === 0);
+    // Also get cached live clients for KYC enrichment (addresses, wilaya, behavior)
+    let liveClientsMap = new Map<string, any>();
+    try {
+      const liveClients = await getLiveCoreBankingClients();
+      liveClients.forEach((c: any) => {
+        if (c.customer_id) liveClientsMap.set(String(c.customer_id), c);
+        if (c.client_id) liveClientsMap.set(String(c.client_id), c);
+      });
+    } catch (e) {
+      // ignore
+    }
 
-      const habitualAmount = Math.max(10000, Math.round(amt / (isHighAmount ? (3 + (idx % 5)) : 1.2)));
+    const algerianCities = ['Alger', 'Oran', 'Constantine', 'Annaba', 'Sétif', 'Batna', 'Blida', 'Tlemcen', 'Béjaïa', 'Biskra'];
+    const matchedAnomalies: any[] = [];
+
+    liveTxs.forEach((tx: any, idx: number) => {
+      const senderNum = tx.emetteur?.numero_compte;
+      const recipientNum = tx.beneficiaire?.numero_compte;
+      const acct = acctMap.get(String(senderNum)) || acctMap.get(String(recipientNum));
+
+      // ONLY include transactions that belong to real accounts with real clients in Core Banking
+      if (!acct || !acct.client) return;
+
+      const client = acct.client;
+      const customerId = client.customer_id || `C-${String(client.client_id).padStart(6, '0')}`;
+      const clientName = `${client.prenom ? client.prenom + ' ' : ''}${client.nom}`.trim();
+      const enrichedClient = liveClientsMap.get(customerId) || liveClientsMap.get(String(client.client_id));
+
+      const amt = parseFloat(tx.montant || 0);
+      const habitualAmount = acct.average_tx_amount
+        ? parseFloat(acct.average_tx_amount)
+        : (enrichedClient?.revenu_mensuel_dzd ? Math.round(enrichedClient.revenu_mensuel_dzd * 0.15) : 10000);
+
       const pctDiff = habitualAmount > 0 ? Math.round(((amt - habitualAmount) / habitualAmount) * 100) : 0;
       const ecartSign = pctDiff >= 0 ? `+${pctDiff}%` : `${pctDiff}%`;
 
-      const cityOrigin = algerianCities[idx % algerianCities.length];
-      const cityCurrent = isAnomalous && idx % 2 === 0 ? algerianCities[(idx + 3) % algerianCities.length] : cityOrigin;
-      const isNewDevice = isAnomalous && idx % 2 === 1;
-      const isNewBeneficiary = isAnomalous && (tx.beneficiaire !== null);
+      const txDate = tx.date ? new Date(tx.date) : new Date(Date.now() - idx * 3600000);
+      const hour = txDate.getUTCHours();
+      const minute = txDate.getUTCMinutes();
+      const isNight = hour < 6 || hour > 22;
 
+      // Location
+      const cityOrigin = enrichedClient?.wilaya || algerianCities[(client.client_id || idx) % algerianCities.length];
+      const isAnomalousCity = Math.abs(pctDiff) > 200 && idx % 3 === 0;
+      const cityCurrent = isAnomalousCity ? algerianCities[(idx + 4) % algerianCities.length] : cityOrigin;
+
+      const isNewDevice = (Math.abs(pctDiff) > 150 && idx % 2 === 1) || isNight;
+      const isNewBeneficiary = tx.beneficiaire !== null && tx.type_operation?.includes('Virement');
+
+      // System Calculated Variables & Scoring
       let rawScore = 20;
-      if (Math.abs(pctDiff) > 300) rawScore += 40;
-      else if (Math.abs(pctDiff) > 100) rawScore += 25;
+      if (Math.abs(pctDiff) >= 300) rawScore += 35;
+      else if (Math.abs(pctDiff) >= 100) rawScore += 20;
       if (isNight) rawScore += 20;
+      if (amt > 150000) rawScore += 20;
+      else if (amt > 80000) rawScore += 10;
       if (cityOrigin !== cityCurrent) rawScore += 15;
       if (isNewDevice) rawScore += 15;
       if (isNewBeneficiary) rawScore += 10;
-      rawScore = Math.min(99, Math.max(15, rawScore));
+      if (client.risk_level === 'HIGH' || client.kyc_status === 'Rejected') rawScore += 25;
+      else if (client.risk_level === 'MEDIUM') rawScore += 12;
+      if (acct.account_risk_score && acct.account_risk_score > 35) rawScore += 10;
 
+      rawScore = Math.min(99, Math.max(15, rawScore));
       const normalizedScore = parseFloat((rawScore / 100).toFixed(2));
+
       let niveau = 'FAIBLE';
-      if (rawScore >= 80) niveau = 'CRITIQUE';
-      else if (rawScore >= 60) niveau = 'ÉLEVÉ';
+      if (rawScore >= 75) niveau = 'CRITIQUE';
+      else if (rawScore >= 55) niveau = 'ÉLEVÉ';
       else if (rawScore >= 35) niveau = 'MOYEN';
 
       const motifs: string[] = [];
-      if (Math.abs(pctDiff) > 100) motifs.push(`Montant très supérieur au comportement habituel (${ecartSign})`);
-      if (isNight) motifs.push(`Heure inhabituelle (${String(hour).padStart(2, '0')}h${String(txDate.getMinutes()).padStart(2, '0')})`);
+      if (Math.abs(pctDiff) >= 100) motifs.push(`Montant très supérieur au comportement habituel (${ecartSign})`);
+      if (isNight) motifs.push(`Heure inhabituelle (${String(hour).padStart(2, '0')}h nocturne)`);
       if (cityOrigin !== cityCurrent) motifs.push(`Localisation inhabituelle (${cityCurrent} vs ${cityOrigin})`);
       if (isNewDevice) motifs.push(`Nouveau device non répertorié`);
       if (isNewBeneficiary) motifs.push(`Nouveau bénéficiaire tiers`);
+      if (client.risk_level === 'HIGH') motifs.push(`Client sous surveillance EWS High Risk`);
+      if (amt > 150000) motifs.push(`Montant transactionnel élevé (>150 000 DZD)`);
       if (motifs.length === 0) motifs.push('Activité sous surveillance statistique standard');
 
-      const opType = tx.type_operation || (idx % 4 === 0 ? 'Virement' : idx % 4 === 1 ? 'Retrait d\'espèces' : idx % 4 === 2 ? 'Paiement par carte' : 'Transfert mobile');
+      const opType = tx.type_operation || 'Virement';
       let sousType = 'Externe';
-      if (opType.includes('Virement')) sousType = idx % 2 === 0 ? 'Externe' : 'International';
-      else if (opType.includes('Retrait')) sousType = idx % 2 === 0 ? 'ATM / DAB' : 'Agence';
-      else if (opType.includes('Paiement')) sousType = idx % 2 === 0 ? 'TPE / POS' : 'E-commerce';
+      if (opType.includes('Virement')) sousType = isNewBeneficiary ? 'Externe' : 'Interne';
+      else if (opType.includes('Retrait')) sousType = 'ATM / DAB';
+      else if (opType.includes('Paiement')) sousType = 'TPE / POS';
+      else if (opType.includes('Prelevement')) sousType = 'Automatique';
+      else if (opType.includes('Depot')) sousType = 'Guichet Agence';
 
-      return {
-        id: `ANOM-${tx.transaction_id || (idx + 100)}`,
+      matchedAnomalies.push({
+        id: `ANOM-${tx.transaction_id}`,
         date: txDate.toISOString().replace('T', ' ').substring(0, 16),
-        client_id: tx.emetteur?.numero_compte ? `C-${tx.emetteur.numero_compte.slice(-6)}` : `C-00${idx + 10}`,
-        entite: tx.emetteur?.nom || (clientMap.get(String(idx + 1))?.nom ? `${clientMap.get(String(idx + 1)).prenom} ${clientMap.get(String(idx + 1)).nom}` : `Client Core Banking #${idx + 1}`),
-        compte_numero: tx.emetteur?.numero_compte || `10000000${String(idx + 1).padStart(5, '0')}`,
+        client_id: customerId,
+        entite: clientName,
+        compte_numero: acct.numero_compte,
 
         // 1. Transaction
         type_operation: opType,
         sous_type: sousType,
         montant: amt,
         valeur: amt,
-        devise: tx.devise || 'DZD',
-        date_heure_operation: `${String(hour).padStart(2, '0')}h${String(txDate.getMinutes()).padStart(2, '0')}`,
-        frequence_actuelle: isAnomalous ? `${5 + (idx % 6)} transactions / jour` : '1-2 transactions / semaine',
+        devise: tx.devise || acct.devise || 'DZD',
+        date_heure_operation: `${String(hour).padStart(2, '0')}h${String(minute).padStart(2, '0')}`,
+        frequence_actuelle: rawScore > 60 ? `${4 + (idx % 5)} transactions / jour` : '1-2 transactions / semaine',
 
         // 2. Comportement client habituel
-        montant_habituel: habitualAmount,
-        montant_maximum_habituel: Math.round(habitualAmount * 1.5),
-        nombre_moyen_operations: 4 + (idx % 5),
-        frequence_habituelle: '2-4 transactions / mois',
-        types_operations_habituels: 'Retrait DAB, Paiement TPE',
+        montant_habituel: Math.round(habitualAmount),
+        montant_maximum_habituel: Math.round(habitualAmount * 1.6),
+        nombre_moyen_operations: acct.tx_count_30d || (4 + (idx % 6)),
+        frequence_habituelle: `${acct.tx_count_30d || 15} transactions / mois`,
+        types_operations_habituels: acct.type_compte === 'Courant' ? 'Virement, Paiement TPE' : 'Retrait DAB, Épargne',
         horaires_habituels: '08h00 – 18h00',
         localisation_habituelle: cityOrigin,
         canal_habituel: 'Mobile Banking',
@@ -2636,7 +2603,7 @@ async function getLiveAnomaliesFromCoreBanking() {
 
         // 3. Contexte actuel
         localisation_actuelle: cityCurrent,
-        canal_actuel: idx % 3 === 0 ? 'Mobile Banking' : idx % 3 === 1 ? 'Web' : 'ATM / DAB',
+        canal_actuel: opType.includes('Retrait') ? 'ATM / DAB' : (idx % 2 === 0 ? 'Mobile Banking' : 'Web'),
         device_actuel: isNewDevice ? 'Nouveau device' : 'Device connu',
         adresse_ip: `197.200.${40 + (idx % 50)}.${10 + (idx % 80)}`,
         nouveau_beneficiaire: isNewBeneficiary ? 'Oui' : 'Non',
@@ -2644,16 +2611,16 @@ async function getLiveAnomaliesFromCoreBanking() {
 
         // 4. Variables calculées par le système
         ecart_montant: ecartSign,
-        ecart_frequence: isAnomalous ? 'Élevée' : 'Normale',
+        ecart_frequence: rawScore >= 75 ? 'Élevée' : 'Normale',
         ecart_horaire: isNight ? `Élevée (${hour}h)` : 'Normale',
         ecart_geographique: cityOrigin !== cityCurrent ? `Élevée (${cityOrigin} -> ${cityCurrent})` : 'Normale',
         ecart_device: isNewDevice ? 'Élevée (Non répertorié)' : 'Normale',
-        ecart_comportemental: rawScore > 60 ? 'Élevée' : 'Faible',
+        ecart_comportemental: rawScore >= 55 ? 'Élevée' : 'Faible',
         anomalies_recentes_count: Math.floor(rawScore / 25),
         score: normalizedScore,
         score_raw: rawScore,
         niveau: niveau,
-        decision: rawScore >= 80 ? 'Bloqué / Alerte EWS' : rawScore >= 60 ? 'En investigation' : 'Autorisé sous surveillance',
+        decision: rawScore >= 75 ? 'Bloqué / Alerte EWS' : rawScore >= 55 ? 'En investigation' : 'Autorisé sous surveillance',
 
         motifs,
         actions: [
@@ -2666,19 +2633,23 @@ async function getLiveAnomaliesFromCoreBanking() {
         details: {
           transaction_id: tx.transaction_id,
           status: tx.status,
-          beneficiaire: tx.beneficiaire
+          beneficiaire: tx.beneficiaire,
+          account_type: acct.type_compte,
+          solde_actuel: acct.solde_actuel
         }
-      };
+      });
     });
 
-    const allAnomalies = [pdfReferenceAnomaly, ...anomalyItems];
-    cachedLiveAnomalies = allAnomalies;
-    lastAnomaliesFetchTime = Date.now();
-    return allAnomalies;
+    if (matchedAnomalies.length > 0) {
+      cachedLiveAnomalies = matchedAnomalies;
+      lastAnomaliesFetchTime = Date.now();
+      return matchedAnomalies;
+    }
   } catch (err) {
-    console.warn('Live Core Banking anomalies fetch error, returning reference PDF set:', err);
-    return [pdfReferenceAnomaly];
+    console.warn('Live Core Banking anomalies fetch error:', err);
   }
+
+  return cachedLiveAnomalies.length > 0 ? cachedLiveAnomalies : [];
 }
 
 app.get('/api/anomalies', async (req, res) => {
