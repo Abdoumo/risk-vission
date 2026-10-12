@@ -256,8 +256,8 @@ export default function FraudEngineView() {
     fetch('/api/fraude/presets')
       .then(r => r.ok ? r.json() : null)
       .then(data => {
-        if (data?.scenarios) setPresets(data.scenarios);
-        else if (data?.pdf_scenarios) setPresets(data.pdf_scenarios);
+        const scenariosList = data?.scenarios || data?.pdf_scenarios;
+        if (scenariosList) setPresets(scenariosList);
       })
       .catch(console.error);
 

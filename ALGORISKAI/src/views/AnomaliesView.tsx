@@ -255,7 +255,7 @@ export default function AnomaliesView() {
             <span className="flex h-2.5 w-2.5 rounded-full bg-rose-500 animate-ping" />
             <h2 className="text-xl font-black text-white tracking-tight">Détection d'Anomalies & Surveillance Comportementale</h2>
             <span className="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">
-              Conforme Spécification PDF
+              Surveillance SIB Live
             </span>
           </div>
           <p className="text-[13px] text-slate-400 mt-1 font-medium">
@@ -369,7 +369,7 @@ export default function AnomaliesView() {
         <div className="mb-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h3 className="text-lg font-bold text-white tracking-tight">
-              Tableau des Détections d'Anomalies — Conforme aux Spécifications PDF
+              Tableau des Détections d'Anomalies — Surveillance Comportementale SIB
             </h3>
             <p className="text-[13px] font-medium text-slate-400 mt-0.5">
               Analyse des 4 blocs de variables : Transaction · Comportement Client · Contexte · Variables Calculées
@@ -587,7 +587,7 @@ export default function AnomaliesView() {
                   </div>
                   <div>
                     <h3 className="text-base font-black text-white tracking-tight flex items-center gap-2">
-                      Fiche Complète d'Anomalie — Conforme à "Anomaly detection.PDF"
+                      Fiche Complète d'Anomalie — Analyse Comportementale Détaillée
                     </h3>
                     <p className="text-xs text-slate-400 font-mono">
                       Client : <span className="text-white font-bold">{selectedDetails.entite}</span> ({selectedDetails.client_id}) · Opération {selectedDetails.id}

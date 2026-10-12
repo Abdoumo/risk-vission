@@ -571,7 +571,10 @@ router.get('/presets', (req, res) => {
         expected_score: 47,
         expected_decision: 'VERIFY'
       }
-    ]
+    ];
+  res.json({
+    scenarios: benchmark_scenarios,
+    pdf_scenarios: benchmark_scenarios
   });
 });
 
