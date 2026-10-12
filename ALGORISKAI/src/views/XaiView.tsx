@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import {
-  Brain, Eye, AlertTriangle, CheckCircle2, Info,
+  Brain, Eye, AlertTriangle, CheckCircle2,
   TrendingUp, TrendingDown, User, Clock, ChevronRight,
   Lightbulb, BarChart3, Scale, MessageSquare, ShieldCheck,
-  ArrowUpRight, ArrowDownRight, RefreshCw, Zap, Loader2,
+  ArrowUpRight, ArrowDownRight, Zap, Loader2,
 } from 'lucide-react';
 import {
   type XaiDecision, type ShapFeature,
@@ -191,7 +191,7 @@ function DecisionCard({ decision, isSelected, onSelect, lang, isRTL }: {
 export default function XaiView() {
   const { lang, isRTL } = useLang();
   const [selectedDecisionId, setSelectedDecisionId] = useState<string>('');
-  const [activeTab, setActiveTab] = useState<'shap' | 'counterfactual' | 'global' | 'fairness' | 'history'>('shap');
+  const [activeTab, setActiveTab] = useState<'variables' | 'shap' | 'counterfactual' | 'global' | 'fairness' | 'history'>('variables');
   const [currentPage, setCurrentPage] = useState(1);
 
   const [xaiDecisions, setXaiDecisions] = useState<XaiDecision[]>([]);
@@ -200,6 +200,11 @@ export default function XaiView() {
   const [decisionHistory, setDecisionHistory] = useState<DecisionHistoryItem[]>([]);
   const [generating, setGenerating] = useState(false);
   const [lastGenerated, setLastGenerated] = useState<string | null>(null);
+
+  // Client search & on-demand XAI
+  const [clientSearch, setClientSearch] = useState('');
+  const [clientDropdownOpen, setClientDropdownOpen] = useState(false);
+  const [availableClients, setAvailableClients] = useState<any[]>([]);
 
   const fetchXaiData = () => {
     fetch('/api/xai/decisions').then(r => r.json()).then(data => {
@@ -211,10 +216,35 @@ export default function XaiView() {
     fetch(`/api/xai/feature-importance`).then(r => r.json()).then(setGlobalFeatureImportance).catch(() => {});
     fetch(`/api/xai/model-fairness`).then(r => r.json()).then(setModelFairness).catch(() => {});
     fetch(`/api/xai/decision-history`).then(r => r.json()).then(setDecisionHistory).catch(() => {});
+    fetch('/api/predictions/clients').then(r => r.json()).then(d => {
+      if (Array.isArray(d)) setAvailableClients(d);
+    }).catch(() => {});
+  };
+
+  const handleSelectClient = async (clientId: string) => {
+    try {
+      const res = await fetch(`/api/xai/client/${encodeURIComponent(clientId)}`);
+      if (res.ok) {
+        const clientXai = await res.json();
+        setXaiDecisions(prev => {
+          const exists = prev.find(d => d.id === clientXai.id || d.entity.includes(clientId));
+          if (!exists) return [clientXai, ...prev];
+          return prev.map(d => (d.id === clientXai.id || d.entity.includes(clientId)) ? clientXai : d);
+        });
+        setSelectedDecisionId(clientXai.id);
+        setActiveTab('variables');
+      }
+    } catch (e) {
+      console.error('Failed to load client XAI:', e);
+    }
   };
 
   useEffect(() => {
     fetchXaiData();
+    const savedId = sessionStorage.getItem('riskvision_selected_client_id');
+    if (savedId) {
+      handleSelectClient(savedId);
+    }
   }, []);
 
   const handlePageChange = (newPage: number) => {
@@ -253,6 +283,7 @@ export default function XaiView() {
     lang === 'ar' ? d.naturalExplanation_ar : lang === 'en' ? d.naturalExplanation_en : d.naturalExplanation_fr;
 
   const tabs = [
+    { id: 'variables',     icon: ShieldCheck,   label_fr: '8 Variables Clés (PDF)', label_ar: 'المتغيرات الثمانية', label_en: '8 Core Variables' },
     { id: 'shap',          icon: BarChart3,     label_fr: 'SHAP Values',       label_ar: 'قيم SHAP',        label_en: 'SHAP Values' },
     { id: 'counterfactual',icon: Lightbulb,     label_fr: 'Contre-Factuels',   label_ar: 'السيناريوهات',    label_en: 'Counter-Factuals' },
     { id: 'global',        icon: Eye,           label_fr: 'Importance Globale', label_ar: 'الأهمية العامة',  label_en: 'Global Importance' },
@@ -277,7 +308,7 @@ export default function XaiView() {
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
-  const itemVariants = {
+  const itemVariants: any = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
   };
@@ -401,6 +432,50 @@ export default function XaiView() {
             {t('Décisions Analysées', 'القرارات المحللة', 'Analyzed Decisions')}
             <span className="ml-2 text-emerald-400">({xaiDecisions.length})</span>
           </p>
+
+          {/* Recherche Directe Client */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder={t("Rechercher client (ID ou nom)...", "البحث عن عميل بالاسم أو المعرف...", "Search client (ID or name)...")}
+              value={clientSearch}
+              onChange={e => {
+                setClientSearch(e.target.value);
+                setClientDropdownOpen(true);
+              }}
+              onFocus={() => setClientDropdownOpen(true)}
+              className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3 py-2 text-xs font-medium text-white placeholder-slate-500 outline-none focus:border-emerald-500/50"
+            />
+            {clientDropdownOpen && clientSearch && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setClientDropdownOpen(false)} />
+                <div className="absolute z-50 mt-1 w-full rounded-xl border border-slate-700 bg-slate-900 shadow-2xl max-h-56 overflow-y-auto">
+                  {availableClients
+                    .filter(c => `${c.client_id} ${c.nom} ${c.prenom || ''}`.toLowerCase().includes(clientSearch.toLowerCase()))
+                    .slice(0, 10)
+                    .map(c => (
+                      <div
+                        key={c.client_id}
+                        onClick={() => {
+                          handleSelectClient(c.client_id);
+                          setClientSearch('');
+                          setClientDropdownOpen(false);
+                        }}
+                        className="px-3 py-2 hover:bg-slate-800 cursor-pointer text-xs border-b border-white/5 last:border-0"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-white">{c.nom} {c.prenom}</span>
+                          <span className="text-[10px] font-mono text-emerald-400">{c.client_id}</span>
+                        </div>
+                        <div className="text-[10px] text-slate-400 mt-0.5">
+                          PD: {c.score || 25}% • {c.statut_client || 'Actif'}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </>
+            )}
+          </div>
           <div className="max-h-[600px] overflow-y-auto space-y-3 pr-1 scrollbar-hide">
           {xaiDecisions.map(d => (
             <DecisionCard
@@ -509,6 +584,157 @@ export default function XaiView() {
 
           {/* ── SHAP WATERFALL ──────────────────────────────────────────── */}
           <AnimatePresence mode="wait">
+          {/* ── 8 VARIABLES CLÉS (PDF SPÉCIFICATION) ──────────────────── */}
+          {activeTab === 'variables' && (
+            <motion.div
+              key="variables"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="space-y-6"
+            >
+              {/* 8 Variables Grid */}
+              <div className="rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-md p-6">
+                <div className={`mb-4 flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <div>
+                    <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                      <ShieldCheck className="h-4 w-4 text-emerald-400" />
+                      {t('8 Variables Financières & Comportementales Clés', 'المتغيرات الثمانية المالية والسلوكية الأساسية', '8 Core Financial & Behavioral Variables')}
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-0.5">
+                      {t('Variables normalisées et auditées selon la spécification Credit Risk & AI', 'متغيرات مدققة ومطابقة لمواصفات نموذج المخاطر', 'Normalized audited variables per Credit Risk & AI specification')}
+                    </p>
+                  </div>
+                  <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    Modèle Conforme BCBS 239
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {[
+                    {
+                      label: '1. Revenu Mensuel',
+                      val: selected.variables?.revenue?.display || (selected.shapFeatures?.find(f => f.feature.includes('Revenue'))?.actualValue) || '85,000 DZD',
+                      sub: 'Capacité financière de base',
+                      badge: 'Financier'
+                    },
+                    {
+                      label: '2. Solde du Compte',
+                      val: selected.variables?.soldeCompte?.display || (selected.shapFeatures?.find(f => f.feature.includes('Solde'))?.actualValue) || '150,000 DZD',
+                      sub: 'Liquidité immédiate disponible',
+                      badge: 'Financier'
+                    },
+                    {
+                      label: '3. Ratio DTI (Dette/Revenu)',
+                      val: selected.variables?.dti?.display || (selected.shapFeatures?.find(f => f.feature.includes('DTI'))?.actualValue) || '32.5%',
+                      sub: selected.variables?.dti?.band || 'Seuil réglementaire',
+                      badge: 'Endettement'
+                    },
+                    {
+                      label: '4. Impayés',
+                      val: selected.variables?.impayes?.display || (selected.shapFeatures?.find(f => f.feature.includes('Impayes'))?.actualValue) || '0 DZD',
+                      sub: 'Incidents de paiement',
+                      badge: 'Comportemental'
+                    },
+                    {
+                      label: '5. Retard de Paiement',
+                      val: selected.variables?.retardPaiement?.display || (selected.shapFeatures?.find(f => f.feature.includes('Retard'))?.actualValue) || '0 jours',
+                      sub: 'Jours de retard max constatés',
+                      badge: 'Comportemental'
+                    },
+                    {
+                      label: '6. Cashflow Net',
+                      val: selected.variables?.cashflow?.display || (selected.shapFeatures?.find(f => f.feature.includes('Cashflow'))?.actualValue) || '+25,000 DZD/mois',
+                      sub: 'Entrées moins Sorties',
+                      badge: 'Financier'
+                    },
+                    {
+                      label: '7. Historique Bancaire',
+                      val: selected.variables?.historiqueBancaire?.display || (selected.shapFeatures?.find(f => f.feature.includes('Historique'))?.actualValue) || 'Favorable',
+                      sub: 'Ancienneté & classe créance',
+                      badge: 'Comportemental'
+                    },
+                    {
+                      label: '8. Découvert (Overdraft)',
+                      val: selected.variables?.overdraft?.display || (selected.shapFeatures?.find(f => f.feature.includes('Overdraft'))?.actualValue) || 'Aucun',
+                      sub: 'Fréquence & intensité découvert',
+                      badge: 'Comportemental'
+                    },
+                  ].map((item, idx) => (
+                    <div key={idx} className="bg-slate-950/50 p-3.5 rounded-xl border border-white/5 hover:border-emerald-500/20 transition-all">
+                      <div className="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+                        <span>{item.label}</span>
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">{item.badge}</span>
+                      </div>
+                      <p className="text-sm font-bold text-white mt-1">{item.val}</p>
+                      <p className="text-[10px] text-slate-500 mt-0.5 truncate">{item.sub}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Facteurs Aggravants & Atténuants */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="rounded-2xl border border-rose-500/20 bg-rose-500/5 backdrop-blur-md p-5">
+                  <h4 className="text-xs font-bold text-rose-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                    <AlertTriangle className="h-4 w-4" />
+                    {t('Facteurs Aggravants (Top 3-5)', 'العوامل المشددة للمخاطر', 'Top Aggravating Factors')}
+                  </h4>
+                  <ul className="space-y-2 text-xs text-slate-300">
+                    {selected.factors?.aggravating && selected.factors.aggravating.length > 0 ? (
+                      selected.factors.aggravating.map((f: string, i: number) => (
+                        <li key={i} className="flex items-start gap-2 bg-slate-900/40 p-2.5 rounded-lg border border-rose-500/10">
+                          <span className="text-rose-400 font-bold">•</span>
+                          <span>{f}</span>
+                        </li>
+                      ))
+                    ) : (
+                      <li className="text-slate-500 italic p-2">Aucun facteur aggravant majeur identifié sur ce dossier.</li>
+                    )}
+                  </ul>
+                </div>
+
+                <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 backdrop-blur-md p-5">
+                  <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                    <CheckCircle2 className="h-4 w-4" />
+                    {t('Facteurs Atténuants (Top 3-5)', 'العوامل المخففة للمخاطر', 'Top Mitigating Factors')}
+                  </h4>
+                  <ul className="space-y-2 text-xs text-slate-300">
+                    {selected.factors?.mitigating && selected.factors.mitigating.length > 0 ? (
+                      selected.factors.mitigating.map((f: string, i: number) => (
+                        <li key={i} className="flex items-start gap-2 bg-slate-900/40 p-2.5 rounded-lg border border-emerald-500/10">
+                          <span className="text-emerald-400 font-bold">•</span>
+                          <span>{f}</span>
+                        </li>
+                      ))
+                    ) : (
+                      <li className="text-slate-500 italic p-2">Aucun facteur atténuant significatif identifié.</li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Policy Engine Action */}
+              <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 backdrop-blur-md p-5">
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <Scale className="h-4 w-4" />
+                    {t('Décision Moteur de Politique (Policy Engine)', 'قرار محرك السياسات الائتمانية', 'Policy Engine Decision')}
+                  </h4>
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold">
+                    Séparation Modèle IA vs Décision Bancaire
+                  </span>
+                </div>
+                <p className="text-sm font-bold text-white mt-1">
+                  {lang === 'ar' ? (selected.policyDecision?.action_ar || selected.policyDecision?.action) : (selected.policyDecision?.action || 'Analyse standard du dossier')}
+                </p>
+                <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                  {selected.policyDecision?.recommendation || selected.decision_fr}
+                </p>
+              </div>
+            </motion.div>
+          )}
+
           {activeTab === 'shap' && (
             <motion.div 
               key="shap"

@@ -20,7 +20,15 @@ export default function CreditRiskView() {
       .then(r => r.json())
       .then(data => {
         setClients(data);
-        if (data.length > 0) setSelectedClientId(data[0].client_id);
+        const savedId = sessionStorage.getItem('riskvision_selected_client_id');
+        const targetId = savedId || (data.length > 0 ? data[0].client_id : '');
+        if (targetId) {
+          setSelectedClientId(targetId);
+          fetch(`/api/credit-risk/analyze/${targetId}`)
+            .then(r => r.json())
+            .then(setAnalysis)
+            .catch(console.error);
+        }
       })
       .catch(console.error);
   }, []);
@@ -28,6 +36,7 @@ export default function CreditRiskView() {
   const handleAnalyze = async () => {
     if (!selectedClientId) return;
     setLoading(true);
+    sessionStorage.setItem('riskvision_selected_client_id', selectedClientId);
     try {
       const res = await fetch(`/api/credit-risk/analyze/${selectedClientId}`);
       const data = await res.json();

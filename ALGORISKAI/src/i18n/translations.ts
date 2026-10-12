@@ -14,7 +14,7 @@ export const translations = {
 
     // Nav
     nav_dashboard: 'Tableau de Bord',
-    nav_kyc: 'Moteur KYC & EWS',
+    nav_kyc: 'Moteur KYC',
     nav_predictions: 'Prédictions',
     nav_modeles: 'Modèles IA',
     nav_anomalies: 'Anomalies',
@@ -207,7 +207,7 @@ export const translations = {
     refresh: 'تحديث',
 
     nav_dashboard: 'لوحة التحكم',
-    nav_kyc: 'محرك اعرف عميلك KYC & EWS',
+    nav_kyc: 'محرك اعرف عميلك KYC',
     nav_predictions: 'التنبؤات',
     nav_modeles: 'نماذج الذكاء الاصطناعي',
     nav_anomalies: 'الشذوذات',

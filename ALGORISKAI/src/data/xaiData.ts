@@ -47,6 +47,11 @@ export interface XaiDecision {
   naturalExplanation_fr: string;
   naturalExplanation_ar: string;
   naturalExplanation_en: string;
+  variables?: any;
+  factors?: { aggravating: string[]; mitigating: string[] };
+  policyDecision?: any;
+  projections?: any;
+  clientData?: any;
 }
 
 export interface GlobalFeatureImportance {

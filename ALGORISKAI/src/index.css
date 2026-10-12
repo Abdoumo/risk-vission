@@ -1,32 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Cairo:wght@400;600;700;900&display=swap');
 @import "tailwindcss";
 
-/* ═══════════════════════════════════════════
-   🇩🇿 AlgoRiskAI — Algerian Color Palette
-   ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   🇩🇿 RiskVision AI — Algerian Banking & Docs Color Palette
+   Couleurs officielles extraites de http://69.57.163.97:4545/docs
+   ═══════════════════════════════════════════════════════════════ */
 :root {
+  /* Exact Docs Tokens */
+  --bg: #070b12;
+  --card-bg: #0d1522;
+  --card-border: #1e293b;
+  --accent: #10b981;
+  --dz-green: #006233;
+  --dz-red: #d21034;
+  --text: #f3f4f6;
+  --text-muted: #94a3b8;
+  --code-bg: #050811;
+
+  /* App Mapped Tokens */
   --alg-green: #10b981;
-  --alg-green-deep: #047857;
-  --alg-green-glow: rgba(16, 185, 129, 0.25);
-  --alg-red: #ef4444;
-  --alg-red-deep: #dc2626;
-  --alg-red-glow: rgba(239, 68, 68, 0.2);
-  --alg-white: #f0f0f0;
+  --alg-green-deep: #006233;
+  --alg-green-glow: rgba(0, 98, 51, 0.35);
+  --alg-red: #d21034;
+  --alg-red-deep: #990022;
+  --alg-red-glow: rgba(210, 16, 52, 0.25);
+  --alg-white: #f3f4f6;
   --alg-silver: #94a3b8;
-  --alg-black: #020617;
-  --alg-surface: #0f172a;
+  --alg-black: #070b12;
+  --alg-surface: #0d1522;
+  --alg-border: #1e293b;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Monospace font from docs */
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
 }
 
 /* Arabic font support */
 .font-arabic {
-  font-family: 'Cairo', 'Segoe UI', sans-serif;
+  font-family: 'Cairo', 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
 }
 
 /* Custom scrollbar — Algerian green theme */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb { background: var(--alg-green-deep); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--alg-green); }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #050811; }
+::-webkit-scrollbar-thumb { background: #006233; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #10b981; }
 
 /* Range input */
 input[type="range"] {
@@ -44,7 +69,7 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50%;
   background: var(--alg-green);
   cursor: pointer;
-  border: 2px solid #0a0a0a;
+  border: 2px solid #070b12;
   box-shadow: 0 0 8px var(--alg-green-glow);
 }
 input[type="range"]::-moz-range-thumb {
@@ -52,7 +77,7 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 50%;
   background: var(--alg-green);
   cursor: pointer;
-  border: 2px solid #0a0a0a;
+  border: 2px solid #070b12;
   box-shadow: 0 0 8px var(--alg-green-glow);
 }
 
@@ -77,6 +102,74 @@ select {
 }
 
 /* ═══════════════════════════════════════════
+   Algerian Flag Tricolor Accent Bar (Docs Page)
+   ═══════════════════════════════════════════ */
+.flag-bar, .flag-strip {
+  height: 4px;
+  background: linear-gradient(90deg, #006233 0%, #006233 45%, #ffffff 45%, #ffffff 55%, #d21034 55%, #d21034 100%);
+  border-radius: 999px;
+}
+
+/* Badge DZ Docs Style */
+.badge-dz {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(0, 98, 51, 0.25);
+  color: #34d399;
+  border: 1px solid rgba(0, 98, 51, 0.5);
+}
+
+/* Card Docs Style */
+.card-docs {
+  background: #0d1522;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Key box / Code Box */
+.key-box-docs {
+  background: #050811;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* HTTP Method Badges from Docs */
+.method-get { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+.method-post { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+.method-put { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+.method-delete { background: rgba(210, 16, 52, 0.2); color: #f87171; border: 1px solid rgba(210, 16, 52, 0.4); }
+
+/* Buttons from Docs */
+.btn-primary-dz {
+  background: #006233;
+  color: white;
+  border: 1px solid #10b981;
+  transition: all 0.2s;
+}
+.btn-primary-dz:hover {
+  background: #059669;
+}
+
+.btn-copy-dz {
+  background: #1e293b;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  transition: all 0.2s;
+}
+.btn-copy-dz:hover {
+  background: #006233;
+  color: white;
+  border-color: #10b981;
+}
+
+/* ═══════════════════════════════════════════
    Animated Background Orbs
    ═══════════════════════════════════════════ */
 @keyframes float-orb {
@@ -94,20 +187,11 @@ select {
 }
 
 /* ═══════════════════════════════════════════
-   Algerian Flag Accent Strip
-   ═══════════════════════════════════════════ */
-.flag-strip {
-  height: 3px;
-  background: linear-gradient(90deg, #10b981 33%, #ffffff 33% 66%, #ef4444 66%);
-  border-radius: 2px 2px 0 0;
-}
-
-/* ═══════════════════════════════════════════
    Glowing card border animation
    ═══════════════════════════════════════════ */
 @keyframes border-glow {
-  0%, 100% { border-color: rgba(16, 185, 129, 0.15); }
-  50% { border-color: rgba(16, 185, 129, 0.35); }
+  0%, 100% { border-color: rgba(0, 98, 51, 0.3); }
+  50% { border-color: rgba(16, 185, 129, 0.5); }
 }
 
 .glow-card:hover {

@@ -59,8 +59,17 @@ function AppInner() {
       if (path === 'kyc') setActiveTab('kyc');
       else if (path === '') setActiveTab('dashboard');
     };
+    const handleCustomNav = (e: any) => {
+      if (e.detail?.tab) {
+        setActiveTab(e.detail.tab);
+      }
+    };
     window.addEventListener('popstate', handlePop);
-    return () => window.removeEventListener('popstate', handlePop);
+    window.addEventListener('riskvision:navigate', handleCustomNav);
+    return () => {
+      window.removeEventListener('popstate', handlePop);
+      window.removeEventListener('riskvision:navigate', handleCustomNav);
+    };
   }, []);
 
   if (!user) {
@@ -89,7 +98,8 @@ function AppInner() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-emerald-500/30 selection:text-emerald-200">
+    <div className="min-h-screen bg-[#070b12] text-slate-100 selection:bg-[#006233]/40 selection:text-emerald-200">
+      <div className="flag-bar w-full fixed top-0 left-0 right-0 z-50" />
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}

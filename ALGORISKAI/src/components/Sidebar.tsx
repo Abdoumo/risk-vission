@@ -39,20 +39,20 @@ export default function Sidebar({ activeTab, setActiveTab, collapsed, setCollaps
 
   return (
     <aside
-      className={`fixed top-0 z-40 flex h-screen flex-col border-white/5 bg-[#020617]/80 backdrop-blur-xl transition-all duration-300 ${
+      className={`fixed top-0 z-40 flex h-screen flex-col border-[#1e293b] bg-[#070b12]/95 backdrop-blur-xl transition-all duration-300 ${
         collapsed ? 'w-[72px]' : 'w-64'
       } ${isRTL ? 'right-0 border-l' : 'left-0 border-r'}`}
     >
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-white/5 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-transparent opacity-50" />
+      <div className="flex h-16 items-center gap-3 border-b border-[#1e293b] px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#006233]/20 to-transparent opacity-60" />
         <AlgoriskLogo size={38} className="shrink-0 relative z-10" />
         {!collapsed && (
           <div className="overflow-hidden relative z-10">
-            <h1 className="text-xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-600 drop-shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+            <h1 className="text-xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#10b981] via-[#34d399] to-[#006233] drop-shadow-[0_0_10px_rgba(0,98,51,0.4)]">
               RiskVision<span className="text-white">AI</span>
             </h1>
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-500/70">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#34d399]">
               {t('appTagline')}
             </p>
           </div>
@@ -62,8 +62,8 @@ export default function Sidebar({ activeTab, setActiveTab, collapsed, setCollaps
       {/* Search */}
       {!collapsed && (
         <div className="px-3 pt-4">
-          <div className="group flex items-center gap-2 rounded-xl border border-white/5 bg-slate-900/50 px-3 py-2.5 transition-colors focus-within:border-emerald-500/30 focus-within:bg-slate-900/80">
-            <Search className="h-4 w-4 text-slate-500 shrink-0 group-focus-within:text-emerald-400 transition-colors" />
+          <div className="group flex items-center gap-2 rounded-xl border border-[#1e293b] bg-[#050811] px-3 py-2.5 transition-colors focus-within:border-[#10b981]/50 focus-within:bg-[#070b12]">
+            <Search className="h-4 w-4 text-slate-500 shrink-0 group-focus-within:text-[#34d399] transition-colors" />
             <input
               type="text"
               placeholder={t('search')}
@@ -84,29 +84,23 @@ export default function Sidebar({ activeTab, setActiveTab, collapsed, setCollaps
               onClick={() => setActiveTab(item.id)}
               className={`group relative flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-300 overflow-hidden ${
                 isActive
-                  ? 'text-emerald-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]'
-                  : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200'
+                  ? 'text-[#34d399] border border-[#006233]/60 bg-[#006233]/25 shadow-[0_0_15px_rgba(0,98,51,0.25)]'
+                  : 'text-slate-400 hover:bg-[#0d1522] hover:text-slate-200'
               } ${isRTL ? 'flex-row-reverse text-right' : ''}`}
               title={collapsed ? t(item.labelKey) : undefined}
             >
-              {isActive && (
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-green-600/5 opacity-100" />
-              )}
-              <Icon className={`h-5 w-5 shrink-0 relative z-10 transition-colors ${isActive ? 'text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'text-slate-500 group-hover:text-emerald-400/70'}`} />
-              {!collapsed && <span className="flex-1 truncate relative z-10">{t(item.labelKey)}</span>}
+              <Icon className={`h-5 w-5 shrink-0 relative z-10 transition-colors ${isActive ? 'text-[#34d399] drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]' : 'text-slate-500 group-hover:text-[#34d399]'}`} />
+              {!collapsed && <span className="flex-1 truncate relative z-10 font-semibold">{t(item.labelKey)}</span>}
               {isActive && !collapsed && (
-                <div className={`${isRTL ? 'mr-auto' : 'ml-auto'} h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.8)] relative z-10`} />
+                <div className={`${isRTL ? 'mr-auto' : 'ml-auto'} h-1.5 w-1.5 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.9)] relative z-10`} />
               )}
             </button>
           );
         })}
       </nav>
 
-      {/* System Status */}
-      
-
       {/* Logout button */}
-      <div className="border-t border-white/5 p-3">
+      <div className="border-t border-[#1e293b] p-3">
         <button
           onClick={logout}
           className={`flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-red-400 transition-all duration-300 hover:bg-red-500/10 hover:shadow-[0_0_15px_rgba(239,68,68,0.1)]`}
