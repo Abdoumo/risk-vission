@@ -396,22 +396,23 @@ export default function ApiConnectorsView() {
 
       {activeSection === 'connectors' && (
         <motion.div variants={itemVariants} className="space-y-4">
-          {(['SIB', 'GED', 'CoreBanking', 'SWIFT', 'CTP'] as const).map(type => {
+          {(['CoreBanking', 'SIB', 'GED', 'SWIFT', 'CTP', 'REST'] as const).map(type => {
             const group = bankConnectors.filter(c => c.type === type);
             if (!group.length) return null;
             const groupLabels: Record<string, string> = {
+              CoreBanking: 'Core Banking Systems (Temenos / SIB)',
               SIB:         'Système Interbancaire Bancaire (SIB)',
               GED:         'Gestion Électronique de Documents (GED)',
-              CoreBanking: 'Core Banking Systems',
               SWIFT:       'SWIFT / Messagerie interbancaire',
               CTP:         'Comptabilité Trésor Public (CTP)',
+              REST:        'Passerelles API REST & Partenaires Externe',
             };
             return (
               <div key={type} className="space-y-2">
                 <div className={`flex items-center gap-3 px-1 ${isRTL ? 'flex-row-reverse' : ''}`}>
                   <div className={`h-px flex-1 bg-slate-800`} />
-                  <span className={`rounded-full border px-3 py-0.5 text-[11px] font-bold ${typeColors[type] || ''}`}>
-                    {groupLabels[type]}
+                  <span className={`rounded-full border px-3 py-0.5 text-[11px] font-bold ${typeColors[type] || 'border-emerald-500/20 bg-emerald-500/10 text-emerald-400'}`}>
+                    {groupLabels[type] || type}
                   </span>
                   <div className="h-px flex-1 bg-slate-800" />
                 </div>
@@ -428,6 +429,53 @@ export default function ApiConnectorsView() {
               </div>
             );
           })}
+
+          {/* Connecteurs personnalisés avec un type différent */}
+          {(() => {
+            const others = bankConnectors.filter(c => !['CoreBanking', 'SIB', 'GED', 'SWIFT', 'CTP', 'REST'].includes(c.type));
+            if (!others.length) return null;
+            return (
+              <div className="space-y-2">
+                <div className={`flex items-center gap-3 px-1 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <div className="h-px flex-1 bg-slate-800" />
+                  <span className="rounded-full border border-pink-500/20 bg-pink-500/10 px-3 py-0.5 text-[11px] font-bold text-pink-400">
+                    Connecteurs Personnalisés
+                  </span>
+                  <div className="h-px flex-1 bg-slate-800" />
+                </div>
+                {others.map(c => (
+                  <ConnectorCard 
+                    key={c.id} 
+                    connector={c} 
+                    isRTL={isRTL} 
+                    lang={lang} 
+                    onSync={handleSyncConnector}
+                    isSyncing={syncingConnectorId === c.id || isSyncing}
+                  />
+                ))}
+              </div>
+            );
+          })()}
+
+          {bankConnectors.length === 0 && (
+            <div className="rounded-2xl border border-dashed border-white/10 bg-slate-900/40 backdrop-blur-md p-10 text-center">
+              <div className="mx-auto mb-3.5 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                <Wifi className="h-6 w-6" />
+              </div>
+              <h4 className="text-base font-bold text-white mb-1">Aucun connecteur bancaire actif</h4>
+              <p className="text-xs text-slate-400 max-w-md mx-auto mb-5">
+                Connectez votre Core Banking distant (69.57.163.97) pour synchroniser en temps réel les clients KYC, les soldes et les flux de transactions.
+              </p>
+              <button
+                onClick={() => handleSyncCoreBanking()}
+                disabled={isSyncing}
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-2.5 text-xs font-bold text-white shadow-lg shadow-emerald-900/30 hover:from-emerald-500 hover:to-teal-500 transition-all cursor-pointer"
+              >
+                <RefreshCw className={`h-3.5 w-3.5 ${isSyncing ? 'animate-spin' : ''}`} />
+                <span>Connecter & Synchroniser Core Banking (69.57.163.97)</span>
+              </button>
+            </div>
+          )}
         </motion.div>
       )}
 
